@@ -1,7 +1,7 @@
 <?php 
 
 return [
-    "siteEmail"=>"admin@admin.com",
+    "siteEmail"=>"admin@admin.coms",
     'siteVersion'=>0.1,
     'genderArr'=>array(
         1=>'Male',
