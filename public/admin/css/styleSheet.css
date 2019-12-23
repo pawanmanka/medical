@@ -1,0 +1,12 @@
+.top8{
+    top: 8px !important
+}
+
+.medical-field-error{
+    color:#ed5565;
+}
+
+.imagePreview{
+    width:100%;
+    max-height: 300px;
+}
