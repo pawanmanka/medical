@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Amenities;
-use App\Models\Category;
+use App\Models\UserAmenities;
 use App\Traits\DatatableGrid;
-use App\Traits\UploadImage;
 use Illuminate\Http\Request;
 
 class AmenitiesController extends Controller
@@ -52,14 +51,8 @@ class AmenitiesController extends Controller
         else{
             $amenitiesObj = !empty($id)?Amenities::find($id):new Amenities();
             $amenitiesObj->name = $request->name;
-            $amenitiesObj->parent_id = !empty($request->parent_id)?$request->parent_id:0;
-            $amenitiesObj->super_amenities_id = !empty($request->super_amenities_id)?$request->super_amenities_id:0;
-            $amenitiesObj->slug = $amenitiesObj->createSlug($request->name,$id);
-            if($request->hasFile('image')) {
-                $amenitiesObj->image =   $this->fileUpload($request,config('application.amenities_image_path'));
-            }
             $amenitiesObj->save();
-            flash('amenities Save Successfully')->success()->important();
+            flash('Amenities Save Successfully')->success()->important();
             return redirect('/administrator/amenities/list');
         }
     }
@@ -67,8 +60,7 @@ class AmenitiesController extends Controller
     public function grid(Request $request){
         $fields = array(
             "id",
-            "name",	
-            "slug"	
+            "name"
           );
     	$this->columns =$fields;
         $this->searchColumns =$fields;
@@ -88,12 +80,11 @@ class AmenitiesController extends Controller
                 $action .= "<a href='$editLink' class='btn btn-primary text-white'><i class='fa fa-pencil'></i></a> ";
                 }
                if(auth()->user()->can('delete amenities')){
-                $action .= "<a data_id='$row->id' href='#' class='btn btn-danger deleteCategory text-white'><i class='fa fa-trash'></i></a>";
+                $action .= "<a data_id='$row->id' href='#' class='btn btn-danger deleteAmenities text-white'><i class='fa fa-trash'></i></a>";
                 }
                 $output ['data'] [] = array (
 	    			$row->id,
 	    			$row->name,
-	    			$row->slug,
 	    			$action
 	    		);
 	    	}
@@ -110,16 +101,16 @@ class AmenitiesController extends Controller
         $status = self::$ERROR;
         $message = 'amenities not found';
         
-        $amenitiesObj = Amenities::find($request->id);
+        $amenitiesObj =  Amenities::find($request->id);
         if(isset($amenitiesObj->id)){
-            $subCategoryObj = Amenities::whereParentId($amenitiesObj->id)->first();
-            if(empty($subCategoryObj->id)){
+            $resultObj =  UserAmenities::whereAmenitieId($amenitiesObj->id)->first();
+            if(empty($resultObj->id)){
                 $amenitiesObj->delete();
                 $status = self::$SUCCESS;
-                $message = "amenities Deleted Successfully";
+                $message = "Amenities Deleted Successfully";
             }
             else{
-                $message = "amenities have subcategories ";
+                $message = "Amenities not deleted because it linked to user";
             }
         }
         

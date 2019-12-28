@@ -26,10 +26,10 @@
                                 <li>{!! selectBox('availability',config('application.availabilityArr'),isset($search['availability'])?$search['availability']:'',array('class'=>'form-control filterElement'),'Select Availability') !!}</li>
                                 @endif
                                 @if(isset($roles[config('application.hospital_role')]))
+                                <li>{!! selectBox('amenities',$amenities,isset($search['amenities'])?$search['amenities']:'',array('class'=>'form-control filterElement'),'Select Amenities') !!}</li>
                                 <li>{!! selectBox('rating',config('application.starArr'),isset($search['rating'])?$search['rating']:'',array('class'=>'form-control filterElement'),'Select Rating') !!}</li>
                                 @endif
                                 @if(isset($roles[config('application.lab_role')]))
-                                <li>{!! selectBox('timing',config('application.timeRangeArr'),isset($search['timing'])?$search['timing']:'',array('class'=>'form-control filterElement'),'Select Timing') !!}</li>
                                 <li>{!! selectBox('experience',config('application.experienceArr'),isset($search['experience'])?$search['experience']:'',array('class'=>'form-control filterElement'),'Select Experience') !!}</li>
                                 @endif
 

@@ -21,7 +21,7 @@ class WalletController extends Controller
         $walletObj = Wallet::where([
             'user_id'=>auth()->id()
         ])->first();
-        $this->data['amount'] = $walletObj->amount;
+        $this->data['amount'] = isset($walletObj->amount)?$walletObj->amount:0;
         return view('my-wallet',$this->data);
     } 
     

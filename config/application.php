@@ -76,7 +76,7 @@ return [
     ),
     'front_end_roles'=>'patient|hospital|doctor|lab',
     'extra_info_roles'=>'hospital|doctor|lab',
-    'wallet_add_roles'=>'hospital|patient',
+    'wallet_add_roles'=>'doctor|patient',
     'rolePermissionArr'=>array(
         'doctor'=>array(
             'edit'=>'edit',

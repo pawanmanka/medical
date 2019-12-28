@@ -17,4 +17,8 @@ class HospitalDoctor extends Model
         }
         return $image;
     }
+
+    public function getProductItem(){
+      return $this->hasOne(ProductItem::class,'product_id','product_id');
+    }
 }

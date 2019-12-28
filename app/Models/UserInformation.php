@@ -29,6 +29,10 @@ class UserInformation extends Model
     {
       return $this->hasMany(HospitalDoctor::class,'user_id','user_id');
     }
+    public function getAmenities()
+    {
+      return $this->belongsToMany(Amenities::class,'user_amenities','user_id','amenitie_id');
+    }
     public function getCategoryNameAttribute()
     {
       $category = $this->category()->first();

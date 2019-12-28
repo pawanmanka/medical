@@ -47,9 +47,14 @@
 @section('customScript')
 <link rel="stylesheet" href="{{baseUrl('plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker-standalone.css')}}">
 <link rel="stylesheet" href="{{baseUrl('plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')}}">
+<link rel="stylesheet" href="{{baseUrl('plugins/chosen/chosen.css')}}">
 <script src="{{ baseUrl('js/jquery.validate.min.js') }}"></script>
 <script src="{{ baseUrl('plugins/bootstrap-datetimepicker/js/moment.js') }}"></script>
 <script src="{{ baseUrl('plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+<script src="{{ baseUrl('plugins/chosen/chosen.jquery.js') }}"></script>
+
+
 <script src="{{ baseUrl('scripts/profile.js') }}"></script>
 <script>
   var profileObj = new ProfileFn();

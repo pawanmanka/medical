@@ -49,13 +49,32 @@
             </div>
     </div>   
 
-    
+    <div class="form-group mt-50">
+        <label class="control-label col-sm-2" for="ActualFee">Actual Fee</label>
+        <div class="col-sm-10 ">
+                <input  type="text" class="form-control required" name="actual_fee" value="{{ old('actual_fee',isset($record->actual_fee)?$record->actual_fee:'') }}" >
+        </div>
+</div>
+
+<div class="form-group mt-10">
+        <label class="control-label col-sm-2" for="DiscountedFee">Discounted Fee</label>
+        <div class="col-sm-10 ">
+                <input  type="text" class="form-control required" name="discounted_fee" value="{{ old('discounted_fee',isset($record->discounted_fee)?$record->discounted_fee:'') }}">
+        </div>
+</div>
 
     <div class="form-group mt-10">
             <label class="control-label col-sm-2" for="facility">Facility</label>
             <div class="col-sm-10 ">
                     <input  type="text" class="form-control required" name="facility" value="{{ old('facility',isset($record->facility)?$record->facility:'') }}">
             </div>
+    </div>
+    <div class="form-group mt-10">
+            <label class="control-label col-sm-2" for="facility">Amenities</label>
+            <div class="col-sm-10 ">
+                    {!! selectBox('amenities',$amenities,$record->getAmenities()->pluck('amenities.id','amenities.id')->toArray(),array('class'=>'form-control chosen-select required','multiple'=>'multiple'),'Select Gender') !!}  	 
+
+                </div>
     </div>
     <div class="form-group mt-10">
             <label class="control-label col-sm-2" for="title">Title</label>

@@ -44,7 +44,9 @@ ProfileFn.prototype.bindElement = function(){
             else{
                 jQuery('#home_visit_div').hide();
           }
-     });
+          
+        });
+        jQuery('.chosen-select').chosen({width: "100%"});
 
      jQuery('#add_doctor').click(function(){
             var ele = jQuery('#doctors_list').find('tr').clone();

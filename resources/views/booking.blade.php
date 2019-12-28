@@ -27,6 +27,7 @@
                                     <div class="col-lg-12">
                                         @include('flash::message')
                                         <table class="table">
+                                            <tr><td>Booking for {{ $userObj->name }}</td></tr>    
                                             <tr><td>{{ $productDetail->name }}</td></tr>    
                                             <tr><td>{{ $productDetail->price }}</td></tr> 
                                             @if($productDetail->lab_product_type == 2)   

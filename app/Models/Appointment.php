@@ -6,6 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     protected $guarded = ["id"];
+    protected $appeds = [
+        'time',
+        'date_str'
+    ]; 
+
+    public function getTimeAttribute()
+    {
+        $date = strtotime($this->date);
+        return date('H:s',$date); 
+    }
+    
+    public function getDateStrAttribute()
+    {
+        $date = strtotime($this->date);
+        return date('d-m-Y',$date); 
+    }
+
+    public function getPatient()
+    {
+        return $this->hasOne(User::class,'id','patient_id');
+    }
 
     public function generateUniqueCode()
     {

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Page;
 use App\Models\Question;
 use App\Models\Review;
+use App\Models\Amenities;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,7 @@ class HomeController extends Controller
     public function hospitals()
     {   
         $this->data['title'] = 'Hospitals';
+        $this->data['amenities'] = Amenities::pluck('name','id')->toArray();
         $this->_getListData(array(config('application.hospital_role')));
         return view('listing',$this->data);
     }
@@ -100,6 +102,12 @@ class HomeController extends Controller
                if(isset($search['price'])){
                   $price= $search['price'];
                   $query->where('actual_fee','<=',$price);
+               }
+               if(isset($search['amenities'])){
+                  $amenities= $search['amenities'];
+                  $query->whereHas('getAmenities',function($q) use($amenities){
+                       $q->where('amenities.id',$amenities);  
+                  });
                }
                if(isset($search['experience'])){
                   $experience= !empty($search['experience'])?$search['experience']:0;

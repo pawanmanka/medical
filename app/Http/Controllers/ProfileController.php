@@ -8,6 +8,9 @@ use App\Models\HospitalDoctor;
 use App\Models\Question;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Amenities;
+use App\Models\Product;
+use App\Models\ProductItem;
 use App\Models\UserInformation;
 use App\Traits\DatatableGrid;
 use App\Traits\UploadImage;
@@ -251,7 +254,9 @@ class ProfileController extends Controller{
 
     public function extraInfo()
     {   
-        $this->data['record']= UserInformation::where('user_id',auth()->id())->first();
+        $this->data['record']= $record = UserInformation::where('user_id',auth()->id())->first();
+        
+        $this->data['amenities']= Amenities::pluck('name','id')->toArray();
         $this->data['title'] ='Extra Information'; 
         return view('extra_information',$this->data);
     }
@@ -370,6 +375,7 @@ class ProfileController extends Controller{
         }
         else{
             $userInformationObj = UserInformation::where('user_id',auth()->id())->first();
+            
             $userInformationObj->m_to_s_morning_start = date("H:i", strtotime($request->m_to_s_morning_start));
             $userInformationObj->m_to_s_morning_end = date("H:i", strtotime($request->m_to_s_morning_end));
             $userInformationObj->m_to_s_evening_start = date("H:i", strtotime($request->m_to_s_evening_start));
@@ -378,6 +384,8 @@ class ProfileController extends Controller{
             $userInformationObj->s_evening_start = date("H:i", strtotime($request->s_evening_start));
 
             $userInformationObj->facility = $request->facility;
+            $userInformationObj->actual_fee = $request->actual_fee;
+            $userInformationObj->discounted_fee = $request->discounted_fee;
             $userInformationObj->meta_title = $request->meta_title;
             $userInformationObj->meta_keyword = $request->meta_keyword;
             $userInformationObj->meta_description = $request->meta_description;
@@ -391,6 +399,8 @@ class ProfileController extends Controller{
                     if(empty($name)) continue;
                     $id = isset($value['id'][$index])?$value['id'][$index]:0;
                     $doctor = !empty($id)?HospitalDoctor::find($id):new HospitalDoctor();
+                    $ProductItem = $this->_saveProduct($name,$doctor,$userInformationObj);
+                    $doctor->product_id = $ProductItem->product_id;
                     $doctor->name = $name;
                     $doctor->user_id = auth()->id();
                     $doctor->experience = isset($value['experience'][$index])?$value['experience'][$index]:'';
@@ -409,14 +419,56 @@ class ProfileController extends Controller{
             }
             }
             if(!empty($oldDoctors)){
-                HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
+               $records = HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->get();
+               $productIds = array();
+               foreach ($records as $key => $value) {
+                $productIds[$value->product_id] = $value->product_id; 
+               }
+              HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
+              if(!empty($productIds)){
+                  Product::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
+                  ProductItem::whereIn('product_id',$oldDoctors)->delete();
+              }
+
             }
+
+            //amenities
+             if(!empty($request->amenities)){
+                $userInformationObj->getAmenities()->sync($request->amenities);
+             }
+
 
             flash('Update Successfully')->success()->important();
             return redirect("/extra-info");      
         }
         
     }
+
+    private function _saveProduct($name,$doctor,$userInformationObj){
+        $actualFee = $userInformationObj->actual_fee;
+        $discountFee=$userInformationObj->discounted_fee;
+        $productId=$doctor->product_id;
+
+        $productObj  = !empty($productId)?Product::find($productId):new Product();
+        $productObj->type  = Product::$HOSPITAL;  
+        $productObj->name  = $name;
+        $productObj->user_id  =  auth()->id();
+        $productObj->save();
+
+        $productItems = $productObj->productItems->first();
+        $productItemObj  = isset($productItems->id)?$productItems:new ProductItem();
+        $productItemObj->product_id=$productObj->id;
+        $productItemObj->name=$name;
+        if(empty($productItemObj->code)){
+            $productItemObj->code =  $productItemObj->generateUniqueCode();
+        }
+        $productItemObj->actual_price=$actualFee;
+        $productItemObj->discount_price=$discountFee;
+        $productItemObj->save();
+        return $productItemObj;
+    }
+
+
     public function labExtraSave($request)
     {
         

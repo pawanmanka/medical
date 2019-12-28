@@ -69,7 +69,6 @@
 
                             <li class="nl-simple" aria-haspopup="true"><a href="{{ url('contact-us') }}">Contact Us</a></li>
                             <!-- NAVIGATION MENU BUTTON -->
-                            <li class="nl-simple header-btn" aria-haspopup="true"><a href="#">Make an Appointment</a></li>
                         </ul>
                     </nav>  <!-- END MAIN MENU -->
 

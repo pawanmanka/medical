@@ -31,8 +31,12 @@
 								<!-- Name -->	
 								<div class="profile-btn">
 										<!-- Button -->
+								@if ($record->role_name  == config('application.doctor_role'))
+								@hasanyrole(config('application.wallet_add_roles'))		
 								<a href="{{ url('/booking/'.$record->slug) }}" class="btn btn-md btn-blue blue-hover" >Book an Appointment</a>
-								</div>
+								@endhasanyrole	
+								@endif
+							</div>
 								 <h2 class="h2-sm blue-color">{{ $record->name }} 
 									@if(!empty($record->gender_title))
 								       ({{$record->gender_title}})	 
@@ -236,7 +240,11 @@
 												<td>{{$item->name}}</td>
 												<td>{{$item->actual_price}}</td>
 												<td>{{$item->discount_price}}</td>
-												<td><a href="{{url('booking/'.$record->slug.'/'.$item->code)}}">Book Appointment</a></td>
+												<td>
+													@hasanyrole(config('application.wallet_add_roles'))
+													<a href="{{url('booking/'.$record->slug.'/'.$item->code)}}">Book Appointment</a>
+													@endhasanyrole
+												</td>
 											</tr>
 											@endforeach
 										</table>
@@ -260,7 +268,9 @@
 											<td>{{$item->name}}</td>
 											<td>{{$item->actual_price}}</td>
 											<td>{{$item->discount_price}}</td>
+											@hasanyrole(config('application.wallet_add_roles'))
 											<td><a href="{{url('booking/'.$record->slug.'/'.$item->code)}}">Book Appointment</a></td>
+										    @endhasanyrole
 										</tr>
 										@endforeach
 									</table>
@@ -308,6 +318,10 @@
 													<h5 class="h5-md steelblue-color">{{$item->name}}</h5>	
 													<span>{{$item->experience}}</span>	
 													<p class="blue-color">{{$item->timing}}</p>	
+													@hasanyrole(config('application.wallet_add_roles'))
+													<a href="{{url('booking/'.$record->slug.'/'.$item->getProductItem->code)}}">Book Appointment</a>
+													@endhasanyrole
+
 												</div>
 			
 											</div>

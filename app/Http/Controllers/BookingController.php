@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\HospitalDoctor;
 use App\Models\ProductItem;
 use App\Models\User;
 use App\Models\Wallet;
@@ -45,7 +46,14 @@ class BookingController extends Controller
             $this->data['productDetail'] = $productDetail;
         }
         else if($userObj->role_name  == config('application.hospital_role')){
-
+            $item = $request->item;
+            $productDetail = ProductItem::where('code',$item)->where('status',2)->first();
+            if(!isset($productDetail->id)){
+                abort(404);
+            }
+           
+            $this->data['productDetail'] = $productDetail;
+           
         }
         else if($userObj->role_name  == config('application.doctor_role')){
             $view  = '_doctor_booking';
@@ -65,7 +73,7 @@ class BookingController extends Controller
         $walletObj = $this->data['wallet'];
         $productDetail = $this->data['productDetail'];
         $userObj = $this->data['userObj'];
-        if($walletAmount < $productDetail->actual_price){
+        if($walletAmount < $productDetail->price){
             flash('Please Add Money In Wallet')->error()->important();
             return back()->withInput();
         }
@@ -91,6 +99,7 @@ class BookingController extends Controller
            // save appointment
            $appointmentObj = new  Appointment();
            $appointmentObj->product_item_id = $productDetail->id; 
+           $appointmentObj->patient_id =  auth()->id(); 
            $appointmentObj->price = $productDetail->price; 
            $appointmentObj->user_id = $userObj->id; 
            $appointmentObj->patient_name = $currentUser->name; 

@@ -78,18 +78,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
     Route::get('/profile','ProfileController@index');
     Route::post('/profile','ProfileController@save');
    
-    Route::get('/extra-info','ProfileController@extraInfo');
-    Route::post('/extra-info','ProfileController@extraInfoSave');
-    
-    Route::get('/my-feedbacks','ProfileController@MyFeedbacks');
-    Route::get('/my-feedback/grid','ProfileController@MyFeedbackGrid');
-    Route::post('/my-feedback/statusChange','ProfileController@MyFeedbackStatusChange');
-    Route::get('/my-qa/grid','ProfileController@MyQAGrid');
-    Route::post('/my-qa/statusChange','ProfileController@MyQuestionStatusChange');
-    Route::post('/saveAnswer','ProfileController@saveAnswer');
-    
-    Route::post('/saveReview', 'HomeController@createReview');
-    Route::post('/saveQuestion', 'HomeController@createQuestion');
+   
 
     Route::group(['middleware'=>['role:doctor']],function(){
         Route::get('/choose-calendar-option','ProductController@doctorProducts');
@@ -121,17 +110,36 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
     });
 
     //booking
+    Route::group(['middleware'=>['role:'.config('application.wallet_add_roles')]],function(){
 
-    Route::get('/booking/{slug}','BookingController@index');
-    Route::get('/booking/{slug}/{item}','BookingController@index');
-    
-    Route::post('/booking/{slug}/{item}','BookingController@save');
-    
+        Route::get('/booking/{slug}','BookingController@index');
+        Route::get('/booking/{slug}/{item}','BookingController@index');
+        
+        Route::post('/booking/{slug}/{item}','BookingController@save');
+        Route::post('/wallet/add-money','WalletController@addMoney');
+    });
+
     Route::get('/my-wallet','WalletController@index');
     Route::get('/my-wallet/grid','WalletController@grid');
+     
+    //extra_info_roles
+    Route::group(['middleware'=>['role:'.config('application.extra_info_roles')]],function(){
+        Route::get('/extra-info','ProfileController@extraInfo');
+        Route::post('/extra-info','ProfileController@extraInfoSave');
+        
+        Route::get('/my-feedbacks','ProfileController@MyFeedbacks');
+        Route::get('/my-feedback/grid','ProfileController@MyFeedbackGrid');
+        Route::post('/my-feedback/statusChange','ProfileController@MyFeedbackStatusChange');
+        Route::get('/my-qa/grid','ProfileController@MyQAGrid');
+        Route::post('/my-qa/statusChange','ProfileController@MyQuestionStatusChange');
+        Route::post('/saveAnswer','ProfileController@saveAnswer');
+        
+        Route::post('/saveReview', 'HomeController@createReview');
+        Route::post('/saveQuestion', 'HomeController@createQuestion');
 
-    Route::post('/wallet/add-money','WalletController@addMoney');
-
+        Route::get('/my-appointment','AppointmentController@index');
+        Route::get('/appointment/grid','AppointmentController@grid');
+    });
 
 });
 
