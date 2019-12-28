@@ -8,7 +8,7 @@ trait OtpHandle{
     
     public function generateOtp($mobile)
     {
-        $otp = rand(100000,999999);;
+        $otp = rand(100000,999999);
         
         $allOtps = $this->getRelatedOtp($otp,$mobile);
 

@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\HospitalDoctor;
+use App\Models\Question;
+use App\Models\Review;
 use App\Models\User;
 use App\Models\UserInformation;
+use App\Traits\DatatableGrid;
 use App\Traits\UploadImage;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller{
     use UploadImage;
+    use DatatableGrid;
 
     public function __construct()
     {
@@ -342,7 +347,7 @@ class ProfileController extends Controller{
     }
     public function hospitalExtraSave($request)
     {
-        
+
        $rules =  [
         'm_to_s_morning_start' => ['required'],
         'm_to_s_morning_end' => ['required'],
@@ -376,9 +381,37 @@ class ProfileController extends Controller{
             $userInformationObj->meta_title = $request->meta_title;
             $userInformationObj->meta_keyword = $request->meta_keyword;
             $userInformationObj->meta_description = $request->meta_description;
-           
-
             $userInformationObj->save();
+
+            // doctors
+            $oldDoctors = HospitalDoctor::where('user_id',auth()->id())->pluck('id','id')->toArray();
+            $value = $request->doctor; 
+            if(!empty($value)){
+                foreach ($value['name'] as $index => $name) {
+                    if(empty($name)) continue;
+                    $id = isset($value['id'][$index])?$value['id'][$index]:0;
+                    $doctor = !empty($id)?HospitalDoctor::find($id):new HospitalDoctor();
+                    $doctor->name = $name;
+                    $doctor->user_id = auth()->id();
+                    $doctor->experience = isset($value['experience'][$index])?$value['experience'][$index]:'';
+                    $doctor->timing = isset($value['timing'][$index])?$value['timing'][$index]:'';
+                    if(isset($value['image'][$index])){
+                        $oldImage =null;
+                        if(isset($doctor->image)){
+                            $oldImage = config('application.hospital_doctor_image_path').'/'.$doctor->image;
+                        }
+                        $doctor->image =   $this->fileUploadFile($value['image'][$index],config('application.hospital_doctor_image_path'),$oldImage);
+                    }
+                    $doctor->save();
+                    if(isset($oldDoctors[$doctor->id])){
+                        unset($oldDoctors[$doctor->id]);
+                    }
+            }
+            }
+            if(!empty($oldDoctors)){
+                HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
+            }
+
             flash('Update Successfully')->success()->important();
             return redirect("/extra-info");      
         }
@@ -429,4 +462,189 @@ class ProfileController extends Controller{
         
     }
 
+    public function MyFeedbacks(Request $request)
+    {
+        $this->data['title'] ='My Feedback'; 
+        return view('my-feedback',$this->data);
+    }
+
+    public function MyFeedbackGrid(Request $request)
+    {
+        $fields = array(
+            "id",
+            "title",	
+            "title",	
+            "rating",	
+            "description"	
+          );
+    	$this->columns =$fields;
+        $this->searchColumns =$fields;
+    	$this->setOrderBy();  	
+    	$this->setSearchCondition();
+    	
+        $this->query = Review::with('getPatient')->where('user_id',auth()->id());        
+    	$output = $this->getGridData();
+        if(!empty($output['recordsTotal']) && $output['recordsTotal']>0 && !empty($output['data'])){
+        	$result = $output['data'];
+            $output ['data'] = array();
+            
+            foreach ($result as $row){
+                $status = $row->status === 1?"Yes":"No";
+                
+                $action =" <a href='#' data-id='$row->id' class='feedbackStatus'>$status</a>";
+                $description = htmlspecialchars(str_replace("'","`",$row->description));
+                $readMoreLink ="... <a href='#' data-message='".$description."' class='readMoreMessage'>Read More</a>";
+              
+                $output ['data'] [] = array (
+	    			$row->id,
+	    			$row->getPatient->name,
+	    			$row->title,
+	    			$row->rating,
+	    			str_limit($row->description,$limit = 20,$readMoreLink),
+	    			$action
+	    		);
+	    	}
+        }
+        
+
+
+        return response()->json($output);  
+    }
+
+
+ 
+    public function MyFeedbackStatusChange(Request $request)
+    {
+        $status = self::$ERROR;
+        $message = 'Error!';
+        
+        $recordObj = Review::find($request->id);
+        if(isset($recordObj->id)){
+            $recordObj->status = $recordObj->status == 1?0:1;
+            $recordObj->save();
+            $status = self::$SUCCESS;
+            $message = "Successfully Changes";
+            
+            $userObj =  User::find(auth()->id());
+            $avgRating = Review::where('user_id',$userObj->id)->where('status',1)->avg('rating');
+            $userObj->avg_rating = $avgRating;
+            $userObj->save();
+        }
+        
+
+        $result = array(
+            'status'=>$status,
+            'message'=>$message
+        );
+
+        return response()->json($result);
+
+    }
+
+    
+    public function MyQuestionStatusChange(Request $request)
+    {
+        $status = self::$ERROR;
+        $message = 'Error!';
+        
+        $recordObj = Question::find($request->id);
+        if(isset($recordObj->id)){
+            $recordObj->status = $recordObj->status == 1?0:1;
+            $recordObj->save();
+            $status = self::$SUCCESS;
+            $message = "Successfully Changes";
+        }
+        
+
+        $result = array(
+            'status'=>$status,
+            'message'=>$message
+        );
+
+        return response()->json($result);
+
+    }
+    
+    
+    public function MyQAGrid(Request $request)
+    {
+        $fields = array(
+            "id",
+            "title",	
+            "answer",	
+          );
+    	$this->columns =$fields;
+        $this->searchColumns =$fields;
+    	$this->setOrderBy();  	
+    	$this->setSearchCondition();
+    	
+        $this->query = Question::where('user_id',auth()->id());        
+    	$output = $this->getGridData();
+        if(!empty($output['recordsTotal']) && $output['recordsTotal']>0 && !empty($output['data'])){
+        	$result = $output['data'];
+            $output ['data'] = array();
+            
+            foreach ($result as $row){
+                $status = $row->status === 1?"Yes":"No";
+                $action =" <a href='#' data-id='$row->id' class='qaStatus'>$status</a>";
+                $question =htmlspecialchars(str_replace("'","`",$row->title));
+                $description = '';
+                $answer = '';
+                $text = 'Write Answer';
+                if(!empty($row->answer)){
+                    $text = 'Edit Answer';
+                    $description = "...".htmlspecialchars(str_replace("'","`",$row->answer));
+                    $answer = htmlspecialchars(str_replace("'","`",$row->answer));
+                }
+                $editLink ="$description ...<a href='#' data-id='$row->id' data-question='".$question."'  data-answer='".$answer."' class='editAnswer'>$text</a>";
+              
+              
+                $output ['data'] [] = array (
+	    			$row->id,
+	    			$row->title,
+	    			$editLink,
+	    			$action
+	    		);
+	    	}
+        }
+        
+
+
+        return response()->json($output);  
+    }
+
+    public function saveAnswer(Request $request)
+    {
+      $status = self::$ERROR;
+      $message = 'Error ! please check';
+      $rules = array(
+         'id'=>'required',
+         'answer'=>'required'
+     );
+     
+     $validation = \Validator::make($request->all(),$rules);
+     if($validation->fails()){
+        $message = flash(makeErrorMessage($validation->errors()->messages()))->error()->important();
+     }
+     else{
+
+            $record = Question::where([
+               'id'=>$request->id,
+               'user_id'=>auth()->id()
+            ])->first();
+            if(isset($record->id)){
+                $record->answer=$request->answer;
+                $record->save();
+                $status = self::$SUCCESS;
+                $message = 'Successfully Updated';
+            }
+         
+     }
+
+     $result = array(
+      'status'=>$status,
+      'message'=>$message
+    );
+    return response()->json($result);  
+    }
 }

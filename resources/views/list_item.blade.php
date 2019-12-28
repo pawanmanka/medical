@@ -8,13 +8,7 @@
        <!-- Data -->
        <div class="txt-widget-data">
            <h5 class="h5-md steelblue-color">{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</h5>	
-           
-           <div class="rate-div">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-          </div>	
+           {!!ratingView($item->avg_rating)!!}
            <ul>
                <li><a href="{{ $item->detail_url }}" class="">View Profile</a></li>
                <li><a href="about.html" class="">Book a appointment</a></li>

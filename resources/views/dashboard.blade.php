@@ -12,7 +12,7 @@
                       
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div class="row pt-50">
-                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                         <a href="{{ url('profile') }}">
                                             <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                                             <div class="txt-widget-data">
@@ -26,7 +26,7 @@
 
                                     </div>
                                     @hasanyrole(config('application.extra_info_roles'))
-                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                         <a href="{{ url('extra-info') }}">
                                             <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                                             <div class="txt-widget-data">
@@ -40,7 +40,7 @@
 
                                     </div>
                                     @endhasanyrole
-                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                         <a href="{{ url('my-wallet') }}">
                                             <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                                             <div class="txt-widget-data">
@@ -53,7 +53,8 @@
                                         </a>
 
                                     </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    @hasanyrole(config('application.extra_info_roles'))
+                                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                         <a href="{{ url('my-appointment') }}">
                                             <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                                             <div class="txt-widget-data">
@@ -66,7 +67,20 @@
                                         </a>
 
                                     </div>
-                                
+                                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                        <a href="{{ url('my-feedbacks') }}">
+                                            <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                            <div class="txt-widget-data">
+                                            <h5 class="h5-md steelblue-color">My Feedback / Q &A</h5>	
+                                            </div>
+                                                <div class="row mar-0" style="text-align:center">
+                                                <i class="fas fa-calendar-check fa-3x"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                    @endhasanyrole
                                 </div>
                                
                             </div>

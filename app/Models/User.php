@@ -68,4 +68,11 @@ class User extends Authenticatable
     public function getUserCertificate(){
         return $this->hasMany(UserCertificate::class,'user_id');
     }
+   
+    public function getProducts(){
+        return $this->hasMany(Product::class,'user_id');
+    }
+    public function getWallet(){
+        return $this->hasOne(Wallet::class,'user_id');
+    }
 }

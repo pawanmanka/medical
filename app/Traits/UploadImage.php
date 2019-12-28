@@ -54,5 +54,14 @@ trait UploadImage
         return $imageName;
     }
 
+    public function removeImage($unLinkImagePath)
+    {
+        $destinationPath = public_path($unLinkImagePath);
+        if(file_exists($destinationPath)){
+            unlink($destinationPath);
+        }
+        return true;
+    }
+
 
 }

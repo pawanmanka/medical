@@ -158,6 +158,7 @@ class ProductController extends Controller
                         'product_id'=>$productObj->id,
                         'name'=>$timestamp
                     ]);
+                   
                     $productItemObj->actual_price=$value;
                     $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
                     $productItemObj->save();
@@ -297,6 +298,9 @@ class ProductController extends Controller
             $productItemObj  = isset($productItems->id)?$productItems:new ProductItem();
             $productItemObj->product_id=$productObj->id;
             $productItemObj->name=$request->name;
+            if(empty($productItemObj->code)){
+                $productItemObj->code =  $productItemObj->generateUniqueCode();
+            }
             if($segment =='my-packages'){
             $productItemObj->description=$request->description;
             }

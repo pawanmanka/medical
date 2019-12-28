@@ -29,6 +29,7 @@ return [
     'default_image_path'=>'images/default.png',
     'category_image_path'=>'uploads/category',
     'users_image_path'=>'uploads/users',
+    'hospital_doctor_image_path'=>'uploads/hospital_doctor',
     'certificate_image_path'=>'uploads/certificates',
     'admin_role'=>'admin',
     'patient_role'=>'patient',
@@ -75,8 +76,13 @@ return [
     ),
     'front_end_roles'=>'patient|hospital|doctor|lab',
     'extra_info_roles'=>'hospital|doctor|lab',
+    'wallet_add_roles'=>'hospital|patient',
     'rolePermissionArr'=>array(
         'doctor'=>array(
+            'edit'=>'edit',
+            'delete'=>'delete'
+        ),
+        'patient'=>array(
             'edit'=>'edit',
             'delete'=>'delete'
         ),

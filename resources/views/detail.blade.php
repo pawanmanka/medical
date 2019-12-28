@@ -50,7 +50,7 @@
 									
 								</h5>
 								 
-								 {!!ratingView(3)!!}
+								 {!!ratingView($record->avg_rating)!!}
 	
 			 					<!-- Text -->	
 						   		<p>{{$record->meta_description}}</p>
@@ -81,14 +81,34 @@
 								    		<span class="flaticon-083-stethoscope"></span> Info
 								    	</a>
 								  	</li>
-
+									  @if($record->role_name  == config('application.lab_role'))
+									  <!-- TAB-service LINK -->
+									  <li class="nav-item icon-xs">
+										  <a class="nav-link" id="service-list" data-toggle="pill" href="#tab-service" role="tab" aria-controls="tab-2" aria-selected="false">
+											 <span class="flaticon-112-mortar"></span> Services
+										  </a>
+									  </li>
+									
+									  <li class="nav-item icon-xs">
+										  <a class="nav-link" id="package-list" data-toggle="pill" href="#tab-package" role="tab" aria-controls="tab-package" aria-selected="false">
+											 <span class="flaticon-035-clinic-history-6"></span> Packages
+										  </a>
+									  </li>
+									  @endif
 								  	<!-- TAB-2 LINK -->
 									<li class="nav-item icon-xs">
 									    <a class="nav-link" id="tab2-list" data-toggle="pill" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">
 									       <span class="flaticon-005-blood-donation-3"></span> Patient Feedback
 									    </a>
 									</li>
-
+									@if($record->role_name  == config('application.hospital_role'))
+									<!-- TAB-doctor LINK -->
+									<li class="nav-item icon-xs">
+									    <a class="nav-link" id="tab2-list" data-toggle="pill" href="#tab-doctor" role="tab" aria-controls="tab-2" aria-selected="false">
+									       <span class="flaticon-016-doctor-1"></span> Doctors
+									    </a>
+									</li>
+                                    @endif 
 									<!-- TAB-3 LINK -->
 									<li class="nav-item icon-xs">
 									    <a class="nav-link" id="tab3-list" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">
@@ -112,6 +132,12 @@
 									
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
+													@if($record->role_name  == config('application.hospital_role') || $record->role_name  == config('application.lab_role'))
+													<strong>About {{$record->name}} </strong> 
+													<p>{{$userInformation->meta_description}}</p>
+													<br>
+													@endif 
+													<strong>Address </strong> 
 														<p>{{$userInformation->address}}</p>
 												</div>
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
@@ -126,6 +152,7 @@
 												</div>
 										</div>
 									   @if(!empty($userInformation->hospital))
+									   <br>
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
 														Work in Hospital - {{$userInformation->hospital}}
@@ -133,8 +160,9 @@
 											
 										</div>
 										@endif
+										<br>
 										<div class="row mar-0 mt-10">
-											 
+											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
 														<strong>General Timing </strong><br>
 														<strong>Mon – Sat </strong>
@@ -155,10 +183,11 @@
 												@endif
 										</div>
 										@if(!empty($userInformation->facility))
+										<br>
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
-														Facility <br>
-														{{$userInformation->facility}}
+													<strong>Facility</strong><br>
+														{!! str_replace(',','<br>',$userInformation->facility) !!}
 												</div>
 										</div>
 										@endif
@@ -190,7 +219,56 @@
                                 @endif   
 									</div>	<!-- END TAB-1 CONTENT -->
 								</div>
-
+								@if($record->role_name  == config('application.lab_role'))
+								<div class="tab-pane fade" id="tab-service" role="tabpanel" aria-labelledby="service-list">
+										@if(!empty($services))
+										<table class="table">
+                                            <tr>
+												<th>SR No</th>
+												<th>Test Name</th>
+												<th>Actual Fee</th>
+												<th>Discount Fee</th>
+												<th>Action</th>
+											</tr>
+											@foreach($services as $item)
+											<tr>
+												<td>1</td>
+												<td>{{$item->name}}</td>
+												<td>{{$item->actual_price}}</td>
+												<td>{{$item->discount_price}}</td>
+												<td><a href="{{url('booking/'.$record->slug.'/'.$item->code)}}">Book Appointment</a></td>
+											</tr>
+											@endforeach
+										</table>
+										@else
+											No Service
+										@endif	 
+								</div>
+								<div class="tab-pane fade" id="tab-package" role="tabpanel" aria-labelledby="package-list">
+									@if(!empty($packages))
+									<table class="table">
+										<tr>
+											<th>SR No</th>
+											<th>Test Name</th>
+											<th>Actual Fee</th>
+											<th>Discount Fee</th>
+											<th>Action</th>
+										</tr>
+										@foreach($packages as $item)
+										<tr>
+											<td>1</td>
+											<td>{{$item->name}}</td>
+											<td>{{$item->actual_price}}</td>
+											<td>{{$item->discount_price}}</td>
+											<td><a href="{{url('booking/'.$record->slug.'/'.$item->code)}}">Book Appointment</a></td>
+										</tr>
+										@endforeach
+									</table>
+									@else
+										No Package
+									@endif	
+								</div>
+								@endif
 								<!-- TAB-2 CONTENT -->
 								<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab2-list">
 									<div class="row d-flex align-items-center mar-0">
@@ -212,7 +290,35 @@
 									</div>
 								</div>	<!-- END TAB-2 CONTENT -->
 							<!-- Button trigger modal -->
-
+							@if($record->role_name  == config('application.hospital_role'))
+							<!-- TAB-2 CONTENT -->
+								<div class="tab-pane fade" id="tab-doctor" role="tabpanel" aria-labelledby="tab2-list">
+									<div class="row d-flex align-items-center mar-0">
+										@foreach ($userInformation->getHospitalDoctor as $item)
+										<div class="col-lg-12">
+											<div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
+								
+												<!-- Avatar -->
+												<div class="txt-widget-avatar">
+													<img src="{{$item->image_url}}" alt="testimonial-avatar">
+												</div>
+			
+												<!-- Data -->
+												<div class="txt-widget-data">
+													<h5 class="h5-md steelblue-color">{{$item->name}}</h5>	
+													<span>{{$item->experience}}</span>	
+													<p class="blue-color">{{$item->timing}}</p>	
+												</div>
+			
+											</div>
+												
+											</div>
+	
+										@endforeach
+									</div>
+								</div>	<!-- END TAB-2 CONTENT -->
+							<!-- Button trigger modal -->
+                            @endif
 
                               
 

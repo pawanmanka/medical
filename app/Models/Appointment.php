@@ -1,21 +1,11 @@
-<?php 
-
+<?php  
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductItem extends Model
+class Appointment extends Model
 {
-    protected $guarded = ['id'];
-    protected $append = ['price'];
-
-    public function getPriceAttribute()
-    {
-        return auth()->id() != null?$this->discount_price:$this->actual_price;
-    }
-    public function getProduct(){
-        return $this->hasOne(Product::class,'id','product_id');
-    }
+    protected $guarded = ["id"];
 
     public function generateUniqueCode()
     {
@@ -35,8 +25,9 @@ class ProductItem extends Model
     }
     protected function getRelatedCode($code)
     {
-        return ProductItem::select('code')->where('code', 'like', $code.'%')->get();
+        return self::select('code')->where('code', 'like', $code.'%')->get();
     }
 
 
 }
+

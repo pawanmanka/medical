@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Question;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -113,20 +114,44 @@ class HomeController extends Controller
          $query->where('gender',$request->gender);
        })
        ->when(!empty($request->rating),function($query) use($request){
-         $query->where('avg_rating',$request->rating);
+         $query->where('avg_rating','>=',$request->rating);
        })
        ->where('status',config('application.user_active_status'))
        ->paginate(config('application.listing_item_limit'));
        $this->data['result'] = $userObj->items();
        $this->data['paging'] = $userObj;
+       
     }
 
     public function detail(Request $request)
     {
            
        $userObj = User::with(['getUserRating'=>function($query){
+          $query->where('status',1);
          $query->with('getPatient');
+       },
+       'getQuestions'=>function($query){
+         $query->where('status',1);
        }])->where('slug',$request->seoname)->where('status',0)->first();
+
+       if($userObj->role_name  == config('application.lab_role')){
+        $services = array();       
+        $packages = array();       
+         if(!$userObj->getProducts->isEmpty()){
+            foreach ($userObj->getProducts as $key => $value) {
+                 foreach ($value->productItems as $index => $product) {
+                    if($product->lab_product_type == 1){
+                       $services[] = $product;
+                    }
+                    else{
+                       $packages[] = $product;
+                    }
+                 }
+            }
+       }
+       $this->data['services'] = $services;
+       $this->data['packages'] = $packages;
+      }
 
        $this->data['title'] = $userObj->name;
        $this->data['record'] = $userObj;
@@ -200,7 +225,7 @@ class HomeController extends Controller
 
          $userObj = User::where('slug',$request->user_id)->where('status',0)->first();
          if(isset($userObj->id)){
-            $record = Review::firstOrCreate([
+            $record = Question::firstOrCreate([
                'user_id'=>$userObj->id,
                'patient_id'=>auth()->id()
             ]);

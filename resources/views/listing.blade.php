@@ -26,7 +26,6 @@
                                 <li>{!! selectBox('availability',config('application.availabilityArr'),isset($search['availability'])?$search['availability']:'',array('class'=>'form-control filterElement'),'Select Availability') !!}</li>
                                 @endif
                                 @if(isset($roles[config('application.hospital_role')]))
-                                <li>{!! selectBox('gender',config('application.genderArr'),isset($search['gender'])?$search['gender']:'',array('class'=>'form-control filterElement'),'Select Gender') !!}</li>
                                 <li>{!! selectBox('rating',config('application.starArr'),isset($search['rating'])?$search['rating']:'',array('class'=>'form-control filterElement'),'Select Rating') !!}</li>
                                 @endif
                                 @if(isset($roles[config('application.lab_role')]))

@@ -13,7 +13,7 @@
              <div class="col-md-10 col-lg-10  mt-50">
                  <div class="form-holder mb-40">
                         @include('flash::message')
-                     <form  method="POST" id="profile_form" class="form-horizontal">
+                     <form  method="POST" id="profile_form" enctype="multipart/form-data" class="form-horizontal">
                         @csrf                    
                         @role(config('application.doctor_role'))
                             @include('_doctor_extra_infromation_fields') 

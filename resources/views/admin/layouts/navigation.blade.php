@@ -26,6 +26,18 @@
                 </ul>
             </li>
             @endcanany
+            @canany(['add amenities', 'delete amenities','edit amenities'])
+            <li class="{{ isset($menu) && ($menu == 'amenities')?'active':'' }}">
+                <a href="{{ url('administrator/amenities/list') }}"><i class="fa fa-list"></i> <span class="nav-label">Amenities</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    @can('add amenities')
+                    <li class="{{ isset($subMenu) && ($subMenu == 'amenities_add')?'active':'' }}"><a href="{{ url('administrator/amenities/add') }}">Add</a></li>
+                    @endcan 
+                    <li class="{{ isset($subMenu) && ($subMenu == 'amenities_list')?'active':'' }}"><a href="{{ url('administrator/amenities/list') }}">List</a></li>
+                   
+                </ul>
+            </li>
+            @endcanany
             @canany(['add category', 'delete category','edit category'])
             <li class="{{ isset($menu) && ($menu == 'category')?'active':'' }}">
                 <a href="{{ url('administrator/category/list') }}"><i class="fa fa-list"></i> <span class="nav-label">Category</span> <span class="fa arrow"></span></a>

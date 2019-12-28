@@ -9,7 +9,8 @@
 		<meta name="description" content="{{ config('app.name') }}"/>
 		<meta name="keywords" content="{{ config('app.name') }}">	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				
+		<meta name="csrf_token" content="{{ csrf_token() }}">
+
   		<!-- SITE TITLE -->
 		<title>{{ config('app.name') }}@if (trim($__env->yieldContent('title')))- @yield('title')@endif</title>
 							

@@ -46,7 +46,7 @@ Route::get('resendVerifyOtp', 'RegisterController@resendVerifyOtp');
 
 
 // login
-Route::get('login', 'LoginController@loginUser');
+Route::get('login', 'LoginController@loginUser')->name('login');
 
 Route::get('patient/login', 'LoginController@showLoginForm');
 Route::post('patient/login', 'LoginController@login');
@@ -81,6 +81,13 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
     Route::get('/extra-info','ProfileController@extraInfo');
     Route::post('/extra-info','ProfileController@extraInfoSave');
     
+    Route::get('/my-feedbacks','ProfileController@MyFeedbacks');
+    Route::get('/my-feedback/grid','ProfileController@MyFeedbackGrid');
+    Route::post('/my-feedback/statusChange','ProfileController@MyFeedbackStatusChange');
+    Route::get('/my-qa/grid','ProfileController@MyQAGrid');
+    Route::post('/my-qa/statusChange','ProfileController@MyQuestionStatusChange');
+    Route::post('/saveAnswer','ProfileController@saveAnswer');
+    
     Route::post('/saveReview', 'HomeController@createReview');
     Route::post('/saveQuestion', 'HomeController@createQuestion');
 
@@ -113,6 +120,18 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
         
     });
 
+    //booking
+
+    Route::get('/booking/{slug}','BookingController@index');
+    Route::get('/booking/{slug}/{item}','BookingController@index');
+    
+    Route::post('/booking/{slug}/{item}','BookingController@save');
+    
+    Route::get('/my-wallet','WalletController@index');
+    Route::get('/my-wallet/grid','WalletController@grid');
+
+    Route::post('/wallet/add-money','WalletController@addMoney');
+
 
 });
 
@@ -137,6 +156,26 @@ Route::prefix('administrator')->middleware('isAdmin')->namespace('Admin')->group
         });
         Route::group(['middleware' => ['permission:delete page']], function () {
             Route::post('/page/delete', 'PageController@delete');
+        });
+    
+    });
+
+    // amenities
+    Route::group(['middleware' => ['permission:add amenities|edit amenities|delete amenities']], function () {
+    
+        Route::get('/amenities/list', 'AmenitiesController@index');
+        Route::get('/amenities/grid', 'AmenitiesController@grid');
+    
+        Route::group(['middleware' => ['permission:add amenities']], function () {
+            Route::get('/amenities/add', 'AmenitiesController@add');
+            Route::post('/amenities/add', 'AmenitiesController@save');
+        });
+        Route::group(['middleware' => ['permission:edit amenities']], function () {
+            Route::get('/amenities/edit/{id}', 'AmenitiesController@edit');
+            Route::post('/amenities/edit/{id}', 'AmenitiesController@save');
+        });
+        Route::group(['middleware' => ['permission:delete amenities']], function () {
+            Route::post('/amenities/delete', 'AmenitiesController@delete');
         });
     
     });

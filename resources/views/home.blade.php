@@ -556,7 +556,7 @@
 @endsection
 @section('customScript')
 <script src="{{ baseUrl('js/materialize.js') }}"></script>	
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe3BKdIx9Qvvo0-HQd-A8E9HOZUUWRpoE&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7qSIQca0nQIStPt89IWG95jTIxQ0OhQM&libraries=places"></script>
 <script>
 		var input = document.getElementById('autocomplete');
 		var autocomplete = new google.maps.places.Autocomplete(input);
