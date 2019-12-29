@@ -30,13 +30,18 @@
                                             <tr><td>Booking for {{ $userObj->name }}</td></tr>    
                                             <tr><td>{{ $productDetail->name }}</td></tr>    
                                             <tr><td>{{ $productDetail->price }}</td></tr> 
+                                            @if($doctorFlag)
+                                            <tr><td>{{ $productDetail->date }}</td></tr> 
+                                            @endif  
                                             @if($productDetail->lab_product_type == 2)   
                                             <tr><td>{{ $productDetail->description }}</td></tr>
                                             @endif    
                                           </table>  
+                                          @if(!$doctorFlag)
                                           <div  class="col-md-12">
                                                   <input type="text" name="date" value="{{old('date',isset($record)?$record->dateFormated:'')}}" id="date" class="form-control required " placeholder="Date"  > 
                                           </div>
+                                          @endif
                                     </div>
                                 </div> <!-- End row -->
                             </div> <!-- End container -->
@@ -58,6 +63,7 @@
 @endsection
 
 @section('customScript')
+
 <link rel="stylesheet" href="{{baseUrl('plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker-standalone.css')}}">
 <link rel="stylesheet" href="{{baseUrl('plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')}}">
 <script src="{{ baseUrl('js/jquery.validate.min.js') }}"></script>

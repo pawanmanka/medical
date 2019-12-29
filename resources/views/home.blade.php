@@ -556,12 +556,12 @@
 @endsection
 @section('customScript')
 <script src="{{ baseUrl('js/materialize.js') }}"></script>	
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7qSIQca0nQIStPt89IWG95jTIxQ0OhQM&libraries=places"></script>
+<script src="{{ baseUrl('scripts/listing.js') }}"></script>
 <script>
-		var input = document.getElementById('autocomplete');
-		var autocomplete = new google.maps.places.Autocomplete(input);
-		google.maps.event.addListener(autocomplete, 'place_changed', function(){
-		   var place = autocomplete.getPlace();
-		})
-	  </script>
+  var listingObj = new ListingFn();
+  var typeArr = {!! json_encode(config('application.super_categories_slug')) !!}
+  jQuery(document).ready(function(){
+    listingObj.init();
+  })
+</script>
 @endsection

@@ -12,27 +12,26 @@
 			============================================= -->
 <div id="appointment-page" class="wide-60 appointment-page-section division">
     <div class="container">
-       
+        <form id="slot_form_date" method="GET">
+         
+        <input type="hidden" class="required" name="slot" id="activeSlot"   > 
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                     <form id="slot_form" action="">
                 <div class="nav flex-column nav-pills slot_create_form" id="v-pills-tab" data-id="{{isset($record)?$record->id:''}}"  role="tablist" aria-orientation="vertical">
                         <div  class="col-md-12">
-                                <input type="text" name="date" value="{{old('date',isset($record)?$record->dateFormated:'')}}" id="date" class="form-control required " placeholder="Date"  > 
+                                <label for="">Please Select Appointment Date</label>
+                                <input type="text" name="date" value="{{old('date',isset($record)?$record->dateFormated:'')}}" id="date" class="form-control required " placeholder="Please Select Appointment Date"  > 
                         </div>
                 </div>
             </form>
             </div>
             <div class="col-xs-12 col-sm-9">
-            <form id="slot_form_date" method="POST">
-                @csrf
-                <div class="tab-content" id="v-pills-tabContent">
+               
+                <div class="tab-content slot_body_div"  style="display:none;" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                         aria-labelledby="v-pills-home-tab">
-                        <input type="hidden" name="date" value="{{old('date',isset($record)?$record->date:'')}}" id="date" >
-                        <input type="hidden" name="time_start"  value="{{old('time_start',isset($record)?$record->time_start:'')}}" > 
-                        <input type="hidden" name="time_end" value="{{old('time_end',isset($record)?$record->time_end:'')}}"  > 
-
+                        <input type="hidden" name="selected_slot" value="{{old('selected_slot',isset($record)?$record->selected_slot:'')}}" id="selected_slot" > 
                         <section id="services-7" class="bg-lightgrey  servicess-section division">
                             <div class="container">
                                 <div class="row" id="slot_body">
@@ -45,10 +44,10 @@
                 <div  class="col-md-12 mt-10 slot_body_div" style="display:none;" >
                     <button class="btn btn-primary" id="slot_body_button" type="submit">Submit</button>
                 </div>
-            </form>
+           
             </div>
         </div>
-   
+    </form>
     </div> <!-- End container -->
 </div> <!-- END APPOINTMENT PAGE -->
         </div>	   <!-- End container -->
@@ -65,6 +64,8 @@
 <script src="{{ baseUrl('scripts/booking.js') }}"></script>
 <script>
     var bookingObj = new BookingFn();
+    var doctor = "{{$slug}}";
+    var activeSlot = 0;
     jQuery(document).ready(function () {
         bookingObj.init();
     })

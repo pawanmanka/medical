@@ -115,6 +115,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
         Route::get('/booking/{slug}','BookingController@index');
         Route::get('/booking/{slug}/{item}','BookingController@index');
         
+        Route::post('/booking/{slug}/get-slots','BookingController@getSlots');
         Route::post('/booking/{slug}/{item}','BookingController@save');
         Route::post('/wallet/add-money','WalletController@addMoney');
     });

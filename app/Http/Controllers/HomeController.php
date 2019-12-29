@@ -80,6 +80,7 @@ class HomeController extends Controller
     {
        $request = request();
        $search = $request->all();
+       
        $this->data['roles'] = array_flip($roles);
        $this->data['search'] = $request->all();
        $this->data['filterParams'] = $request->all(['location','type','category']); 
@@ -88,7 +89,22 @@ class HomeController extends Controller
          $categoryObj = Category::where('slug',$request->category)->first();
          $search['categoryId'] = isset($categoryObj->id)?$categoryObj->id:null; 
        }
-       $userObj = User::whereHas('roles',function($query) use($roles){
+       $distanceFlag = false;
+       if(!empty($request->location_lng) && !empty($request->location_lat) && is_numeric($request->location_lng) && is_numeric($request->location_lat) ){
+         $distanceFlag = true;
+         $haversine = "*,((6371 * acos(cos(radians(" . $request->location_lat . ")) 
+         * cos(radians(`lat`)) 
+         * cos(radians(`lng`) 
+         - radians(" . $request->location_lng . ")) 
+         + sin(radians(" . $request->location_lat . ")) 
+         * sin(radians(`lat`))))) AS distance";
+       }
+       else{
+         $haversine = "*";
+       }
+    
+       
+       $userObj = User::selectRaw( $haversine)->whereHas('roles',function($query) use($roles){
          $query->whereIn('name',$roles);
        })
        ->when(!empty($search),function($query) use($search){
@@ -125,6 +141,9 @@ class HomeController extends Controller
          $query->where('avg_rating','>=',$request->rating);
        })
        ->where('status',config('application.user_active_status'))
+       ->when($distanceFlag,function($query){
+         $query->orderBy('distance');
+         })
        ->paginate(config('application.listing_item_limit'));
        $this->data['result'] = $userObj->items();
        $this->data['paging'] = $userObj;

@@ -158,7 +158,9 @@ class ProductController extends Controller
                         'product_id'=>$productObj->id,
                         'name'=>$timestamp
                     ]);
-                   
+                    if(empty($productItemObj->code)){
+                        $productItemObj->code =  $productItemObj->generateUniqueCode();
+                    }
                     $productItemObj->actual_price=$value;
                     $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
                     $productItemObj->save();
@@ -196,7 +198,9 @@ class ProductController extends Controller
             $diff = $time_end - $time_start;
               $time = round($diff/600);
               $diffTime = $diff%600;
-              $time_start_value = $time_start;
+              $date_time_start = "$request->date $request->time_start";
+              $date_time_start_value = date('Y-m-d',strtotime($date_time_start));
+              $time_start_value = strtotime($date_time_start);
               $date = date('Y-m-d',strtotime($request->date));
               $productObj = Product::where('date',$date)->whereUserId(auth()->id())->first();
               if(isset($productObj->id)){
@@ -211,7 +215,7 @@ class ProductController extends Controller
                   'price'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->actual_price:$user->actual_fee,
                   'discount_fee'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->discount_price:$user->discount_price,
                   'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'1',
-                  'index'=>$time_start_value
+                  'index'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->name:$time_start_value
                 );
               $slots.= \View::make('_slot',$dataArr)->render();
               for($i=1;$i < $time;$i++){

@@ -50,6 +50,7 @@ class RegisterController extends Controller{
             $userObj->id_proof_type = $request->id_proof_type;
             $userObj->id_proof = $request->id_proof;
             $userObj->gender = $request->gender;
+          
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
 
@@ -95,7 +96,7 @@ class RegisterController extends Controller{
         'sub_category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
         'registration_number' => ['required','string'],
-        'address' => ['required','string'],
+        'location' => ['required','string'],
         'hospital' => ['required','string'],
         'qualification' => ['required','string'],
         'contact_number' => ['required', 'string','max:255', 'unique:users'],
@@ -122,6 +123,8 @@ class RegisterController extends Controller{
             $userObj->username = $request->contact_number;
             $userObj->contact_number = $request->contact_number;
             $userObj->gender = $request->gender;
+            $userObj->lat = $request->location_lat;
+            $userObj->lng = $request->location_lng;
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
            
@@ -135,7 +138,8 @@ class RegisterController extends Controller{
             $userInformationObj->sub_category = $request->sub_category;
             $userInformationObj->practice_since = $request->practice_since;
             $userInformationObj->registration_number = $request->registration_number;
-            $userInformationObj->address = $request->address;
+            $userInformationObj->address = $request->location;
+           
             $userInformationObj->hospital = $request->hospital;
             $userInformationObj->qualification = $request->qualification;
             $userInformationObj->user_id = $userObj->id;
@@ -224,7 +228,7 @@ class RegisterController extends Controller{
        $rules =  [
         'category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
-        'address' => ['required','string'],
+        'location' => ['required','string'],
         'contact_number' => ['required', 'string','max:255', 'unique:users'],
         'email' => ['required', 'string','max:255', 'unique:users'],
         'profile_image' => ['required','image','mimes:'.config('application.valid_image_mimes')],
@@ -257,6 +261,8 @@ class RegisterController extends Controller{
             $userObj->username = $request->contact_number;
             $userObj->contact_number = $request->contact_number;
             $userObj->gender = $request->gender;
+            $userObj->lat = $request->location_lat;
+            $userObj->lng = $request->location_lng;
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
            
@@ -268,7 +274,7 @@ class RegisterController extends Controller{
             $userInformationObj = new UserInformation();
             $userInformationObj->category = $request->category;
             $userInformationObj->practice_since = $request->practice_since;
-            $userInformationObj->address = $request->address;
+            $userInformationObj->address = $request->location;
             $userInformationObj->user_id = $userObj->id;
             if($request->hasFile('profile_image')) {
                 $userInformationObj->profile_image =   $this->fileUpload($request,config('application.users_image_path'),null,'profile_image');
@@ -303,7 +309,7 @@ class RegisterController extends Controller{
        $rules =  [
         'category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
-        'address' => ['required','string'],
+        'location' => ['required','string'],
         'contact_number' => ['required', 'string','max:255', 'unique:users'],
         'email' => ['required', 'string','max:255', 'unique:users'],
         'profile_image' =>  ['required','image','mimes:'.config('application.valid_image_mimes')],
@@ -329,6 +335,8 @@ class RegisterController extends Controller{
             $userObj->username = $request->contact_number;
             $userObj->contact_number = $request->contact_number;
             $userObj->gender = $request->gender;
+            $userObj->lat = $request->location_lat;
+            $userObj->lng = $request->location_lng;
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
            
@@ -340,7 +348,7 @@ class RegisterController extends Controller{
             $userInformationObj = new UserInformation();
             $userInformationObj->category = $request->category;
             $userInformationObj->practice_since = $request->practice_since;
-            $userInformationObj->address = $request->address;
+            $userInformationObj->address = $request->location;
             $userInformationObj->user_id = $userObj->id;
             if($request->hasFile('profile_image')) {
                 $userInformationObj->profile_image =   $this->fileUpload($request,config('application.users_image_path'),null,'profile_image');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\HospitalDoctor;
+use App\Models\Product;
 use App\Models\ProductItem;
 use App\Models\User;
 use App\Models\Wallet;
@@ -30,6 +31,8 @@ class BookingController extends Controller
         if(!isset($userObj->id)){
             abort(404);
         }
+        $this->data['slug'] = $request->slug;   
+        $this->data['doctorFlag'] = false;   
         $this->data['userObj'] = $userObj;   
         $this->data['title'] = 'booking'; 
         $this->data['wallet'] =  auth()->user()->getWallet; 
@@ -57,6 +60,20 @@ class BookingController extends Controller
         }
         else if($userObj->role_name  == config('application.doctor_role')){
             $view  = '_doctor_booking';
+            $item = $request->item;
+            if(!empty($item)){
+                $productDetail = ProductItem::where('code',$item)->where('status',2)->first();
+                if(!isset($productDetail->id)){
+                    abort(404);
+                }
+                $this->data['doctorFlag'] = true;
+                $view = 'booking'; 
+                $productDetail->dateStr = $productDetail->name;
+                $productDetail->date = date("d-m-Y", $productDetail->name);
+                $productDetail->name = date("h:i A", $productDetail->name);
+                $this->data['productDetail'] = $productDetail;
+            }
+           
         }
         else{
             abort(404);
@@ -64,6 +81,67 @@ class BookingController extends Controller
 
         return $view;
     }
+
+   
+    public function getSlots(Request $request)
+    {
+        $status = self::$ERROR;
+        $slots ='';
+        $post = $request->all();
+        $userObj = User::with('getWallet')->where('slug',$request->slug)->where('status',0)->first();
+        if(isset($userObj->id)){
+        
+        $rules = array(
+            'date'=>'required'
+        );
+       
+        $validation = \Validator::make($request->all(),$rules);
+        if($validation->fails()){
+            $message =   makeErrorMessage($validation->errors()->messages());
+        }
+        else{
+            $user = $userObj->getUserInformation;
+
+              $date = date('Y-m-d',strtotime($request->date));
+              $productObj = Product::where('date',$date)->whereType(Product::$DOCTOR)->whereUserId($userObj->id)->first();
+              if(isset($productObj->id)){
+                  $productItems = $productObj->productItems()->where('status',2)->get();
+                  foreach ($productItems as $key => $value) {
+                    $time_start_value =  $value->name;;
+                    $dataArr = array(
+                       'time'=>date("h:i A", $time_start_value),
+                       'price'=>$value->price,
+                       'index'=>$value->code
+                     );
+                    $slots.= \View::make('_booking_slot',$dataArr)->render();
+                  }
+           
+                  
+                  $message =  "Slots";
+                  $status = self::$SUCCESS;
+
+              }
+              else{
+                  $message ="doctor is not available";
+              }
+             
+           
+        }
+     
+         }
+         else{
+            $message ="doctor is not available";
+         }
+        $result = array(
+            'status'=>$status,
+            'message'=>$message,
+            'slots'=>$slots,  
+            'post'=>$post,  
+        );
+
+        return response()->json($result);
+    }
+
 
     public function save(Request $request)
     {
@@ -73,13 +151,17 @@ class BookingController extends Controller
         $walletObj = $this->data['wallet'];
         $productDetail = $this->data['productDetail'];
         $userObj = $this->data['userObj'];
+   
         if($walletAmount < $productDetail->price){
             flash('Please Add Money In Wallet')->error()->important();
             return back()->withInput();
         }
-        $rules =  [
-            'date' => ['required','date']
-        ];
+        $rules =[];
+        if(!$this->data['doctorFlag']){
+            $rules =  [
+                'date' => ['required','date']
+            ];
+        }
 
         $validatorObj =   \Validator::make($request->all(),$rules);
         if($validatorObj->fails()){
@@ -87,7 +169,13 @@ class BookingController extends Controller
             return back()->withInput(); 
         }
         else{
-           $date = date('Y-m-d H:i:s',strtotime($request->date));
+           
+            if($this->data['doctorFlag']){
+                $date = date('Y-m-d H:i:s',($productDetail->dateStr));
+            }
+            else{
+                $date = date('Y-m-d H:i:s',strtotime($request->date));
+            }
            $currentUser = auth()->user();
 
            

@@ -16,7 +16,8 @@
     </div> 
     <div  class="col-md-12">
         <input type="text" name="id_proof" class="form-control required " placeholder="Id Number*"  > 
-    </div>                     
+    </div>         
+    
     <div  class="col-md-12">
         <input type="password" name="password" class="form-control required " placeholder="Password*"  > 
     </div>                     

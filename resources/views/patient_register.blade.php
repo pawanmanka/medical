@@ -29,13 +29,7 @@
                         <!-- Contact Form Button -->
                         <div class="col-lg-12 mt-15 form-btn">  
                             <button type="submit" class="btn btn-blue blue-hover">Register</button> 
-                        </div>
-                                                                      
-                        <!-- Contact Form Message -->
-                        {{-- <div class="col-lg-12 contact-form-msg text-center">
-                            <div class="sending-msg"><span class="loading"></span></div>
-                        </div>   --}}
-                                                  
+                        </div>                          
                     </form> 
 
                  </div>	

@@ -10,7 +10,10 @@
                             <div class="col-md-6 col-lg-3">
                                 <div class="form-group">
                                     <label for="">Location</label>
-                                    <input type="text" name="location" value="{{ isset($search['location'])?$search['location']:'' }}" id="autocomplete" placeholder="Enter Location" class="form-control" autocomplete="off">
+                                    <input type="text" name="location" id="autocomplete_location" value="{{ isset($search['location'])?$search['location']:'' }}" placeholder="Enter Location" class="form-control" autocomplete="off">
+                                    <input type="hidden" id="autocomplete_location_lat" value="{{ isset($search['location_lat'])?$search['location_lat']:'' }}"  name="location_lat" > 
+                                    <input type="hidden" id="autocomplete_location_lng" value="{{ isset($search['location_lng'])?$search['location_lng']:'' }}" name="location_lng" > 
+                                     
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3 ">
@@ -41,3 +44,18 @@
         </div>    <!-- End row -->
     </div>	   <!-- End container -->	
 </section>	<!-- END ABOUT-1 -->
+@section('customScript')
+     @parent
+     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCREIdHZBD5RWhB63e58_CYXcat_-MFraQ&libraries=places"></script>
+     <script>
+             var input = document.getElementById('autocomplete_location');
+             var autocomplete = new google.maps.places.Autocomplete(input);
+             google.maps.event.addListener(autocomplete, 'place_changed', function(){
+                var place = autocomplete.getPlace();
+               var lat = place.geometry.location.lat();
+               var lng=  place.geometry.location.lng();
+               document.getElementById('autocomplete_location_lat').value = lat;
+               document.getElementById('autocomplete_location_lng').value = lng;
+             })
+           </script>
+@endsection

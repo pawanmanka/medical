@@ -85,7 +85,7 @@ class ProfileController extends Controller{
         'sub_category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
         'registration_number' => ['required','string'],
-        'address' => ['required','string'],
+        'location' => ['required','string'],
         'hospital' => ['required','string'],
         'qualification' => ['required','string'],
         'email' => ['required', 'string','max:255']
@@ -108,6 +108,8 @@ class ProfileController extends Controller{
             $userObj->name = $request->name;
             $userObj->email = $request->email;
             $userObj->gender = $request->gender;
+            $userObj->lat = $request->location_lat;
+            $userObj->lng = $request->location_lng;
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
 
@@ -117,7 +119,7 @@ class ProfileController extends Controller{
             $userInformationObj->sub_category = $request->sub_category;
             $userInformationObj->practice_since = $request->practice_since;
             $userInformationObj->registration_number = $request->registration_number;
-            $userInformationObj->address = $request->address;
+            $userInformationObj->address = $request->location;
             $userInformationObj->hospital = $request->hospital;
             $userInformationObj->qualification = $request->qualification;
             $userInformationObj->user_id = $userObj->id;
@@ -140,7 +142,7 @@ class ProfileController extends Controller{
        $rules =  [
         'category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
-        'address' => ['required','string'],
+        'location' => ['required','string'],
         'email' => ['required', 'string','max:255']
            ];
        if(!empty($request->profile_image)){
@@ -159,6 +161,8 @@ class ProfileController extends Controller{
             $userObj->name = $request->name;
             $userObj->email = $request->email;
             $userObj->gender = $request->gender;
+            $userObj->lat = $request->location_lat;
+            $userObj->lng = $request->location_lng;
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
             
@@ -168,7 +172,7 @@ class ProfileController extends Controller{
             $userInformationObj = UserInformation::where('user_id',$userObj->id)->first();
             $userInformationObj->category = $request->category;
             $userInformationObj->practice_since = $request->practice_since;
-            $userInformationObj->address = $request->address;
+            $userInformationObj->address = $request->location;
             $userInformationObj->user_id = $userObj->id;
             if($request->hasFile('profile_image')) {
                 $oldImage = config('application.users_image_path').'/'.$userInformationObj->profile_image;
@@ -210,6 +214,8 @@ class ProfileController extends Controller{
             $userObj->name = $request->name;
             $userObj->email = $request->email;
             $userObj->gender = $request->gender;
+            $userObj->lat = $request->location_lat;
+            $userObj->lng = $request->location_lng;
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
 
@@ -218,7 +224,7 @@ class ProfileController extends Controller{
             $userInformationObj = UserInformation::where('user_id',$userObj->id)->first();
             $userInformationObj->category = $request->category;
             $userInformationObj->practice_since = $request->practice_since;
-            $userInformationObj->address = $request->address;
+            $userInformationObj->address = $request->location;
             $userInformationObj->user_id = $userObj->id;
             if($request->hasFile('profile_image')) {
                 $oldImage = config('application.users_image_path').'/'.$userInformationObj->profile_image;

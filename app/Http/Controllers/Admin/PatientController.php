@@ -37,7 +37,7 @@ class PatientController extends UserCommonController
     	$this->setOrderBy();  	
     	$this->setSearchCondition();
     	
-        $this->query = User::whereHas('roles',function($query){
+        $this->query = User::with('getWallet')->whereHas('roles',function($query){
             $query->whereIn('name',array(config('application.patient_role')));
         });        
     	$output = $this->getGridData();
@@ -64,7 +64,7 @@ class PatientController extends UserCommonController
 	    			$row->id_proof,
 	    			$appointmentLink,
 	    			'Free',
-	    			0,
+	    			!empty($row->getWallet)?$row->getWallet->amount:0,
 	    			$action
 	    		);
 	    	}
