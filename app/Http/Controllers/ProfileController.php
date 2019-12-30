@@ -35,10 +35,15 @@ class ProfileController extends Controller{
     {
         $user = auth()->user();
         $role = $user->roles()->first();
+        $this->data['categories'] = array();    
+        $this->data['categoryArr'] = array();
         $role_wih_category = array_flip(config('application.role_wih_category'));
         $this->data['record'] =$user; 
+        if(isset($role_wih_category[$role->name])){
+            $this->_getCategory($role_wih_category[$role->name]);
+
+        }
       
-        $this->_getCategory($role_wih_category[$role->name]);
         $this->data['title'] ='Profile'; 
         return view('profile',$this->data);
     }

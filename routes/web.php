@@ -227,6 +227,7 @@ Route::prefix('administrator')->middleware('isAdmin')->namespace('Admin')->group
     Route::group(['middleware' => ['permission:add patient|edit patient|delete patient']], function () {
         Route::get('/patient/list', 'PatientController@index');
         Route::get('/patient/grid', 'PatientController@grid');
+        Route::get('/patient/edit/{id}', 'PatientController@edit');
     });
    
     Route::group(['middleware' => ['permission:add doctor|edit doctor|delete doctor']], function () {
