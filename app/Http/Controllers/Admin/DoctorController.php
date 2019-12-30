@@ -37,7 +37,11 @@ class DoctorController extends UserCommonController
     	$this->setOrderBy();  	
     	$this->setSearchCondition();
     	
-        $this->query = User::whereHas('roles',function($query){
+        $this->query = User::with([
+            'getWallet'
+        ])
+        ->withCount('getUserRating')
+        ->whereHas('roles',function($query){
             $query->whereIn('name',array(config('application.doctor_role')));
         });        
     	$output = $this->getGridData();
@@ -64,9 +68,9 @@ class DoctorController extends UserCommonController
 	    			$appointmentLink,
 	    			$appointmentLink,
 	    			'Free',
+	    			$row->get_user_rating_count,
 	    			0,
-	    			0,
-	    			0,
+	    			!empty($row->getWallet)?$row->getWallet->amount:0,
 	    			$action
 	    		);
 	    	}

@@ -94,6 +94,21 @@ return [
             'edit'=>'edit',
             'delete'=>'delete'
         ),
+        'page'=>array(
+            'add'=>'add',
+            'edit'=>'edit',
+            'delete'=>'delete'
+        ),
+        'amenities'=>array(
+            'add'=>'add',
+            'edit'=>'edit',
+            'delete'=>'delete'
+        ),
+        'category'=>array(
+            'add'=>'add',
+            'edit'=>'edit',
+            'delete'=>'delete'
+        ),
     )
 
     ];
