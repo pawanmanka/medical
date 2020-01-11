@@ -500,8 +500,18 @@ public function reviewsGrid(Request $request)
     {
         $record = User::findOrFail($request->id);
         $mobile_number = $request->mobile_number; 
-        $this->sendOtp($mobile_number,$record->id);
-        flash('Update Successfully')->success()->important();
+       
+        $checkMobile = $this->checkMobile($request->mobile_number);
+        if(isset($checkMobile->id)){
+            $status = self::$SUCCESS;
+            $message = "Otp is resend";
+            $this->sendOtp($checkMobile->mobile,$checkMobile->user_id);
+            $checkMobile->delete();
+        }
+        else{
+            $this->sendOtp($mobile_number,$record->id);
+        }
+        flash('Successfully send otp')->success()->important();
         return redirect("/administrator/change-mobile-number/$request->id/$mobile_number");  
     }
 
@@ -516,7 +526,27 @@ public function reviewsGrid(Request $request)
     public function changeMobileNumberSuccessfully(Request $request)
     {
         if($request->send_type == 'confirm_otp'){
-            return $this->_sendChangeMobileOtp($request);
+            $checkMobile = $this->checkMobile($request->mobile_number);
+            if(!isset($checkMobile->id)){
+                flash('Mobile Number Not Found')->error()->important();
+                return back()->withInput(); 
+            }
+            if($checkMobile->token != $request->otp){
+                flash('Otp not valid')->error()->important();
+                return back()->withInput(); 
+            }
+            try {
+                $user = User::find($checkMobile->user_id);
+                $user->contact_number = $request->mobile_number;
+                $user->mobile_verified_at = \DB::raw('now()');
+                $user->save();  
+                $checkMobile->delete();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+         
+            flash('successfully changed number')->success()->important();
+            return redirect('/administrator/change-mobile-number/'.$request->id);
         }
         else{
             return $this->_sendChangeMobileOtp($request);
