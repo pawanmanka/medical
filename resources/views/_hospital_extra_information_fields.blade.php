@@ -72,7 +72,7 @@
     <div class="form-group mt-10">
             <label class="control-label col-sm-2" for="facility">Amenities</label>
             <div class="col-sm-10 ">
-                    {!! selectBox('amenities',$amenities,$record->getAmenities()->pluck('amenities.id','amenities.id')->toArray(),array('class'=>'form-control chosen-select required','multiple'=>'multiple'),'Select Gender') !!}  	 
+                    {!! selectBox('amenities',$amenities,$record->getAmenities()->pluck('amenities.id','amenities.id')->toArray(),array('class'=>'form-control chosen-select required','multiple'=>'multiple'),'Select Amenite') !!}  	 
 
                 </div>
     </div>

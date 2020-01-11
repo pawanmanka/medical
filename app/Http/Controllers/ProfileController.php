@@ -199,7 +199,7 @@ class ProfileController extends Controller{
        $rules =  [
         'category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
-        'address' => ['required','string'],
+        'location' => ['required','string'],
         'email' => ['required', 'string','max:255']
        ];
      

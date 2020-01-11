@@ -32,14 +32,14 @@ class LoginController extends Controller{
     }
     protected function sendFailedLoginResponse(Request $request)
     {
-        flash('User not')->error()->important();
+        flash('User not found')->error()->important();
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
         ]);
        // return back()->withInput(); 
     }
     protected function validateLogin(Request $request)
-    {
+    { 
         $request->validate(
         [
             'username' => [

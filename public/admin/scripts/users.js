@@ -41,9 +41,37 @@ UserFn.prototype.bindListElement = function(){
           App.showConfirm(jQuery(this),e,data);
     });
 
+     //changeStatus
+     
+     jQuery(document).on('click','.changeStatus',function(e){
+        e.preventDefault();
+        var id = jQuery(this).attr('data_id');
+        var data = {};
+        data.success = function(){
+        var params = {};
+        params.data = {
+            'id':id,
+            '_token':jQuery('[name="csrf_token"]').attr('content')            
+          };
+        params.type = 'post';
+        params.success = function(data){
+          App.showMessage(data.message,data.status);
+          if(data.status == 'success')
+          {
+            self.table.fnDraw();
+          }
+        }
+        App.sendRequest('/user/changeStatus', params);
+ 
+      }
+        App.showConfirm(jQuery(this),e,data);
+    });
+
 }
 UserFn.prototype.bindElement = function(){
-    
+    var self = this;
+   
+
 }
 
 
@@ -117,3 +145,49 @@ UserFn.prototype.grid = function(){
     self.table = App.showDataTable(jQuery('#user_table'),this.gridUrl, params);
 }
 
+
+UserFn.prototype.initEditForm = function(){
+  this.bindEditForm();
+  this.editGrid(jQuery('#appointment_table'),SITE_URL+'/user/appointment-grid');
+  this.editGrid(jQuery('#questions_table'),SITE_URL+'/user/qa-grid');
+  this.editGrid(jQuery('#reviews_table'),SITE_URL+'/user/reviews-grid');
+}
+UserFn.prototype.categorySubCategory = function(categoryArr){
+    try {
+        App.getSubCategory(categoryArr,jQuery('#category_id option:selected').val(),'subcategory_id') 
+        jQuery(document).on('change','#category_id',function(){
+            App.getSubCategory(categoryArr,jQuery(this).val(),'subcategory_id') 
+        }); 
+    } catch (error) {
+        
+    }
+  
+
+}
+UserFn.prototype.bindEditForm = function(){
+      var self=this;
+      jQuery(document).on('click','.readMoreMessage',function(){
+        jQuery('#reviewMessageShowModal').find('#messageTag').html(jQuery(this).attr('data-message'));
+        jQuery('#reviewMessageShowModal').modal('show');
+      });
+
+      jQuery('.only_view').find('input').attr('disabled','disabled');
+      jQuery('.only_view').find('.btn').remove();
+
+      
+
+}
+UserFn.prototype.editGrid = function(table,gridUrl){
+    var self = this;
+    var params = {};
+    params.order = [ [ 0, 'desc' ] ];
+    params.columnDefs = [{
+            'targets' : -1,
+            'orderable'	: false,
+            'searchable':false
+        },
+        ];
+        params.data={"user_id":userId};
+   
+    App.showDataTable(table,gridUrl, params);
+}

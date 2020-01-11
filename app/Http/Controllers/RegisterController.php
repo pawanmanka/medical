@@ -24,6 +24,7 @@ class RegisterController extends Controller{
        $this->data = array();
     }
 
+
     public function patient(Request $request)
     {
         return view('patient_register');

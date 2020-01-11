@@ -46,27 +46,32 @@ class PatientController extends UserCommonController
             $output ['data'] = array();
             
             foreach ($result as $row){
-                $editLink = url("administrator/patient/edit/$row->id");
                 $action ='';
+                $editLink = url("administrator/change-mobile-number/$row->id");
+    			$action .= "<a href='$editLink' title='change mobile number' class='btn btn-primary text-white'><i class='fa fa-repeat'></i></a> ";
+                $editLink = url("administrator/patient/edit/$row->id");
                 if(auth()->user()->can('edit patient')){
     			$action .= "<a href='$editLink' class='btn btn-primary text-white'><i class='fa fa-pencil'></i></a> ";
                 }
                  if(auth()->user()->can('delete patient')){
                 $action .= "<a data_id='$row->id' href='#' class='btn btn-danger deleteUser text-white'><i class='fa fa-trash'></i></a>";
                 }
-                	$appointmentLink = "<a data_id='$row->id' href='#' >Click Here</a>";
                 
-                $output ['data'] [] = array (
+                    $each = array (
 	    			$row->id,
 	    			$row->name,
 	    			$row->contact_number,
 	    			$row->email,
 	    			$row->id_proof,
-	    			$appointmentLink,
 	    			'Free',
-	    			!empty($row->getWallet)?$row->getWallet->amount:0,
-	    			$action
-	    		);
+	    			!empty($row->getWallet)?$row->getWallet->amount:0
+                );
+                if(auth()->user()->can('edit doctor')){
+                    $status = $row->status == 0?'Yes':'No';  
+                    $each[] = "<a class='changeStatus' data_id='$row->id' href='#' >$status</a>";
+                  }
+                  $each[] =$action;
+                  $output ['data'] [] =$each;
 	    	}
         }
         

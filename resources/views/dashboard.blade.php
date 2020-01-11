@@ -53,7 +53,6 @@
                                         </a>
 
                                     </div>
-                                    @hasanyrole(config('application.extra_info_roles'))
                                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                         <a href="{{ url('my-appointment') }}">
                                             <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
@@ -67,6 +66,8 @@
                                         </a>
 
                                     </div>
+                                    @hasanyrole(config('application.extra_info_roles'))
+
                                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                         <a href="{{ url('my-feedbacks') }}">
                                             <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">

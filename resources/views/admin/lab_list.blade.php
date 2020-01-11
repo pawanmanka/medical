@@ -27,13 +27,14 @@
                                         <th>Id</th>
                                         <th>Name</th>
                                         <th>Contact No.</th>
-                                        <th>Information</th>
-                                        <th>Extra Information</th>
-                                        <th>Appointment</th>
+                                      
                                         <th>Subscription</th>
                                         <th>Review</th>
                                         <th>Request Money</th>
                                         <th>Wallet Amount</th>
+                                        @canany(['edit lab'])
+                                        <th>Status</th>
+                                        @endcanany
                                         <th>Action</th>
                                     </tr>
                                     </thead>

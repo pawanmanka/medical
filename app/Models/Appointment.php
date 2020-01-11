@@ -27,6 +27,10 @@ class Appointment extends Model
     {
         return $this->hasOne(User::class,'id','patient_id');
     }
+    public function getUser()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
 
     public function generateUniqueCode()
     {

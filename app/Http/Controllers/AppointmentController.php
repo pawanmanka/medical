@@ -34,27 +34,39 @@ class AppointmentController extends Controller
         $this->searchColumns =$fields;
     	$this->setOrderBy();  	
     	$this->setSearchCondition();
-    	
-        $this->query = Appointment::where('user_id',auth()->id());        
+        $fieldName = 'user_id';
+        if(auth()->user()->hasRole(config('application.patient_role')))
+        {
+            $fieldName = 'patient_id';
+      
+        }
+        $this->query = Appointment::with('getUser')
+        ->where($fieldName,auth()->id());        
     	$output = $this->getGridData();
         if(!empty($output['recordsTotal']) && $output['recordsTotal']>0 && !empty($output['data'])){
         	$result = $output['data'];
             $output ['data'] = array();
             
             foreach ($result as $row){
-                
-                $description = htmlspecialchars(str_replace("'","`",$row->description));
-                $readMoreLink ="... <a href='#' data-message='".$description."' class='readMoreMessage'>Read More</a>";
-              
-                $output ['data'] [] = array (
+             
+                $userName = $row->patient_name;
+                if($row->user_id != auth()->id())
+                {
+                    $userName = isset($row->getUser->name)?$row->getUser->name:'';
+                    
+                }
+                $each = array (
 	    			$row->id,
-	    			$row->patient_name,
-	    			$row->patient_gender,
-	    			$row->date_str,
-	    			$row->time,
-	    			$row->code,
-	    			$row->code
-	    		);
+	    			$userName
+                );
+                if($row->user_id == auth()->id())
+                {
+                 $each[] = $row->patient_gender;
+                }
+                $each[] = $row->date_str;
+                $each[] = $row->time;
+                $each[] = $row->code;
+                $output ['data'] [] = $each;
 	    	}
         }
         

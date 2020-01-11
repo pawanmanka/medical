@@ -46,7 +46,7 @@ class LabController extends UserCommonController
             $output ['data'] = array();
             
             foreach ($result as $row){
-                $editLink = url("administrator/patient/edit/$row->id");
+                $editLink = url("administrator/lab/edit/$row->id");
                 $action ='';
                 if(auth()->user()->can('edit lab')){
     			$action .= "<a href='$editLink' class='btn btn-primary text-white'><i class='fa fa-pencil'></i></a> ";
@@ -56,19 +56,22 @@ class LabController extends UserCommonController
                 }
                 $appointmentLink = "<a data_id='$row->id' href='#' >Click Here</a>";
                 
-                $output ['data'] [] = array (
+                $each= array (
 	    			$row->id,
 	    			$row->name,
 	    			$row->contact_number,
-	    			$appointmentLink,
-	    			$appointmentLink,
-	    			$appointmentLink,
+	    		
 	    			'Free',
 	    			0,
 	    			0,
-	    			0,
-	    			$action
-	    		);
+	    			0
+                );
+                if(auth()->user()->can('edit doctor')){
+                    $status = $row->status == 0?'Yes':'No';  
+                    $each[] = "<a class='changeStatus' data_id='$row->id' href='#' >$status</a>";
+                  }
+                  $each[] =$action;
+                  $output ['data'] [] =$each;
 	    	}
         }
         

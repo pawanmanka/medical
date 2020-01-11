@@ -29,9 +29,11 @@
                                         <th>Contact No.</th>
                                         <th>Email</th>
                                         <th>Id Proof</th>
-                                        <th>Appointment</th>
                                         <th>Subscription</th>
                                         <th>Wallet Amount</th>
+                                        @canany(['edit patient'])
+                                        <th>Status</th>
+                                        @endcanany
                                         <th>Action</th>
                                     </tr>
                                     </thead>

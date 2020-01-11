@@ -19,8 +19,8 @@
                                     <li><a class="nav-link active" data-toggle="tab" href="#tab-1">Profile</a></li>
                                     @if ($record->role_name  != config('application.patient_role')) 
                                       <li><a class="nav-link" data-toggle="tab" href="#tab-extra_info">Extra Info</a></li>
-                                      <li><a class="nav-link" data-toggle="tab" href="#tab-appointment">Reviews</a></li>
-                                      <li><a class="nav-link" data-toggle="tab" href="#tab-appointment">Reviews</a></li>
+                                      <li><a class="nav-link" data-toggle="tab" href="#tab-reviews">Reviews</a></li>
+                                      <li><a class="nav-link" data-toggle="tab" href="#tab-questions">Questions</a></li>
                                     @endif
                                     <li><a class="nav-link" data-toggle="tab" href="#tab-appointment">Appointment</a></li>
                                 </ul>
@@ -29,8 +29,16 @@
                                         <div class="panel-body">
                                            <form method="post" class="contact-form" enctype="multipart/form-data" id='amenities_form'>
                                                 @csrf
-                                           
+                                                @if($record->role_name == config('application.patient_role'))
                                                 @include('_patient_register_fields')
+                                                @elseif($record->role_name == config('application.doctor_role'))
+                                                @include('_doctor_register_fields',array('record'=>$record)) 
+                                                @elseif($record->role_name == config('application.hospital_role'))
+                                                    @include('_hospital_register_fields',array('record'=>$record)) 
+                                                @elseif($record->role_name == config('application.lab_role'))
+                                                    @include('_lab_register_fields',array('record'=>$record)) 
+                                                @endif  
+                                               
                                                 <div class="form-group row">
                                                     <div class="col-sm-4 col-sm-offset-2">
                                                         <button class="btn btn-primary btn-sm" type="submit">Save</button>
@@ -42,26 +50,77 @@
                                   
                                     <div role="tabpanel" id="tab-extra_info" class="tab-pane">
                                         <div class="panel-body">
-                                            <strong>Donec quam felis</strong>
-        
-                                            <p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects
-                                                and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>
-        
-                                            <p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite
-                                                sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>
+                                            <div class="contact-form only_view">
+                                                @if($record->role_name == config('application.doctor_role'))
+                                                @include('_doctor_extra_infromation_fields',array('record'=>$record->getUserInformation)) 
+                                                @elseif($record->role_name == config('application.hospital_role'))
+                                                    @include('_hospital_extra_information_fields',array('record'=>$record->getUserInformation)) 
+                                                @elseif($record->role_name == config('application.lab_role'))
+                                                    @include('_lab_extra_information_fields',array('record'=>$record->getUserInformation)) 
+                                                @endif     
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div role="tabpanel" id="tab-appointment" class="tab-pane">
                                         <div class="panel-body">
-                                            <strong>Donec quam felis</strong>
-        
-                                            <p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects
-                                                and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>
-        
-                                            <p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite
-                                                sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>
+                                            <div class="table-responsive">
+                                                <table id="appointment_table" class="table" >
+                                                <thead>
+                                                <tr>
+                                                    <th>SR. NO</th>
+                                                    <th>Name</th>
+                                                    @if($record->role_name != config('application.patient_role'))
+                                                    <th>Gender</th>
+                                                    @endif
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Code</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                                </table>
+                                         </div> 
                                         </div>
                                     </div>
+                                    <div role="tabpanel" id="tab-reviews" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table id="reviews_table" class="table" >
+                                                <thead>
+                                                <tr>
+                                                    <th>S.no</th>
+                                                    <th>Name</th>
+                                                    <th>Visited for</th>
+                                                    <th>Rating</th>
+                                                    <th>Message</th>
+                                                    <th>Publish</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                                </table>
+                                         </div> 
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" id="tab-questions" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table id="questions_table" class="table" >
+                                                <thead>
+                                                <tr>
+                                                    <th>S.no</th>
+                                                    <th>Question</th>
+                                                    <th>Answer</th>
+                                                    <th>Publish</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                                </table>
+                                         </div> 
+                                        </div>
+                                    </div>
+                                    @include('_review_message_show_modal')
+
                                 </div>
         
         
@@ -78,13 +137,24 @@
 @endsection
 
 
+
+@section('customStyle')
+<link rel="stylesheet" href="{{ baseUrl('admin/css/plugins/dataTables/datatables.min.css') }}">
+
+@endsection
 @section('customScript')
-     <script src="{{ baseUrl('js/jquery.validate.min.js') }}"></script>
-     <script src="{{ baseUrl('admin/scripts/amenities.js') }}"></script>
+<script src="{{ baseUrl('admin/js/plugins/dataTables/datatables.min.js') }}"></script>
+<script src="{{ baseUrl('admin/js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+     <script src="{{ baseUrl('admin/scripts/users.js') }}"></script>
      <script>
-       var amenitiesObj = new AmenitiesFn();
+           var categoryArr = {!! json_encode($categoryArr) !!}
+
+       var userObj = new UserFn();
+       var userId ="{{$record->id}}";
        jQuery(document).ready(function(){
-         amenitiesObj.initForm();
+        userObj.categorySubCategory(categoryArr);
+
+        userObj.initEditForm();
        })
      </script>
 @endsection

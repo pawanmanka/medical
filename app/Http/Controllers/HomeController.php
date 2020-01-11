@@ -134,6 +134,7 @@ class HomeController extends Controller
        })
        ->with('getUserInformation')
        ->whereNotNull('mobile_verified_at')
+       ->where('status',0)
        ->when(!empty($request->gender),function($query) use($request){
          $query->where('gender',$request->gender);
        })

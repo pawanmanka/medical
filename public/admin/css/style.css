@@ -9580,3 +9580,7 @@ body.md-skin {
   width: 100%;
   color: #777;
 }
+
+.only_view .input-group-addon{
+  border:none;
+}

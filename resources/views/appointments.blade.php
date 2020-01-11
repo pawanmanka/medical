@@ -17,11 +17,15 @@
                                    <tr>
                                        <th>SR. NO</th>
                                        <th>Name</th>
+                                       @hasanyrole(config('application.extra_info_roles'))
                                        <th>Gender</th>
+                                       @endhasanyrole
                                        <th>Date</th>
                                        <th>Time</th>
                                        <th>Code</th>
+                                       @hasanyrole(config('application.extra_info_roles'))
                                        <th>Action</th>
+                                       @endhasanyrole
                                    </tr>
                                    </thead>
                                    <tbody></tbody>

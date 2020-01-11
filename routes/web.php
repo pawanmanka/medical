@@ -72,7 +72,7 @@ Route::get('/administrator/logout', 'Admin\LoginController@logout');
 
 Route::get('/getCategory', 'HomeController@getCategory');
 
-Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
+Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],function(){
     Route::get('/dashboard','ProfileController@dashboard');
 
     Route::get('/profile','ProfileController@index');
@@ -122,7 +122,8 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
 
     Route::get('/my-wallet','WalletController@index');
     Route::get('/my-wallet/grid','WalletController@grid');
-     
+    Route::get('/my-appointment','AppointmentController@index');
+    Route::get('/appointment/grid','AppointmentController@grid');
     //extra_info_roles
     Route::group(['middleware'=>['role:'.config('application.extra_info_roles')]],function(){
         Route::get('/extra-info','ProfileController@extraInfo');
@@ -138,8 +139,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
         Route::post('/saveReview', 'HomeController@createReview');
         Route::post('/saveQuestion', 'HomeController@createQuestion');
 
-        Route::get('/my-appointment','AppointmentController@index');
-        Route::get('/appointment/grid','AppointmentController@grid');
+      
     });
 
 });
@@ -148,6 +148,11 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab']],function(){
 Route::prefix('administrator')->middleware('isAdmin')->namespace('Admin')->group(function(){
     Route::get('/', 'HomeController@index');
     Route::get('/dashboard', 'HomeController@index');
+    Route::get('/change-mobile-number/{id}', 'UserCommonController@changeMobileNumber');
+    Route::post('/change-mobile-number/{id}', 'UserCommonController@sendChangeMobileNumber');
+    
+    Route::get('/change-mobile-number/{id}/{mobile_number}', 'UserCommonController@changeMobileNumberOtp');
+    Route::post('/change-mobile-number/{id}/{mobile_number}', 'UserCommonController@changeMobileNumberSuccessfully');
     
     // page
     Route::group(['middleware' => ['permission:add page|edit page|delete page']], function () {
@@ -228,21 +233,42 @@ Route::prefix('administrator')->middleware('isAdmin')->namespace('Admin')->group
         Route::get('/patient/list', 'PatientController@index');
         Route::get('/patient/grid', 'PatientController@grid');
         Route::get('/patient/edit/{id}', 'PatientController@edit');
+        Route::post('/patient/edit/{id}', 'PatientController@saveUser');
+        Route::post('/patient/delete', 'UserCommonController@deleteUser');
     });
-   
+    Route::get('/user/appointment-grid', 'PatientController@appointmentGrid');
+    Route::get('/user/reviews-grid', 'PatientController@reviewsGrid');
+    Route::get('/user/qa-grid', 'PatientController@MyQAGrid');
+
+    Route::group(['middleware' => ['permission:edit hospital|edit patient|edit doctor|edit lab']], function () {
+       Route::post('/user/changeStatus', 'UserCommonController@ChangeStatus');
+    });
+
     Route::group(['middleware' => ['permission:add doctor|edit doctor|delete doctor']], function () {
         Route::get('/doctor/list', 'DoctorController@index');
         Route::get('/doctor/grid', 'DoctorController@grid');
+        Route::get('/doctor/edit/{id}', 'PatientController@edit');
+        Route::post('/doctor/edit/{id}', 'PatientController@saveUser');
+        Route::post('/doctor/delete', 'UserCommonController@deleteUser');
+
     });
 
     Route::group(['middleware' => ['permission:add hospital|edit hospital|delete hospital']], function () {
         Route::get('/hospital/list', 'HospitalController@index');
         Route::get('/hospital/grid', 'HospitalController@grid');
+        Route::get('/hospital/edit/{id}', 'PatientController@edit');
+        Route::post('/hospital/edit/{id}', 'PatientController@saveUser');
+        Route::post('/hospital/delete', 'UserCommonController@deleteUser');
+
     });
    
     Route::group(['middleware' => ['permission:add lab|edit lab|delete lab']], function () {
         Route::get('/lab/list', 'LabController@index');
         Route::get('/lab/grid', 'LabController@grid');
+        Route::get('/lab/edit/{id}', 'PatientController@edit');
+        Route::post('/lab/edit/{id}', 'PatientController@saveUser');
+        Route::post('/lab/delete', 'UserCommonController@deleteUser');
+
     });
 });
 

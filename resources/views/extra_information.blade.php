@@ -19,7 +19,7 @@
                             @include('_doctor_extra_infromation_fields') 
                         @endrole
                         @role(config('application.hospital_role'))
-                            @include('_hostipal_extra_information_fields') 
+                            @include('_hospital_extra_information_fields') 
                         @endrole
                         @role(config('application.lab_role'))
                             @include('_lab_extra_information_fields') 
