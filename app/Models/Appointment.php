@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
+    public static $STATUS_ACTIVE = 1;
+    public static $STATUS_CANCEL = 2;
     protected $guarded = ["id"];
     protected $appeds = [
         'time',

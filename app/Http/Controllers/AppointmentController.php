@@ -35,8 +35,10 @@ class AppointmentController extends Controller
     	$this->setOrderBy();  	
     	$this->setSearchCondition();
         $fieldName = 'user_id';
+        $actionButton = true;
         if(auth()->user()->hasRole(config('application.patient_role')))
         {
+            $actionButton = false;
             $fieldName = 'patient_id';
       
         }
@@ -55,6 +57,8 @@ class AppointmentController extends Controller
                     $userName = isset($row->getUser->name)?$row->getUser->name:'';
                     
                 }
+              
+                
                 $each = array (
 	    			$row->id,
 	    			$userName
@@ -66,6 +70,15 @@ class AppointmentController extends Controller
                 $each[] = $row->date_str;
                 $each[] = $row->time;
                 $each[] = $row->code;
+                if($actionButton){
+                    if($row->status == Appointment::$STATUS_CANCEL){
+                        $action ='Canceled';
+                    }
+                    else{
+                        $action ="<a href='#' class='cancelAppointment' data-href='".url('appointment/cancel/'.$row->code)."'> Cancel <a>";
+                    }
+                    $each[] = $action;
+                }
                 $output ['data'] [] = $each;
 	    	}
         }
@@ -74,5 +87,25 @@ class AppointmentController extends Controller
 
         return response()->json($output);  
     }
+
+   public function cancel(Request $request)
+   {
+              
+    $query = Appointment::where('user_id',auth()->id())->where('code',$request->code)->first();
+    if(!isset($query->id)) abort(404);
+    if($query->status == Appointment::$STATUS_CANCEL) 
+    {
+        flash('Appointment Already Canceled')->error()->important();
+        return back();
+    } 
+  
+    $query->status = Appointment::$STATUS_CANCEL;
+    
+    $query->save();
+    flash('Appointment  Canceled')->success()->important();
+    return back();
+
+
+   }
 
 }

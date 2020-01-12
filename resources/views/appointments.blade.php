@@ -12,6 +12,7 @@
                         <div class="col-md-6 col-lg-10 offset-lg-1 col-md-offset-5">
                             <div class="mt-20">
                                <div class="table-responsive">
+                                @include('flash::message')
                                    <table id="appointment_table" class="table" >
                                    <thead>
                                    <tr>

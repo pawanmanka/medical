@@ -46,8 +46,11 @@ class LabController extends UserCommonController
             $output ['data'] = array();
             
             foreach ($result as $row){
-                $editLink = url("administrator/lab/edit/$row->id");
                 $action ='';
+                $editLink = url("administrator/change-mobile-number/$row->id");
+    			$action .= "<a href='$editLink' title='change mobile number' class='btn btn-primary text-white'><i class='fa fa-repeat'></i></a> ";
+                
+                $editLink = url("administrator/lab/edit/$row->id");
                 if(auth()->user()->can('edit lab')){
     			$action .= "<a href='$editLink' class='btn btn-primary text-white'><i class='fa fa-pencil'></i></a> ";
                 }
