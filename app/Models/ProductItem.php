@@ -13,8 +13,14 @@ class ProductItem extends Model
     {
         return auth()->id() != null?$this->discount_price:$this->actual_price;
     }
+
     public function getProduct(){
         return $this->hasOne(Product::class,'id','product_id');
+    }
+     
+    public function getUser()
+    {
+       return $this->hasOneThrough(User::class,Product::class,'id','id','product_id','user_id');
     }
 
     public function generateUniqueCode()

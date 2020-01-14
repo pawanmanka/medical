@@ -42,6 +42,7 @@ return [
     'lab_subadmin_role'=>'lab subadmin',
     'user_active_status'=>0,
     'listing_item_limit'=>1,
+    'default_percentage'=>0.10,
     'super_categories'=>array(
         1=>'Doctor',
         2=>'Hospital',

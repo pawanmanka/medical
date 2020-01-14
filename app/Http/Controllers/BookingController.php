@@ -78,7 +78,6 @@ class BookingController extends Controller
         else{
             abort(404);
         }
-
         return $view;
     }
 
@@ -178,17 +177,23 @@ class BookingController extends Controller
             }
            $currentUser = auth()->user();
 
+           $merchant_user =  $productDetail->getUser;
+        
+           $adminMargin = marginCalculation($productDetail->price,$merchant_user->default_percentage);
            
            //detect for wallet
            $walletObj->amount = $walletObj->amount - $productDetail->price;
            $walletObj->save();
 
+          
            
            // save appointment
            $appointmentObj = new  Appointment();
            $appointmentObj->product_item_id = $productDetail->id; 
            $appointmentObj->patient_id =  auth()->id(); 
            $appointmentObj->price = $productDetail->price; 
+           $appointmentObj->admin_margin_amount = $adminMargin; 
+           $appointmentObj->merchant_amount = $productDetail->price - $adminMargin; 
            $appointmentObj->user_id = $userObj->id; 
            $appointmentObj->patient_name = $currentUser->name; 
            $appointmentObj->patient_gender = $currentUser->gender_title; 
@@ -209,7 +214,7 @@ class BookingController extends Controller
             $walletTransObj->description = " Appointment id $appointmentObj->id";
             $walletTransObj->save();
 
-            flash('Appointment is successfully created')->error()->important();
+            flash('Appointment is successfully created')->success()->important();
             return redirect('/detail/'.$request->slug);
         } 
         

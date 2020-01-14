@@ -29,6 +29,11 @@
                                         <div class="panel-body">
                                            <form method="post" class="contact-form" enctype="multipart/form-data" id='amenities_form'>
                                                 @csrf
+                                                @if ($record->role_name  != config('application.patient_role')) 
+                                                <div  class="col-md-12">
+                                                    <input type="text" name="default_margin" class="form-control required digit" value="{{old('default_margin',isset($record)?$record->default_percentage*100:'')}}" placeholder="Default Admin Margin*"  > 
+                                                </div>
+                                                @endif 
                                                 @if($record->role_name == config('application.patient_role'))
                                                 @include('_patient_register_fields')
                                                 @elseif($record->role_name == config('application.doctor_role'))

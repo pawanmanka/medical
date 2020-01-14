@@ -8,6 +8,7 @@
 		<!-- DOCTOR-2 DETAILS -->
         <section id="doctor-2-details" class="wide-70 doctor-details-section division">	
 				<div class="container">
+					@include('flash::message')
 					<div class="row">
 
 

@@ -7,6 +7,8 @@ class Appointment extends Model
 {
     public static $STATUS_ACTIVE = 1;
     public static $STATUS_CANCEL = 2;
+    public static $PAYMENT_TRANSFER_STATUS_PENDING = 0;
+    public static $PAYMENT_TRANSFER_STATUS_DONE = 1;
     protected $guarded = ["id"];
     protected $appeds = [
         'time',

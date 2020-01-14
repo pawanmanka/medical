@@ -126,6 +126,7 @@ class RegisterController extends Controller{
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->default_percentage = config('application.default_percentage');
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
            
@@ -264,6 +265,8 @@ class RegisterController extends Controller{
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->default_percentage = config('application.default_percentage');
+
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
            
@@ -338,6 +341,8 @@ class RegisterController extends Controller{
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->default_percentage = config('application.default_percentage');
+
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
            

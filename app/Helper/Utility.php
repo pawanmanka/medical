@@ -48,3 +48,8 @@ if(!function_exists('makeErrorMessage')){
      }
 }
 
+if(!function_exists('marginCalculation')){
+       function marginCalculation($price,$margin){
+             return $price*$margin; 
+       }
+}

@@ -267,6 +267,7 @@ public function reviewsGrid(Request $request)
         
        $rules =  [
         'category' => ['required','numeric'],
+        'default_margin' => ['required','numeric','min:0','max:100'],
         'sub_category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
         'registration_number' => ['required','string'],
@@ -295,6 +296,7 @@ public function reviewsGrid(Request $request)
             $userObj->email = $request->email;
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
+            $userObj->default_percentage = $request->default_margin/100;
             $userObj->lng = $request->location_lng;
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
@@ -327,6 +329,7 @@ public function reviewsGrid(Request $request)
         
        $rules =  [
         'category' => ['required','numeric'],
+        'default_margin' => ['required','numeric','min:0','max:100'],
         'practice_since' => ['required','numeric'],
         'location' => ['required','string'],
         'email' => ['required', 'string','max:255']
@@ -350,6 +353,7 @@ public function reviewsGrid(Request $request)
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->default_percentage = $request->default_margin/100;
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
             
@@ -404,6 +408,7 @@ public function reviewsGrid(Request $request)
         
        $rules =  [
         'category' => ['required','numeric'],
+        'default_margin' => ['required','numeric','min:0','max:100'],
         'practice_since' => ['required','numeric'],
         'location' => ['required','string'],
         'email' => ['required', 'string','max:255']
@@ -428,6 +433,7 @@ public function reviewsGrid(Request $request)
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->default_percentage = $request->default_margin/100;
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
 

@@ -213,7 +213,7 @@ class ProductController extends Controller
               $dataArr = array(
                   'time'=> date("h:i A", $time_start_value),
                   'price'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->actual_price:$user->actual_fee,
-                  'discount_fee'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->discount_price:$user->discount_price,
+                  'discount_fee'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->discount_price:$user->discounted_fee,
                   'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'1',
                   'index'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->name:$time_start_value
                 );
@@ -223,7 +223,7 @@ class ProductController extends Controller
                  $dataArr = array(
                     'time'=> date("h:i A", $time_start_value),
                     'price'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->actual_price:$user->actual_fee,
-                    'discount_fee'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->discount_price:$user->discount_price,
+                    'discount_fee'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->discount_price:$user->discounted_fee,
                     'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'1',
                     'index'=>$time_start_value
                   );

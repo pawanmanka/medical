@@ -100,7 +100,6 @@ class AppointmentController extends Controller
     } 
   
     $query->status = Appointment::$STATUS_CANCEL;
-    
     $query->save();
     flash('Appointment  Canceled')->success()->important();
     return back();
