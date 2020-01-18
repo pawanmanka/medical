@@ -32,7 +32,7 @@
     {!! selectBox('gender',config('application.genderArr'),old('gender',isset($record)?$record->gender:null),array('class'=>'form-control required'),'Select Gender') !!}  	 
 </div>
 <div  class="col-md-12">            
-    @include('admin.elements.location_text_input')                    
+    @include('admin.elements.location_text')                    
  </div>  
 @if(!isset($record))
 <div  class="col-md-12">

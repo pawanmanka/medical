@@ -17,7 +17,7 @@
     <input type="text" name="practice_since" value="{{old('practice_since',isset($record)?$record->getUserInformation->practice_since:'')}}" class="form-control required " placeholder="Practice Since*"  > 
 </div>
 <div  class="col-md-12">            
-    @include('admin.elements.location_text_input')                    
+    @include('admin.elements.location_text')                    
  </div>                   
 @if(!isset($record))
 <div  class="col-md-12">

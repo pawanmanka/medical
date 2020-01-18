@@ -176,14 +176,18 @@
 														<strong>Sun</strong>
 														<p>Morning : {{ $userInformation->sun_morning_time  }} </p>
 												</div>
-												@if($userInformation->home_visit == 1)
+												@if($record->role_name  == config('application.doctor_role'))
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
-														<strong>Home Visit Timing</strong><br>
+													<strong>Home Visit Timing</strong><br>
+													@if($userInformation->home_visit == 1)
 														<strong>Mon – Sat </strong>
 														<p>Morning : {{ $userInformation->home_mon_sat_morning_time  }} </p>
 														<p>Evening : {{ $userInformation->home_mon_sat_evening_time  }} </p>
 														<strong>Sun</strong>
 														<p>Morning : {{ $userInformation->home_sun_time  }} </p>
+														@else
+														<p>Not Available</p>
+														@endif
 												</div>
 												@endif
 										</div>

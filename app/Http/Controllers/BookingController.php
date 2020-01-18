@@ -36,7 +36,7 @@ class BookingController extends Controller
         $this->data['userObj'] = $userObj;   
         $this->data['title'] = 'booking'; 
         $this->data['wallet'] =  auth()->user()->getWallet; 
-        $this->data['wallet_amount'] =$wallet_amount =  !empty(auth()->user()->getWallet)?auth()->user()->getWallet->amount:0; 
+        $this->data['wallet_amount'] =$wallet_amount =  !empty(auth()->user()->getWallet->id)?auth()->user()->getWallet->amount:0; 
         
         $view = 'booking'; 
         if($userObj->role_name  == config('application.lab_role')){
@@ -155,6 +155,11 @@ class BookingController extends Controller
             flash('Please Add Money In Wallet')->error()->important();
             return back()->withInput();
         }
+        if(!isset($walletObj->amount)){
+            flash('Please Add Money In Wallet')->error()->important();
+            return back()->withInput();
+        }
+        
         $rules =[];
         if(!$this->data['doctorFlag']){
             $rules =  [

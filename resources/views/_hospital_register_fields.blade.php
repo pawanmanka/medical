@@ -19,7 +19,7 @@
 </div>
 
 <div  class="col-md-12">            
-    @include('admin.elements.location_text_input')                    
+    @include('admin.elements.location_text')                    
  </div>           
 
 @if(!isset($record))
