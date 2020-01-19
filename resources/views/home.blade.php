@@ -72,160 +72,26 @@
 						<div class="row">
 							<div class="col-md-12">					
 								<div class="owl-carousel owl-theme services-holder">
-	
-							
-									<!-- SERVICE BOX #1 -->
+									 
+									
+							        @foreach (topCategory() as $item)
+											<!-- SERVICE BOX #1 -->
 									<div class="sbox-3 icon-sm">
 	
 										<!-- Icon -->
 										<div class="sbox-3-icon">
-											<span class="flaticon-083-stethoscope"></span>
+											<span ><img src="{{$item->image_url}}" alt="{{$item->name}}"></span>
 										</div>
 											
 										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">Pediatrics</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
+										<a href="{{url($item->super_categories_slug.'?type='.$item->super_category_id.'&category='.$item->slug)}}"><h5 class="h5-xs steelblue-color">{{$item->name}}</h5></a>
 																																							
 									</div>
 	
-	
-									<!-- SERVICE BOX #2 -->
-									<div class="sbox-3 icon-sm">
-	
-										<!-- Icon -->
-										<div class="sbox-3-icon">
-											<span class="flaticon-047-head"></span>
-										</div>
-											
-										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">Neurology</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
-																																							
-									</div>
-	
-	
-									<!-- SERVICE BOX #3 -->
-									<div class="sbox-3 icon-sm">
-	
-										<!-- Icon -->
-										<div class="sbox-3-icon">
-											<span class="flaticon-015-blood-donation-1"></span>
-										</div>
-											
-										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">Haematology</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
-																																							
-									</div>
-	
-	
-									<!-- SERVICE BOX #4 -->
-									<div class="sbox-3 icon-sm">
-	
-										<!-- Icon -->
-										<div class="sbox-3-icon">
-											<span class="flaticon-048-lungs"></span>
-										</div>
-											
-										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">X-Ray Diagnostic</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
-																																							
-									</div>
-	
-	
-									<!-- SERVICE BOX #5 -->
-									<div class="sbox-3 icon-sm">
-	
-										<!-- Icon -->
-										<div class="sbox-3-icon">
-											<span class="flaticon-060-cardiogram-4"></span>
-										</div>
-											
-										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">Cardiology</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
-																																							
-									</div>
-	
-	
-									<!-- SERVICE BOX #6 -->
-									<div class="sbox-3 icon-sm">
-	
-										<!-- Icon -->
-										<div class="sbox-3-icon">
-											<span class="flaticon-031-scanner"></span>
-										</div>
-											
-										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">MRI</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
-																																							
-									</div>
-	
-	
-									<!-- SERVICE BOX #7 -->
-									<div class="sbox-3 icon-sm">
-	
-										<!-- Icon -->
-										<div class="sbox-3-icon">
-											<span class="flaticon-076-microscope"></span>
-										</div>
-											
-										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">Laboratory Services</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
-																																							
-									</div>
-	
-	
-									<!-- SERVICE BOX #8 -->
-									<div class="sbox-3 icon-sm">
-	
-										<!-- Icon -->
-										<div class="sbox-3-icon">
-											<span class="flaticon-068-ambulance-3"></span>
-										</div>
-											
-										<!-- Title -->
-										<h5 class="h5-xs steelblue-color">Emergency Help</h5>
-	
-										<!-- Text -->
-										<p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor
-										   tempus feugiat dolor lacinia cubilia curae integer congue leo metus
-										</p>
-																																							
-									</div>
-	
+									@endforeach 
 								
+	
+	
 								</div>
 							</div>									
 						</div>	<!-- END SERVICES CONTENT --> 
@@ -260,22 +126,21 @@
 
 
 					<div class="row">
-
-
+                         @foreach (topRateDoctor() as $item)
+							
 						<!-- DOCTOR #1 -->
 						<div class="col-md-6 col-lg-3">
 							<div class="doctor-1">								
 														
 								<!-- Doctor Photo -->
 								<div class="hover-overlay text-center"> 
-
 									<!-- Photo -->
-									<img class="img-fluid" src="images/doctor-1.jpg" alt="doctor-foto">	
+									<img class="img-fluid" src="{{isset($item->getUserInformation->profile_pic)?$item->getUserInformation->profile_pic:''}}" alt="{{$item->name}}">	
 									<div class="item-overlay"></div>
 
 									<!-- Profile Link -->		
 									<div class="profile-link">
-										<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
+									<a class="btn btn-sm btn-tra-white black-hover" href="{{$item->detail_url}}" title="{{$item->name}}">View More Info</a>
 									</div> 
 
 								</div>	
@@ -283,256 +148,18 @@
 								<!-- Doctor Meta -->		
 								<div class="doctor-meta">
 
-									<h5 class="h5-sm steelblue-color">Jonathan Barnes D.M.</h5>
-									<span class="blue-color">Chief Medical Officer</span>
+									<h5 class="h5-sm steelblue-color">{{$item->name}}</h5>
+								     <span class="blue-color">{{isset($item->getUserInformation->category_name)?$item->getUserInformation->category_name:''}}</span>
 
-									<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-									   augue luctus magna dolor luctus ipsum neque
-									</p>
-
+								
 								</div>	
 
 							</div>								
 						</div>	<!-- END DOCTOR #1 -->
 						
 						
-						<!-- DOCTOR #2 -->
-						<div class="col-md-6 col-lg-3">
-							<div class="doctor-1">	
-																						
-								<!-- Doctor Photo -->
-								<div class="hover-overlay text-center"> 
-
-									<!-- Photo -->
-									<img class="img-fluid" src="images/doctor-2.jpg" alt="doctor-foto">	
-									<div class="item-overlay"></div>
-
-									<!-- Profile Link -->		
-									<div class="profile-link">
-										<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
-									</div>
-
-								</div>	
-
-								<!-- Doctor Meta -->		
-								<div class="doctor-meta">
-
-									<h5 class="h5-sm steelblue-color">Hannah Harper D.M.</h5>
-									<span class="blue-color">Anesthesiologist</span>
-
-									<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-									   augue luctus magna dolor luctus ipsum neque
-									</p>
-
-								</div>	
-
-							</div>					
-						</div>	<!-- END DOCTOR #2 -->
-						
-						
-						<!-- DOCTOR #3 -->
-						<div class="col-md-6 col-lg-3">
-							<div class="doctor-1">	
-																						
-								<!-- Doctor Photo -->
-								<div class="hover-overlay text-center"> 
-
-									<!-- Photo -->
-									<img class="img-fluid" src="images/doctor-3.jpg" alt="doctor-foto">	
-									<div class="item-overlay"></div>
-
-									<!-- Profile Link -->		
-									<div class="profile-link">
-										<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
-									</div>
-
-								</div>		
-								
-								<!-- Doctor Meta -->		
-								<div class="doctor-meta">
-
-									<h5 class="h5-sm steelblue-color">Matthew Anderson D.M.</h5>
-									<span class="blue-color">Cardiology</span>
-
-									<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-									   augue luctus magna dolor luctus ipsum neque
-									</p>
-
-								</div>	
-
-							</div>			
-						</div>	<!-- END DOCTOR #3 -->
-											
-						
-						<!-- DOCTOR #4 -->
-						<div class="col-md-6 col-lg-3">
-							<div class="doctor-1">	
-																					
-								<!-- Doctor Photo -->
-								<div class="hover-overlay text-center"> 
-
-									<!-- Photo -->
-									<img class="img-fluid" src="images/doctor-4.jpg" alt="doctor-foto">	
-									<div class="item-overlay"></div>
-
-									<!-- Profile Link -->		
-									<div class="profile-link">
-										<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
-									</div>
-
-								</div>		
-								
-								<!-- Doctor Meta -->		
-								<div class="doctor-meta">
-
-									<h5 class="h5-sm steelblue-color">Megan Coleman D.M.</h5>
-									<span class="blue-color">Neurosurgeon</span>
-
-									<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-									   augue luctus magna dolor luctus ipsum neque
-									</p>
-
-								</div>	
-
-							</div>			
-						</div>	<!-- END DOCTOR #4 -->
-
-						
-						<!-- DOCTOR #1 -->
-						<div class="col-md-6 col-lg-3">
-								<div class="doctor-1">								
-															
-									<!-- Doctor Photo -->
-									<div class="hover-overlay text-center"> 
-	
-										<!-- Photo -->
-										<img class="img-fluid" src="images/doctor-1.jpg" alt="doctor-foto">	
-										<div class="item-overlay"></div>
-	
-										<!-- Profile Link -->		
-										<div class="profile-link">
-											<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
-										</div> 
-	
-									</div>	
-	
-									<!-- Doctor Meta -->		
-									<div class="doctor-meta">
-	
-										<h5 class="h5-sm steelblue-color">Jonathan Barnes D.M.</h5>
-										<span class="blue-color">Chief Medical Officer</span>
-	
-										<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-										   augue luctus magna dolor luctus ipsum neque
-										</p>
-	
-									</div>	
-	
-								</div>								
-							</div>	<!-- END DOCTOR #1 -->
-							
-							
-							<!-- DOCTOR #2 -->
-							<div class="col-md-6 col-lg-3">
-								<div class="doctor-1">	
-																							
-									<!-- Doctor Photo -->
-									<div class="hover-overlay text-center"> 
-	
-										<!-- Photo -->
-										<img class="img-fluid" src="images/doctor-2.jpg" alt="doctor-foto">	
-										<div class="item-overlay"></div>
-	
-										<!-- Profile Link -->		
-										<div class="profile-link">
-											<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
-										</div>
-	
-									</div>	
-	
-									<!-- Doctor Meta -->		
-									<div class="doctor-meta">
-	
-										<h5 class="h5-sm steelblue-color">Hannah Harper D.M.</h5>
-										<span class="blue-color">Anesthesiologist</span>
-	
-										<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-										   augue luctus magna dolor luctus ipsum neque
-										</p>
-	
-									</div>	
-	
-								</div>					
-							</div>	<!-- END DOCTOR #2 -->
-							
-							
-							<!-- DOCTOR #3 -->
-							<div class="col-md-6 col-lg-3">
-								<div class="doctor-1">	
-																							
-									<!-- Doctor Photo -->
-									<div class="hover-overlay text-center"> 
-	
-										<!-- Photo -->
-										<img class="img-fluid" src="images/doctor-3.jpg" alt="doctor-foto">	
-										<div class="item-overlay"></div>
-	
-										<!-- Profile Link -->		
-										<div class="profile-link">
-											<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
-										</div>
-	
-									</div>		
-									
-									<!-- Doctor Meta -->		
-									<div class="doctor-meta">
-	
-										<h5 class="h5-sm steelblue-color">Matthew Anderson D.M.</h5>
-										<span class="blue-color">Cardiology</span>
-	
-										<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-										   augue luctus magna dolor luctus ipsum neque
-										</p>
-	
-									</div>	
-	
-								</div>			
-							</div>	<!-- END DOCTOR #3 -->
-												
-							
-							<!-- DOCTOR #4 -->
-							<div class="col-md-6 col-lg-3">
-								<div class="doctor-1">	
-																						
-									<!-- Doctor Photo -->
-									<div class="hover-overlay text-center"> 
-	
-										<!-- Photo -->
-										<img class="img-fluid" src="images/doctor-4.jpg" alt="doctor-foto">	
-										<div class="item-overlay"></div>
-	
-										<!-- Profile Link -->		
-										<div class="profile-link">
-											<a class="btn btn-sm btn-tra-white black-hover" href="profile.html" title="">View More Info</a>
-										</div>
-	
-									</div>		
-									
-									<!-- Doctor Meta -->		
-									<div class="doctor-meta">
-	
-										<h5 class="h5-sm steelblue-color">Megan Coleman D.M.</h5>
-										<span class="blue-color">Neurosurgeon</span>
-	
-										<p class="p-sm grey-color">Donec vel sapien augue integer turpis cursus porta, mauris sed
-										   augue luctus magna dolor luctus ipsum neque
-										</p>
-	
-									</div>	
-	
-								</div>			
-							</div>	<!-- END DOCTOR #4 -->
-	
+ 
+						 @endforeach
 
 
 					</div>	    <!-- End row -->
@@ -542,7 +169,7 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<div class="all-doctors mb-40">
-								<a href="all-doctors.html" class="btn btn-blue blue-hover">Meet All Doctors</a>
+								<a href="{{url('/doctors')}}" class="btn btn-blue blue-hover">Meet All Doctors</a>
 							</div>
 						</div>
 					</div>

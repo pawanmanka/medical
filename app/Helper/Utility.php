@@ -1,5 +1,7 @@
-<?php 
+<?php
 
+use App\Models\Category;
+use App\Models\User;
 
 if(!function_exists('baseUrl')){
     function baseUrl($url){
@@ -51,5 +53,20 @@ if(!function_exists('makeErrorMessage')){
 if(!function_exists('marginCalculation')){
        function marginCalculation($price,$margin){
              return $price*$margin; 
+       }
+}
+if(!function_exists('topRateDoctor')){
+       function topRateDoctor(){
+             return User::with('getUserInformation')
+             ->whereHas('roles',function($query){
+                $query->whereIn('name',array(config('application.doctor_role')));
+              })
+             ->get(); 
+       }
+}
+
+if(!function_exists('topCategory')){
+       function topCategory(){
+             return Category::withCount('getUser')->where('parent_id',0)->get(); 
        }
 }

@@ -74,11 +74,9 @@
                                     <h5 class="h5-sm steelblue-color">Categories</h5>
     
                                     <ul class="blog-category-list clearfix">
-                                        <li><a href="#"><i class="fas fa-angle-double-right blue-color"></i> Elderly Care</a> <span>(5)</span></li>
-                                        <li><a href="#"><i class="fas fa-angle-double-right blue-color"></i> Lifestyle</a> <span>(13)</span></li>
-                                        <li><a href="#"><i class="fas fa-angle-double-right blue-color"></i> Medical</a> <span>(6)</span></li>
-                                        <li><a href="#"><i class="fas fa-angle-double-right blue-color"></i> Treatment </a> <span>(8)</span></li>
-                                        <li><a href="#"><i class="fas fa-angle-double-right blue-color"></i> Pharma</a> <span>(12)</span></li>
+                                        @foreach (topCategory() as $item)
+                                        <li><a href="{{url($item->super_categories_slug.'?type='.$item->super_category_id.'&category='.$item->slug)}}"><i class="fas fa-angle-double-right blue-color"></i>{{$item->name}}</a> <span>({{$item->get_user_count}})</span></li>
+                                        @endforeach
                                     </ul>
     
                                 </div>
@@ -92,51 +90,27 @@
                                     <h5 class="h5-sm steelblue-color">Top Rated Doctor</h5>
     
                                     <!-- Head of Clinic -->
+                                    @foreach (topRateDoctor() as $item)
                                     <div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
                                     
                                         <!-- Avatar -->
                                         <div class="txt-widget-avatar">
-                                            <img src="images/head-of-clinic.jpg" alt="testimonial-avatar">
+                                            <img src="{{isset($item->getUserInformation->profile_pic)?$item->getUserInformation->profile_pic:''}}" alt="{{$item->name}}">	
+
                                         </div>
     
                                         <!-- Data -->
                                         <div class="txt-widget-data">
-                                            <h5 class="h5-md steelblue-color">Dr. Jonathan Barnes</h5>	
-                                            <span>Chief Medical Officer, Founder</span>	
-                                            <div class="rate-div">
-                                         <i class="fas fa-star"></i>
-                                         <i class="fas fa-star"></i>
-                                         <i class="fas fa-star"></i>
-                                         <i class="fas fa-star"></i>
-                                     </div>	
+                                            <h5 class="h5-md steelblue-color">{{$item->name}}</h5>	
+                                            <span >{{isset($item->getUserInformation->category_name)?$item->getUserInformation->category_name:''}}</span>
+
+                                            {!!ratingView($item->avg_rating)!!}
                                         </div>
     
                                     </div>	<!-- End Head of Clinic -->	
-                                    <div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
-                                    
-                                        <!-- Avatar -->
-                                        <div class="txt-widget-avatar">
-                                            <img src="images/head-of-clinic.jpg" alt="testimonial-avatar">
-                                        </div>
-    
-                                        <!-- Data -->
-                                        <div class="txt-widget-data">
-                                            <h5 class="h5-md steelblue-color">Dr. Jonathan Barnes</h5>	
-                                            <span>Chief Medical Officer, Founder</span>	
-                                            <div class="rate-div">
-                                         <i class="fas fa-star"></i>
-                                         <i class="fas fa-star"></i>
-                                         <i class="fas fa-star"></i>
-                                         <i class="fas fa-star"></i>
-                                     </div>	
-                                        </div>
-    
-                                    </div>	<!-- End Head of Clinic -->	
-                                    
-                                    
-    
+                                    @endforeach
                                     <!-- Button -->
-                                    <a href="about.html" class="btn btn-blue blue-hover">Learn More</a>
+                                    <a href="{{url('/doctors')}}" class="btn btn-blue blue-hover">Learn More</a>
                                                                             
                                 </div>	<!-- END TEXT WIDGET -->
     

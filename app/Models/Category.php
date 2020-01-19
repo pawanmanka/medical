@@ -10,7 +10,7 @@ class Category extends Model
    use CreateSlug; 
 
    protected $table = 'catagories';
-   protected $appends = ['image_url'];
+   protected $appends = ['image_url','super_categories_slug'];
 
    public static $DOCTOR = 1;
    public static $HOSPITAL = 2;
@@ -25,6 +25,18 @@ class Category extends Model
        }
 
        return $image;
+   }
+   public function getSuperCategoriesSlugAttribute()
+   {
+       $super_categories_slug = (config('application.super_categories_slug'));
+       
+
+       return $super_categories_slug[$this->super_category_id];
+   }
+
+   public function getUser()
+   {
+      return $this->hasMany(UserInformation::class,'category');
    }
 
    public function getSubCategory()
