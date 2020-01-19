@@ -12,6 +12,7 @@
                         <div class="col-md-6 col-lg-6 offset-lg-3 col-md-offset-5">
                                 <div class="text-right">
                                         <a class="btn btn-primary" href="{{ url('/create-slots') }}">Add</a>
+                                        <a class="btn btn-primary" href="{{ url('/bulk-create-slots') }}">Bulk Add</a>
                                 </div>
                             <div class="mt-20">
                                <div class="table-responsive">

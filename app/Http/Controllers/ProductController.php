@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductItem;
 use App\Traits\DatatableGrid;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -121,7 +122,88 @@ class ProductController extends Controller
             }
             $this->data['record'] = $productObj;
         } 
+        $this->data['bulk'] = false;
         return view('create_slot',$this->data);
+    }
+    public function bulkCreateSlots(Request $request)
+    {
+        $this->data['title'] = 'Bulk Create Slots';
+        $this->data['bulk'] = true;
+        
+        return view('create_slot',$this->data);
+    }
+
+    public function bulkSlotSave(Request $request){
+        $rules = array(
+            'date'=>'required',
+            'time_start'=>'required',
+            'time_end'=>'required'
+        );
+        $rules['end_date'] = 'required|date|after:date';
+        
+        $slots ='';
+        $post = $request->all();
+        $validation = \Validator::make($request->all(),$rules);
+        if($validation->fails()){
+            flash(makeErrorMessage($validation->errors()->messages()))->error()->important();
+            return back()->withInput(); 
+        }
+        else{
+            $date = date('Y-m-d',strtotime($request->date));
+            $end_date = date('Y-m-d',strtotime($request->end_date));
+            $time_start = strtotime($request->time_start);
+            $time_end = strtotime($request->time_end);
+            if($time_start < $time_end){ 
+                
+                $period = CarbonPeriod::create($date,$end_date);
+                foreach ($period as $date) {
+                     $this->_saveBulkSlot($request,$date->format('Y-m-d'));
+                }
+                flash('Update Successfully')->success()->important();
+                return redirect("/choose-calendar-option");      
+
+            }
+            else{
+                flash('End Time Grater than Start time')->error()->important();
+                return back()->withInput(); 
+            }
+        }
+    }
+
+    private function _saveBulkSlot($request,$date){
+       
+        $time_start = strtotime($request->time_start);
+        $time_end = strtotime($request->time_end);
+        $productObj  = Product::firstOrCreate([
+            'name'=>$date,
+            'date'=>$date,
+            'user_id'=>auth()->id()
+           ]);
+           
+        $productObj->type  = Product::$DOCTOR;
+        $productObj->time_start  = date('H:i',$time_start);
+        $productObj->time_end  = date('H:i',$time_end);
+        $productObj->save();
+
+        foreach ($request->actual_fee as $timestamp => $value) {
+
+            $timestamp = date("H:i", $timestamp);
+
+            $date_time_start = "$date $timestamp";
+            $timestamp = strtotime($date_time_start);
+
+            $productItemObj  = ProductItem::firstOrCreate([
+                'product_id'=>$productObj->id,
+                'name'=>$timestamp
+            ]);
+            if(empty($productItemObj->code)){
+                $productItemObj->code =  $productItemObj->generateUniqueCode();
+            }
+            $productItemObj->actual_price=$value;
+            $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
+            $productItemObj->save();
+        }    
+
     }
 
     public function slotSave(Request $request){
@@ -130,6 +212,9 @@ class ProductController extends Controller
             'time_start'=>'required',
             'time_end'=>'required'
         );
+        if($request->end_date){
+            $rules['end_date'] = 'date|after:date';
+        }
         $slots ='';
         $post = $request->all();
         $validation = \Validator::make($request->all(),$rules);

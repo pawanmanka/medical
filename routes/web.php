@@ -82,6 +82,8 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
 
     Route::group(['middleware'=>['role:doctor']],function(){
         Route::get('/choose-calendar-option','ProductController@doctorProducts');
+        Route::get('/bulk-create-slots','ProductController@bulkCreateSlots');
+        Route::post('/bulk-create-slots','ProductController@bulkSlotSave');
         Route::get('/create-slots','ProductController@createSlots');
         Route::post('/create-slots','ProductController@slotSave');
         Route::get('/create-slots/{id}','ProductController@createSlots');

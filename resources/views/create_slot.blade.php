@@ -9,7 +9,7 @@
 			============================================= -->
 <div id="appointment-page" class="wide-60 appointment-page-section division">
     <div class="container">
-       
+        @include('flash::message')
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                     <form id="slot_form" action="">
@@ -17,6 +17,11 @@
                         <div  class="col-md-12">
                                 <input type="text" name="date" value="{{old('date',isset($record)?$record->dateFormated:'')}}" id="date" class="form-control required " placeholder="Date"  > 
                         </div>
+                        @if($bulk)
+                        <div  class="col-md-12 mt-10">
+                                <input type="text" name="end_date" value="{{old('end_date',isset($record)?$record->dateFormated:'')}}" id="end_date" class="form-control required " placeholder="Date"  > 
+                        </div>
+                        @endif
                         <div  class="col-md-12 mt-10">
                                 <input type="text" name="time_start" id="time_start" value="{{old('time_start',isset($record)?$record->time_start:'')}}"  class="form-control required " placeholder="Time Start"  > 
                         </div>
@@ -45,7 +50,9 @@
                         <input type="hidden" name="date" value="{{old('date',isset($record)?$record->date:'')}}" id="date" >
                         <input type="hidden" name="time_start"  value="{{old('time_start',isset($record)?$record->time_start:'')}}" > 
                         <input type="hidden" name="time_end" value="{{old('time_end',isset($record)?$record->time_end:'')}}"  > 
-
+                        @if($bulk)
+                            <input type="hidden" name="end_date" value="{{old('end_date',isset($record)?$record->end_date:'')}}"  >
+                        @endif
                         <section id="services-7" class="bg-lightgrey  servicess-section division">
                             <div class="container">
                                 <div class="row" id="slot_body">

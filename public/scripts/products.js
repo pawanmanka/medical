@@ -108,6 +108,7 @@ var ProductFn = function(){
              jQuery('#slot_form_date').find('input[name="date"]').val(data.post.date);
              jQuery('#slot_form_date').find('input[name="time_start"]').val(data.post.time_start);
              jQuery('#slot_form_date').find('input[name="time_end"]').val(data.post.time_end);
+             jQuery('#slot_form_date').find('input[name="end_date"]').val(data.post.end_date);
              jQuery('.slot_body_div').show();
              jQuery('#slot_body').html(data.slots);
          }
@@ -123,10 +124,12 @@ var ProductFn = function(){
        var id ='time_start';
        var id1 ='time_end';
        var dateId ='date';
+       var dateId2 ='end_date';
    
        jQuery('#'+dateId).datetimepicker({
            format:"DD-MM-YYYY"
        });
+      
    
        jQuery('#'+id).datetimepicker({format: 'LT'});
        jQuery('#'+id1).datetimepicker({
@@ -140,7 +143,18 @@ var ProductFn = function(){
            jQuery('#'+id).data("DateTimePicker").maxDate(e.date);
         
        });
-   
+
+       if(jQuery("#"+dateId2).length > 0){
+        jQuery('#'+dateId2).datetimepicker({
+            format:"DD-MM-YYYY"
+        });
+        jQuery("#"+dateId).on("dp.change", function (e) {
+            jQuery('#'+dateId2).data("DateTimePicker").minDate(e.date);
+        });
+        jQuery("#"+dateId2).on("dp.change", function (e) {
+            jQuery('#'+dateId).data("DateTimePicker").maxDate(e.date);
+        });
+    }
        
    }
    
