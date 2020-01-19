@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Question;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\UserCertificate;
 use App\Models\UserInformation;
 use App\Traits\DatatableGrid;
 use App\Traits\OtpHandle;
@@ -51,6 +52,7 @@ class UserCommonController extends Controller{
          $userObj = User::findOrFail($request->id); 
          $segment = $request->segment(2);
          $this->data['amenities']= Amenities::pluck('name','id')->toArray();
+         $this->data['certificates']= $record = UserCertificate::where('user_id',$userObj->id)->get();
          if($userObj->hasRole(config('application.patient_role'))){
             $this->data['categories'] = array();    
          $this->data['categoryArr'] =  array(); 
