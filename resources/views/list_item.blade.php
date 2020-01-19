@@ -11,7 +11,6 @@
            {!!ratingView($item->avg_rating)!!}
            <ul>
                <li><a href="{{ $item->detail_url }}" class="">View Profile</a></li>
-               <li><a href="about.html" class="">Book a appointment</a></li>
            </ul>
        </div>
 
