@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Amenities;
 use App\Models\Product;
 use App\Models\ProductItem;
+use App\Models\UserCertificate;
 use App\Models\UserInformation;
 use App\Traits\DatatableGrid;
 use App\Traits\UploadImage;
@@ -140,6 +141,35 @@ class ProfileController extends Controller{
         
     }
     
+    public function _uploadCertificate($request)
+    {
+      
+            // doctors
+            $oldUserCertificates = UserCertificate::where('user_id',auth()->id())->pluck('id','id')->toArray();
+            $value = $request->certificate; 
+            if(!empty($value)){
+                foreach ($value['id'] as $index => $name) {
+                    $id = isset($value['id'][$index])?$value['id'][$index]:0;
+                    $userCertificateObj = !empty($id)?UserCertificate::find($id):new UserCertificate();
+                    $userCertificateObj->user_id = auth()->id();
+                    if(isset($value['image'][$index])){
+                        $oldImage =null;
+                        if(isset($userCertificateObj->file_name)){
+                            $oldImage = config('application.certificate_image_path').'/'.$userCertificateObj->file_name;
+                        }
+                        $userCertificateObj->file_name =   $this->fileUploadFile($value['image'][$index],config('application.certificate_image_path'),$oldImage);
+                    }
+                    $userCertificateObj->save();
+                    if(isset($oldUserCertificates[$userCertificateObj->id])){
+                        unset($oldUserCertificates[$userCertificateObj->id]);
+                    }
+            }
+            }
+            if(!empty($oldUserCertificates)){
+               $records = UserCertificate::where('user_id',auth()->id())->whereIn('id',$oldUserCertificates)->delete();
+
+            }
+    }
 
     public function hospitalSave(Request $request)
     {
@@ -266,6 +296,7 @@ class ProfileController extends Controller{
     public function extraInfo()
     {   
         $this->data['record']= $record = UserInformation::where('user_id',auth()->id())->first();
+        $this->data['certificates']= $record = UserCertificate::where('user_id',auth()->id())->get();
         
         $this->data['amenities']= Amenities::pluck('name','id')->toArray();
         $this->data['title'] ='Extra Information'; 
@@ -354,6 +385,8 @@ class ProfileController extends Controller{
             $userInformationObj->meta_keyword = $request->meta_keyword;
             $userInformationObj->meta_description = $request->meta_description;
            
+            $this->_uploadCertificate($request);
+
 
             $userInformationObj->save();
             flash('Update Successfully')->success()->important();

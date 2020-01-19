@@ -151,7 +151,7 @@ class RegisterController extends Controller{
             $userInformationObj->save();
 
            
-            // 
+            
             $this->_uploadCertificate($request->certificate,$userObj->id);
 
             $role_r = Role::where('name', '=',config('application.doctor_role'))->firstOrFail();            

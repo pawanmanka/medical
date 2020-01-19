@@ -24,6 +24,8 @@
                         @role(config('application.lab_role'))
                             @include('_lab_extra_information_fields') 
                         @endrole     
+
+                    
                         <!-- Contact Form Button -->
                         <div class="col-lg-12 mt-15 form-btn">  
                             <button type="submit" class="btn btn-blue blue-hover">Save</button> 

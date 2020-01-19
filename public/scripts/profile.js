@@ -54,6 +54,22 @@ ProfileFn.prototype.bindElement = function(){
             ele.find('img').remove();
             jQuery('#doctors_list tbody').after('<tr>'+jQuery(ele).html()+'</tr>');
      });
+     jQuery('#add_certificates').click(function(){
+        
+            var ele = jQuery('#certificates_list').find('tr').clone();
+            ele.find('input').attr('value','');
+            ele.find('img').remove();
+            jQuery('#certificates_list tbody').after('<tr>'+jQuery(ele).html()+'</tr>');
+     });
+
+     jQuery(document).on('click','.delete_certificate',function(){
+        if(jQuery('#certificates_list').find('tr').length > 1){
+            jQuery(this).parents('tr').remove();
+        }
+        else{
+            App.showMessage('add at least one','error');
+        }
+ });
 
      jQuery(document).on('click','.delete_doctor',function(){
             if(jQuery('#doctors_list').find('tr').length > 1){

@@ -197,6 +197,26 @@ Route::prefix('administrator')->middleware('isAdmin')->namespace('Admin')->group
     
     });
 
+     // plans
+     Route::group(['middleware' => ['permission:add plans|edit plans|delete plans']], function () {
+    
+        Route::get('/plans/list', 'PlansController@index');
+        Route::get('/plans/grid', 'PlansController@grid');
+    
+        Route::group(['middleware' => ['permission:add plans']], function () {
+            Route::get('/plans/add', 'PlansController@add');
+            Route::post('/plans/add', 'PlansController@save');
+        });
+        Route::group(['middleware' => ['permission:edit plans']], function () {
+            Route::get('/plans/edit/{id}', 'PlansController@edit');
+            Route::post('/plans/edit/{id}', 'PlansController@save');
+        });
+        Route::group(['middleware' => ['permission:delete plans']], function () {
+            Route::post('/plans/delete', 'PlansController@delete');
+        });
+    
+    });
+
     //categories
     Route::group(['middleware' => ['permission:add category|edit category|delete category']], function () {
         Route::get('/category/list', 'CategoryController@index');

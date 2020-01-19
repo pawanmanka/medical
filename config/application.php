@@ -105,6 +105,11 @@ return [
             'edit'=>'edit',
             'delete'=>'delete'
         ),
+        'plans'=>array(
+            'add'=>'add',
+            'edit'=>'edit',
+            'delete'=>'delete'
+        ),
         'category'=>array(
             'add'=>'add',
             'edit'=>'edit',

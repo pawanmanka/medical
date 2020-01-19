@@ -99,7 +99,7 @@
         <div class="col-sm-10 ">  
         <label class="control-label col-sm-2" for="Doctors">Doctors</label>
         <button class="btn btn-primary" id="add_doctor" type="button"><i class="fa fa-plus"></i> Add Doctor</button> 
-    </div>
+       </div>
 
             <div class="col-sm-10 ">
                  <table id="doctors_list" class="table">
@@ -151,6 +151,6 @@
             </div>
     </div>
 
-
+       
 </div>
     
