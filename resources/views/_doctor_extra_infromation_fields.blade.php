@@ -107,6 +107,12 @@
     </div>
 
     <div class="form-group mt-50">
+            <label class="control-label col-sm-2" for="ActualFee">Education</label>
+            <div class="col-sm-10 ">
+                    <input  type="text" class="form-control required" name="education" value="{{ old('education',isset($record->doctor_education)?$record->doctor_education:'') }}" >
+            </div>
+    </div>
+    <div class="form-group mt-50">
             <label class="control-label col-sm-2" for="ActualFee">Actual Fee</label>
             <div class="col-sm-10 ">
                     <input  type="text" class="form-control required" name="actual_fee" value="{{ old('actual_fee',isset($record->actual_fee)?$record->actual_fee:'') }}" >

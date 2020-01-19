@@ -379,6 +379,7 @@ class ProfileController extends Controller{
             }
             $userInformationObj->home_visit = !empty($request->home_visit)?$request->home_visit:0;
             
+            $userInformationObj->doctor_education = $request->education;
             $userInformationObj->actual_fee = $request->actual_fee;
             $userInformationObj->discounted_fee = $request->discounted_fee;
             $userInformationObj->meta_title = $request->meta_title;

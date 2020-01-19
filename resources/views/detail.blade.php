@@ -164,8 +164,18 @@
 												</div>
 											
 										</div>
-										@endif
 										<br>
+										@endif
+									   @if(!empty($userInformation->doctor_education))
+									   <br>
+										<div class="row mar-0">
+												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
+														Education : - {{$userInformation->doctor_education}}
+												</div>
+											
+										</div>
+										<br>
+										@endif
 										<div class="row mar-0 mt-10">
 											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
