@@ -23,6 +23,9 @@
  </div>           
 
 @if(!isset($record))
+<div  class="col-md-12" >
+    {!! selectBox('plan_id',getSubscriptionPlans(),null,array('class'=>'form-control required','id'=>'plan_id'),'Select Plan') !!}  	 
+</div>  
 <div  class="col-md-12">
     <input type="password" name="password" class="form-control required " placeholder="Password*"  > 
 </div>                     

@@ -63,7 +63,7 @@ class PatientController extends UserCommonController
 	    			$row->contact_number,
 	    			$row->email,
 	    			$row->id_proof,
-	    			'Free',
+	    			$row->plan_name,
 	    			!empty($row->getWallet)?$row->getWallet->amount:0
                 );
                 if(auth()->user()->can('edit doctor')){

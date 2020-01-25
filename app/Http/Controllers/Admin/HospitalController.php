@@ -62,7 +62,7 @@ class HospitalController extends UserCommonController
 	    			$row->id,
 	    			$row->name,
 	    			$row->contact_number,
-	    			'Free',
+	    			$row->plan_name,
 	    			0,
 	    			0,
 	    			0

@@ -51,7 +51,7 @@ class RegisterController extends Controller{
             $userObj->id_proof_type = $request->id_proof_type;
             $userObj->id_proof = $request->id_proof;
             $userObj->gender = $request->gender;
-          
+            $userObj->plan_id = $request->plan_id;
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
 
@@ -126,6 +126,7 @@ class RegisterController extends Controller{
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->plan_id = $request->plan_id;
             $userObj->default_percentage = config('application.default_percentage');
             $userObj->password = Hash::make($request->password) ;
             $userObj->save();
@@ -265,6 +266,7 @@ class RegisterController extends Controller{
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->plan_id = $request->plan_id;
             $userObj->default_percentage = config('application.default_percentage');
 
             $userObj->password = Hash::make($request->password) ;
@@ -341,6 +343,7 @@ class RegisterController extends Controller{
             $userObj->gender = $request->gender;
             $userObj->lat = $request->location_lat;
             $userObj->lng = $request->location_lng;
+            $userObj->plan_id = $request->plan_id;
             $userObj->default_percentage = config('application.default_percentage');
 
             $userObj->password = Hash::make($request->password) ;

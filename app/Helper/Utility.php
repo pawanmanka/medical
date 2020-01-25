@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Plan;
 use App\Models\User;
 
 if(!function_exists('baseUrl')){
@@ -68,5 +69,10 @@ if(!function_exists('topRateDoctor')){
 if(!function_exists('topCategory')){
        function topCategory(){
              return Category::withCount('getUser')->where('parent_id',0)->get(); 
+       }
+}
+if(!function_exists('getSubscriptionPlans')){
+       function getSubscriptionPlans(){
+             return Plan::pluck('name','id'); 
        }
 }

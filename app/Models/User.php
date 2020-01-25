@@ -41,7 +41,7 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected $append = ['gender_title','detail_url','role_name'];
+    protected $append = ['gender_title','detail_url','role_name','plan_name'];
 
     public function getJWTIdentifier()
     {
@@ -57,6 +57,10 @@ class User extends Authenticatable implements JWTSubject
         $role = $this->roles()->first();
         return $role->name;
     }
+    public function getPlanNameAttribute(){
+        $plan=$this->getPlan()->first();
+        return isset($plan->id)?$plan->name:'free';
+    }
     public function getGenderTitleAttribute(){
         $genderArr = config('application.genderArr');
         return isset($genderArr[$this->gender])?$genderArr[$this->gender]:'';
@@ -71,6 +75,9 @@ class User extends Authenticatable implements JWTSubject
 
     public function getUserRating(){
         return $this->hasMany(Review::class,'user_id','id');
+    }
+    public function getPlan(){
+        return $this->hasMany(Plan::class,'id','plan_id');
     }
     public function getQuestions(){
         return $this->hasMany(Question::class,'user_id','id');

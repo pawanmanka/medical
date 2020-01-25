@@ -65,7 +65,7 @@ class DoctorController extends UserCommonController
 	    			$row->id,
 	    			$row->name,
 	    			$row->contact_number,
-	    			'Free',
+	    			$row->plan_name,
 	    			$row->get_user_rating_count,
 	    			0,
 	    			!empty($row->getWallet)?$row->getWallet->amount:0
