@@ -254,7 +254,7 @@
 								<div class="certificates">
 
 									<!-- Title -->	
-									<h5 class="h5-md blue-color">Diplomas and Certificates</h5>
+									<h5 class="h5-md blue-color">Certificates</h5>
 
 									<!-- Certificate Preview -->
 									<div class="row">
