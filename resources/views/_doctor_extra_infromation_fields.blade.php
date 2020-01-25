@@ -113,6 +113,18 @@
             </div>
     </div>
     <div class="form-group mt-50">
+            <label class="control-label col-sm-2" for="specializations">Specializations</label>
+            <div class="col-sm-10 ">
+                    <input  type="text" class="form-control required" name="specializations" value="{{ old('specializations',isset($record->specializations)?$record->specializations:'') }}" >
+            </div>
+    </div>
+    <div class="form-group mt-50">
+            <label class="control-label col-sm-2" for="services">Services</label>
+            <div class="col-sm-10 ">
+                    <input  type="text" class="form-control required" name="services" value="{{ old('services',isset($record->services)?$record->services:'') }}" >
+            </div>
+    </div>
+    <div class="form-group mt-50">
             <label class="control-label col-sm-2" for="ActualFee">Actual Fee</label>
             <div class="col-sm-10 ">
                     <input  type="text" class="form-control required" name="actual_fee" value="{{ old('actual_fee',isset($record->actual_fee)?$record->actual_fee:'') }}" >

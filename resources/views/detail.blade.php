@@ -170,7 +170,42 @@
 									   <br>
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
-														Education : - {{$userInformation->doctor_education}}
+														Education : - 
+														<ul>
+															@foreach (explode("|",$userInformation->doctor_education) as $item)
+															  <li>{{$item}}</li>	
+															@endforeach
+															</ul>
+												</div>
+											
+										</div>
+										<br>
+										@endif
+									   @if(!empty($userInformation->specializations))
+									   <br>
+										<div class="row mar-0">
+												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
+													Specializations :<br>
+													<ul>
+													@foreach (explode("|",$userInformation->specializations) as $item)
+													  <li>{{$item}}</li>	
+													@endforeach
+												    </ul>
+												</div>
+											
+										</div>
+										<br>
+										@endif
+									   @if(!empty($userInformation->services))
+									   <br>
+										<div class="row mar-0">
+												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
+													Services :<br>
+													<ul>
+													@foreach (explode("|",$userInformation->services) as $item)
+													  <li>{{$item}}</li>	
+													@endforeach
+												    </ul>
 												</div>
 											
 										</div>

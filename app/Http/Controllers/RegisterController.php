@@ -145,6 +145,7 @@ class RegisterController extends Controller{
            
             $userInformationObj->hospital = $request->hospital;
             $userInformationObj->qualification = $request->qualification;
+            $userInformationObj->doctor_education = $request->qualification;
             $userInformationObj->user_id = $userObj->id;
             if($request->hasFile('profile_image')) {
                 $userInformationObj->profile_image =   $this->fileUpload($request,config('application.users_image_path'),null,'profile_image');
