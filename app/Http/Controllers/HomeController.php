@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\PaymentGateway;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Question;
@@ -31,6 +32,16 @@ class HomeController extends Controller
     public function index()
     {
        return view('home',$this->data);
+    }
+    public function testing()
+    {
+      //  $pay = new PaymentGateway();
+      //  $pay->generateOrder();
+      //  dd(1);
+
+      return view('payment_page',$this->data);
+
+
     }
     
     public function page(Request $request)

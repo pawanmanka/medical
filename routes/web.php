@@ -13,6 +13,7 @@
 
 
 Route::get('/','HomeController@index');
+Route::get('/testing','HomeController@testing');
 Route::get('/contact-us','ContactusController@index');
 //Auth::routes();
 
@@ -35,6 +36,11 @@ Route::post('doctor/register', 'RegisterController@doctorSave');
 
 Route::get('hospital/register', 'RegisterController@hospital');
 Route::post('hospital/register', 'RegisterController@hospitalSave');
+
+Route::get('/forgot-password', 'ForgotPasswordController@index');
+Route::post('/forgot-password', 'ForgotPasswordController@sendVerificationSms');
+Route::get('/reset-password', 'ForgotPasswordController@resetPage');
+Route::post('/reset-password', 'ForgotPasswordController@resetPassword');
 
 Route::get('lab/register', 'RegisterController@lab');
 Route::post('lab/register', 'RegisterController@labSave');

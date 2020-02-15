@@ -40,6 +40,9 @@
 				 		<div class="col-md-6 col-lg-6 offset-lg-3 col-md-offset-5">
 				 			<p>Don't have a account <a href="{{ url('register') }}">Register Account ?</a></p>
 				 		</div>
+				 		<div class="col-md-6 col-lg-6 offset-lg-3 col-md-offset-5">
+				 			<p><a href="{{ url('forgot-password') }}"> {{ __('Forgot Your Password?') }}</a></p>
+				 		</div>
 				 		
 
 

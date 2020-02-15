@@ -43,7 +43,19 @@
 </div>                     
 <div  class="col-md-12">
     <input type="password" name="password_confirmation" class="form-control required " placeholder="Password Confirm*"  > 
-</div>    
+</div>   
+
 @endif 
 
 @include('_upload_fields')
+@if(!isset($record))
+<div class="form-group mt-10">
+    <div class="col-md-12 ">
+            <div class="form-check">
+                    <input class="form-check-input"  name="term_and_condition" type="checkbox" value="1" id="term_and_condition">
+                    <label class="form-check-label" for="term_and_condition"> Terms and condition</label>
+                    
+            </div>
+    </div> 
+</div>
+@endif 

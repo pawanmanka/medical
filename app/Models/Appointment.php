@@ -39,6 +39,7 @@ class Appointment extends Model
     public function generateUniqueCode()
     {
         $code = strtoupper(uniqid());
+        $code  = substr($code,0,7);
         $allRecord = $this->getRelatedCode($code);
         if (! $allRecord->contains('code', $code)){
             return $code;

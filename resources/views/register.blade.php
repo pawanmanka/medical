@@ -37,7 +37,9 @@
                 </a>
              </div>
            
-             
+             <div class="col-md-6 col-lg-6 offset-lg-3 col-md-offset-5">
+                <p>you have account  <a href="{{ url('login') }}">Login</a></p>
+            </div>
 
 
          </div>	<!-- End row -->			  
