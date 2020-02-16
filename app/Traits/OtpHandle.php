@@ -40,7 +40,9 @@ trait OtpHandle{
         $OtpObj->user_id = $userId;
         $OtpObj->save();
 
-      $this->_sendSms($OtpObj->mobile,'Otp '.$token);
+
+       $this->_sendSms($OtpObj->mobile,'Otp '.$token);
+
        
     }
 

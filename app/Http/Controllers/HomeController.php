@@ -9,6 +9,7 @@ use App\Models\Review;
 use App\Models\Amenities;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,13 @@ class HomeController extends Controller
     {
        $this->data = array();
        // $this->middleware('auth');
+    }
+    
+       public function testing(Request $request)
+    {
+      Log::info('webhook');
+      Log::info($request->all());
+
     }
 
     /**

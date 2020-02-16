@@ -78,7 +78,7 @@
                             <li class="nl-simple" aria-haspopup="true"><a href="{{ url('contact-us') }}">Contact Us</a></li>
                             
 
-							    <li class="nl-simple header-btn" aria-haspopup="true"><a class="blue-hover" href="#">Call - 8561903387</a></li> 
+							    <li class="nl-simple header-btn" aria-haspopup="true"><a class="blue-hover" href="tel:8561903387">Call - 8561903387</a></li> 
 
 
         					</ul>
@@ -88,7 +88,7 @@
 
         				<!-- NAVIGATION MENU BUTTON -->
         				<div class="header-button">
-        					<span class="nl-simple header-btn blue-hover"><a href="#">Call - 8561903387</a></span>
+        					<span class="nl-simple header-btn blue-hover"><a class="blue-hover" href="tel:8561903387">Call - 8561903387</a></span>
         				</div>
 
 

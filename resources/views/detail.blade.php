@@ -143,7 +143,7 @@
 													<p>{{$userInformation->meta_description}}</p>
 													<br>
 													@endif 
-													<strong>AddreAddress </strong> 
+													<strong>Address </strong> 
 														<p>{{$userInformation->address}}</p>
 												</div>
 											

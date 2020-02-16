@@ -13,6 +13,7 @@
 
 
 Route::get('/','HomeController@index');
+Route::get('/testing','HomeController@testing');
 Route::get('/contact-us','ContactusController@index');
 //Auth::routes();
 
@@ -110,7 +111,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
         
         
     });
-
+    
     //booking
     Route::group(['middleware'=>['role:'.config('application.wallet_add_roles')]],function(){
 
@@ -126,6 +127,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
     Route::get('/my-wallet/grid','WalletController@grid');
     Route::get('/my-appointment','AppointmentController@index');
     Route::get('/appointment/grid','AppointmentController@grid');
+
     
     //extra_info_roles
     Route::group(['middleware'=>['role:'.config('application.extra_info_roles')]],function(){
