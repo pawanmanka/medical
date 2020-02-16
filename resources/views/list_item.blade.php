@@ -2,7 +2,7 @@
     <div class="col-12">
                <div class="box-one">
                <div class="txt-widget-avatar">
-                 <img src="{{ isset($item->getUserInformation->profile_pic)?$item->getUserInformation->profile_pic:(config('application.default_image_path')) }}" alt="{{ $item->name }}">
+                 <img src="{{$item->getUserInformation->profile_pic}}" alt="{{ $item->name }}">
               </div>
                   <div class="text-holder">
                      <div class="doctor-details">
@@ -31,7 +31,8 @@
 
 <div class="col-12">
                <div class="box-one">
-                  <div class="image-holder"><img src="{{ isset($item->getUserInformation->profile_pic)?$item->getUserInformation->profile_pic:(config('application.default_image_path')) }}" alt="{{ $item->name }}"></div>
+                  <div class="image-holder">
+                     <img src="{{$item->getUserInformation->profile_pic }}" alt="{{ $item->name }}"></div>
                   <div class="text-holder">
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">
@@ -56,7 +57,7 @@
 @if(isset($roles[config('application.lab_role')]))
 <div class="col-12">
                <div class="box-one">
-                  <div class="image-holder"><img src="images/doctor-2.jpg" alt=""></div>
+                  <div class="image-holder"><img src="{{$item->getUserInformation->profile_pic }}" alt=""></div>
                   <div class="text-holder">
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">

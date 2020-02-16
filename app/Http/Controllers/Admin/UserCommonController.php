@@ -547,6 +547,7 @@ public function reviewsGrid(Request $request)
             try {
                 $user = User::find($checkMobile->user_id);
                 $user->contact_number = $request->mobile_number;
+                $user->username = $request->mobile_number;
                 $user->mobile_verified_at = \DB::raw('now()');
                 $user->save();  
                 $checkMobile->delete();
