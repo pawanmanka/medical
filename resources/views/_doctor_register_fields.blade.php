@@ -52,9 +52,9 @@
 <div class="form-group mt-10">
     <div class="col-md-12 ">
             <div class="form-check">
-                    <input class="form-check-input"  name="term_and_condition" type="checkbox" value="1" id="term_and_condition">
-                    <label class="form-check-label" for="term_and_condition"> Terms and condition</label>
-                    
+                    <input class="form-check-input required"  name="term_and_condition" type="checkbox" value="1" id="term_and_condition">
+                    <label class="form-check-label" for="term_and_condition"><a target="_blank" href="{{config('application.doctor_term_and_condition_url')}}">Terms and condition</a></label>
+                    <span class="handleError"></span>
             </div>
     </div> 
 </div>
