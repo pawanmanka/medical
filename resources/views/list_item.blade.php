@@ -38,13 +38,15 @@
                         <ul class="pl-0 mb-0">
                            <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
                            <li>Multi-Specialty hospital</li>
-                           <li><b>Timing - </b>Mon - Sun ( 9 AM - 9 PM ) <i class="fa fa-map-marker"></i></li>
+                           <li><b>Timing - </b><br>Mon - Sun ( 
+                              <br>Morning : {{ $item->getUserInformation->mon_sat_morning_time  }} And
+                              <br>Evening : {{ $item->getUserInformation->mon_sat_evening_time  }} ) <i class="fa fa-map-marker"></i></li>
                         </ul>
                      </div>
                   </div>
                   <div class="testing_lab_btns">
                      <ul class="mb-0">
-                        <li><a href="">Call Now</a></li>
+                     <li><a href="tel:{{$item->username}}">Call Now</a></li>
                         <li><a href="{{ $item->detail_url }}">Profile</a></li>
                      </ul>
                      </div>
@@ -64,13 +66,15 @@
                            <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
                            <li>{{$item->getUserInformation->doctor_education}}</li>
                            <li>{{ $item->getUserInformation->experience }} Experience</li>
-                           <li><b>Timing - </b>Mon - Sun ( 9 AM - 9 PM ) <i class="fa fa-map-marker"></i></li>
+                           <li><b>Timing - </b><br>Mon - Sun ( 
+                              <br>Morning : {{ $item->getUserInformation->mon_sat_morning_time  }} And
+                              <br>Evening : {{ $item->getUserInformation->mon_sat_evening_time  }} ) <i class="fa fa-map-marker"></i></li>
                         </ul>
                      </div>
                   </div>
                   <div class="testing_lab_btns">
                      <ul class="mb-0">
-                        <li><a href="">Call Now</a></li>
+                        <li><a href="tel:{{$item->username}}">Call Now</a></li>
                         <li><a href="{{ $item->detail_url }}">View Detail</a></li>
                      </ul>
                      </div>
