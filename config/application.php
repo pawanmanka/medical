@@ -5,10 +5,11 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.1,
+    'siteVersion'=>0.122,
     'genderArr'=>array(
         1=>'Male',
-        2=>'Female'
+        2=>'Female',
+        3=>'Other'
     ),
     'yesNoArr'=>array(
         0=>'No',
@@ -35,6 +36,10 @@ return [
     'patient_role'=>'patient',
     'hospital_role'=>'hospital',
     'doctor_role'=>'doctor',
+    'resent_opt_content'=>'OTP is ',
+    'register_sms_content'=>'Welcome to Arogyarth. Your Registration OTP is ',
+    'booking_patient_sms_content'=>'Your appointment has been done. Appointment No. is ',
+    'cancel_booking_patient_sms_content'=>'Your Appointment has beed cancelled by you. Required charges will be charged from your wallet. ',
     'subadmin_role'=>'subadmin',
     'lab_role'=>'lab',
     'hospital_subadmin_role'=>'hospital subadmin',

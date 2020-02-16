@@ -57,7 +57,7 @@ class RegisterController extends Controller{
 
             $role_r = Role::where('name', '=',config('application.patient_role'))->firstOrFail();            
             $userObj->assignRole($role_r);
-            $this->sendOtp($userObj->contact_number,$userObj->id);
+            $this->sendOtp($userObj->contact_number,$userObj->id,config('application.register_sms_content'));
             flash('Registration Successfully')->success()->important();
             return redirect("/verifyOtp/$userObj->contact_number");       
         }
@@ -158,7 +158,7 @@ class RegisterController extends Controller{
 
             $role_r = Role::where('name', '=',config('application.doctor_role'))->firstOrFail();            
             $userObj->assignRole($role_r);
-            $this->sendOtp($userObj->contact_number,$userObj->id);
+            $this->sendOtp($userObj->contact_number,$userObj->id,config('application.register_sms_content'));
             flash('Registration Successfully')->success()->important();
             return redirect("/verifyOtp/$userObj->contact_number");      
         }
@@ -208,7 +208,7 @@ class RegisterController extends Controller{
         if(isset($checkMobile->id)){
             $status = self::$SUCCESS;
             $message = "Otp is resend";
-            $this->sendOtp($checkMobile->mobile,$checkMobile->user_id);
+            $this->sendOtp($checkMobile->mobile,$checkMobile->user_id,config('application.register_sms_content'));
             $checkMobile->delete();
         }
         $result = array(
@@ -294,7 +294,7 @@ class RegisterController extends Controller{
 
             $role_r = Role::where('name', '=',config('application.hospital_role'))->firstOrFail();            
             $userObj->assignRole($role_r);
-            $this->sendOtp($userObj->contact_number,$userObj->id);
+            $this->sendOtp($userObj->contact_number,$userObj->id,config('application.register_sms_content'));
             flash('Registration Successfully')->success()->important();
             return redirect("/verifyOtp/$userObj->contact_number");   
         }
@@ -370,7 +370,7 @@ class RegisterController extends Controller{
 
             $role_r = Role::where('name', '=',config('application.lab_role'))->firstOrFail();            
             $userObj->assignRole($role_r);
-            $this->sendOtp($userObj->contact_number,$userObj->id);
+            $this->sendOtp($userObj->contact_number,$userObj->id,config('application.register_sms_content'));
             flash('Registration Successfully')->success()->important();
             return redirect("/verifyOtp/$userObj->contact_number");       
         }

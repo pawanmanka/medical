@@ -31,7 +31,7 @@ trait OtpHandle{
             ->get();
     }
 
-    public function sendOtp($mobile,$userId = 0)
+    public function sendOtp($mobile,$userId = 0,$message)
     {
         $token = $this->generateOtp($mobile);
         $OtpObj = new Otp();
@@ -39,11 +39,15 @@ trait OtpHandle{
         $OtpObj->token = $token;
         $OtpObj->user_id = $userId;
         $OtpObj->save();
-
-
-       $this->_sendSms($OtpObj->mobile,'Otp '.$token);
+                
+       $this->_sendSms($OtpObj->mobile,$message.$token);
 
        
+    }
+
+    public function sendSms($mobile,$message)
+    {
+       $this->_sendSms($mobile,$message);
     }
 
   

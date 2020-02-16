@@ -59,6 +59,21 @@ class WalletController extends Controller
         return response()->json($output);  
     } 
 
+    public function addPayment(Request $request){
+        $rules = array(
+            'money'=>'required'
+        );
+
+        $validation = \Validator::make($request->all(),$rules);
+        if($validation->fails()){
+            flash(makeErrorMessage($validation->errors()->messages()))->error()->important();
+            return back()->withInput(); 
+        }
+        else{
+            
+        }        
+    }
+
     public function addMoney(Request $request)
     {
         $rules = array(

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Traits\DatatableGrid;
+use App\Traits\OtpHandle;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
     use DatatableGrid;
-    
+    use OtpHandle;
+
     public function __construct()
     {
         $this->data['title'] = 'Appointment';
@@ -101,6 +103,7 @@ class AppointmentController extends Controller
   
     $query->status = Appointment::$STATUS_CANCEL;
     $query->save();
+    $this->sendSms($query->patient_contact_number,config('application.cancel_booking_patient_sms_content'));
     flash('Appointment  Canceled')->success()->important();
     return back();
 

@@ -9,11 +9,13 @@ use App\Models\ProductItem;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\WalletTrans;
+use App\Traits\OtpHandle;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
     
+    use OtpHandle;
     public function __construct()
     {
        $this->data = array();
@@ -218,7 +220,7 @@ class BookingController extends Controller
             $walletTransObj->after_total = $walletObj->amount ;
             $walletTransObj->description = " Appointment id $appointmentObj->id";
             $walletTransObj->save();
-
+            $this->sendSms($appointmentObj->patient_contact_number,config('application.booking_patient_sms_content').$appointmentObj->code);
             flash('Appointment is successfully created')->success()->important();
             return redirect('/detail/'.$request->slug);
         } 

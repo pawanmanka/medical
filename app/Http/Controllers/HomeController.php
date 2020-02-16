@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\PaymentGateway;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Question;
@@ -40,7 +41,7 @@ class HomeController extends Controller
     {
        return view('home',$this->data);
     }
-    
+ 
     public function page(Request $request)
     {
        return $this->_pageData($request->segment(1));

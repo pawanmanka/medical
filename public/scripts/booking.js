@@ -79,7 +79,7 @@ BookingFn.prototype.handleForm = function() {
         },
 
         errorPlacement: function (error, element) {
-            if(jQuery(".slot_body_div").is(":visible")){
+            if(jQuery(".slot_body_div").is(":visible") && jQuery('.available').length == 0){
               App.showMessage('Please Select Valid Slot','error');
             }
           //  error.insertAfter(element);

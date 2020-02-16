@@ -510,14 +510,15 @@ public function reviewsGrid(Request $request)
         $mobile_number = $request->mobile_number; 
        
         $checkMobile = $this->checkMobile($request->mobile_number);
+        $resent_opt_content = config('application.resent_opt_content');
         if(isset($checkMobile->id)){
             $status = self::$SUCCESS;
             $message = "Otp is resend";
-            $this->sendOtp($checkMobile->mobile,$checkMobile->user_id);
+            $this->sendOtp($checkMobile->mobile,$checkMobile->user_id,$resent_opt_content);
             $checkMobile->delete();
         }
         else{
-            $this->sendOtp($mobile_number,$record->id);
+            $this->sendOtp($mobile_number,$record->id,$resent_opt_content);
         }
         flash('Successfully send otp')->success()->important();
         return redirect("/administrator/change-mobile-number/$request->id/$mobile_number");  
