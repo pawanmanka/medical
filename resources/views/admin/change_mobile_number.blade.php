@@ -25,11 +25,11 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group row">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary btn-sm" type="submit">Send Opt</button>
+                                    <button class="btn btn-primary btn-sm" type="submit">Send Otp</button>
                                 </div>
                             </div>
                             @else 
-                            <div class="form-group  row"><label class="col-sm-2 col-form-label">Enter Opt</label>
+                            <div class="form-group  row"><label class="col-sm-2 col-form-label">Enter Otp</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="otp" value="" class="form-control">
                                 </div>
@@ -38,7 +38,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <button class="btn btn-primary btn-sm" type="submit" name='send_type' value="confirm_otp">Confirm Otp</button>
-                                    <button class="btn btn-primary btn-sm" type="submit" name='send_type' value="resend_otp">Resend Opt</button>
+                                    <button class="btn btn-primary btn-sm" type="submit" name='send_type' value="resend_otp">Resend Otp</button>
                                 </div>
                             </div>
                             @endif

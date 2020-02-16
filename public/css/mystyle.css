@@ -1,0 +1,752 @@
+ul{
+	margin-bottom: 1rem;
+}
+.common-padding{
+	padding: 50px 0px;
+}
+.search-panel{
+	padding: 40px 20px;
+	background-color: #00a3c8;
+}
+.search-panel form button {
+	color: #fff;
+    background-color: #0e8eab;
+    border: #0e8eab;
+    padding: 9px 15px;
+    width: 159px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto";
+    font-weight: 700;
+    font-style: normal;
+}
+.search-panel2{
+	padding: 0px 0px 50px;
+}
+.search-panel form button i {
+/*	font-size: 28px;*/
+	color: #fff;
+    padding-left: 10px;
+}
+.search-panel form input{
+	font-size: 16px;
+}
+.search-panel form  .location  i{
+	color: #00a3c8;
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    font-size: 20px;
+}
+.search-panel-two select{
+	width: 100%;
+}
+.thred-panel{
+	padding: 20px 15px;
+    background-color: #fafafa;
+}
+.left-panel h2{
+	color: #004861;
+	padding-bottom: 20px;
+}
+.box-one{
+	border: 0px red solid;
+	padding: 15px 15px;
+	box-shadow: 1.5px 2.598px 18px 0px #d8d8d8;
+	margin-bottom: 30px;
+	background-color: #fff;
+}
+.image-holder {
+	float: left;
+}
+.image-holder  {
+	width: 110px;
+	height: 96px;
+}
+.box-one .image-holder img{
+	width: 100%;
+    height: 100%
+}
+.text-holder{
+	float: left;
+}
+.doctor-details ul li{
+	list-style: none;
+	padding: 0px 0px 5px 20px;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+}
+.buttons ul{
+	padding-left: 20px !important;
+}
+.buttons ul li{
+	display: inline-block;
+    background-color: #00a3c8;
+    padding: 7px 15px;
+    margin-right: 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+.buttons ul li a{
+	color: #fff;
+}
+.buttons ul li a:hover{
+	text-decoration: none;
+}
+.right-panel{
+    box-shadow: 1.5px 2.598px 18px 0px #d8d8d8;
+    padding: 15px 15px;
+    background-color: #fff;
+}
+.right-panel h3{
+	color: #004861;
+    font-family: "Roboto";
+    font-weight: 700;
+    font-style: normal;
+    border-bottom: 2px #00a3c8 solid;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.right-panel ul li{
+	list-style: none;
+    padding: 5px 0px;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+}
+.right-panel ul li a{
+	color: #555;
+}
+.right-panel ul li a:hover{
+	text-decoration: none;
+}
+.right-panel-cat{
+	margin-bottom: 50px !important;
+}
+.right-panel-cat li i{
+	padding-right: 10px;
+	color: #00a3c8;
+}
+.right-boxes {
+	border: 0px red solid;
+}
+.doctor_img{
+	width: 80px;
+	height: 80px;
+	float: left;
+}
+.doctor_img img{
+	width: 100%;
+	height: 100%;
+}
+.doctor_text_holder{
+    float: left;
+    width: 74%;
+    padding: 4px 10px;
+    font-size: 14px;
+}
+.doctor_text_holder p{
+	margin-bottom: 0px;
+}
+.appointment-section h2{
+	color: #004861;
+}
+.appointment-section h5{
+	padding: 20px 0px;
+	color: #00a3c8;
+}
+.appointment-section table{
+	width: 100%;
+}
+.table thead th{
+	border: 1px solid #dee2e6;
+	color: #004861;
+}
+.table tbody tr  td{
+	border: 1px solid #dee2e6;
+	text-transform: capitalize;
+}
+.testing-lab-panel .text-holder{
+	border: 0px red solid;
+	width: 60%;
+}
+.testing_lab_btns {
+	float: right;
+}
+.testing_lab_btns ul li{
+	list-style: none;
+    background-color: #00a3c8;
+    padding: 7px 15px;
+    border-radius: 4px;
+    margin: 14px 0px;
+    text-align: center;
+    border-radius: 1px solid #00a3c8;
+}
+
+.testing_lab_btns ul li a{
+	color: #fff;
+	font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+}
+.view_more_btn{
+	font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    border-radius: 4px;
+    margin: 0px auto;
+    display: block;
+    background-color: #00a3c8;
+    border: 1px solid #00a3c8;
+    color: #fff;
+    padding: 6px 20px;
+    cursor: pointer;
+}
+.view_more_btn:hover{
+	background-color: #fff;
+	color: #00a3c8;
+	transition: 0.5s;
+}
+/*View profile page*/
+.doctor_profile_sec .image-holder {
+	border: 2px #000 solid;
+	float: left;
+}
+.doctor_profile_sec .image-holder{
+	width: 120px;
+	height: 110px;
+}
+.doctor_profile_sec .image-holder img{
+	width: 100%;
+	height: 100%;
+}
+.doctor_profile_sec .doc_detail{
+	float: left;
+}
+.book_appoin{
+	text-align: right;
+}
+.book_appoin button{
+    background-color: #00a3c8;
+    padding: 7px 15px;
+    border-radius: 4px;
+    border: 1px solid #00a3c8;
+    color: #fff;
+	font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    margin-top: 65px;
+    cursor: pointer;
+}
+.doc_desc b{ 
+	color: #000;
+}
+.doc_desc{
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    padding: 50px 0px 0px;
+    color: #666;
+}
+.doc_tabing{
+	padding: 50px 0px;
+	background-color: #fafafa;
+}
+.doc_tabing .tab-content{
+	padding: 30px 0px;
+}
+.nav-tabs .nav-link {
+    color: #000;
+    border-radius: 0px;
+    border: 2px #000 solid;
+    margin: 0px 20px 0px 0px;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    padding: 6px 25px;
+}
+.nav-tabs{
+	border: 0px;
+}
+
+.nav-tabs .nav-link:hover {
+    border: 2px #00a3c8 solid;	
+    background-color: #00a3c8;
+    color: #fff;
+}
+.nav-tabs .nav-link.active{
+	color: #fff;
+    background-color: #fff;
+    border: 2px solid #00a3c8;
+    background-color: #00a3c8;
+    font-family: "Roboto";
+    font-weight: 700;
+    font-style: normal;
+}
+.addres_panel {
+	float: left;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    color: #666;
+}
+.addres_panel b{
+	color: #000;
+}
+.addres_panel address{
+	margin-bottom: 0px;
+	padding-bottom: 10px;
+}
+.addres_panel .landmark{
+	padding-bottom: 10px;
+}
+.city{
+	padding-bottom: 10px;
+}
+.disco_fee{
+	float: right;
+	font-size: 18px;
+}
+.timing_sec ul {
+	padding-left: 0px;
+}
+.timing_sec h4{
+	font-weight: 700;
+}
+.timing_sec b{
+	color: #000;
+}
+.timing_sec ul li{
+	list-style: none;
+	color: #666;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+}
+.timing_sec .general_time{
+	float: left;
+	width: 50%;
+}
+
+.timing_sec{
+	padding-top: 40px;
+}
+.timing_sec .home_time{
+	float: left;
+	width: 50%;
+}
+.service_panel h4{
+	font-weight: 700;
+}
+.service_panel ul{
+	padding-left: 40px;
+    margin-bottom: 1rem;	
+}
+.service_panel ul li{
+	color: #666;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    list-style: disc;
+}
+.certificate_img ul{
+	padding-left: 0px;
+}
+.certificate_img ul li{
+	list-style: none;
+	display: inline-block;
+}
+.certificate_img ul li{
+	width: 120px;
+    height: 100px;
+    margin-right: 15px;
+}
+.certificate_img ul li img{
+	width: 100%;
+	height: 100%;
+}
+/**/
+.patient_reviews{
+	background-color: #fff;
+    padding: 20px 20px;
+    box-shadow: 1.5px 2.598px 10px 0px #d8d8d8;
+    margin-bottom: 40px;
+}
+.patient_name{
+	font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #666;
+    float: left;
+}
+.patient_name i{
+	padding-right: 10px;
+}
+.monthago{
+	float: right;
+	color: #666;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+}
+.patient_reviews h2{
+	font-family: "Roboto";
+    font-weight: 700;
+    font-style: normal;
+    padding-left: 50px;
+    padding-top: 10px;    
+    font-size: 26px;
+}
+.recom{
+	padding: 20px 0px;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+}
+.recom i{
+	padding-right: 10px;
+}
+.satis{
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;	
+}
+.secmsg{
+	padding: 10px 0px 10px 50px;
+}
+.last_rew_line{
+	padding-left: 50px;
+}
+.thnks_div{
+	float: left;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    padding-right: 15px;
+}
+.rew_star{
+	float: left;
+}
+.rew_star ul li{
+	list-style: none;
+	display: inline-block;
+	padding-right: 5px;
+}
+.rew_amonthago{
+	float: right;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+.sub_rew_btn{
+	text-align: right;
+}
+.sub_rew_btn button{
+	background-color: #00a3c8;
+    padding: 7px 15px;
+    border-radius: 4px;
+    border: 1px solid #00a3c8;
+    color: #fff;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    cursor: pointer;
+}
+.show_all{
+	background-color: #fff;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    color: #000;
+    margin-top: 30px;
+    padding: 15px 15px;
+    border: 2px #00a3c8 solid;
+    font-size: 18px;
+    cursor: pointer;
+}
+.show_all a{
+	color: #000;
+}
+.show_all a:hover{
+	text-decoration:none;
+}
+/**/
+.que_ask{
+	font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    color: #666;
+    float: left;
+}
+.que_ask b{
+	color: #000;
+}
+.que_ask_right{
+	float: right;
+	font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+}
+.ans_div{
+	font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    color: #666;
+    padding: 10px 0px;
+}
+.ans_div b{
+	color: #000;
+}
+.ans_div  a{
+	padding-left: 15px;
+}
+.helpful{
+	float: left;
+	font-family: "Roboto";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+}
+.help_last_panel ul{
+	float: left;
+}
+.help_last_panel ul li{
+	list-style: none;
+	display: inline-block;
+	padding-right: 20px;
+}
+.doc_tabing .tab-pane.active{
+	border: 0px !important;
+	background-color: #fafafa;
+}
+.ask_qes_popup form label{
+	font-family: "Roboto";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+}
+.ask_qes_popup form  textarea{
+	font-size: 16px;
+	padding: 10px 10px;
+	height: 150px;
+}
+.ask_qes_popup form button{
+    background-color: #00a3c8;
+    padding: 6px 25px;
+    border-radius: 4px;
+    border: 1px solid #00a3c8;
+    color: #fff;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    cursor: pointer;
+    margin: 10px 15px;
+}
+.ask_qes_popup .modal-header{
+	border: 0px;
+	padding-bottom: 0px;
+}
+.ask_qes_popup  .modal-body{
+	padding-top: 0px;
+}
+.ask_qes_popup  form ul{
+	padding-left: 0px;
+	margin-bottom: 0px;
+}
+.ask_qes_popup  form ul li{
+	list-style: none;
+	display: inline-block;
+}
+.ask_qes_popup form table{
+	width: 100%;
+}
+.ask_qes_popup form table tr .firsttd{
+	font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    width: 26%;
+}
+.ask_qes_popup .modal-dialog{
+    max-width: 550px; 
+}
+.review_popup .modal-dialog{
+    max-width: 600px;
+}
+.about_hospital address b{
+    font-size: 20px;
+}
+.about_hospital_pro p{
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    color: #666;
+}
+.about_hospital_pro h5{
+    font-family: "Roboto";
+    font-weight: 700;
+    font-style: normal;
+    margin-bottom: 0px;
+    padding-top: 20px; 
+}
+.about_hospital_pro p{
+    margin-bottom: 0px;
+}
+.hos_lanmark b{
+    color: #000;
+}
+.hos_lanmark {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    color: #666;
+}
+.hos_timig{
+    float: left;
+}
+.hos_photo {
+    float: right;
+}
+.hos_photo ul li{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+.hos_photo ul li img{
+    width: 100%;
+    height: 100%;
+}
+.mode_payment ul li{
+    display: inline-block;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #666;
+    border-right: 1px #666 solid; 
+    padding: 0px 10px 0px 0px;
+}
+.mode_payment ul li:last-child{
+    border-right: 0px;
+}
+.mode_payment ul{
+    padding-left: 0px;
+}
+.spec_second_sec{
+    padding: 30px 0px;
+}
+.spec_tab .spec_first_sec h4{
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 10px;
+}
+.spec_tab .spec_first_sec select{
+    width: 40%;
+    padding: 8px 10px;
+    border-radius: 3px;
+    color: #666;
+    font-size: 16px;
+}
+.spec_second_sec .doc_photo{
+    width: 120px;
+    height: 110px;
+}
+.spec_second_sec .doc_photo {
+    float: left;
+}
+.spec_second_sec .doc_photo img{ 
+    width: 100%;
+    height: 100%;
+}
+.spec_second_sec .sec_doc_detal{
+    float: left;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+.spec_second_sec .sec_doc_detal ul li{
+    list-style: none;
+    padding-left: 20px;
+    padding-bottom: 3px;
+}
+.spec_second_sec .doc_book_appo{
+    float: right;
+}
+.doc_book_appo button{
+    background-color: #00a3c8;
+    padding: 7px 15px;
+    border-radius: 4px;
+    border: 1px solid #00a3c8;
+    color: #fff;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    margin-top: 28px;
+    cursor: pointer;
+}
+.hos_services ul li{
+    display: inline-block;
+    list-style: none;
+    padding: 6px 10px;
+    width: 40%;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    color: #666;
+}
+.hos_services ul li i{ 
+    color: #00a3c8;
+    padding-right: 10px;
+}
+.forth_tab .spec_second_sec{
+    background-color: #fff; 
+    padding: 15px;
+    margin-bottom: 30px;
+}
+.more_doc{
+    background-color: #00a3c8;
+    padding: 7px 15px;
+    border-radius: 4px;
+    border: 1px solid #00a3c8;
+    color: #fff;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-style: normal;
+    cursor: pointer;
+    text-transform: uppercase;
+    float: right;
+}
+.more_doc a{
+    color: #fff;
+}
+
+.timing_photo{
+    padding: 30px 0px;
+}
+.facility_sec{
+    padding: 30px 0px;
+}
+.disco_fee b{
+    font-weight: 700;
+}
+.facility_sec b{
+   font-weight: 700; 
+} 

@@ -54,7 +54,7 @@ body {
 .wide-90 { padding-top: 100px; padding-bottom: 90px; }
 .wide-80 { padding-top: 100px; padding-bottom: 80px; }
 .wide-70 { padding-top: 100px; padding-bottom: 70px; }
-.wide-60 { padding-top: 100px; padding-bottom: 60px; }
+.wide-60 { padding-top: 50px; padding-bottom: 60px; }
 .wide-50 { padding-top: 100px; padding-bottom: 50px; }
 .wide-40 { padding-top: 100px; padding-bottom: 40px; }
 .wide-30 { padding-top: 100px; padding-bottom: 30px; }
@@ -5791,6 +5791,7 @@ ul.category-ul-li li
     border: 1px solid lightsteelblue;
     background-color: #f8f8f8;;
     padding: 10px;
+    padding-top:30px;
 }
 .blog-page-pagination
 {
@@ -5934,4 +5935,11 @@ ul.dot li
 }
 .input-group-addon {
   margin: 10px;
+}
+.text-underline
+{
+  text-decoration: underline;
+}
+ul.filter-ul-li li {
+  padding-right: 32px;
 }

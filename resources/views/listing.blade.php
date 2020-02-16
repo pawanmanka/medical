@@ -12,12 +12,13 @@
 
                    @include('_search_form')
                     <div class="container">
-                        <div class="row pt-20 mar-0">
+                        <div class="row pt-30 mar-0">
                         <form id="filter_form_ele">
                             <ul class="filter-ul-li">
                                 @foreach ($filterParams as $key => $item)
                                     <input type="hidden" name="{{$key}}" value="{{$item}}">
                                 @endforeach
+                                <li><h4>Filter By :</h4></li>
                                 @if(isset($roles[config('application.doctor_role')]))
                                 <li>{!! selectBox('gender',config('application.genderArr'),isset($search['gender'])?$search['gender']:'',array('class'=>'form-control filterElement'),'Select Gender') !!}</li>
                                 <li>{!! selectBox('experience',config('application.experienceArr'),isset($search['experience'])?$search['experience']:'',array('class'=>'form-control filterElement'),'Select Experience') !!}</li>
@@ -36,95 +37,88 @@
                             </ul>
                             </form>
                         </div>
-                        <div class="row pt-20">
-    
-    
-                            <!-- SERVICE CONTENT -->
-                             <div class="col-lg-8">
-                                 <div class="s2-page pr-30 mb-40">
-                                     <!-- Title -->
-                                    <h3 class="h3-md blue-color">{{ $title }}</h3>
-                                </div>
-                                <div class="row">
-                                   @if($paging->total() > 0)
-                                    @foreach ($result as $item)
-                                        @include('list_item')
-                                    @endforeach
-                                    @else
-                                      No Result Found
-                                    @endif
-                                </div>
-                            <div class="row">
-                                <div class="blog-page-pagination b-top">
-                                    <nav aria-label="Page navigation">
-                                            {!! $paging->appends($_GET)->links() !!}
-                                     </nav>					
-                                </div>
-                            </div>
-                                    
-                             </div>	<!-- END SERVICE CONTENT --> 	
-        
-    
-                             <!-- SIDEBAR -->
-                            <aside id="sidebar" class="col-lg-4">
-                                
-                                <div class="blog-categories sidebar-div mb-50">
-                                        
-                                    <!-- Title -->
-                                    <h5 class="h5-sm steelblue-color">Categories</h5>
-    
-                                    <ul class="blog-category-list clearfix">
-                                        @foreach (topCategory() as $item)
-                                        <li><a href="{{url($item->super_categories_slug.'?type='.$item->super_category_id.'&category='.$item->slug)}}"><i class="fas fa-angle-double-right blue-color"></i>{{$item->name}}</a> <span>({{$item->get_user_count}})</span></li>
-                                        @endforeach
-                                    </ul>
-    
-                                </div>
-    
-    
-    
-                                <!-- TEXT WIDGET -->						
-                                <div id="txt-widget" class="sidebar-div mb-50">
-                                            
-                                    <!-- Title -->
-                                    <h5 class="h5-sm steelblue-color">Top Rated Doctor</h5>
-    
-                                    <!-- Head of Clinic -->
-                                    @foreach (topRateDoctor() as $item)
-                                    <div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
-                                    
-                                        <!-- Avatar -->
-                                        <div class="txt-widget-avatar">
-                                            <img src="{{isset($item->getUserInformation->profile_pic)?$item->getUserInformation->profile_pic:''}}" alt="{{$item->name}}">	
-
-                                        </div>
-    
-                                        <!-- Data -->
-                                        <div class="txt-widget-data">
-                                            <h5 class="h5-md steelblue-color">{{$item->name}}</h5>	
-                                            <span >{{isset($item->getUserInformation->category_name)?$item->getUserInformation->category_name:''}}</span>
-
-                                            {!!ratingView($item->avg_rating)!!}
-                                        </div>
-    
-                                    </div>	<!-- End Head of Clinic -->	
-                                    @endforeach
-                                    <!-- Button -->
-                                    <a href="{{url('/doctors')}}" class="btn btn-blue blue-hover">Learn More</a>
-                                                                            
-                                </div>	<!-- END TEXT WIDGET -->
-    
-                                
-    
-    
-                            </aside>   <!-- END SIDEBAR -->	
-    
-    
-                         </div>  <!-- End row -->	
+                       
                     </div>	<!-- End container -->	
                 </div>	<!-- END SERVICE DETAILS -->
-     
+<section class="thred-panel">
+<div class="container">
+        <div class="row pt-20">
+            
+            
+            <!-- SERVICE CONTENT -->
+            <div class=" col-xs-7 col-sm-7 col-md-7 col-lg-8 left-panel">
+                <div class="s2-page pr-30 mb-40">          
+                    <h2 >{{ $title }} Near You</h2>
+                </div>
+                <div class="row">
+                @if($paging->total() > 0)
+                    @foreach ($result as $item)
+                        @include('list_item')
+                    @endforeach
+                    @else
+                    No Result Found
+                    @endif
+                </div>
+            <div class="row">
+                <div class="blog-page-pagination b-top">
+                    <nav aria-label="Page navigation">
+                            {!! $paging->appends($_GET)->links() !!}
+                    </nav>					
+                </div>
+            </div>
+                    
+            </div>	<!-- END SERVICE CONTENT --> 	
 
+
+            <!-- SIDEBAR -->
+            <aside id="sidebar" class="col-lg-4">
+            <div class="right-panel">
+               <h3>Categories</h3>
+               <ul class="pl-0 mb-0 right-panel-cat">
+               @foreach (topCategory() as $item)
+                        <li><a href="{{url($item->super_categories_slug.'?type='.$item->super_category_id.'&category='.$item->slug)}}"><i class="fa fa-angle-double-right"></i>{{$item->name}}</a> <span>({{$item->get_user_count}})</span></li>
+                 @endforeach
+               </ul>
+               
+            </div>
+            <div class="pt-20">
+                <div class="right-panel">
+                <h3>Top Rated Doctor</h3>
+                <!-- Head of Clinic -->
+                @foreach (topRateDoctor() as $item)
+                    <div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
+                    
+                        <!-- Avatar -->
+                        <div class="txt-widget-avatar">
+                            <img src="{{isset($item->getUserInformation->profile_pic)?$item->getUserInformation->profile_pic:''}}" alt="{{$item->name}}">	
+
+                        </div>
+                      
+                        <div class="doctor_text_holder">
+                                <h5 class="mb-0">{{$item->name}}</h5>
+                                <p>{{isset($item->getUserInformation->category_name)?$item->getUserInformation->category_name:''}}</p>
+                                <p>10 Year Experience</p>
+                                {!!ratingView($item->avg_rating)!!}
+                            </div>
+                      
+
+                    </div>	<!-- End Head of Clinic -->	
+                    @endforeach
+                    <!-- Button -->
+                   
+                </div>
+            </div>
+                
+
+                
+
+
+            </aside>   <!-- END SIDEBAR -->	
+
+
+        </div>  <!-- End row -->	
+</div>
+</section>
 @endsection
 
 @section('customScript')

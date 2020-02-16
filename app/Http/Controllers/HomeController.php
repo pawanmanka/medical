@@ -71,6 +71,7 @@ class HomeController extends Controller
     {   
         $this->data['title'] = 'Doctors';
         $this->_getListData(array(config('application.doctor_role')));
+       
         return view('listing',$this->data);
     }
     public function hospitals()
