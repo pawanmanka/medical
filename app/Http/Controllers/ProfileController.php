@@ -227,7 +227,8 @@ class ProfileController extends Controller{
     {
         
        $rules =  [
-        'category' => ['required','numeric'],
+        'category' => ['required'],
+        'category.*' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
         'location' => ['required','string'],
         'email' => ['required', 'string','max:255']
@@ -254,10 +255,14 @@ class ProfileController extends Controller{
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
 
+             //getLabCategory
+             $userObj->getLabCategory()->sync($request->category);
+             // user information
+ 
             // user information
 
             $userInformationObj = UserInformation::where('user_id',$userObj->id)->first();
-            $userInformationObj->category = $request->category;
+           // $userInformationObj->category = $request->category;
             $userInformationObj->practice_since = $request->practice_since;
             $userInformationObj->address = $request->location;
             $userInformationObj->user_id = $userObj->id;

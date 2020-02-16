@@ -312,9 +312,10 @@ class RegisterController extends Controller{
 
     public function labSave(Request $request)
     {
-        
+     
        $rules =  [
-        'category' => ['required','numeric'],
+        'category' => ['required'],
+        'category.*' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
         'location' => ['required','string'],
         'contact_number' => ['required', 'string','max:255', 'unique:users'],
@@ -333,7 +334,7 @@ class RegisterController extends Controller{
             return back()->withInput(); 
         }
         else{
-
+          //  dd($request->all());
           
             $userObj = new User();
 
@@ -353,10 +354,12 @@ class RegisterController extends Controller{
             $userObj->slug = str_slug($userObj->name)."-$userObj->id" ;
             $userObj->save();
 
+            //getLabCategory
+            $userObj->getLabCategory()->sync($request->category);
             // user information
 
             $userInformationObj = new UserInformation();
-            $userInformationObj->category = $request->category;
+           // $userInformationObj->category = $request->category;
             $userInformationObj->practice_since = $request->practice_since;
             $userInformationObj->address = $request->location;
             $userInformationObj->user_id = $userObj->id;

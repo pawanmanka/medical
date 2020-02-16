@@ -8,9 +8,9 @@
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">
                            <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
-                           <li>MBBS, Gynecologist</li>
-                           <li>12 Year Experience</li>
-                           <li>Patient Receive (10)</li>
+                          <li>{{$item->getUserInformation->doctor_education}}</li>
+                           <li>{{ $item->getUserInformation->experience }} Experience</li>
+                           <li>Patient Receive ({{$item->get_appointment_count_count}})</li>
                            <li>{!!ratingView($item->avg_rating)!!}</li>
                         </ul>
                      </div>
@@ -18,7 +18,7 @@
                      <div class="buttons">
                         <ul class="pl-0 mb-0">
                            <li><a href="{{ $item->detail_url }}" class="">View Profile</a></li>
-                           <li><a href="{{ $item->detail_url }}">Book an appointment</a></li>
+                           <li><a href="{{ url('/booking/'.$item->slug) }}">Book an appointment</a></li>
                         </ul>
                      </div>
                   </div>
@@ -61,8 +61,8 @@
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">
                            <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
-                           <li>MBBS, Gynecologist</li>
-                           <li>12 Year Experience</li>
+                           <li>{{$item->getUserInformation->doctor_education}}</li>
+                           <li>{{ $item->getUserInformation->experience }} Experience</li>
                            <li><b>Timing - </b>Mon - Sun ( 9 AM - 9 PM ) <i class="fa fa-map-marker"></i></li>
                         </ul>
                      </div>
