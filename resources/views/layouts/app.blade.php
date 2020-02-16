@@ -49,7 +49,7 @@
 		<link href="{{ baseUrl('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 		<!-- TEMPLATE CSS -->
 		<link href="{{ baseUrl('css/style.css')}}" rel="stylesheet">
-		
+		<link rel="stylesheet" type="text/css" href="{{ baseUrl('css/mystyle.css')}}">
 		<!-- RESPONSIVE CSS -->
 		<link href="{{ baseUrl('css/responsive.css')}}" rel="stylesheet"> 
 

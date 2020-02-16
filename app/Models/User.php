@@ -72,7 +72,15 @@ class User extends Authenticatable implements JWTSubject
     public function getUserInformation(){
         return $this->hasOne(UserInformation::class,'user_id');
     }
+    public function getLabCategory(){
+        return $this->belongsToMany(Category::class,'lab_categories','user_id','category_id');
 
+    }
+
+    public function getAppointmentCount(){
+        return $this->hasMany(Appointment::class,'user_id','id')
+        ->where(\DB::Raw('DATE(date)'),\DB::Raw('NOW()'));
+    }
     public function getUserRating(){
         return $this->hasMany(Review::class,'user_id','id');
     }

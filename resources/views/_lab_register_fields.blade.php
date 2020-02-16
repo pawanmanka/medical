@@ -1,7 +1,11 @@
  <!-- Contact Form Input -->
- <div  class="col-md-12" >
-        {!! selectBox('category',isset($categories)?$categories:array(),old('category',isset($record)?$record->getUserInformation->category:null),array('class'=>'form-control required','id'=>'category_id'),'Select Service') !!}  	 
+ <div  class="col-md-12" style="margin-bottom: 20px" >
+        {!! selectBox('category',isset($categories)?$categories:array()
+        ,old('category',isset($record)?$record->getLabCategory()->pluck('catagories.id','catagories.id')->toArray():null),
+        array('class'=>'form-control chosen-select required'
+        ,'multiple'=>'multiple'),'Select Service') !!}  	 
 </div>  
+<br>
 <div  class="col-md-12">
     <input type="text" name="name" class="form-control required " value="{{old('name',isset($record)?$record->name:'')}}" placeholder="Full Name*"  > 
 </div>
@@ -37,9 +41,20 @@
     <div class="col-md-12 ">
             <div class="form-check">
                     <input class="form-check-input required"  name="term_and_condition" type="checkbox" value="1" id="term_and_condition">
-                    <label class="form-check-label" for="term_and_condition"><a target="_blank" href="{{config('application.doctor_term_and_condition_url')}}">Terms and condition</a></label>
+                    <label class="form-check-label" for="term_and_condition">I accept the<a target="_blank" class="text-underline" href="{{config('application.doctor_term_and_condition_url')}}">Terms and condition</a></label>
                     <span class="handleError"></span>
             </div>
     </div> 
 </div>
 @endif 
+@section('customScript')
+@parent;
+<link rel="stylesheet" href="{{baseUrl('plugins/chosen/chosen.css')}}">
+ 
+<script src="{{ baseUrl('plugins/chosen/chosen.jquery.js') }}"></script>
+<script>
+    jQuery(document).ready(function(){
+        jQuery('.chosen-select').chosen({width: "100%"});
+    })
+</script>
+@endsection

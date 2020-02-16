@@ -29,7 +29,7 @@
 				                     @csrf                       
 					                <!-- Contact Form Input -->
 					                <div id="input-name" class="col-md-12">
-					                	<input type="text" name="username" class="form-control required" placeholder="username*" autocomplete="off"  required> 
+					                	<input type="text" name="username" class="form-control required" placeholder="Mobile No.*" autocomplete="off"  required> 
 			
 									</div>
 					                        

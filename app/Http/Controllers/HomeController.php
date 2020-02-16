@@ -69,6 +69,7 @@ class HomeController extends Controller
     {   
         $this->data['title'] = 'Doctors';
         $this->_getListData(array(config('application.doctor_role')));
+       
         return view('listing',$this->data);
     }
     public function hospitals()
@@ -116,13 +117,17 @@ class HomeController extends Controller
        $userObj = User::selectRaw( $haversine)->whereHas('roles',function($query) use($roles){
          $query->whereIn('name',$roles);
        })
-       ->when(!empty($search),function($query) use($search){
-            $query->whereHas('getUserInformation',function($query) use($search){
+       ->when(!empty($search),function($query) use($search,$request){
+            $query->whereHas('getUserInformation',function($query) use($search,$request){
                if(isset($search['categoryId'])){
                   $categoryId= $search['categoryId'];
-                  $query->where(function($categoryWhere) use($categoryId){
-                     $categoryWhere->where('category',$categoryId)->whereOr('subcategory',$categoryId);
-                  });
+                  if($request->type != 3){
+                   
+                     $query->where(function($categoryWhere) use($categoryId){
+                        $categoryWhere->where('category',$categoryId)->whereOr('subcategory',$categoryId);
+                     });
+                  }
+                
                }
                if(isset($search['price'])){
                   $price= $search['price'];
@@ -139,9 +144,18 @@ class HomeController extends Controller
                   $year = date('Y') - $experience;
                   $query->where('practice_since','<=',$year);
                }
+            })->when(!empty($search),function($query) use($request,$search){
+               $categoryId= $search['categoryId'];
+               if($request->type == 3){
+                
+                  $query->whereHas('getLabCategory',function($q) use($categoryId){
+                     $q->where('catagories.id',$categoryId);  
+                });
+               }
             });   
        })
        ->with('getUserInformation')
+       ->withCount('getAppointmentCount')
        ->whereNotNull('mobile_verified_at')
        ->where('status',0)
        ->when(!empty($request->gender),function($query) use($request){

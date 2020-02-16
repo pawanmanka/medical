@@ -33,6 +33,10 @@ class UserInformation extends Model
     {
       return $this->belongsToMany(Amenities::class,'user_amenities','user_id','amenitie_id');
     }
+    public function getLabCategory(){
+      return $this->belongsToMany(Category::class,'lab_categories','user_id','category_id');
+
+  }
     public function getCategoryNameAttribute()
     {
       $category = $this->category()->first();
