@@ -10,7 +10,7 @@
             
         <div class="row">
             <!-- CONTACT FORM -->	
-             <div class="col-md-10 col-lg-10  mt-50">
+             <div class="col-md-10 col-lg-10  mt-20">
                  <div class="form-holder mb-40">
                         @include('flash::message')
                      <form  method="POST" id="profile_form" enctype="multipart/form-data" class="form-horizontal">

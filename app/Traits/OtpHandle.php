@@ -41,6 +41,8 @@ trait OtpHandle{
         $OtpObj->save();
                 
        $this->_sendSms($OtpObj->mobile,$message.$token);
+
+    
        
     }
 

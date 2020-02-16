@@ -975,7 +975,7 @@ span.id-color {
 }
 
 #header-2 .wsmainfull.cloned .desktoplogo {
-  padding: 16px 0px 0px 0px;
+  /* padding: 16px 0px 0px 0px; */
   display: block;
 }
 
@@ -5918,5 +5918,20 @@ display: inline-flex;
   color: #f9e431;
 }
 
+.headertopright a{
+  color:#0e8eab;
+  font-weight: bold;
+}
+section.tabs-section {
+  display: contents;
+}
+ul.dot li
+{
 
+    list-style: outside;
+    margin-left: 16px;
 
+}
+.input-group-addon {
+  margin: 10px;
+}

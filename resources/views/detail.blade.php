@@ -13,7 +13,7 @@
 
 
 						<!-- DOCTOR PHOTO -->
-						<div class="col-xs-12 col-md-3 col-xl-3">
+						<div class="col-xs-12 col-md-2 col-xl-2">
 			 				<div class="doctor-photo mb-30 text-center">
 
 			 					<!-- Photo -->	
@@ -26,7 +26,7 @@
 
 
 			 			<!-- DOCTOR'S BIO -->
-						<div class="col-xs-12 col-md-9 col-xl-9 ">
+						<div class="col-xs-12 col-md-10 col-xl-10 ">
 							<div class="doctor-bio">
 
 								<!-- Name -->	
@@ -38,11 +38,11 @@
 								@endhasanyrole	
 								@endif
 							</div>
-								 <h2 class="h2-sm blue-color">{{ $record->name }} 
+								 <h4 class="h2-sm blue-color">{{ $record->name }} 
 									@if(!empty($record->gender_title))
 								       ({{$record->gender_title}})	 
 								   @endif
-								</h2>
+								</h4>
 
 			 					<h5 class="h5-lg blue-color">
 								    @if ($record->role_name  == config('application.doctor_role'))
@@ -53,10 +53,11 @@
 									Services
 									@endif
 									
-								</h5>
+								</h5>	
+								
 								 
 								 {!!ratingView($record->avg_rating)!!}
-	
+						
 			 					<!-- Text -->	
 						   		<p>{{$record->meta_description}}</p>
 							</div>
@@ -142,12 +143,20 @@
 													<p>{{$userInformation->meta_description}}</p>
 													<br>
 													@endif 
-													<strong>Address </strong> 
+													<strong>AddreAddress </strong> 
 														<p>{{$userInformation->address}}</p>
 												</div>
+											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
 														@if ($record->role_name  == config('application.doctor_role'))
-														Discounted Fee <p>{{$userInformation->discounted_fee}}</p>
+														 Fee 
+														 <p>
+														 @if(auth()->id() == null)
+															 {{$userInformation->actual_fee}}
+														@else
+														<del> {{$userInformation->actual_fee}}</del> {{$userInformation->actual_fee-$userInformation->discounted_fee}}
+														@endif	
+															</p>
 													 @elseif($record->role_name  == config('application.hospital_role'))
 													 Establish in {{$userInformation->practice_since}}
 													 @elseif($record->role_name  == config('application.lab_role'))
@@ -160,7 +169,7 @@
 									   <br>
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
-														Work in Hospital - {{$userInformation->hospital}}
+												<strong>	Work in Hospital</strong> - {{$userInformation->hospital}}
 												</div>
 											
 										</div>
@@ -170,8 +179,8 @@
 									   <br>
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
-														Education : - 
-														<ul>
+												<strong>Education : </strong> 
+														<ul class="dot">
 															@foreach (explode("|",$userInformation->doctor_education) as $item)
 															  <li>{{$item}}</li>	
 															@endforeach
@@ -185,8 +194,8 @@
 									   <br>
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
-													Specializations :<br>
-													<ul>
+												<strong>Specializations :</strong><br>
+													<ul class="dot">
 													@foreach (explode("|",$userInformation->specializations) as $item)
 													  <li>{{$item}}</li>	
 													@endforeach
@@ -200,8 +209,8 @@
 									   <br>
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
-													Services :<br>
-													<ul>
+												<strong>Services :</strong><br>
+													<ul class="dot">
 													@foreach (explode("|",$userInformation->services) as $item)
 													  <li>{{$item}}</li>	
 													@endforeach
