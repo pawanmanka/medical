@@ -354,9 +354,11 @@
 	
 										@endforeach
 									</div>
+									@hasanyrole(config('application.wallet_add_roles'))
 									<div class="row mar-0">
 										<a href="#"  class="btn btn-sm btn-blue blue-hover" id="reviewForm">Submit Review</a>
 									</div>
+									@endhasanyrole
 								</div>	<!-- END TAB-2 CONTENT -->
 							<!-- Button trigger modal -->
 							@if($record->role_name  == config('application.hospital_role'))
@@ -408,9 +410,11 @@
 										</div>
 									</div>
 									@endforeach
+									@hasanyrole(config('application.wallet_add_roles'))
 									<div class="row mar-0">
 										<a href="#" class="btn btn-sm btn-blue blue-hover" data-toggle="modal" data-target="#questionFormModal">Ask Free Question</a>
 									</div>
+									@endhasanyrole
 								</div>	<!-- END TAB-2 CONTENT -->
 							<!-- Button trigger modal -->
 
