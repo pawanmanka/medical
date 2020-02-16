@@ -10,6 +10,11 @@ RegisterFn.prototype.init = function(){
 RegisterFn.prototype.bindElement = function(){
     var self = this;
     App.validFileType(jQuery('#profile_image'));
+    jQuery('#term_and_condition').change(function(){
+        if(jQuery(this).is(':checked')){
+                 jQuery('.handleError').html('');
+        }
+    });
 }
 RegisterFn.prototype.categorySubCategory = function(categoryArr,id){
     var self = this;
@@ -44,13 +49,19 @@ RegisterFn.prototype.handleForm = function(){
         },
 
         success: function (label) {
+         //   jQuery('.handleError').html('');
             label.closest('.form-group').removeClass('has-error');
             label.remove();
         },
 
         errorPlacement: function (error, element) {
             //error.insertAfter(element.closest('.input-icon'));
-        	error.insertAfter(element);
+            if(element.closest('#term_and_condition').length >0){
+                jQuery('.handleError').html('<br><label class="error">Please accept Term and condition</label>');
+
+            }else{
+                error.insertAfter(element);
+            }
         },
 
         submitHandler: function (form) {
