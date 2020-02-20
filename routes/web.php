@@ -126,6 +126,10 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
         Route::post('/booking/{slug}/get-slots','BookingController@getSlots');
         Route::post('/booking/{slug}/{item}','BookingController@save');
         Route::post('/wallet/add-money','WalletController@addMoney');
+
+                
+        Route::post('/saveReview', 'HomeController@createReview');
+        Route::post('/saveQuestion', 'HomeController@createQuestion');
     });
 
     Route::get('/my-wallet','WalletController@index');
@@ -144,9 +148,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
         Route::get('/my-qa/grid','ProfileController@MyQAGrid');
         Route::post('/my-qa/statusChange','ProfileController@MyQuestionStatusChange');
         Route::post('/saveAnswer','ProfileController@saveAnswer');
-        
-        Route::post('/saveReview', 'HomeController@createReview');
-        Route::post('/saveQuestion', 'HomeController@createQuestion');
+
 
         Route::get('/appointment/cancel/{code}','AppointmentController@cancel');  
     });
