@@ -136,13 +136,10 @@
 													<p>{{$userInformation->meta_description}}</p>
 													<br>
 													@endif 
-<<<<<<< HEAD
-													<strong>Address </strong> 
-														<p>{{$userInformation->address}}</p>
-=======
+
 													<h5 class="h5-md ">Address :</h5> 
 														<p>{{$userInformation->address}} <i class="fa fa-map-marker"></i></p>
->>>>>>> 7f3a9985d5769d297525d8c370a78fec43d08f07
+
 												</div>
 											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
