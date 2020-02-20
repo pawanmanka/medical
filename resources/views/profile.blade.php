@@ -13,7 +13,7 @@
              <div class="col-md-6 col-lg-6 offset-lg-3 col-md-offset-5 mt-50">
                  <div class="form-holder mb-40">
                         @include('flash::message')
-                     <form  method="POST" id="profile_form" class="row contact-form">
+                     <form  method="POST" enctype="multipart/form-data" id="profile_form" class="row contact-form">
                         @csrf                        
                         @role(config('application.patient_role'))
                         @include('_patient_register_fields') 
