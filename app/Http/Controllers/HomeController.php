@@ -145,7 +145,7 @@ class HomeController extends Controller
                   $query->where('practice_since','<=',$year);
                }
             })->when(!empty($search),function($query) use($request,$search){
-               $categoryId= $search['categoryId'];
+               $categoryId= isset($search['categoryId'])?$search['categoryId']:999999;
                if($request->type == 3){
                 
                   $query->whereHas('getLabCategory',function($q) use($categoryId){
