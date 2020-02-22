@@ -126,6 +126,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
         Route::post('/booking/{slug}/get-slots','BookingController@getSlots');
         Route::post('/booking/{slug}/{item}','BookingController@save');
         Route::post('/wallet/add-money','WalletController@addMoney');
+        Route::post('/wallet/pay-success','WalletController@paySuccess');
 
                 
         Route::post('/saveReview', 'HomeController@createReview');

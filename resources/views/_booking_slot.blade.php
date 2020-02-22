@@ -1,5 +1,5 @@
 <div class="col-md-4">
-    <div class="sbox-7 icon-xs ">
+    <div class="sbox-7 icon-xs {{$status_class}}">
         
             <div class="sbox-7-txt" id="slot_item_{{$index}}">
                 <input type="hidden" id="availability_{{$index}}" name="availability[{{$index}}]"  value="{{$index}}">

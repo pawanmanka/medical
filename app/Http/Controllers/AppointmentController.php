@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use App\Models\ProductItem;
 use App\Traits\DatatableGrid;
 use App\Traits\OtpHandle;
 use Illuminate\Http\Request;
@@ -104,6 +105,9 @@ class AppointmentController extends Controller
     $query->status = Appointment::$STATUS_CANCEL;
     $query->save();
     $this->sendSms($query->patient_contact_number,config('application.cancel_booking_patient_sms_content'));
+    $productDetail = ProductItem::where('code',$query->code)->first();
+    $productDetail->status = 2;
+    $productDetail->save();
     flash('Appointment  Canceled')->success()->important();
     return back();
 
