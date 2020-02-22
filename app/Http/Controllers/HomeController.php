@@ -21,6 +21,7 @@ class HomeController extends Controller
     public function __construct()
     {
        $this->data = array();
+       
        // $this->middleware('auth');
     }
 
@@ -210,7 +211,7 @@ class HomeController extends Controller
        $this->data['record'] = $userObj;
        $this->data['userInformation'] = $userObj->getUserInformation;
        $this->data['userCertificate'] = $userObj->getUserCertificate;
-    
+  
        return view('detail',$this->data);
     }
 

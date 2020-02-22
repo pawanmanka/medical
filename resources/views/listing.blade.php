@@ -47,7 +47,7 @@
             
             <!-- SERVICE CONTENT -->
             <div class=" col-xs-7 col-sm-7 col-md-7 col-lg-8 left-panel">
-                <div class="s2-page pr-30 mb-40">          
+                <div class="s2-page pr-30 mb-20">          
                     <h2 >{{ $title }} Near You</h2>
                 </div>
                 <div class="row">

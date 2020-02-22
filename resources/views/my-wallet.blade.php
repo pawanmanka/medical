@@ -14,7 +14,7 @@
                             <div class="mt-20">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <h4>My wallet amount – {{$amount}}</h4>
+                                        <h4>My wallet Balance ( {{$amount}} )</h4>
                                     </div>
                                     <div class="col-lg-6 text-right">
                                         @hasanyrole(config('application.extra_info_roles'))
@@ -26,7 +26,7 @@
                             <div class="mt-20">
                                  <h4>My last Payment receive statement</h4>
                                 <div class="">
-                                    <div class="row">
+                                    <div class="row mb-20">
                                          <div class="col-lg-6"></div>
                                          <div class="col-lg-6 text-right">
                                             @hasanyrole(config('application.wallet_add_roles')) 

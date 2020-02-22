@@ -33,7 +33,7 @@
                                 </div>            
 
                                 <div class="col-lg-12 mt-15 form-btn">  
-                                    <button type="submit" class="btn btn-blue blue-hover">Ssave</button> 
+                                    <button type="submit" class="btn btn-blue blue-hover">Save</button> 
                                 </div>                         
                                 </form> 
                             </div>

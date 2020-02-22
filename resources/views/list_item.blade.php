@@ -2,12 +2,12 @@
     <div class="col-12">
                <div class="box-one">
                <div class="txt-widget-avatar">
-                 <img src="{{$item->getUserInformation->profile_pic}}" alt="{{ $item->name }}">
+                 <img src="{{$item->getUserInformation->profile_pic}}" class="image-round" alt="{{ $item->name }}">
               </div>
                   <div class="text-holder">
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">
-                           <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
+                           <li><a href="{{ $item->detail_url }}" class="text-color">{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</a></li>
                           <li>{{$item->getUserInformation->doctor_education}}</li>
                            <li>{{ $item->getUserInformation->experience }} Experience</li>
                            <li>Patient Receive ({{$item->get_appointment_count_count}})</li>

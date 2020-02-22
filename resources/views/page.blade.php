@@ -8,7 +8,7 @@
 
 			<!-- BANNER-5
 			============================================= -->
-			<section id="banner-5" class="pt-100 banner-section division">
+			<section id="banner-5" class="pt-20 banner-section division">
 				<div class="container">
 
                            {!! $content !!}

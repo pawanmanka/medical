@@ -9,6 +9,9 @@
                               <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                                 {{-- <li class="breadcrumb-item"><a href="all-services.html">Our Services</a></li> --}}
+                                @if(auth()->id() != null)
+                                <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                                @endif
                                 <li class="breadcrumb-item active" aria-current="page">{{$title}}</li>
                               </ol>
                         </nav>
