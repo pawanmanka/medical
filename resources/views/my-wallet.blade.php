@@ -66,7 +66,21 @@
 <script src="{{ baseUrl('admin/js/plugins/dataTables/datatables.min.js') }}"></script>
 <script src="{{ baseUrl('admin/js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ baseUrl('js/jquery.validate.min.js') }}"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var SITEURL = '{{URL::to('')}}';
+    var YouName = '{{auth()->user()->name}}';
+    var Email = '{{auth()->user()->email}}';
+    var Phone = '{{auth()->user()->username}}';
+    var ApiKey = '{{config("application.rez_api_key")}}';
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    }); 
+   
 
+ </script>
      <script src="{{ baseUrl('scripts/wallet.js') }}"></script>
      <script>
        var walletObj = new WalletFn();

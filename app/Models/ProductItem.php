@@ -7,11 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class ProductItem extends Model
 {
     protected $guarded = ['id'];
-    protected $append = ['price'];
+    protected $append = ['price','status_class'];
 
     public function getPriceAttribute()
     {
         return auth()->id() != null?$this->discount_price:$this->actual_price;
+    }
+    public function getStatusClassAttribute()
+    {
+        $slotArr = config('application.slotArr');
+        $title = isset($slotArr[$this->status])?$slotArr[$this->status]:'';
+        $title = str_replace(' ','-',$title);
+        return $this->status ==1?'':$title;
     }
 
     public function getProduct(){
