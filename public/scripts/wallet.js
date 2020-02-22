@@ -56,7 +56,43 @@ var WalletFn = function(){
            },
    
            submitHandler: function (form) {
-                App.formSubmit($frm);
+
+            var totalAmount =jQuery('#money').val();
+            var product_id = Math.random();
+            var options = {
+            "key":ApiKey,
+            "amount": (totalAmount*100),
+            "handler": function (response){
+                  $.ajax({
+                    url: SITEURL + '/wallet/pay-success',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                      '_token': jQuery('meta[name="csrf_token"]').attr('content'),
+                      payPaymentId:response.razorpay_payment_id , 
+                      totalAmount :totalAmount ,
+                      productId :product_id,
+                    }, 
+                    success: function (data) {
+                        App.showMessage(data.message,data.status);
+                        if(data.status == 'success')
+                        {
+                            walletObj.table.fnDraw();
+                            jQuery('#addWalletMoneyShowModal').modal('hide');
+                        }
+
+                    }
+                });
+              
+            },
+           "prefill": {
+                "contact": Phone,
+                "email":   Email,
+            }
+          };
+          var rzp1 = new Razorpay(options);
+          rzp1.open();
+          return false;
            }
        });
    

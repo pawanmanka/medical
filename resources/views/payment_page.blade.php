@@ -149,7 +149,7 @@
            "image": "https://www.tutsmake.com/wp-content/uploads/2018/12/cropped-favicon-1024-1-180x180.png",
            "handler": function (response){
                  $.ajax({
-                   url: SITEURL + 'paysuccess',
+                   url: SITEURL + '/paysuccess',
                    type: 'post',
                    dataType: 'json',
                    data: {
@@ -157,7 +157,7 @@
                      totalAmount : totalAmount ,product_id : product_id,
                    }, 
                    success: function (msg) {
-          
+                     console.log('ssssss');      
                        window.location.href = SITEURL + 'razor-thank-you';
                    }
                });

@@ -74,6 +74,48 @@ class WalletController extends Controller
         }        
     }
 
+    public function paySuccess(Request $request){
+        $rules = array(
+            'payPaymentId'=>'required',
+            'totalAmount'=>'required',
+            'productId'=>'required'
+        );
+        $status = self::$ERROR;
+        $validation = \Validator::make($request->all(),$rules);
+        if($validation->fails()){
+            $message =   makeErrorMessage($validation->errors()->messages());
+        }
+        else{
+            $status = self::$SUCCESS;
+            $walletObj = Wallet::firstOrCreate([
+                'user_id'=>auth()->id()
+            ]);
+           $walletObj->amount = !empty($walletObj->amount)?$walletObj->amount:0;
+           $walletTransObj = new WalletTrans();
+           $walletTransObj->user_id = auth()->id();
+           $walletTransObj->action_user_id = auth()->id();
+           $walletTransObj->wallet_id = $walletObj->id; 
+           $walletTransObj->before_total = $walletObj->amount; 
+           $walletTransObj->amount = $request->totalAmount;
+           $walletTransObj->after_total = $walletObj->amount + $request->totalAmount;
+           $walletTransObj->description = " add money $request->totalAmount";
+           $walletTransObj->payment_id = $request->payPaymentId;
+           $walletTransObj->save();
+ 
+           $walletObj->amount = $walletTransObj->after_total;
+           $walletObj->save();
+
+           $message = 'Money Add Successfully';
+        }
+
+        $result = array(
+            'status'=>$status,
+            'message'=>$message
+        );
+
+        return response()->json($result);
+    }
+
     public function addMoney(Request $request)
     {
         $rules = array(
