@@ -15,7 +15,7 @@
         
             <div class="doctor_profile_sec">
                <div class="image-holder">
-			   <img class="img-fluid" src="{{ $userInformation->profile_pic }}" alt="doctor-foto">
+			   <img class="image-round" src="{{ $userInformation->profile_pic }}" alt="doctor-foto">
                </div>
                <div class="doc_detail">
                   <div class="doctor-details">
@@ -41,21 +41,24 @@
          </div>
          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-4">
             <div class="book_appoin">
-			@if ($record->role_name  == config('application.doctor_role'))
-								@hasanyrole(config('application.wallet_add_roles'))		
-								<a href="{{ url('/booking/'.$record->slug) }}" class="btn  btn-blue blue-hover" >Book an Appointment</a>
-								@endhasanyrole	
-								@endif
+				@if ($record->role_name  == config('application.doctor_role'))
+				@hasanyrole(config('application.wallet_add_roles'))		
+				<a href="{{ url('/booking/'.$record->slug) }}" class="btn  btn-blue blue-hover" >Book an Appointment</a>
+				@endhasanyrole	
+				@endif
                <!-- <button>Book an appointment</button> -->
             </div>
          </div> 
              
 	  </div>
+	  
+	  @if(!empty($record->getUserInformation->meta_description))
 	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="doc_desc">
-               <b>Description : </b>{{$record->meta_description}} <a href="">More</a>
+               <b>Description : </b>{{$record->getUserInformation->meta_description}} 
             </div>
-		 </div>  
+		 </div>
+		 @endif  
 		 
 
 						<hr>  <!-- End row -->	
@@ -72,46 +75,47 @@
 
 				 			<!-- TABS NAVIGATION -->
 							<div id="tabs-nav" class="list-group text-center">
-							    <ul class="nav nav-tabs" id="pills-tab" role="tablist">
+							    <ul class="nav nav-pills" id="pills-tab" role="tablist">
 
 							    	<!-- TAB-1 LINK -->
 								  	<li class="nav-item icon-xs">
 								    	<a class="nav-link active" id="tab1-list" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">
-								    		 Info
+								    	<span class="flaticon-083-stethoscope"></span> 	 Info
 								    	</a>
 								  	</li>
 									  @if($record->role_name  == config('application.lab_role'))
 									  <!-- TAB-service LINK -->
 									  <li class="nav-item icon-xs">
 										  <a class="nav-link" id="service-list" data-toggle="pill" href="#tab-service" role="tab" aria-controls="tab-2" aria-selected="false">
-											 Services
+										  <span class="flaticon-076-microscope"></span> Services
+										  
 										  </a>
 									  </li>
 									
 									  <li class="nav-item icon-xs">
 										  <a class="nav-link" id="package-list" data-toggle="pill" href="#tab-package" role="tab" aria-controls="tab-package" aria-selected="false">
-											 Packages
+										  <span class="flaticon-056-first-aid-kit-5"></span> Packages
 										  </a>
 									  </li>
 									  @endif
 								  	<!-- TAB-2 LINK -->
 									<li class="nav-item icon-xs">
 									    <a class="nav-link" id="tab2-list" data-toggle="pill" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">
-									       Patient Feedback
+										<span class="flaticon-005-blood-donation-3"></span> Patient Feedback
 									    </a>
 									</li>
 									@if($record->role_name  == config('application.hospital_role'))
 									<!-- TAB-doctor LINK -->
 									<li class="nav-item icon-xs">
 									    <a class="nav-link" id="tab2-list" data-toggle="pill" href="#tab-doctor" role="tab" aria-controls="tab-2" aria-selected="false">
-									       Doctors
+									       <span class="flaticon-137-doctor"></span> Doctors
 									    </a>
 									</li>
                                     @endif 
 									<!-- TAB-3 LINK -->
 									<li class="nav-item icon-xs">
 									    <a class="nav-link" id="tab3-list" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">
-									       Consult Q & A
+										<span class="flaticon-031-scanner"></span> Consult Q & A
 									    </a>
 									</li>
 
@@ -128,7 +132,7 @@
 
 								<!-- TAB-1 CONTENT -->
 								<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab1-list">
-									
+									<div class="bk-white">
 										<div class="row mar-0">
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
 													@if($record->role_name  == config('application.hospital_role') || $record->role_name  == config('application.lab_role'))
@@ -142,12 +146,16 @@
 											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
 														@if ($record->role_name  == config('application.doctor_role'))
+														@if(auth()->id() == null)
 														<h5 class="h5-md "> Fee :</h5>
+														@else
+														<h5 class="h5-md ">Discounted Fee :</h5>
+														@endif
 														 <p>
 														 @if(auth()->id() == null)
 															 {{$userInformation->actual_fee}}
 														@else
-														<del> {{$userInformation->actual_fee}}</del> {{$userInformation->actual_fee-$userInformation->discounted_fee}}
+														 {{$userInformation->discounted_fee}}
 														@endif	
 															</p>
 													 @elseif($record->role_name  == config('application.hospital_role'))
@@ -274,12 +282,14 @@
 										@endforeach
 									</div>
 								</div>	<!-- END CERTIFI-->
-                                @endif   
+								@endif   
+								</div>
 									</div>	<!-- END TAB-1 CONTENT -->
 								</div>
 								@if($record->role_name  == config('application.lab_role'))
 								<div class="tab-pane fade" id="tab-service" role="tabpanel" aria-labelledby="service-list">
 										@if(!empty($services))
+										<div class=" bk-white">
 										<table class="table table-striped">
                                             <tr>
 												<th>SR No</th>
@@ -288,9 +298,10 @@
 												<th>Discount Fee(Only for member)</th>
 												<th>Action</th>
 											</tr>
+											<?php $i=1; ?>
 											@foreach($services as $item)
 											<tr>
-												<td>1</td>
+												<td><?php echo $i; ?></td>
 												<td>{{$item->name}}</td>
 												<td>{{$item->actual_price}}</td>
 												<td>{{$item->discount_price}}</td>
@@ -300,14 +311,17 @@
 													@endhasanyrole
 												</td>
 											</tr>
+											<?php $i++; ?>
 											@endforeach
 										</table>
+										</div>
 										@else
 											No Service
 										@endif	 
 								</div>
 								<div class="tab-pane fade" id="tab-package" role="tabpanel" aria-labelledby="package-list">
 									@if(!empty($packages))
+									<div class=" bk-white">
 									<table class="table table-striped">
 										<tr>
 											<th>SR No</th>
@@ -315,10 +329,12 @@
 											<th>Package  Fee</th>
 											<th>Discounted Fee(Only for member)</th>
 											<th>Action</th>
+											
 										</tr>
+										<?php $i=1; ?>
 										@foreach($packages as $item)
 										<tr>
-											<td>1</td>
+										<td><?php echo $i; ?></td>
 											<td>{{$item->name}}</td>
 											<td>{{$item->actual_price}}</td>
 											<td>{{$item->discount_price}}</td>
@@ -326,8 +342,10 @@
 											<td><a href="{{url('booking/'.$record->slug.'/'.$item->code)}}">Book Appointment</a></td>
 										    @endhasanyrole
 										</tr>
+										<?php $i++; ?>
 										@endforeach
 									</table>
+									</div>
 									@else
 										No Package
 									@endif	
@@ -336,8 +354,9 @@
 								<!-- TAB-2 CONTENT -->
 								
 								<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab2-list">
+								
 								@foreach ($record->getUserRating as $item)
-											<div class="patient_reviews">
+											<div class="patient_reviews ">
 												<div class="patient_name"><i class="fa fa-chevron-right"></i>{{$item->getPatient->name}}</div>
 												<div class="monthago">{{$item->create_age}}</div>
 												<div class="clearfix"></div>
@@ -357,10 +376,11 @@
 												</div>
 												</div>
 											</div>
+											
 											@endforeach
 								
 									@hasanyrole(config('application.wallet_add_roles'))
-									<div class="row mar-0">
+									<div class="text-align-end mar-0">
 										<a href="#"  class="btn btn-sm btn-blue blue-hover" id="reviewForm">Submit Review</a>
 									</div>
 									@endhasanyrole
@@ -370,8 +390,9 @@
 							<!-- TAB-2 CONTENT -->
 								<div class="tab-pane fade" id="tab-doctor" role="tabpanel" aria-labelledby="tab2-list">
 									<div class="row d-flex align-items-center mar-0">
+										
 										@foreach ($userInformation->getHospitalDoctor as $item)
-										<div class="col-lg-12">
+										<div class="col-lg-12 bk-white mb-10">
 											<div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
 								
 												<!-- Avatar -->
@@ -380,7 +401,7 @@
 												</div>
 			
 												<!-- Data -->
-												<div class="txt-widget-data">
+												<div class="txt-widget-data ">
 													<h5 class="h5-md steelblue-color">{{$item->name}}</h5>	
 													<span>{{$item->experience}}</span>	
 													<p class="blue-color">{{$item->timing}}</p>	
@@ -404,22 +425,32 @@
 
 								<!-- TAB-3 CONTENT -->
 								<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab3-list">
+								
 									@foreach ($record->getQuestions as $item)
-									<div class="row d-flex align-items-center mar-0">
-										<div class="col-xs-12">
-											
-											<p><b>Question:- {{$item->title}}</b></p>
-											<p>Answer :- {{$item->answer}}</p>
-											<p>Helpful &nbsp;<a href=""><i class="fas fa-thumbs-up"></i> </a>&nbsp;<a href=""><i class="fas fa-thumbs-down"></i> </a></p>
-											<hr>
+									<div class="bk-white mb-10">
+										<div class="question_panel">
+											<div class="que_ask"><b>Question - </b> {{$item->title}}</div>
+											<div class="que_ask_right">Ask {{$item->create_age}}</div>
+											<div class="clearfix"></div>
+											<div class="ans_div"><b>Answer -</b> {{$item->answer}} </div>
+											<div class="help_last_panel">
+											<div class="helpful">Helpful &nbsp</div>
+											<a href=""><i class="fas fa-thumbs-up"></i> </a>&nbsp;<a href=""><i class="fas fa-thumbs-down"></i> </a>
+											<div class="clearfix"></div>
+											</div>											
 										</div>
 									</div>
-									@endforeach
+									
 									@hasanyrole(config('application.wallet_add_roles'))
-									<div class="row mar-0">
-										<a href="#" class="btn btn-sm btn-blue blue-hover" data-toggle="modal" data-target="#questionFormModal">Ask Free Question</a>
-									</div>
-									@endhasanyrole
+											<div class="sub_rew_btn"><a href="#" class="btn btn-sm btn-blue blue-hover" data-toggle="modal" data-target="#questionFormModal">Ask Free Question</a></div>
+											
+									@endhasanyrole	
+									<!-- <div class="bk-white mt-10">
+										<div class="show_all"><a href=""> Show all patient questions (20) </a></div>
+									</div> -->
+									
+									@endforeach
+									
 								</div>	<!-- END TAB-2 CONTENT -->
 							<!-- Button trigger modal -->
 

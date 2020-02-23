@@ -19,7 +19,32 @@
             <form id="booking_form_date" method="POST" class="row contact-form">
                 @csrf
                 <div class="col-lg-6">
-                    <div>
+                        
+                        <div class="col-12 left-panel testing-lab-panel">
+
+                            <div class="doctor_profile_sec">
+                            <div class="image-holder">
+                            <img class="image-round" src="http://localhost/medical/public/images/default.png" alt="doctor-foto">
+                            </div>
+                            <div class="doc_detail">
+                            <div class="doctor-details">
+                            <ul class="pl-0 mb-0">
+                            <li>Hitesh Manka 
+                                                                            (Male)	 
+                                    </li>
+                            <li> 									   Specialist in dentistry 	 15 Year  experience 									</li>
+                            <li>	 
+                                    <div class="rate-div"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas"></i></div></li>
+                            </ul>
+                            </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div> 
+                        </div>
+                    
+                </div>
+                <div class="col-lg-6">
+                 
                         <section id="services-7" class="">
                             <div class="container">
                                 <div class="row" >
@@ -27,12 +52,13 @@
                                     <div class="col-lg-12">
                                         @include('flash::message')
                                         <table class="table">
-                                            <tr><td>Booking for {{ $userObj->name }}</td></tr>    
-                                            <tr><td>{{ $productDetail->name }}</td></tr>    
-                                            <tr><td>{{ $productDetail->price }}</td></tr> 
+                                            <!-- <tr><td>Name :- {{ $userObj->name }}</td></tr>  -->
                                             @if($doctorFlag)
-                                            <tr><td>{{ $productDetail->date }}</td></tr> 
-                                            @endif  
+                                            <tr><td>Date :-{{ $productDetail->date }}</td></tr> 
+                                            @endif    
+                                            <tr><td>Time :-{{ $productDetail->time }}</td></tr>    
+                                            <tr><td>Fee :-{{ $productDetail->price }}</td></tr> 
+                                            
                                             @if($productDetail->lab_product_type == 2)   
                                             <tr><td>{{ $productDetail->description }}</td></tr>
                                             @endif    
@@ -46,10 +72,11 @@
                                 </div> <!-- End row -->
                             </div> <!-- End container -->
                         </section>
-                    </div>
+                  
+                    <button class="btn btn-primary"  type="submit">Book Appointment</button>
                 </div>
-                <div  class="col-md-12 mt-10 slot_body_div"  >
-                    <button class="btn btn-primary"  type="submit">Submit</button>
+                <div  class="col-md-12 mt-10 slot_body_div text-align-end"  >
+                   
                 </div>
             </form>
             </div>

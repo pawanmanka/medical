@@ -42,6 +42,7 @@
             </form>
             </div>
             <div class="col-xs-12 col-sm-9">
+                <p>( 10 Min Gap In Each Slot )</p>
             <form id="slot_form_date" method="POST">
                 @csrf
                 <div class="tab-content" id="v-pills-tabContent">
