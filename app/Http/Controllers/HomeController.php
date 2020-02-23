@@ -104,7 +104,7 @@ class HomeController extends Controller
        $distanceFlag = false;
        if(!empty($request->location_lng) && !empty($request->location_lat) && is_numeric($request->location_lng) && is_numeric($request->location_lat) ){
          $distanceFlag = true;
-         $haversine = "*,((6371 * acos(cos(radians(" . $request->location_lat . ")) 
+         $haversine = "users.*,((6371 * acos(cos(radians(" . $request->location_lat . ")) 
          * cos(radians(`lat`)) 
          * cos(radians(`lng`) 
          - radians(" . $request->location_lng . ")) 
@@ -112,9 +112,10 @@ class HomeController extends Controller
          * sin(radians(`lat`))))) AS distance";
        }
        else{
-         $haversine = "*";
+         $haversine = "users.*";
        }
     
+       
        
        $userObj = User::selectRaw( $haversine)->whereHas('roles',function($query) use($roles){
          $query->whereIn('name',$roles);
@@ -131,10 +132,10 @@ class HomeController extends Controller
                   }
                 
                }
-               if(isset($search['price'])){
-                  $price= $search['price'];
-                  $query->where('actual_fee','<=',$price);
-               }
+               // if(isset($search['price'])){
+               //    $price= $search['price'];
+               //    $query->orderBy('actual_fee',$price);
+               // }
                if(isset($search['amenities'])){
                   $amenities= $search['amenities'];
                   $query->whereHas('getAmenities',function($q) use($amenities){
@@ -157,18 +158,21 @@ class HomeController extends Controller
             });   
        })
        ->with('getUserInformation')
-       ->withCount('getAppointmentCount')
+       ->withCount(['getAppointmentCount'])
        ->whereNotNull('mobile_verified_at')
        ->where('status',0)
        ->when(!empty($request->gender),function($query) use($request){
          $query->where('gender',$request->gender);
        })
        ->when(!empty($request->rating),function($query) use($request){
-         $query->where('avg_rating','>=',$request->rating);
+         $query->where('avg_rating',$request->rating);
        })
        ->where('status',config('application.user_active_status'))
        ->when($distanceFlag,function($query){
          $query->orderBy('distance');
+         })
+       ->when(isset($search['price']),function($query) use($search){
+           $query->join('user_information','user_information.user_id','users.id')->orderBy('user_information.actual_fee',$search['price']);
          })
        ->paginate(config('application.listing_item_limit'));
        $this->data['result'] = $userObj->items();
@@ -278,11 +282,9 @@ class HomeController extends Controller
 
          $userObj = User::where('slug',$request->user_id)->where('status',0)->first();
          if(isset($userObj->id)){
-            $record = Question::firstOrCreate([
-               'user_id'=>$userObj->id,
-               'patient_id'=>auth()->id()
-            ]);
-   
+            $record = new Question();
+            $record->user_id=$userObj->id;
+            $record->patient_id=auth()->id();
             $record->title=$request->question;
             $record->save();
             $status = self::$SUCCESS;

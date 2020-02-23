@@ -62,13 +62,19 @@ if(!function_exists('topRateDoctor')){
              ->whereHas('roles',function($query){
                 $query->whereIn('name',array(config('application.doctor_role')));
               })
+             ->limit(6)
              ->get(); 
        }
 }
 
 if(!function_exists('topCategory')){
-       function topCategory(){
-             return Category::withCount('getUser')->where('parent_id',0)->get(); 
+       function topCategory($parentSlug = ''){
+             $superCategoriesSlug = array_flip(config('application.super_categories_slug'));
+             return Category::withCount('getUser')
+             ->when(isset($superCategoriesSlug[$parentSlug]),function($query) use($superCategoriesSlug,$parentSlug){
+                   $query->where('super_category_id',$superCategoriesSlug[$parentSlug]);
+             })
+             ->where('parent_id',0)->get(); 
        }
 }
 if(!function_exists('getSubscriptionPlans')){

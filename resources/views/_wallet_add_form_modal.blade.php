@@ -15,7 +15,7 @@
                      <div class="form-group">
                          <label for="">Money</label>
                      </div>
-                     <input name="money" class="form-control number required" placeholder="Add Money" id="money" />	
+                     <input name="money" max="500000" min="0" class="form-control number required" placeholder="Add Money" id="money" />	
                  </div>
                  
                  <div class="col-xs-12 p-10">

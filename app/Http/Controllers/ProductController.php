@@ -185,9 +185,8 @@ class ProductController extends Controller
         $productObj->time_end  = date('H:i',$time_end);
         $productObj->save();
 
-        foreach ($request->actual_fee as $timestamp => $value) {
-
-            $timestamp = date("H:i", $timestamp);
+        foreach ($request->actual_fee as $timestampIndex => $value) {
+            $timestamp = date("H:i", $timestampIndex);
 
             $date_time_start = "$date $timestamp";
             $timestamp = strtotime($date_time_start);
@@ -200,7 +199,8 @@ class ProductController extends Controller
                 $productItemObj->code =  $productItemObj->generateUniqueCode();
             }
             $productItemObj->actual_price=$value;
-            $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
+            //discount_fee
+            $productItemObj->discount_price=isset($request->discount_fee[$timestampIndex])?$request->discount_fee[$timestampIndex]:0;
             $productItemObj->save();
         }    
 

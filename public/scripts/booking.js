@@ -16,8 +16,8 @@ BookingFn.prototype.bindElement = function(){
 
     jQuery(document).on('click','.sbox-7',function(e){
            e.preventDefault();
-           jQuery('.sbox-7').removeClass('available');
-           jQuery(this).addClass('available');  
+           jQuery('.sbox-7').removeClass('selected');
+           jQuery(this).addClass('selected');  
            activeSlot = jQuery(this).find('input').val();
            jQuery('#activeSlot').val(activeSlot);
            jQuery('form').attr('action',SITE_URL+'/booking/'+doctor+'/'+activeSlot);
@@ -79,7 +79,7 @@ BookingFn.prototype.handleForm = function() {
         },
 
         errorPlacement: function (error, element) {
-            if(jQuery(".slot_body_div").is(":visible") && jQuery('.available').length == 0){
+            if(jQuery(".slot_body_div").is(":visible") && jQuery('.selected').length == 0){
               App.showMessage('Please Select Valid Slot','error');
             }
           //  error.insertAfter(element);

@@ -16,6 +16,7 @@ use App\Models\UserInformation;
 use App\Traits\DatatableGrid;
 use App\Traits\UploadImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller{
     use UploadImage;
@@ -750,5 +751,37 @@ class ProfileController extends Controller{
       'message'=>$message
     );
     return response()->json($result);  
+    }
+
+
+    public function changePassword(Request $request)
+    {
+       return view('change-password');
+    }
+ 
+    public function saveChangePassword(Request $request)
+    {
+        $rules = array(
+            'old_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'confirmed']
+        );
+        $validatorObj =   \Validator::make($request->all(),$rules);
+        if($validatorObj->fails()){
+            flash(makeErrorMessage($validatorObj->errors()->messages()))->error()->important();
+            return back()->withInput(); 
+        }
+        else{
+            $userObj = User::find(auth()->id());
+            if(Hash::check($request->old_password,$userObj->password)){
+                $userObj->password = Hash::make($request->password);
+                $userObj->save();
+                flash(('Password Change Successfully'))->success()->important();
+                return redirect("/change-password");
+            }
+            else{
+                flash(('Old Password i not match'))->error()->important();
+                return back()->withInput();
+            }
+        }
     }
 }

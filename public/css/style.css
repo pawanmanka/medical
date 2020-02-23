@@ -5943,3 +5943,7 @@ ul.dot li
 ul.filter-ul-li li {
   padding-right: 32px;
 }
+.selected{
+  border:1px solid #000 !important;
+  background-color: #305f30 !important;
+}

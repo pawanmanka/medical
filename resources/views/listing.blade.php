@@ -75,7 +75,7 @@
             <div class="right-panel">
                <h3>Categories</h3>
                <ul class="pl-0 mb-0 right-panel-cat">
-               @foreach (topCategory() as $item)
+               @foreach (topCategory(request()->segment(1)) as $item)
                         <li><a href="{{url($item->super_categories_slug.'?type='.$item->super_category_id.'&category='.$item->slug)}}"><i class="fa fa-angle-double-right"></i>{{$item->name}}</a> <span>({{$item->get_user_count}})</span></li>
                  @endforeach
                </ul>
