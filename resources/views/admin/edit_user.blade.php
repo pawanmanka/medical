@@ -81,6 +81,10 @@
                                                     <th>Date</th>
                                                     <th>Time</th>
                                                     <th>Code</th>
+                                                    @if($record->role_name != config('application.patient_role'))
+                                                    <th>Amount</th>
+                                                    <th>Admin Amount</th>
+                                                    @endif
                                                 </tr>
                                                 </thead>
                                                 <tbody></tbody>

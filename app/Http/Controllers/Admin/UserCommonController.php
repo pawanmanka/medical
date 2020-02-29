@@ -94,7 +94,9 @@ class UserCommonController extends Controller{
             "patient_name",	
             "patient_gender",	
             "date",	
-            "code"	
+            "code",	
+            "merchant_amount",	
+            "admin_margin_amount"	
           );
     	$this->columns =$fields;
         $this->searchColumns =$fields;
@@ -127,6 +129,11 @@ class UserCommonController extends Controller{
                 $each[] = $row->date_str;
                 $each[] = $row->time;
                 $each[] = $row->code;
+                if($row->user_id == $request->user_id)
+                {
+                 $each[] = $row->merchant_amount;
+                 $each[] = $row->admin_margin_amount;
+                }
                 $output ['data'] [] = $each;
 	    	}
         }
