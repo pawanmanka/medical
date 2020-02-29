@@ -36,8 +36,8 @@ class HomeController extends Controller
     }
     public function testing()
     {
-      //  $pay = new PaymentGateway();
-      //  $pay->generateOrder();
+       $pay = new PaymentGateway();
+       $pay->createAccount();
       //  dd(1);
 
       return view('payment_page',$this->data);

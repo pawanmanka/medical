@@ -1,5 +1,10 @@
             <?php 
-            $page=\App\Models\Page::where('navigation_type','=','1')->orWhere('navigation_type','=','3')->get();
+			$page=\App\Models\Page::where('navigation_type','=','1')->orWhere('navigation_type','=','3')->get();
+			$currentUser = auth()->user();
+			if(!empty($currentUser)){
+				$userName = $currentUser->name;
+				$profilePic = $currentUser->getUserInformation->profile_pic;
+			}
             ?>
 			<!-- HEADER
 			============================================= -->
@@ -19,8 +24,11 @@
                     <div class="wsmenu ">
 						<ul class="wsmenu-list">
 
-						<li aria-haspopup="true"><span class="wsmenu-click"><i class="wsmenu-arrow"></i></span><a href="{{url('/dashboard') }}">John Henderson <img src="https://demo.neontheme.com/assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44">
-							</a>
+						<li aria-haspopup="true"><span class="wsmenu-click"><i class="wsmenu-arrow"></i></span>
+						
+							<a href="{{url('/dashboard') }}">{{$userName}}   
+								<img src="{{$profilePic}}" alt="" class="img-circle" width="44">
+								</a>
 							<ul class="sub-menu">
 								<li aria-haspopup="true"><a title="Dashboard" href="{{url('/dashboard') }}"> <span >Dashboard</span>&nbsp;&nbsp;</a></li>
 								<li aria-haspopup="true"><a title="Logout" href="{{ url('/logout') }}"> <span >Logout</span>&nbsp;</a></li>
@@ -58,7 +66,9 @@
                     <div class="wsmenu ">
 						<ul class="wsmenu-list">
 
-						<li aria-haspopup="true"><span class="wsmenu-click"><i class="wsmenu-arrow"></i></span><a href="{{url('/dashboard') }}">John Henderson <img src="https://demo.neontheme.com/assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44">
+						<li aria-haspopup="true"><span class="wsmenu-click"><i class="wsmenu-arrow"></i></span>
+							<a href="{{url('/dashboard') }}">{{$userName}}   
+							<img src="{{$profilePic}}" alt="" class="img-circle" width="44">
 							</a>
 							<ul class="sub-menu">
 								<li aria-haspopup="true"><a title="Dashboard" href="{{url('/dashboard') }}"> <span >Dashboard</span>&nbsp;&nbsp;</a></li>
