@@ -23,6 +23,7 @@ Route::get('/doctors','HomeController@doctors');
 Route::get('/hospitals','HomeController@hospitals');
 Route::get('/labs','HomeController@labs');
 
+Route::get('/detail/{seoname}/{type}/{offset}','HomeController@questionAndFeedback');
 Route::get('/detail/{seoname}','HomeController@detail');
 
 Route::get('/logout', 'Auth\LoginController@logout');
