@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.002,
+    'siteVersion'=>0.12,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
@@ -49,7 +49,7 @@ return [
     'doctor_subadmin_role'=>'doctor subadmin',
     'lab_subadmin_role'=>'lab subadmin',
     'user_active_status'=>0,
-    'listing_item_limit'=>5,
+    'listing_item_limit'=>20,
     'default_percentage'=>0.10,
     'super_categories'=>array(
         1=>'Doctor',
@@ -77,7 +77,10 @@ return [
     ),
     'experienceArr'=>$experienceArr,
     'starArr'=>$starArr,
-    'priceArr'=>$priceArr,
+    'priceArr'=>array(
+        'asc'=>'Low to high',
+        'desc'=>'High to low'
+    ),
     'timeRangeArr'=>$timeRangeArr,
     'availabilityArr'=>array(
         1=>'Busy',

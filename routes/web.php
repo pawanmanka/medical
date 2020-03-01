@@ -133,6 +133,10 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
         Route::post('/saveQuestion', 'HomeController@createQuestion');
     });
 
+    Route::get('/change-password','ProfileController@changePassword');
+    Route::post('/change-password','ProfileController@saveChangePassword');
+
+
     Route::get('/my-wallet','WalletController@index');
     Route::get('/my-wallet/grid','WalletController@grid');
     Route::get('/my-appointment','AppointmentController@index');

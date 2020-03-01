@@ -151,7 +151,7 @@
 
 			<!-- SERVICES-3
 			============================================= -->
-			<section id="services-3" class="bg-lightgrey wide-100 services-section division">
+			<section id="services-3" class="bg-lightgrey wide-60 services-section division">
 					<div class="container">
 	
 	
@@ -232,7 +232,7 @@
                          @foreach (topRateDoctor() as $item)
 							
 						<!-- DOCTOR #1 -->
-						<div class="col-md-6 col-lg-3">
+						<div class=" col-sm-12 col-md-3 col-lg-2">
 							<div class="doctor-1">								
 														
 								<!-- Doctor Photo -->

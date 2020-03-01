@@ -47,7 +47,7 @@
             
             <!-- SERVICE CONTENT -->
             <div class=" col-xs-7 col-sm-7 col-md-7 col-lg-8 left-panel">
-                <div class="s2-page pr-30 mb-40">          
+                <div class="s2-page pr-30 mb-20">          
                     <h2 >{{ $title }} Near You</h2>
                 </div>
                 <div class="row">
@@ -75,7 +75,7 @@
             <div class="right-panel">
                <h3>Categories</h3>
                <ul class="pl-0 mb-0 right-panel-cat">
-               @foreach (topCategory() as $item)
+               @foreach (topCategory(request()->segment(1)) as $item)
                         <li><a href="{{url($item->super_categories_slug.'?type='.$item->super_category_id.'&category='.$item->slug)}}"><i class="fa fa-angle-double-right"></i>{{$item->name}}</a> <span>({{$item->get_user_count}})</span></li>
                  @endforeach
                </ul>

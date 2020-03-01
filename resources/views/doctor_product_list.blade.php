@@ -19,7 +19,7 @@
                                    <table id="product_table" class="table" >
                                    <thead>
                                    <tr>
-                                       <th>Id</th>
+                                       <th>S.No.</th>
                                        <th>Title</th>
                                        <th>Action</th>
                                    </tr>

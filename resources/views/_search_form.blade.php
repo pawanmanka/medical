@@ -1,4 +1,4 @@
-<section  >
+<section class="search-bk" >
     <div class="container">
         <div class="row d-flex align-items-center">
 

@@ -1,5 +1,10 @@
             <?php 
-            $page=\App\Models\Page::where('navigation_type','=','1')->orWhere('navigation_type','=','3')->get();
+			$page=\App\Models\Page::where('navigation_type','=','1')->orWhere('navigation_type','=','3')->get();
+			$currentUser = auth()->user();
+			if(!empty($currentUser)){
+				$userName = $currentUser->name;
+				$profilePic = $currentUser->getUserInformation->profile_pic;
+			}
             ?>
 			<!-- HEADER
 			============================================= -->
@@ -10,7 +15,30 @@
 			    <div class="wsmobileheader clearfix">
 			    	<a id="wsnavtoggle" class="wsanimated-arrow"><span></span></a>
 			    	<span class="smllogo"><img src="images/arogyarth-logo.png" width="120" height="auto" alt="mobile-logo"/></span>
-			    	<a href="tel:123456789" class="callusbtn"><i class="fas fa-phone"></i></a>
+					@if(auth()->id() == null)
+                    <div class="headertopright">
+                        <a title="Login" href="{{ url('/login') }}"> <span >Login</span>&nbsp;</a>
+                        <a  title="Register" href="{{ url('register') }}"> <span > Register</span></a>
+                    </div>
+                    @else
+                    <div class="wsmenu ">
+						<ul class="wsmenu-list">
+
+						<li aria-haspopup="true"><span class="wsmenu-click"><i class="wsmenu-arrow"></i></span>
+						
+							<a href="{{url('/dashboard') }}">{{$userName}}   
+								<img src="{{$profilePic}}" alt="" class="img-circle" width="44">
+								</a>
+							<ul class="sub-menu">
+								<li aria-haspopup="true"><a title="Dashboard" href="{{url('/dashboard') }}"> <span >Dashboard</span>&nbsp;&nbsp;</a></li>
+								<li aria-haspopup="true"><a title="Logout" href="{{ url('/logout') }}"> <span >Logout</span>&nbsp;</a></li>
+								
+							</ul>
+						</li>
+						</ul>
+					</div>
+
+                    @endif
 			 	</div>
 
 
@@ -27,17 +55,30 @@
 </div>
 
 				     		<!-- WIDGETS -->
-						    <div class="col-md-7 col-xl-6">
+						    <div class="col-md-7 col-xl-6 user-icon">
+							
                             @if(auth()->id() == null)
                     <div class="headertopright">
                         <a title="Login" href="{{ url('/login') }}"> <span >Login</span>&nbsp;</a>
                         <a  title="Register" href="{{ url('register') }}"> <span > Register</span></a>
                     </div>
                     @else
-                    <div class="headertopright">
-                        <a title="Dashboard" href="{{url('/dashboard') }}"> <span >Dashboard</span>&nbsp;&nbsp;</a>
-                        <a title="Logout" href="{{ url('/logout') }}"> <span >Logout</span>&nbsp;</a>
-                    </div>
+                    <div class="wsmenu ">
+						<ul class="wsmenu-list">
+
+						<li aria-haspopup="true"><span class="wsmenu-click"><i class="wsmenu-arrow"></i></span>
+							<a href="{{url('/dashboard') }}">{{$userName}}   
+							<img src="{{$profilePic}}" alt="" class="img-circle" width="44">
+							</a>
+							<ul class="sub-menu">
+								<li aria-haspopup="true"><a title="Dashboard" href="{{url('/dashboard') }}"> <span >Dashboard</span>&nbsp;&nbsp;</a></li>
+								<li aria-haspopup="true"><a title="Logout" href="{{ url('/logout') }}"> <span >Logout</span>&nbsp;</a></li>
+								
+							</ul>
+						</li>
+						</ul>
+					</div>
+
                     @endif
 					      	</div>	<!-- END WIDGETS -->
 
@@ -58,22 +99,12 @@
       					<nav class="wsmenu clearfix">
         					<ul class="wsmenu-list">
                             <li aria-haspopup="true"><a href="{{ url('/')}}">Home </a>                        
-                              </li> <!-- END DROPDOWN MENU -->
-                              @foreach($page as $data)
-                   
-                    <li class="nl-simple" aria-haspopup="true"><a href="{{ url($data->slug) }}">{{$data->name}}</a></li>
-                    @endforeach
-                                            
-                              <!-- PAGES -->
-                              <li aria-haspopup="true"><a href="#">Services <span class="wsarrow"></span></a>
-                                <ul class="sub-menu">
-                                        <li aria-haspopup="true"><a href="{{ url('doctors') }}">Doctor </a></li>
-                                        <li aria-haspopup="true"><a href="{{ url('hospitals') }}">Hospital  </a></li>
-                                        <li aria-haspopup="true"><a href="{{ url('labs') }}">Testing Lab </a></li>
-                                        
-                                     </ul>
-                            </li>
-                           
+							  </li> 
+							<li aria-haspopup="true"><a href="{{ url('doctors') }}">Doctor </a></li>
+							<li aria-haspopup="true"><a href="{{ url('hospitals') }}">Hospital  </a></li>
+							<li aria-haspopup="true"><a href="{{ url('labs') }}">Laboratory</a></li>
+								
+                             
 
                             <li class="nl-simple" aria-haspopup="true"><a href="{{ url('contact-us') }}">Contact Us</a></li>
                             

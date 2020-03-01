@@ -54,7 +54,9 @@ body {
 .wide-90 { padding-top: 100px; padding-bottom: 90px; }
 .wide-80 { padding-top: 100px; padding-bottom: 80px; }
 .wide-70 { padding-top: 100px; padding-bottom: 70px; }
-.wide-60 { padding-top: 50px; padding-bottom: 60px; }
+.wide-60 {
+   padding-top: 50px;
+   padding-bottom: 60px; }
 .wide-50 { padding-top: 100px; padding-bottom: 50px; }
 .wide-40 { padding-top: 100px; padding-bottom: 40px; }
 .wide-30 { padding-top: 100px; padding-bottom: 30px; }
@@ -736,7 +738,7 @@ span.id-color {
 
 .section-title {
   text-align: center;
-  margin-bottom: 60px;     
+  margin-bottom: 30px;     
 }
 
 .section-title h3.h3-md {
@@ -2217,7 +2219,7 @@ td.text-right {
   background-color: #fff; 
   border: 1px solid #ddd;
   margin: 0 8px 40px;
-  padding: 40px 20px 40px;
+  padding:10px 9px 2px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -2308,7 +2310,7 @@ td.text-right {
   line-height: 1;
   font-weight: 900;
   text-transform: uppercase;
-  margin-top: 25px;
+  margin-top: 7px;
   margin-bottom: 15px;
 }
 
@@ -2363,8 +2365,8 @@ td.text-right {
 .sbox-3-icon {
   background-color: #00a3c8;
   display: inline-block;
-  width: 110px;
-  height: 110px;
+  width: 100%;
+  height: auto;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   -o-border-radius: 100%;
@@ -3232,6 +3234,10 @@ td.text-right {
   z-index: 1;
   margin-bottom: 60px;
   overflow: hidden;
+  
+}
+.doctor-meta h5,span{
+  text-align: center;
 }
 
 .doctor-2 {
@@ -3458,6 +3464,7 @@ td.text-right {
 
 .certificates {
   margin-top: 30px;
+  padding-left:12px;
 }
 
 .certificate-image {
@@ -5146,7 +5153,7 @@ ul.blog-category-list li:hover {
 .txt-widget-data h5 {
   font-size: 1.2rem;
   line-height: 1;
-  padding-top: 10px;
+  padding-top: 5px;
   margin-bottom: 5px;
 }
 
@@ -5238,8 +5245,8 @@ ul.blog-category-list li:hover {
   =========================================================================== */
 
 .blog-page-pagination {
-  margin-top: 70px;
-  padding-top: 60px;
+  margin-top: 10px;
+  padding-top: 15px;
 }
 
 .page-link {
@@ -5788,10 +5795,10 @@ ul.category-ul-li li
   text-align: end;
 }
 .tab-pane.active {
-    border: 1px solid lightsteelblue;
+    /* border: 1px solid lightsteelblue; */
     background-color: #f8f8f8;;
     padding: 10px;
-    padding-top:30px;
+  
 }
 .blog-page-pagination
 {
@@ -5942,4 +5949,86 @@ ul.dot li
 }
 ul.filter-ul-li li {
   padding-right: 32px;
+}
+.selected{
+  border:1px solid #000 !important;
+  background-color: #305f30 !important;
+}
+.doctor-details  ul li:first-child
+{
+    font-weight:bold;
+}
+.text-color
+{
+  color:#00a3c8 ;
+}
+.image-round
+{
+  border-radius: 3px;
+}
+.bk-white
+{
+  background: white;
+  padding:10px;
+  box-shadow: 1.5px 2.598px 10px 0px #d8d8d8;
+}
+.text-align-end
+{
+  text-align: end;
+}
+.pb-5{
+padding-bottom:5px;
+}
+.dash-icon
+{
+  /* display: flex; */
+  vertical-align: top;
+  align-items: center;
+    margin: 0 0 0 auto;
+}
+.dash-icon i{
+  margin-left:7px;
+}
+.dis-flex
+{
+  display: flex;
+}
+a.dash-icon span {
+  font-weight: bold;
+}
+.dataTables_length label
+{
+  display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+.dataTables_length label select{
+  width: 64px;
+  margin-left: 3px;
+  margin-right: 5px;
+}
+.dataTables_filter label{
+  display: flex;
+  float: right;
+  align-items: center;
+}
+.dataTables_filter label input{
+  width:200px;
+  margin-left:6px;
+}
+table#wallet_table th:last-child ,table#wallet_table td:last-child{
+  text-align: end;
+}
+.text-align-end{
+  text-align: end;
+}
+.img-circle {
+  border-radius: 50%;
+}
+.user-icon >.wsmenu {
+  float: right !important;
+}
+.search-bk
+{
+  background-color: #00a3c8;
 }

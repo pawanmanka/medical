@@ -212,7 +212,7 @@ ul{
 }
 /*View profile page*/
 .doctor_profile_sec .image-holder {
-	border: 2px #000 solid;
+	
 	float: left;
 }
 .doctor_profile_sec .image-holder{
@@ -249,7 +249,7 @@ ul{
     font-weight: 400;
     font-style: normal;
     font-size: 18px;
-    padding: 50px 0px 0px;
+    padding: 10px 0px 0px;
     color: #666;
 }
 .doc_tabing{
@@ -375,7 +375,7 @@ ul{
 	background-color: #fff;
     padding: 20px 20px;
     box-shadow: 1.5px 2.598px 10px 0px #d8d8d8;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 .patient_name{
 	font-family: "Roboto";
@@ -469,7 +469,7 @@ ul{
     font-weight: 500;
     font-style: normal;
     color: #000;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     padding: 15px 15px;
     border: 2px #00a3c8 solid;
     font-size: 18px;

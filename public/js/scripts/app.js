@@ -371,6 +371,10 @@ App.showDataTable = function(element,url,params){
 				}
 			}
 		},
+		"fnRowCallback" : function(nRow, aData, iDisplayIndex){
+			$("td:first", nRow).html(iDisplayIndex +1);
+		   return nRow;
+		},
 		"drawCallback": function( settings ) {
 			//App.show_tooltip();
 			if(jQuery('.delete_all').length > 0){

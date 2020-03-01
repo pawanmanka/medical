@@ -185,9 +185,8 @@ class ProductController extends Controller
         $productObj->time_end  = date('H:i',$time_end);
         $productObj->save();
 
-        foreach ($request->actual_fee as $timestamp => $value) {
-
-            $timestamp = date("H:i", $timestamp);
+        foreach ($request->actual_fee as $timestampIndex => $value) {
+            $timestamp = date("H:i", $timestampIndex);
 
             $date_time_start = "$date $timestamp";
             $timestamp = strtotime($date_time_start);
@@ -200,7 +199,8 @@ class ProductController extends Controller
                 $productItemObj->code =  $productItemObj->generateUniqueCode();
             }
             $productItemObj->actual_price=$value;
-            $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
+            //discount_fee
+            $productItemObj->discount_price=isset($request->discount_fee[$timestampIndex])?$request->discount_fee[$timestampIndex]:0;
             $productItemObj->save();
         }    
 
@@ -288,13 +288,16 @@ class ProductController extends Controller
               $time_start_value = strtotime($date_time_start);
               $date = date('Y-m-d',strtotime($request->date));
               $productObj = Product::where('date',$date)->whereUserId(auth()->id())->first();
+              $editMode = false;
               if(isset($productObj->id)){
-                  $productItems = $productObj->productItems()->get();
+                $editMode = true;
+                $productItems = $productObj->productItems()->get();
                   foreach ($productItems as $key => $value) {
                     $oldItems[$value->name] = $value;
                   }
               }
               $user = auth()->user()->getUserInformation;
+              $slotArr = config('application.slotArr');
               $dataArr = array(
                   'time'=> date("h:i A", $time_start_value),
                   'price'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->actual_price:$user->actual_fee,
@@ -302,6 +305,7 @@ class ProductController extends Controller
                   'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'1',
                   'index'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->name:$time_start_value
                 );
+              $dataArr['class'] = $editMode?(isset($slotArr[$dataArr['availability']])?$slotArr[$dataArr['availability']]:''):'';
               $slots.= \View::make('_slot',$dataArr)->render();
               for($i=1;$i < $time;$i++){
                  $time_start_value =  $time_start_value+600;
@@ -312,6 +316,8 @@ class ProductController extends Controller
                     'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'1',
                     'index'=>$time_start_value
                   );
+                  $dataArr['class'] = $editMode?(isset($slotArr[$dataArr['availability']])?$slotArr[$dataArr['availability']]:''):'';
+
                  //$dataArr['index'] = $time_start_value;
                  $slots.= \View::make('_slot',$dataArr)->render();
               }
