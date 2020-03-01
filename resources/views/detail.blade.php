@@ -355,35 +355,18 @@
 								
 								<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab2-list">
 								
-								@foreach ($record->getUserRating as $item)
-											<div class="patient_reviews ">
-												<div class="patient_name"><i class="fa fa-chevron-right"></i>{{$item->getPatient->name}}</div>
-												<div class="monthago">{{$item->create_age}}</div>
-												<div class="clearfix"></div>
-												<h2>{{$item->title}}</h2>
-												<div class="recom">
-											<a href=""><i class="fas {{ ($item->recommend > 0)?'fa-thumbs-up':'fa-thumbs-down' }}"></i> </a>I recommend the doctor
-												</div>
-												<div class="satis">
-													<div class="fmasg">{{$item->description}}</div>
-													<div class="last_rew_line">
-													<div class="thnks_div">Thanks</div>
-													<div class="rew_star">
-													{!!ratingView($item->rating)!!}
-													</div>
-													<div class="rew_amonthago">{{$item->create_age}}</div>
-													<div class="clearfix"></div>
-												</div>
-												</div>
-											</div>
-											
-											@endforeach
+									<div id="review_list_div"></div>
 								
 									@hasanyrole(config('application.wallet_add_roles'))
 									<div class="text-align-end mar-0">
 										<a href="#"  class="btn btn-sm btn-blue blue-hover" id="reviewForm">Submit Review</a>
 									</div>
 									@endhasanyrole
+									@if(!empty($record->get_user_rating_count))	
+									<div class="bk-white mt-10" id="get_reviews">
+									   <div class="show_all"><a href=""> Show all reviews ({{config('application.question_feedback_item_limit')}}) </a></div>
+								   </div>
+								   @endif
 								</div>	<!-- END TAB-2 CONTENT -->
 							<!-- Button trigger modal -->
 							@if($record->role_name  == config('application.hospital_role'))
@@ -425,31 +408,18 @@
 
 								<!-- TAB-3 CONTENT -->
 								<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab3-list">
-								
-									@foreach ($record->getQuestions as $item)
-									<div class="bk-white mb-10">
-										<div class="question_panel">
-											<div class="que_ask"><b>Question - </b> {{$item->title}}</div>
-											<div class="que_ask_right">Ask {{$item->create_age}}</div>
-											<div class="clearfix"></div>
-											<div class="ans_div"><b>Answer -</b> {{$item->answer}} </div>
-											<div class="help_last_panel">
-											<div class="helpful">Helpful &nbsp</div>
-											<a href=""><i class="fas fa-thumbs-up"></i> </a>&nbsp;<a href=""><i class="fas fa-thumbs-down"></i> </a>
-											<div class="clearfix"></div>
-											</div>											
-										</div>
-									</div>
-									
+									<div id="question_list_div"></div>
 									@hasanyrole(config('application.wallet_add_roles'))
 											<div class="sub_rew_btn"><a href="#" class="btn btn-sm btn-blue blue-hover" data-toggle="modal" data-target="#questionFormModal">Ask Free Question</a></div>
 											
-									@endhasanyrole	
-									<!-- <div class="bk-white mt-10">
-										<div class="show_all"><a href=""> Show all patient questions (20) </a></div>
-									</div> -->
+									@endhasanyrole
+									@if(!empty($record->get_questions_count))	
+									 <div class="bk-white mt-10" id="get_questions">
+										<div class="show_all"><a href=""> Show all patient questions ({{config('application.question_feedback_item_limit')}}) </a></div>
+									</div>
+									@endif
 									
-									@endforeach
+								
 									
 								</div>	<!-- END TAB-2 CONTENT -->
 							<!-- Button trigger modal -->
@@ -483,6 +453,9 @@
 <script src="{{ baseUrl('js/rating.js') }}"></script>
 <script>
   var detailObj = new DetailFn();
+  var currentUser = "{{$currentUser}}";
+  var questionsCount = "{{$record->get_questions_count}}";
+  var reviewCount = "{{$record->get_user_rating_count}}";
   jQuery(document).ready(function(){
     detailObj.init();
   })

@@ -181,17 +181,56 @@ class HomeController extends Controller
        
     }
 
+    public function questionAndFeedback(Request $request)
+    {
+      $status = self::$ERROR;
+      $output = '';
+      $offset = isset($request->offset)?$request->offset:0;
+      $userObj = User::where('slug',$request->seoname)->where('status',0)->first();
+      if(isset($userObj->id)){
+         $status = self::$SUCCESS;
+         $limit = config('application.question_feedback_item_limit');
+         if($request->type == 'question'){
+            $records =  Question::
+            where('user_id',$userObj->id)->
+            offset($offset)->limit($limit)->get();
+            foreach ($records as $key => $value) {
+               $output.= \View::make('_question_item',array('item'=>$value))->render();
+            }
+         }
+         else{
+            $records =  Review::where('user_id',$userObj->id)->offset($offset)->limit($limit)->get();
+            foreach ($records as $key => $value) {
+               $output.= \View::make('_review_item',array('item'=>$value))->render();
+            }
+         }
+         $offset =  $offset +1;
+   }
+
+      $result = array(
+         'status'=>$status,
+         'output'=>$output,
+         'offset'=>$offset
+       );
+   
+     return response()->json($result);
+    }
+
     public function detail(Request $request)
     {
            
-       $userObj = User::with(['getUserRating'=>function($query){
-          $query->where('status',1);
-         $query->with('getPatient');
-       },
-       'getQuestions'=>function($query){
-         $query->where('status',1);
-       }])->where('slug',$request->seoname)->where('status',0)->first();
-
+       $userObj = User::with([])
+       ->withCount([  
+          'getQuestions'=>function($query){$query->where('status',1);},
+          'getUserRating'=>function($query){$query->where('status',1)->with('getPatient');}
+       ])
+       ->where('slug',$request->seoname)->where('status',0)->first();
+     
+       if(!isset($userObj->id)){
+          abort(404);
+       }
+       $userObj->get_questions_count = ceil($userObj->get_questions_count/config('application.question_feedback_item_limit'));
+       $userObj->get_user_rating_count = ceil($userObj->get_user_rating_count/config('application.question_feedback_item_limit'));
        if($userObj->role_name  == config('application.lab_role')){
         $services = array();       
         $packages = array();       
@@ -212,6 +251,7 @@ class HomeController extends Controller
       }
 
        $this->data['title'] = $userObj->name;
+       $this->data['currentUser'] = $request->seoname;
        $this->data['record'] = $userObj;
        $this->data['userInformation'] = $userObj->getUserInformation;
        $this->data['userCertificate'] = $userObj->getUserCertificate;

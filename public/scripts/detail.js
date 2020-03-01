@@ -9,12 +9,62 @@ DetailFn.prototype.init = function(){
 }
 
 DetailFn.prototype.bindElement= function(){
-  
+      var self = this;
+
+      self.questionList();
+      self.reviewList();
      
     jQuery(document).on('click','#reviewForm',function(){
                
              jQuery('#reviewFormModal').modal('show');  
     });
+    jQuery(document).on('click','#get_questions',function(e){
+        e.preventDefault();
+        self.questionList();
+    });
+    jQuery(document).on('click','#get_reviews',function(e){
+        e.preventDefault();
+        self.reviewList();
+    });
+}
+
+DetailFn.prototype.questionList= function(){
+    var self = this;
+    var params = {};
+    var offset = jQuery('#question_list_div').attr('data-offset');
+    offset = offset === undefined?0:offset;
+    params.success = function(data){
+    
+      if(data.status == 'success')
+      {
+        if(questionsCount <= data.offset){
+            jQuery('#get_questions').remove();
+
+        }  
+        jQuery('#question_list_div').append(data.output);
+        jQuery('#question_list_div').attr('data-offset',data.offset);
+      }
+    }
+     App.sendRequest('/detail/'+currentUser+'/question/'+offset, params);
+}
+DetailFn.prototype.reviewList= function(){
+    var self = this;
+    var params = {};
+    var offset = jQuery('#review_list_div').attr('data-offset');
+    offset = offset === undefined?0:offset;
+    params.success = function(data){
+    
+      if(data.status == 'success')
+      {
+        if(questionsCount <= data.offset){
+            jQuery('#get_reviews').remove();
+
+        }  
+        jQuery('#review_list_div').append(data.output);
+        jQuery('#review_list_div').attr('data-offset',data.offset);
+      }
+    }
+     App.sendRequest('/detail/'+currentUser+'/review/'+offset, params);
 }
 
 DetailFn.prototype.reviewHandelForm= function(){
