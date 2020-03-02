@@ -7,9 +7,9 @@
 @section('content')
 	<!-- DOCTOR-1 DETAILS -->
     <section id="doctor-1-details" class="doctor-details-section division pd-0">	
-        <div class="container-fluid pl-0">
+        <div class="container pl-0">
                     <div class="row mt-20">
-                        <div class="col-md-6 col-lg-10 offset-lg-1 col-md-offset-5">
+                        <div class="col-md-12">
                             <div class="mt-20">
                                <div class="table-responsive">
                                 @include('flash::message')

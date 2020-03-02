@@ -6032,3 +6032,8 @@ table#wallet_table th:last-child ,table#wallet_table td:last-child{
 {
   background-color: #00a3c8;
 }
+.mlr-0
+{
+  margin-left:0px;
+  margin-right:0px;
+}
