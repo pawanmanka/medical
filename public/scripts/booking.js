@@ -11,16 +11,21 @@ BookingFn.prototype.bindElement = function(){
         format:"DD-MM-YYYY"
     });
     jQuery("#date").on("dp.change", function (e) {
+        if(doctor != undefined){
         self.getSlot();
+        }
     });
 
     jQuery(document).on('click','.sbox-7',function(e){
            e.preventDefault();
-           jQuery('.sbox-7').removeClass('selected');
-           jQuery(this).addClass('selected');  
-           activeSlot = jQuery(this).find('input').val();
-           jQuery('#activeSlot').val(activeSlot);
-           jQuery('form').attr('action',SITE_URL+'/booking/'+doctor+'/'+activeSlot);
+           if(doctor != undefined){
+
+               jQuery('.sbox-7').removeClass('selected');
+               jQuery(this).addClass('selected');  
+               activeSlot = jQuery(this).find('input').val();
+               jQuery('#activeSlot').val(activeSlot);
+               jQuery('form').attr('action',SITE_URL+'/booking/'+doctor+'/'+activeSlot);
+           }
 
     })
 

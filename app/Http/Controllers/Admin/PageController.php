@@ -51,6 +51,7 @@ class PageController extends Controller
             $PageObj->name = $request->name;
             $PageObj->content = $request->content;
             $PageObj->display_order = is_numeric($request->display_order)?$request->display_order:0;
+            $PageObj->navigation_type = is_numeric($request->navigation_type)?$request->navigation_type:0;
             $PageObj->slug = $PageObj->createSlug($request->name,$id);
             $PageObj->save();
             flash('Page Save Successfully')->success()->important();

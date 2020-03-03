@@ -29,13 +29,21 @@
                             <div class="doc_detail">
                             <div class="doctor-details">
                             <ul class="pl-0 mb-0">
-                            <li>Hitesh Manka 
-                                                                            (Male)	 
+                            <li>{{ $userObj->name }}
+                                @if(!empty($userObj->gender_title))
+                                ({{$userObj->gender_title}})	 
+                            @endif 
                                     </li>
-                            <li> 									   Specialist in dentistry 	 15 Year  experience 									</li>
-                            <li>	 
-                                    <div class="rate-div"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas"></i></div></li>
-                            </ul>
+                                    <li> @if ($userObj->role_name  == config('application.doctor_role'))
+                                        Specialist in {{$userObj->getUserInformation->category_name}} 	@if(!empty($userObj->getUserInformation->experience)) {{ $userObj->getUserInformation->experience }}  experience @endif
+                                     @elseif($userObj->role_name  == config('application.hospital_role'))
+                                     Multi-Specialty Hospital
+                                     @elseif($userObj->role_name  == config('application.lab_role'))
+                                     Services
+                                     @endif</li>
+                         <li>	 
+                                  {!!ratingView($userObj->avg_rating)!!}</li>
+                                </ul>
                             </div>
                             </div>
                             <div class="clearfix"></div>
@@ -52,11 +60,10 @@
                                     <div class="col-lg-12">
                                         @include('flash::message')
                                         <table class="table">
-                                            <!-- <tr><td>Name :- {{ $userObj->name }}</td></tr>  -->
                                             @if($doctorFlag)
                                             <tr><td>Date :-{{ $productDetail->date }}</td></tr> 
                                             @endif    
-                                            <tr><td>Time :-{{ $productDetail->time }}</td></tr>    
+                                            <tr><td>Time :-{{ $productDetail->name }}</td></tr>    
                                             <tr><td>Fee :-{{ $productDetail->price }}</td></tr> 
                                             
                                             @if($productDetail->lab_product_type == 2)   
@@ -99,6 +106,7 @@
 <script src="{{ baseUrl('scripts/booking.js') }}"></script>
 <script>
     var bookingObj = new BookingFn();
+    var doctor = undefined;
     jQuery(document).ready(function () {
         bookingObj.init();
     })
