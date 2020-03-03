@@ -96,18 +96,22 @@
                                        
                                     </div>
                                     @endhasanyrole
-                                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                                        <a href="{{ url('change-password') }}">
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                       
                                             <div class="sbox-7 icon-xs wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                                            <div class="txt-widget-data">
-                                            <h5 class="h5-md steelblue-color">Change Password</h5>	
+                                            <div class="txt-widget-data dis-flex">
+                                                <h5 class="h5-md steelblue-color">Change Password</h5>	
+                                                <a href="{{ url('change-password') }}" class="dash-icon">	
+                                                        <i class="fas fa-pencil-alt fa-x"></i>
+                                                        <span>Edit</span>
+                                                    </a>
                                             </div>
                                                 <div class="row mar-0" style="text-align:center">
                                                 <i class="fas fa-key fa-3x"></i>
                                                 </div>
                                             </div>
-                                        </a>
-
+                                       
                                     </div>
                                     @hasanyrole(config('application.extra_info_roles'))
 
@@ -128,6 +132,7 @@
                                        
                                     </div>
                                     @endhasanyrole
+                                   
                                 </div>
                                
                             </div>
