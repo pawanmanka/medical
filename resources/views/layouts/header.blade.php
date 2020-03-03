@@ -3,7 +3,11 @@
 			$currentUser = auth()->user();
 			if(!empty($currentUser)){
 				$userName = $currentUser->name;
+				$profilePic="";
+				if($currentUser->getUserInformation != NULL)
+				{
 				$profilePic = $currentUser->getUserInformation->profile_pic;
+				}
 			}
             ?>
 			<!-- HEADER
