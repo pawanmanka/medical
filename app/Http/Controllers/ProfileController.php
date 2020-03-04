@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Library\PaymentGateway;
 use App\Models\Category;
 use App\Models\HospitalDoctor;
 use App\Models\Question;
@@ -13,6 +14,8 @@ use App\Models\Product;
 use App\Models\ProductItem;
 use App\Models\UserCertificate;
 use App\Models\UserInformation;
+use App\Models\Wallet;
+use App\Models\WalletTrans;
 use App\Traits\DatatableGrid;
 use App\Traits\UploadImage;
 use Illuminate\Http\Request;
@@ -781,6 +784,90 @@ class ProfileController extends Controller{
             else{
                 flash(('Old Password i not match'))->error()->important();
                 return back()->withInput();
+            }
+        }
+    }
+
+    public function requestForMoney(Request $request)
+    {
+        $user = auth()->user();
+        if(empty($user->razorpay_account_id)){
+            flash('Please Add Bank Account')->error()->important();
+            return back()->withInput(); 
+        }
+        else{
+            $walletObj = Wallet::where([
+                'user_id'=>auth()->id()
+            ])->first();
+            $amount = isset($walletObj->amount)?$walletObj->amount:0;
+               
+            if($amount < config('application.minimum_withdrawal_amount')){
+                flash('Minimum limit go withdrawal is'.config('application.minimum_withdrawal_amount'))->error()->important();
+                return back()->withInput(); 
+            }
+
+            $pay = new PaymentGateway();
+            
+            $output = $pay->directTransfers($user->razorpay_account_id,$amount);
+            if($output['status'] == 'error'){
+                flash($output['message'])->error()->important();
+                return back()->withInput(); 
+            }
+            else{
+                $walletTransObj = new WalletTrans();
+                $walletTransObj->user_id = auth()->id();
+                $walletTransObj->action_user_id = auth()->id();
+                $walletTransObj->wallet_id = $walletObj->id; 
+                $walletTransObj->before_total = $walletObj->amount; 
+                $walletTransObj->amount = $request->totalAmount;
+                $walletTransObj->after_total = 0;
+                $walletTransObj->description = " withdrawal money $amount";
+                $walletTransObj->payment_id = $output['id'];
+                $walletTransObj->save();
+      
+                $walletObj->amount = 0;
+                $walletObj->save();
+                 
+                flash(('withdrawal successfully done'))->success()->important();
+                return redirect("/dashboard");
+            }
+        }
+    }
+    public function bankDetail(Request $request)
+    {
+        $user = auth()->user();
+        return view('bank-detail');
+    }
+    public function bankDetailSave(Request $request)
+    {
+        $rules = array(
+            'ifsc_code' => ['required', 'string'],
+            'beneficiary_name' => ['required', 'string'],
+            'account_type' => ['required', 'string'],
+            'account_number' => ['required']
+        );
+        $validatorObj =   \Validator::make($request->all(),$rules);
+        if($validatorObj->fails()){
+            flash(makeErrorMessage($validatorObj->errors()->messages()))->error()->important();
+            return back()->withInput(); 
+        }
+        else{
+            $user = auth()->user();
+            $inputs = $request->only(['ifsc_code', 'beneficiary_name','account_type','account_number']);
+
+            $pay = new PaymentGateway();
+            $email = "$user->id@arogyarth.com";
+            $output = $pay->createAccount($email,$user->name,$inputs);
+            if($output['status'] == 'error'){
+                flash($output['message'])->error()->important();
+                return back()->withInput(); 
+            }
+            else{
+                $userObj = User::find(auth()->id());
+                $userObj->razorpay_account_id = $output['data'];
+                $userObj->save();
+                flash(('Bank Add Successfully'))->success()->important();
+                return redirect("/dashboard");
             }
         }
     }

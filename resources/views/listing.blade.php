@@ -83,9 +83,9 @@
             </div>
             <div class="pt-20">
                 <div class="right-panel">
-                <h3>Top Rated Doctor</h3>
+                <h3>Top Rated {{ucfirst(request()->segment(1))}}</h3>
                 <!-- Head of Clinic -->
-                @foreach (topRateDoctor() as $item)
+                @foreach (topRateDoctor(request()->segment(1)) as $item)
                     <div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
                     
                         <!-- Avatar -->

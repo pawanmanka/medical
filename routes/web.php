@@ -148,6 +148,10 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
     Route::group(['middleware'=>['role:'.config('application.extra_info_roles')]],function(){
         Route::get('/extra-info','ProfileController@extraInfo');
         Route::post('/extra-info','ProfileController@extraInfoSave');
+    
+        Route::get('/request-for-money','ProfileController@requestForMoney');
+        Route::get('/my-bank-detail','ProfileController@bankDetail');
+        Route::post('/my-bank-detail','ProfileController@bankDetailSave');
         
         Route::get('/my-feedbacks','ProfileController@MyFeedbacks');
         Route::get('/my-feedback/grid','ProfileController@MyFeedbackGrid');

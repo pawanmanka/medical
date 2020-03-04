@@ -7,12 +7,12 @@
 @section('content')
 	<!-- DOCTOR-1 DETAILS -->
     <section id="doctor-1-details" class="doctor-details-section division pd-0">	
-        <div class="container-fluid pl-0">
+        <div class="container pl-0">
                     <div class="row mt-20">
-                        <div class="col-md-6 col-lg-8 offset-lg-2 col-md-offset-2">
+                        <div class="col-md-12">
                             @include('flash::message')
                             <div class="mt-20">
-                                <div class="row">
+                                <div class="row mlr-0">
                                     <div class="col-lg-6">
                                         <h4>My wallet Balance ( {{$amount}} )</h4>
                                     </div>
@@ -23,10 +23,13 @@
                                     </div>
                                </div>
                             </div>   
-                            <div class="mt-20">
-                                 <h4>My last Payment receive statement</h4>
+                            <div class="mt-20 mlr-0 col-12">
+                            <h4>My last Payment receive statement</h4>
+                            </div>
+                            <div class="mt-20 mlr-0">
+                                
                                 <div class="">
-                                    <div class="row mb-20">
+                                    <div class="row mb-20 mlr-0">
                                          <div class="col-lg-6"></div>
                                          <div class="col-lg-6 text-right">
                                             @hasanyrole(config('application.wallet_add_roles')) 

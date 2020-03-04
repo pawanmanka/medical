@@ -40,7 +40,7 @@ class UserInformation extends Model
     public function getCategoryNameAttribute()
     {
       $category = $this->category()->first();
-      return $category->name;
+      return isset($category->name)?$category->name:'';
     }
     public function getExperienceAttribute()
     {

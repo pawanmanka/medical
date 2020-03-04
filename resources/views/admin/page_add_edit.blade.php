@@ -18,6 +18,12 @@
                             @csrf
                            
 
+<div class="form-group  row"><label class="col-sm-2 col-form-label">Navigation Position</label>
+    <div class="col-sm-10">
+         {!! selectBox('navigation_type',config('application.pageNavigationPlace'),old('navigation_type',(isset($page->navigation_type)?$page->navigation_type:'')),array('class'=>'form-control required'),'Select Navigation Position') !!}
+    </div>
+</div>
+                            <div class="hr-line-dashed"></div>
                             <div class="form-group  row"><label class="col-sm-2 col-form-label">Title</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="name" value="{{ old('name',(isset($page->name)?$page->name:'')) }}" class="form-control required">

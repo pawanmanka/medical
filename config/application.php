@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.210,
+    'siteVersion'=>0.2110,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
@@ -49,6 +49,7 @@ return [
     'doctor_subadmin_role'=>'doctor subadmin',
     'lab_subadmin_role'=>'lab subadmin',
     'user_active_status'=>0,
+    'minimum_withdrawal_amount'=>100,
     'listing_item_limit'=>20,
     'question_feedback_item_limit'=>2,
     'default_percentage'=>0.10,
@@ -61,6 +62,11 @@ return [
         1=>'doctors',
         2=>'hospitals',
         3=>'labs'
+    ),
+    'role_slug'=>array(
+        'doctors'=>'doctor',
+        'hospitals'=>'hospital',
+        'labs'=>'lab'
     ),
     'role_wih_category'=>array(
         1=>'doctor',

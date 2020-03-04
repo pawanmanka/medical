@@ -57,10 +57,12 @@ if(!function_exists('marginCalculation')){
        }
 }
 if(!function_exists('topRateDoctor')){
-       function topRateDoctor(){
+       function topRateDoctor($parentSlug = 'doctors'){
+             $roleSlug = (config('application.role_slug'));
+             $role = isset($roleSlug[$parentSlug])?$roleSlug[$parentSlug]:'doctor';
              return User::with('getUserInformation')
-             ->whereHas('roles',function($query){
-                $query->whereIn('name',array(config('application.doctor_role')));
+             ->whereHas('roles',function($query) use($role){
+                $query->whereIn('name',array($role));
               })
              ->limit(6)
              ->get(); 
