@@ -114,11 +114,16 @@
 							
 								<!-- Title -->
 								<h5 class="h5-xs">Information </h5>
-
+							<?php
+							
+							 $page=\App\Models\Page::where("navigation_type","2")->get();
+							
+							?>
 								<ul class="footer-ul ">
-									<li><a class="white-link" href="{{url('/terms-and-condition')}}">Terms and condition</a></li>
-									<li><a class="white-link" href="{{url('/privacy-policy')}}">Privacy Policy</a></li>
-									<li><a class="white-link" href="{{url('/return-policy')}}">Return Policy</a></li>
+									@foreach($page as $url)
+									<li><a class="white-link" href="{{url($url->slug)}}">{{$url->name}}</a></li>
+									@endforeach
+									
 								</ul>
 
 							</div>
