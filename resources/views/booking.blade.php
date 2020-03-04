@@ -24,7 +24,7 @@
                             
                             <div class="doctor_profile_sec">
                             <div class="image-holder">
-                            <img class="image-round" src="{{baseUrl('images/'.$userObj->getUserInformation->profile_image)}}" alt="doctor-foto">
+                            <img class="image-round" src="{{baseUrl('uploads/users/'.$userObj->getUserInformation->profile_image)}}" alt="doctor-foto">
                             </div>
                             <div class="doc_detail">
                             <div class="doctor-details">
