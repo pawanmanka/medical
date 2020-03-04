@@ -106,8 +106,11 @@ class AppointmentController extends Controller
     $query->save();
     $this->sendSms($query->patient_contact_number,config('application.cancel_booking_patient_sms_content'));
     $productDetail = ProductItem::where('code',$query->code)->first();
-    $productDetail->status = 2;
-    $productDetail->save();
+    if(isset($productDetail->id))
+    {
+        $productDetail->status = 2;
+        $productDetail->save();
+    }   
     flash('Appointment  Canceled')->success()->important();
     return back();
 
