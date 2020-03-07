@@ -248,6 +248,7 @@ class ProductController extends Controller
                     }
                     $productItemObj->actual_price=$value;
                     $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
+                    $productItemObj->status=isset($request->availability[$timestamp])?$request->availability[$timestamp]:0;
                     $productItemObj->save();
                 }    
 
