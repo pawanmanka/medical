@@ -222,8 +222,9 @@ class BookingController extends Controller
             $walletTransObj->after_total = $walletObj->amount ;
             $walletTransObj->description = " Appointment id $appointmentObj->id";
             $walletTransObj->save();
-
-            $productDetail->status = 1;
+            if($userObj->role_name  == config('application.doctor_role')){
+              $productDetail->status = 1;
+            }
             $productDetail->save();
 
             $this->sendSms($appointmentObj->patient_contact_number,config('application.booking_patient_sms_content').$appointmentObj->code);
