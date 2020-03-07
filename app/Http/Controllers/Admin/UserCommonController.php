@@ -13,12 +13,14 @@ use App\Models\UserCertificate;
 use App\Models\UserInformation;
 use App\Traits\DatatableGrid;
 use App\Traits\OtpHandle;
+use App\Traits\UploadImage;
 use Illuminate\Http\Request;
 
 class UserCommonController extends Controller{
 
     use DatatableGrid;
     use OtpHandle;
+    use UploadImage;
 
     public function __construct()
     {

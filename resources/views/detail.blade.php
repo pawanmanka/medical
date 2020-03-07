@@ -177,6 +177,8 @@
 											
 										</div>
 										<br>
+										@endif
+
 										<div class="row mar-0 mt-10">
 											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
@@ -203,7 +205,6 @@
 												@endif
 										</div>
 										<br>
-										@endif
 									   @if(!empty($userInformation->doctor_education))
 									   <br>
 										<div class="row mar-0">
