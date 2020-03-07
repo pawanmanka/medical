@@ -28,12 +28,15 @@
                         <div  class="col-md-12 mt-10">
                                 <input type="text" name="time_end" id="time_end" value="{{old('time_end',isset($record)?$record->time_end:'')}}"  class="form-control required " placeholder="Time End"  > 
                         </div>
+                        @if(isset($record))
                         <div  class="col-md-12 mt-10" >
                                 {!! selectBox('time',config('application.timeArr'),old('time',isset($record)?$record->time:null),array('class'=>'form-control required'),'Select Time') !!}  	 
                         </div>
+                    
                         <div  class="col-md-12 mt-10" >
                                 {!! selectBox('slot',config('application.slotArr'),old('slot',isset($record)?$record->slot:null),array('class'=>'form-control required'),'Select Slot') !!}  	 
                         </div>
+                        @endif
                         <div  class="col-md-12 mt-10" >
                           <button class="btn btn-primary col-md-12" id="apply" type="button">Apply</button>
                         </div>

@@ -12,13 +12,19 @@ class Appointment extends Model
     protected $guarded = ["id"];
     protected $appeds = [
         'time',
-        'date_str'
+        'date_str',
+        'amount'
     ]; 
 
     public function getTimeAttribute()
     {
         $date = strtotime($this->date);
         return date('H:s',$date); 
+    }
+    
+    public function getAmountAttribute()
+    {
+        return $this->merchant_amount + $this->admin_margin_amount; 
     }
     
     public function getDateStrAttribute()

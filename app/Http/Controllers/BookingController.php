@@ -70,7 +70,12 @@ class BookingController extends Controller
                 }
                 $this->data['doctorFlag'] = true;
                 $view = 'booking'; 
-                $productDetail->dateStr = $productDetail->name;
+                try {
+                    $productDetail->dateStr = $productDetail->name;
+                    //code...
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
                 $productDetail->date = date("d-m-Y", $productDetail->name);
                 $productDetail->name = date("h:i A", $productDetail->name);
                 $this->data['productDetail'] = $productDetail;
