@@ -70,12 +70,12 @@ class BookingController extends Controller
                 }
                 $this->data['doctorFlag'] = true;
                 $view = 'booking'; 
-                // try {
-                //     $productDetail->dateStr = $productDetail->name;
-                //     //code...
-                // } catch (\Throwable $th) {
-                //     //throw $th;
-                // }
+                try {
+                    $productDetail->dateStr = $productDetail->name;
+                    //code...
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
                 $productDetail->date = date("d-m-Y", $productDetail->name);
                 $productDetail->name = date("h:i A", $productDetail->name);
                 $this->data['productDetail'] = $productDetail;
@@ -227,6 +227,7 @@ class BookingController extends Controller
             $walletTransObj->after_total = $walletObj->amount ;
             $walletTransObj->description = " Appointment id $appointmentObj->id";
             $walletTransObj->save();
+            $productDetail = ProductItem::find($productDetail->id);
             if($userObj->role_name  == config('application.doctor_role')){
               $productDetail->status = 1;
             }
