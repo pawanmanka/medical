@@ -18,6 +18,10 @@
                          
   
                              <td>
+                              <input type="text" placeholder="Enter Name" value="{{ $item->title}}" name="certificate[name][]">
+
+                             </td>
+                             <td>
                              <button class="btn btn-danger delete_certificate"  type="button"><i class="fa fa-plus"></i> Delete </button> 
 
                              </td>
@@ -28,6 +32,10 @@
                             <td>
                                  <input type="file" name="certificate[image][]" value="">   
                             </td>
+                             <td>
+                               <input type="text" placeholder="Enter Name" name="certificate[name][]">
+
+                             </td>
                             <td>
                                     <button class="btn btn-danger delete_certificate" type="button"><i class="fa fa-plus"></i> Delete </button>
                             </td>

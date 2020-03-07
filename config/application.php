@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.1210,
+    'siteVersion'=>0.12310,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
@@ -33,6 +33,7 @@ return [
     'rez_api_key'=>'rzp_test_xAzxbAGPEoQ0Hd',
     'hospital_doctor_image_path'=>'uploads/hospital_doctor',
     'certificate_image_path'=>'uploads/certificates',
+    'user_photos_path'=>'uploads/photos',
     'patient_term_and_condition_url'=>url('terms-and-condition'),
     'doctor_term_and_condition_url'=>url('terms-and-condition'),
     'admin_role'=>'admin',

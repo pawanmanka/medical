@@ -61,7 +61,22 @@ ProfileFn.prototype.bindElement = function(){
             ele.find('img').remove();
             jQuery('#certificates_list tbody').after('<tr>'+jQuery(ele).html()+'</tr>');
      });
+     jQuery('#add_photos').click(function(){
+        
+            var ele = jQuery('#photos_list').find('tr').clone();
+            ele.find('input').attr('value','');
+            ele.find('img').remove();
+            jQuery('#photos_list tbody').after('<tr>'+jQuery(ele).html()+'</tr>');
+     });
 
+     jQuery(document).on('click','.delete_photo',function(){
+        if(jQuery('#photos_list').find('tr').length > 1){
+            jQuery(this).parents('tr').remove();
+        }
+        else{
+            App.showMessage('add at least one','error');
+        }
+ });
      jQuery(document).on('click','.delete_certificate',function(){
         if(jQuery('#certificates_list').find('tr').length > 1){
             jQuery(this).parents('tr').remove();

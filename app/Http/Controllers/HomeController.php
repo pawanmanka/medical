@@ -255,6 +255,7 @@ class HomeController extends Controller
        $this->data['record'] = $userObj;
        $this->data['userInformation'] = $userObj->getUserInformation;
        $this->data['userCertificate'] = $userObj->getUserCertificate;
+       $this->data['userPhotos'] = $userObj->getUserPhoto;
   
        return view('detail',$this->data);
     }
