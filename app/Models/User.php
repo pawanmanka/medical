@@ -94,6 +94,9 @@ class User extends Authenticatable implements JWTSubject
     public function getUserCertificate(){
         return $this->hasMany(UserCertificate::class,'user_id');
     }
+    public function getUserPhoto(){
+        return $this->hasMany(UserPhotos::class,'user_id');
+    }
    
     public function getProducts(){
         return $this->hasMany(Product::class,'user_id');

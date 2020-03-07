@@ -251,6 +251,28 @@
 										<br>
 										@endif
 										
+										@if(!$userPhotos->isEmpty())
+										<!-- CERTIFICATES -->	
+										<div class="certificates">
+		
+											<!-- Title -->	
+											<h5 class="h5-md ">Photos</h5>
+		
+											<!-- Certificate Preview -->
+											<div class="row">
+												@foreach ($userPhotos as $certificate)
+												<!-- Certificate Image -->
+												<div class="col-xs-12 col-sm-6 col-lg-3">
+													<div class="certificate-image">
+														<a class="image-link" href="{{$certificate->image_url}}" title="{{$record->name}} certificate">
+															<img class="img-fluid" src="{{$certificate->image_url}}" alt="{{$record->name}}-certificate" />
+														</a>
+													</div>
+												</div>
+												@endforeach
+											</div>
+										</div>	<!-- END CERTIFI-->
+										@endif 
 										@if(!empty($userInformation->facility))
 										<br>
 										<div class="row mar-0">

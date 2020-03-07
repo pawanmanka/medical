@@ -94,7 +94,8 @@
                     <input  type="text" class="form-control required"  name="meta_keyword" value="{{ old('meta_keyword',isset($record->meta_keyword)?$record->meta_keyword:'') }}">
             </div>
     </div>
-   
+    @include('admin.elements.upload_certificate')
+    @include('admin.elements.upload_photos')
     <div class="form-group mt-10">
         <div class="col-sm-10 ">  
         <label class="control-label col-sm-2" for="Doctors">Doctors</label>
