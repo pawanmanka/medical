@@ -24,7 +24,11 @@
                             
                             <div class="doctor_profile_sec">
                             <div class="image-holder">
+<<<<<<< HEAD
                             <img class="image-round" src="{{baseUrl('uploads/users/'.$userObj->getUserInformation->profile_image)}}" alt="doctor-foto">
+=======
+                            <img class="image-round" src="{{$userObj->getUserInformation->profile_pic}}" alt="doctor-foto">
+>>>>>>> a76698aa9473827bd6de4489bdba1a45327d2afe
                             </div>
                             <div class="doc_detail">
                             <div class="doctor-details">
@@ -71,7 +75,7 @@
                                             @endif    
                                           </table>  
                                           @if(!$doctorFlag)
-                                          <div  class="col-md-12">
+                                          <div  class="col-md-12" style="padding: 0px !important">
                                                   <input type="text" name="date" value="{{old('date',isset($record)?$record->dateFormated:'')}}" id="date" class="form-control required " placeholder="Date"  > 
                                           </div>
                                           @endif
