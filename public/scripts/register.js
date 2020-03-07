@@ -34,7 +34,17 @@ RegisterFn.prototype.handleForm = function(){
         // errorElement: 'span', //default input error message container
         // errorClass: 'medical-field-error', // default input error message class
         // focusInvalid: false, // do not focus the last invalid input     
-
+        rules:{
+          
+            contact_number:{
+                required:true,
+                minlength:10,
+                maxlength:10,
+            }
+            },
+            messages:{
+                contact_number:"Enter your mobile no"
+                },            
         normalizer: function( value ) {
             return $.trim( value );
         },

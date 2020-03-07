@@ -25,6 +25,7 @@
                                        <th>Time</th>
                                        <th>Code</th>
                                        @hasanyrole(config('application.extra_info_roles'))
+                                       <th>Amount</th>
                                        <th>Action</th>
                                        @endhasanyrole
                                    </tr>
