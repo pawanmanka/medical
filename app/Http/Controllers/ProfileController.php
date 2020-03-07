@@ -14,6 +14,8 @@ use App\Models\Product;
 use App\Models\ProductItem;
 use App\Models\UserCertificate;
 use App\Models\UserInformation;
+use App\Models\UserPhoto;
+use App\Models\UserPhotos;
 use App\Models\Wallet;
 use App\Models\WalletTrans;
 use App\Traits\DatatableGrid;
@@ -154,6 +156,7 @@ class ProfileController extends Controller{
             if(!empty($value)){
                 foreach ($value['id'] as $index => $name) {
                     $id = isset($value['id'][$index])?$value['id'][$index]:0;
+                    $title = isset($value['name'][$index])?$value['name'][$index]:'';
                     $userCertificateObj = !empty($id)?UserCertificate::find($id):new UserCertificate();
                     $userCertificateObj->user_id = auth()->id();
                     if(isset($value['image'][$index])){
@@ -162,6 +165,7 @@ class ProfileController extends Controller{
                             $oldImage = config('application.certificate_image_path').'/'.$userCertificateObj->file_name;
                         }
                         $userCertificateObj->file_name =   $this->fileUploadFile($value['image'][$index],config('application.certificate_image_path'),$oldImage);
+                        $userCertificateObj->title = $title;
                     }
                     $userCertificateObj->save();
                     if(isset($oldUserCertificates[$userCertificateObj->id])){
@@ -172,6 +176,37 @@ class ProfileController extends Controller{
             if(!empty($oldUserCertificates)){
                $records = UserCertificate::where('user_id',auth()->id())->whereIn('id',$oldUserCertificates)->delete();
 
+            }
+    }
+    public function uploadPhoto($request)
+    {
+      
+            // doctors
+            $oldRecords = UserPhotos::where('user_id',auth()->id())->pluck('id','id')->toArray();
+            $value = $request->photo; 
+            if(isset($value['image'])){
+                foreach ($value['image'] as $index => $name) {
+                    $id = isset($value['id'][$index])?$value['id'][$index]:0;
+                    $userCertificateObj = !empty($id)?UserPhotos::find($id):new UserPhotos();
+                    $userCertificateObj->user_id = auth()->id();
+                    if(isset($value['image'][$index])){
+                        $oldImage =null;
+                        if(isset($userCertificateObj->file_name)){
+                            $oldImage = config('application.user_photos_path').'/'.$userCertificateObj->file_name;
+                        }
+                        $userCertificateObj->file_name =   $this->fileUploadFile($value['image'][$index],config('application.user_photos_path'),$oldImage);
+                    }
+                    $userCertificateObj->save();
+                    if(isset($oldRecords[$userCertificateObj->id])){
+                        unset($oldRecords[$userCertificateObj->id]);
+                    }
+            }
+            }
+            if(!empty($oldRecords)){ 
+                if(isset($value['image'])){
+               $records = UserPhotos::where('user_id',auth()->id())->whereIn('id',$oldRecords)->delete();
+
+            }
             }
     }
 
@@ -306,6 +341,7 @@ class ProfileController extends Controller{
     {   
         $this->data['record']= $record = UserInformation::where('user_id',auth()->id())->first();
         $this->data['certificates']= $record = UserCertificate::where('user_id',auth()->id())->get();
+        $this->data['photos'] = UserPhotos::where('user_id',auth()->id())->get();
         
         $this->data['amenities']= Amenities::pluck('name','id')->toArray();
         $this->data['title'] ='Extra Information'; 
@@ -493,6 +529,9 @@ class ProfileController extends Controller{
                 $userInformationObj->getAmenities()->sync($request->amenities);
              }
 
+             $this->_uploadCertificate($request);
+             $this->uploadPhoto($request);
+
 
             flash('Update Successfully')->success()->important();
             return redirect("/extra-info");      
@@ -564,6 +603,10 @@ class ProfileController extends Controller{
            
 
             $userInformationObj->save();
+
+            $this->_uploadCertificate($request);
+            $this->uploadPhoto($request);
+
             flash('Update Successfully')->success()->important();
             return redirect("/extra-info");      
         }

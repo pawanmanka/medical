@@ -78,5 +78,8 @@
                     <input  type="text" class="form-control required"  name="meta_keyword" value="{{ old('meta_keyword',isset($record->meta_keyword)?$record->meta_keyword:'') }}">
             </div>
     </div>
+
+    {{-- @include('admin.elements.upload_certificate') --}}
+    @include('admin.elements.upload_photos')
 </div>
     
