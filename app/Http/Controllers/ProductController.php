@@ -62,7 +62,7 @@ class ProductController extends Controller
             
             foreach ($result as $row){
                 $editLink = url("create-slots/$row->id");
-    			$action = "<a href='$editLink' class='btn btn-primary text-white'><i class='fa fa-pencil-alt'></i></a> ";
+    			$action = "<a href='$editLink' class='btn btn-primary text-white'><i class='fas fa-pencil-alt'></i></a> ";
                 
                 $output ['data'] [] = array (
 	    			$row->id,
@@ -98,7 +98,7 @@ class ProductController extends Controller
             
             foreach ($result as $row){
                 $editLink = url("$segment/edit/$row->product_id");
-    			$action = "<a href='$editLink' class='btn btn-primary text-white'><i class='fa fa-pencil-alt'></i></a> ";
+    			$action = "<a href='$editLink' class='btn btn-primary text-white'><i class='fas fa-pencil-alt'></i></a> ";
                 
                 $output ['data'] [] = array (
 	    			$row->product_id,
@@ -248,6 +248,7 @@ class ProductController extends Controller
                     }
                     $productItemObj->actual_price=$value;
                     $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
+                    $productItemObj->status=isset($request->availability[$timestamp])?$request->availability[$timestamp]:0;
                     $productItemObj->save();
                 }    
 

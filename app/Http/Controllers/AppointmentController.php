@@ -73,10 +73,7 @@ class AppointmentController extends Controller
                 $each[] = $row->date_str;
                 $each[] = $row->time;
                 $each[] = $row->code;
-                if($row->user_id == auth()->id())
-                {
-                $each[] = $row->amount;
-                }
+                $each[] = $row->price;
                 if($actionButton){
                     if($row->status == Appointment::$STATUS_CANCEL){
                         $action ='Canceled';

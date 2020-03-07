@@ -227,6 +227,7 @@ class BookingController extends Controller
             $walletTransObj->after_total = $walletObj->amount ;
             $walletTransObj->description = " Appointment id $appointmentObj->id";
             $walletTransObj->save();
+            $productDetail = ProductItem::find($productDetail->id);
             if($userObj->role_name  == config('application.doctor_role')){
               $productDetail->status = 1;
             }
