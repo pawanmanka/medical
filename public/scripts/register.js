@@ -28,8 +28,31 @@ RegisterFn.prototype.categorySubCategory = function(categoryArr,id){
 RegisterFn.prototype.handleForm = function(){
 	var formHandle = "#register_form";
 	var $frm = jQuery(formHandle);
-	jQuery.validator.setDefaults({ ignore: ".ignore" });
-	
+    jQuery.validator.setDefaults({ ignore: ".ignore" });
+    
+var errorMessage = "ww";
+	jQuery.validator.addMethod("checkIdProof", function(value1, element) {
+       var type = jQuery('.id_proof_type').val();
+       var value = value1.length;
+        var max = 9999999;
+        var min = 0;
+
+       if(parseInt(type) === 1){
+          max = 12
+          min = 12
+          errorMessage = "Please enter only 12 digit";
+       } 
+       else if(parseInt(type) === 3){
+          max = 9
+          min = 9
+          errorMessage = "Please enter only 9 digit";
+       } 
+       else{
+           return true;
+       }
+ 
+       return value == max && value == min?true:false; // return true if field is ok or should be ignored
+    },(parseInt(jQuery('.id_proof_type').val()) === 1?"Invalid Input":"Invalid Input"));
 	$frm.validate({
         // errorElement: 'span', //default input error message container
         // errorClass: 'medical-field-error', // default input error message class
