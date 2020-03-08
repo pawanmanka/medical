@@ -14,10 +14,10 @@
         {!! selectBox('gender',config('application.genderArr'),old('gender',isset($record)?$record->gender:null),array('class'=>'form-control required'),'Select Gender') !!}  	 
     </div>                      
       <div  class="col-md-12" >
-        {!! selectBox('id_proof_type',config('application.idProofTypes'),old('id_proof_type',isset($record)?$record->id_proof_type:null),array('class'=>'form-control required'),'Select Id Proof Type') !!}  	 
+        {!! selectBox('id_proof_type',config('application.idProofTypes'),old('id_proof_type',isset($record)?$record->id_proof_type:null),array('class'=>'form-control required id_proof_type'),'Select Id Proof Type') !!}  	 
     </div> 
     <div  class="col-md-12">
-        <input type="text" value="{{old('name',isset($record)?$record->id_proof:'')}}" name="id_proof" class="form-control required " placeholder="Id Number*"  > 
+        <input type="text" value="{{old('name',isset($record)?$record->id_proof:'')}}" name="id_proof" class="form-control checkIdProof required id_proof" placeholder="Id Number*"  > 
     </div>         
     @if(!isset($record))
     <div  class="col-md-12" >
