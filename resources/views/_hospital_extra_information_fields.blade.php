@@ -62,6 +62,12 @@
                 <input  type="text" class="form-control required" name="discounted_fee" value="{{ old('discounted_fee',isset($record->discounted_fee)?$record->discounted_fee:'') }}">
         </div>
 </div>
+<div class="form-group mt-10">
+        <label class="control-label col-sm-4" for="modes_of_payment">modes of payments</label>
+        <div class="col-sm-10 ">
+                <input  type="text" class="form-control required" name="mode_of_payment" value="{{ old('mode_of_payment',isset($record->mode_of_payment)?$record->mode_of_payment:'') }}">
+        </div>
+</div>
 
     <div class="form-group mt-10">
             <label class="control-label col-sm-2" for="facility">Facility</label>
@@ -122,6 +128,9 @@
                                 <td>
                                         <input type="text"  class="valueInput" name="doctor[timing][]" placeholder="Timing" value="{{$item->timing}}">
                                  </td>
+                                <td>
+                                        <input type="text"  class="valueInput" name="doctor[specification][]" placeholder="Specification" value="{{$item->specification}}">
+                                 </td>
                                  <td>
                                  <button class="btn btn-danger delete_doctor"  type="button"><i class="fa fa-plus"></i> Delete Doctor</button> 
    
@@ -142,6 +151,9 @@
                                <td>
                                        <input type="text" name="doctor[timing][]" placeholder="Timing" value="">
                                 </td>
+                                <td>
+                                        <input type="text"  class="valueInput" name="doctor[specification][]" placeholder="Timing" value="">
+                                 </td>
                                 <td>
                                         <button class="btn btn-danger delete_doctor" type="button"><i class="fa fa-plus"></i> Delete Doctor</button> 
   

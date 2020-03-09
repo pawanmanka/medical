@@ -57,7 +57,16 @@ class AppointmentController extends Controller
                 $userName = $row->patient_name;
                 if($row->user_id != auth()->id())
                 {
-                    $userName = isset($row->getUser->name)?$row->getUser->name:'';
+                    $getUser = $row->getUser;
+                    if(isset($getUser->id)){
+                        $userName = isset($getUser->name)?$getUser->name:'';
+                        if($getUser->role_name  == config('application.hospital_role')){
+                            $userName .= isset($row->getProductItem->name)?" (".$row->getProductItem->name.")":'';
+                        }
+                        
+                        $userName = "<a target='_blank' href='$getUser->detail_url'>$userName</a>";
+
+                    }
                     
                 }
               

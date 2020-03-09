@@ -475,6 +475,7 @@ class ProfileController extends Controller{
             $userInformationObj->s_evening_end = date("H:i", strtotime($request->s_evening_end));
             $userInformationObj->s_evening_start = date("H:i", strtotime($request->s_evening_start));
 
+            $userInformationObj->mode_of_payment = $request->mode_of_payment;
             $userInformationObj->facility = $request->facility;
             $userInformationObj->actual_fee = $request->actual_fee;
             $userInformationObj->discounted_fee = $request->discounted_fee;
@@ -497,6 +498,7 @@ class ProfileController extends Controller{
                     $doctor->user_id = auth()->id();
                     $doctor->experience = isset($value['experience'][$index])?$value['experience'][$index]:'';
                     $doctor->timing = isset($value['timing'][$index])?$value['timing'][$index]:'';
+                    $doctor->specification = isset($value['specification'][$index])?$value['specification'][$index]:'';
                     if(isset($value['image'][$index])){
                         $oldImage =null;
                         if(isset($doctor->image)){

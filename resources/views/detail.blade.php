@@ -282,6 +282,15 @@
 												</div>
 										</div>
 										@endif
+										@if(!empty($userInformation->mode_of_payment))
+										<br>
+										<div class="row mar-0">
+												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
+												<h5 class="h5-md ">Mode of Payment</h5>
+														{{$userInformation->mode_of_payment}}
+												</div>
+										</div>
+										@endif
 									<div class="row d-flex align-items-center mar-0">
 									<!-- Title -->	
 							

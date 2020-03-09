@@ -183,26 +183,29 @@ class HomeController extends Controller
     {
       $status = self::$ERROR;
       $output = '';
-      $offset = isset($request->offset)?$request->offset:0;
+      $page = isset($request->offset)?$request->offset:0;
       $userObj = User::where('slug',$request->seoname)->where('status',0)->first();
       if(isset($userObj->id)){
          $status = self::$SUCCESS;
          $limit = config('application.question_feedback_item_limit');
+         $offset = $page * $limit ;
+
          if($request->type == 'question'){
             $records =  Question::
-            where('user_id',$userObj->id)->
-            offset($offset)->limit($limit)->get();
+            where('user_id',$userObj->id)
+            ->where('status',1)
+            ->offset($offset)->limit($limit)->get();
             foreach ($records as $key => $value) {
                $output.= \View::make('_question_item',array('item'=>$value))->render();
             }
          }
          else{
-            $records =  Review::where('user_id',$userObj->id)->offset($offset)->limit($limit)->get();
+            $records =  Review::where('user_id',$userObj->id)->where('status',1)->offset($offset)->limit($limit)->get();
             foreach ($records as $key => $value) {
                $output.= \View::make('_review_item',array('item'=>$value))->render();
             }
          }
-         $offset =  $offset +1;
+         $offset =  $page +1;
    }
 
       $result = array(
