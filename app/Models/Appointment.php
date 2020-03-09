@@ -19,7 +19,7 @@ class Appointment extends Model
     public function getTimeAttribute()
     {
         $date = strtotime($this->date);
-        return date('H:s',$date); 
+        return date('H:i',$date); 
     }
     
     public function getAmountAttribute()
@@ -33,6 +33,10 @@ class Appointment extends Model
         return date('d-m-Y',$date); 
     }
 
+    public function getProductItem()
+    {
+        return $this->hasOne(ProductItem::class,'id','product_item_id');
+    }
     public function getPatient()
     {
         return $this->hasOne(User::class,'id','patient_id');
@@ -45,7 +49,7 @@ class Appointment extends Model
     public function generateUniqueCode()
     {
         $code = strtoupper(uniqid());
-        $code  = substr($code,0,7);
+        $code  = substr($code,0,8);
         $allRecord = $this->getRelatedCode($code);
         if (! $allRecord->contains('code', $code)){
             return $code;

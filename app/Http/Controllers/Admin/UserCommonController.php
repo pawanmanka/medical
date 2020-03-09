@@ -117,7 +117,15 @@ class UserCommonController extends Controller{
                 $userName = $row->patient_name;
                 if($row->user_id != $request->user_id)
                 {
-                    $userName = isset($row->getUser->name)?$row->getUser->name:'';
+                    $getUser = $row->getUser;
+                    if(isset($getUser->id)){
+                        $userName = isset($getUser->name)?$getUser->name:'';
+                        if($getUser->role_name  == config('application.hospital_role')){
+                            $userName .= isset($row->getProductItem->name)?" (".$row->getProductItem->name.")":'';
+                        }
+
+
+                    }
                     
                 }
                 $each = array (

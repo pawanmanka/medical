@@ -79,7 +79,7 @@
             </div>
     </div>
 
-    {{-- @include('admin.elements.upload_certificate') --}}
+    @include('admin.elements.upload_certificate')
     @include('admin.elements.upload_photos')
 </div>
     

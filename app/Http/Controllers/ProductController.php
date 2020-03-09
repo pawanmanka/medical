@@ -307,6 +307,7 @@ class ProductController extends Controller
                   'index'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->name:$time_start_value
                 );
               $dataArr['class'] = $editMode?(isset($slotArr[$dataArr['availability']])?$slotArr[$dataArr['availability']]:''):'';
+              $dataArr['class'] = str_replace(' ','-',$dataArr['class']);
               $slots.= \View::make('_slot',$dataArr)->render();
               for($i=1;$i < $time;$i++){
                  $time_start_value =  $time_start_value+600;
@@ -318,6 +319,7 @@ class ProductController extends Controller
                     'index'=>$time_start_value
                   );
                   $dataArr['class'] = $editMode?(isset($slotArr[$dataArr['availability']])?$slotArr[$dataArr['availability']]:''):'';
+                  $dataArr['class'] = str_replace(' ','-',$dataArr['class']);
 
                  //$dataArr['index'] = $time_start_value;
                  $slots.= \View::make('_slot',$dataArr)->render();
