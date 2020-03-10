@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Traits\OtpHandle;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -9,7 +11,8 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller{
     
-    use AuthenticatesUsers;
+//    use AuthenticatesUsers;
+use OtpHandle;
 
     public function __construct()
     {  $this->middleware('guest');
@@ -21,6 +24,54 @@ class LoginController extends Controller{
     public function loginUser(Request $request)
     {
         return view('login_user');
+    }
+    public function login(Request $request)
+    {
+      // validate the info, create rules for the inputs
+        $rules =  [
+            'username' => [
+                'required',
+                Rule::exists('users')->where(function ($query) {
+                    // $query->whereNotNull('mobile_verified_at');
+                    $query->where('status',0);
+                }),
+            ],
+            'password' => 'required',
+        ];
+
+        // run the validation rules on the inputs from the form
+        $validator = \Validator::make($request->all(), $rules);
+       
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator);        
+            
+            } else {
+            // create our user data for the authentication
+                $userdata = array(
+                    'username'  => $request->username,
+                    'password'  => $request->password
+                );
+                $userObj =User::where('username',$request->username)->first();
+                if(empty($userObj->mobile_verified_at)){
+                    $this->sendOtp($userObj->contact_number,$userObj->id,config('application.register_sms_content'));
+                    flash('Registration Successfully')->success()->important();
+                    return redirect("/verifyOtp/$userObj->contact_number");    
+                }
+
+                // attempt to do the login
+                if (\Auth::attempt($userdata)) {
+
+                    return redirect('/home'); 
+
+                } else {        
+
+                    return back(); 
+
+                }
+
+            }
     }
     public function username()
     {

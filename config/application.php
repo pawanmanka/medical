@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.33110,
+    'siteVersion'=>0.3110,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
@@ -52,7 +52,7 @@ return [
     'user_active_status'=>0,
     'minimum_withdrawal_amount'=>100,
     'listing_item_limit'=>20,
-    'question_feedback_item_limit'=>2,
+    'question_feedback_item_limit'=>20,
     'default_percentage'=>0.10,
     'super_categories'=>array(
         1=>'Doctor',
