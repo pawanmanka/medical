@@ -6,7 +6,7 @@
         <div class="ans_div"><b>Answer -</b> {{$item->answer}} </div>
         <div class="help_last_panel">
         <div class="helpful">Helpful &nbsp</div>
-        <a href=""><i class="fas fa-thumbs-up"></i> </a>&nbsp;<a href=""><i class="fas fa-thumbs-down"></i> </a>
+        <a href="">1000 <i class="fas fa-thumbs-up"></i> </a>&nbsp;<a href="">3 <i class="fas fa-thumbs-down"></i> </a>
         <div class="clearfix"></div>
         </div>											
     </div>
