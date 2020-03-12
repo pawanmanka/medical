@@ -14,6 +14,10 @@ DetailFn.prototype.bindElement= function(){
       self.questionList();
       self.reviewList();
      
+    jQuery(document).on('change','#specification_doctor',function(){
+             jQuery('.class-all-specification').hide();  
+             jQuery('.'+jQuery(this).val()).show();  
+    });
     jQuery(document).on('click','#reviewForm',function(){
                
              jQuery('#reviewFormModal').modal('show');  

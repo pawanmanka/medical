@@ -1,3 +1,4 @@
+@if(isset($photos))
 <div class="form-group mt-10">
     <div class="col-sm-10 ">  
     <label class="control-label col-sm-6" for="Photos">Photos</label>
@@ -36,3 +37,5 @@
              </table>
         </div>
 </div>
+
+@endif

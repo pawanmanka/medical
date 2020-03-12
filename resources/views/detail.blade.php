@@ -82,7 +82,15 @@
 								    	<a class="nav-link active" id="tab1-list" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">
 								    	<span class="flaticon-083-stethoscope"></span> 	 Info
 								    	</a>
-								  	</li>
+									  </li>
+									  @if($record->role_name  == config('application.hospital_role'))
+									  <!-- TAB-doctor LINK -->
+									  <li class="nav-item icon-xs">
+										  <a class="nav-link" id="specification-list" data-toggle="pill" href="#tab-specification" role="tab" aria-controls="tab-specification" aria-selected="false">
+											 <span class="flaticon-137-doctor"></span> Specification
+										  </a>
+									  </li>
+									  @endif 
 									  @if($record->role_name  == config('application.lab_role'))
 									  <!-- TAB-service LINK -->
 									  <li class="nav-item icon-xs">
@@ -91,7 +99,7 @@
 										  
 										  </a>
 									  </li>
-									
+									 
 									  <li class="nav-item icon-xs">
 										  <a class="nav-link" id="package-list" data-toggle="pill" href="#tab-package" role="tab" aria-controls="tab-package" aria-selected="false">
 										  <span class="flaticon-056-first-aid-kit-5"></span> Packages
@@ -280,6 +288,15 @@
 												</div>
 										</div>
 										@endif
+										@if(!empty($userInformation->mode_of_payment))
+										<br>
+										<div class="row mar-0">
+												<div class="col-xs-12 col-md-12 col-xl-12 mar-0">
+												<h5 class="h5-md ">Mode of Payment</h5>
+														{{$userInformation->mode_of_payment}}
+												</div>
+										</div>
+										@endif
 									<div class="row d-flex align-items-center mar-0">
 									<!-- Title -->	
 							
@@ -297,8 +314,8 @@
 										<!-- Certificate Image -->
 										<div class="col-xs-12 col-sm-6 col-lg-3">
 											<div class="certificate-image">
-												<a class="image-link" href="{{$certificate->image_url}}" title="{{$record->name}} certificate">
-													<img class="img-fluid" src="{{$certificate->image_url}}" alt="{{$record->name}}-certificate" />
+												<a class="image-link" href="{{$certificate->image_url}}" title="{{$certificate->title}}">
+													<img class="img-fluid" src="{{$certificate->image_url}}" alt="{{$certificate->title}}" />
 												</a>
 											</div>
 										</div>
@@ -391,6 +408,48 @@
 								   </div>
 								   @endif
 								</div>	<!-- END TAB-2 CONTENT -->
+							<!-- Button trigger modal -->
+							@if($record->role_name  == config('application.hospital_role'))
+							<!-- TAB-2 CONTENT -->
+								<div class="tab-pane fade" id="tab-specification" role="tabpanel" aria-labelledby="tab2-list">
+									<div class="row d-flex align-items-center mar-0">
+										 <select class="form-control"  id="specification_doctor">
+											   <option>Select</option>
+											   @foreach ($userInformation->getHospitalDoctor->pluck('specification','specification') as $item)
+											   @if(!empty(trim($item)))
+												   <option value="class-{{str_slug($item)}}">{{$item}}</option>
+											   @endif	   
+											   @endforeach
+										 </select>
+										@foreach ($userInformation->getHospitalDoctor as $item)
+										<div class="col-lg-12 bk-white mb-10 class-all-specification class-{{str_slug($item->specification)}}">
+											<div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
+								
+												<!-- Avatar -->
+												<div class="txt-widget-avatar">
+													<img src="{{$item->image_url}}" alt="testimonial-avatar">
+												</div>
+			
+												<!-- Data -->
+												<div class="txt-widget-data ">
+													<h5 class="h5-md steelblue-color">{{$item->name}}</h5>	
+													<span>{{$item->experience}}</span>	
+													<p class="blue-color">{{$item->timing}}</p>	
+													@hasanyrole(config('application.wallet_add_roles'))
+													<a href="{{url('booking/'.$record->slug.'/'.$item->getProductItem->code)}}">Book Appointment</a>
+													@endhasanyrole
+
+												</div>
+			
+											</div>
+												
+											</div>
+	
+										@endforeach
+									</div>
+								</div>	<!-- END TAB-2 CONTENT -->
+							<!-- Button trigger modal -->
+                            @endif
 							<!-- Button trigger modal -->
 							@if($record->role_name  == config('application.hospital_role'))
 							<!-- TAB-2 CONTENT -->

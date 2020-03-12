@@ -6,9 +6,9 @@ BookingFn.prototype.init = function(){
 }
 BookingFn.prototype.bindElement = function(){
      var self =this;
-
+     
     jQuery('#date').datetimepicker({
-        format:"DD-MM-YYYY"
+       // format:"DD-MM-YYYY"
     });
     jQuery("#date").on("dp.change", function (e) {
         if(doctor != undefined){
