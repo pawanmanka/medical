@@ -20,10 +20,7 @@ DetailFn.prototype.bindElement= function(){
         var id = jQuery(this).attr('data-id');
         var status = jQuery(this).attr('data-status');
         var parentEl = jQuery(this).parents('.question_panel');
-        var helpfull = parentEl.find('.question_helpfull').html();
-        var nothelpfull = parentEl.find('.question_nothelpfull').html();
         params.success = function(data){
-        
           if(data.status == 'success')
           {
               parentEl.find('.question_helpfull').html(data.helpfull);
