@@ -21,6 +21,13 @@ class UserInformation extends Model
         return $image;
     }
 
+    public function getHospitalServiceAttribute($data){
+            if(!empty($data)){
+              return json_decode($data);
+            } 
+            return array();
+    }
+
     public function category()
     {
       return $this->hasOne(Category::class,'id','category');

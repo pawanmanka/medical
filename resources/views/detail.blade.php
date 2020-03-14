@@ -91,15 +91,16 @@
 										  </a>
 									  </li>
 									  @endif 
-									  @if($record->role_name  == config('application.lab_role'))
+									  @if($record->role_name  != config('application.doctor_role'))
 									  <!-- TAB-service LINK -->
 									  <li class="nav-item icon-xs">
-										  <a class="nav-link" id="service-list" data-toggle="pill" href="#tab-service" role="tab" aria-controls="tab-2" aria-selected="false">
+										  <a class="nav-link" id="service-list" data-toggle="pill" href="#tab-service" role="tab" aria-controls="tab-7" aria-selected="false">
 										  <span class="flaticon-076-microscope"></span> Services
 										  
 										  </a>
 									  </li>
-									 
+									  @endif
+									  @if($record->role_name  == config('application.lab_role'))
 									  <li class="nav-item icon-xs">
 										  <a class="nav-link" id="package-list" data-toggle="pill" href="#tab-package" role="tab" aria-controls="tab-package" aria-selected="false">
 										  <span class="flaticon-056-first-aid-kit-5"></span> Packages
@@ -270,13 +271,14 @@
 											<div class="row">
 												@foreach ($userPhotos as $certificate)
 												<!-- Certificate Image -->
-												<div class="col-xs-12 col-sm-6 col-lg-3">
-													<div class="certificate-image">
+												<div class="col-xs-12 col-sm-6 col-lg-2 gallery-div">
+													<div class="gallery-image">
 														<a class="image-link" href="{{$certificate->image_url}}" title="{{$record->name}} certificate">
 															<img class="img-fluid" src="{{$certificate->image_url}}" alt="{{$record->name}}-certificate" />
 														</a>
 													</div>
 												</div>
+												
 												@endforeach
 											</div>
 										</div>	<!-- END CERTIFI-->
@@ -312,13 +314,17 @@
 
 									<!-- Certificate Preview -->
 									<div class="row">
+								
 										@foreach ($userCertificate as $certificate)
 										<!-- Certificate Image -->
-										<div class="col-xs-12 col-sm-6 col-lg-3">
+										<div class="col-xs-12 col-sm-6 col-lg-2">
 											<div class="certificate-image">
 												<a class="image-link" href="{{$certificate->image_url}}" title="{{$certificate->title}}">
 													<img class="img-fluid" src="{{$certificate->image_url}}" alt="{{$certificate->title}}" />
 												</a>
+											</div>
+											<div class="certificate-title">
+												<p>Title  Here</p>
 											</div>
 										</div>
 										@endforeach
@@ -328,9 +334,10 @@
 								</div>
 									</div>	<!-- END TAB-1 CONTENT -->
 								</div>
-								@if($record->role_name  == config('application.lab_role'))
+								@if($record->role_name  != config('application.doctor_role'))
 								<div class="tab-pane fade" id="tab-service" role="tabpanel" aria-labelledby="service-list">
-										@if(!empty($services))
+									@if($record->role_name  == config('application.lab_role'))
+									@if(!empty($services))
 										<div class=" bk-white">
 										<table class="table table-striped">
                                             <tr>
@@ -359,7 +366,18 @@
 										</div>
 										@else
 											No Service
-										@endif	 
+										@endif	
+									@endif	
+										
+									@if($record->role_name  == config('application.hospital_role'))	
+										@if(!empty($userInformation->hospital_service))
+										<ul>
+										@foreach ($userInformation->hospital_service as $item)
+										<li>{{$item}}</li>
+										@endforeach
+									    </ul>
+										@endif
+									@endif	
 								</div>
 								<div class="tab-pane fade" id="tab-package" role="tabpanel" aria-labelledby="package-list">
 									@if(!empty($packages))

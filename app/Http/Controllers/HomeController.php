@@ -179,6 +179,35 @@ class HomeController extends Controller
        
     }
 
+    public function questionHelpFull(Request $request){
+      $status = self::$ERROR;
+      $helpfull =$nothelpfull = 0;
+      $userObj = User::where('slug',$request->seoname)->where('status',0)->first();
+      if(isset($userObj->id)){
+         $records =  Question::where('user_id',$userObj->id)->where('id',$request->id)->where('status',1)->first();
+         if(isset($userObj->id)){
+            $status = self::$SUCCESS; 
+            if($request->status == 1){
+               $records->helpfull = $records->helpfull+1;
+            }
+            else{
+               $records->nothelpfull = $records->nothelpfull+1;
+            }
+            $records->save();
+            $helpfull = $records->helpfull;
+            $nothelpfull = $records->nothelpfull;
+         }
+         
+      }
+      $result = array(
+         'status'=>$status,
+         'helpfull'=>$helpfull,
+         'nothelpfull'=>$nothelpfull,
+         
+       );
+   
+     return response()->json($result);
+    }
     public function questionAndFeedback(Request $request)
     {
       $status = self::$ERROR;

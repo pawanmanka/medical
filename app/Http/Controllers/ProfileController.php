@@ -482,6 +482,7 @@ class ProfileController extends Controller{
             $userInformationObj->meta_title = $request->meta_title;
             $userInformationObj->meta_keyword = $request->meta_keyword;
             $userInformationObj->meta_description = $request->meta_description;
+            $userInformationObj->hospital_service = !empty($request->hospital_servic)?json_encode($request->hospital_servic):'{}';
             $userInformationObj->save();
 
             // doctors
