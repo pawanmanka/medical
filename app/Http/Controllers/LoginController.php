@@ -32,7 +32,6 @@ use OtpHandle;
             'username' => [
                 'required',
                 Rule::exists('users')->where(function ($query) {
-                    // $query->whereNotNull('mobile_verified_at');
                     $query->where('status',0);
                 }),
             ],
@@ -59,12 +58,14 @@ use OtpHandle;
                     flash('Registration Successfully')->success()->important();
                     return redirect("/verifyOtp/$userObj->contact_number");    
                 }
+                if($userObj->role_name != $request->segment(1)){
+                    flash('User not found')->error()->important();
+                    return back(); 
+                }
 
                 // attempt to do the login
                 if (\Auth::attempt($userdata)) {
-
-                    return redirect('/home'); 
-
+                    return redirect('/dashboard');
                 } else {        
 
                     return back(); 
