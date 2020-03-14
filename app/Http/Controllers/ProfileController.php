@@ -165,8 +165,8 @@ class ProfileController extends Controller{
                             $oldImage = config('application.certificate_image_path').'/'.$userCertificateObj->file_name;
                         }
                         $userCertificateObj->file_name =   $this->fileUploadFile($value['image'][$index],config('application.certificate_image_path'),$oldImage);
-                        $userCertificateObj->title = $title;
                     }
+                    $userCertificateObj->title = $title;
                     $userCertificateObj->save();
                     if(isset($oldUserCertificates[$userCertificateObj->id])){
                         unset($oldUserCertificates[$userCertificateObj->id]);
@@ -458,7 +458,6 @@ class ProfileController extends Controller{
         'meta_keyword' => ['required']
        ];
 
-      
      
         $validatorObj =   \Validator::make($request->all(),$rules);
         if($validatorObj->fails()){
