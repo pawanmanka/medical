@@ -14,6 +14,25 @@ DetailFn.prototype.bindElement= function(){
       self.questionList();
       self.reviewList();
      
+    jQuery(document).on('click','.question_helpfull_status',function(e){
+        e.preventDefault();
+        var params = {};
+        var id = jQuery(this).attr('data-id');
+        var status = jQuery(this).attr('data-status');
+        var parentEl = jQuery(this).parents('.question_panel');
+        var helpfull = parentEl.find('.question_helpfull').html();
+        var nothelpfull = parentEl.find('.question_nothelpfull').html();
+        params.success = function(data){
+        
+          if(data.status == 'success')
+          {
+              parentEl.find('.question_helpfull').html(data.helpfull);
+              parentEl.find('.question_nothelpfull').html(data.nothelpfull);
+            
+          }
+        }
+         App.sendRequest('/detail/'+currentUser+'/question-helpfull/'+id+"/"+status,params);
+    });
     jQuery(document).on('change','#specification_doctor',function(){
              jQuery('.class-all-specification').hide();  
              jQuery('.'+jQuery(this).val()).show();  

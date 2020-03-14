@@ -106,22 +106,22 @@
                          @if(!$record->getHospitalDoctor->isEmpty())
                          @foreach ($record->getHospitalDoctor as $item)
                          <tr>
-                                 <td>
+                                 <td style="width: 15%">
                                  <img  style="width: 50px; height: 50px;"  class="imagePreview" id="categoryImage" src="{{ $item->image_url }}">
 
                                       <input type="hidden" name="doctor[id][]" value="{{$item->id}}">   
                                       <input type="file" class="valueInput" name="doctor[image][]" value="{{$item->name}}">   
                                  </td>
-                                 <td>
+                                 <td style="width: 15%">
                                       <input type="text"  class="valueInput" name="doctor[name][]" placeholder="Name" value="{{$item->name}}">
                                 </td>
-                                <td>
+                                <td style="width: 15%">
                                         <input type="text"  class="valueInput" name="doctor[experience][]" placeholder="Experience" value="{{$item->experience}}">
                                  </td>
-                                <td>
+                                <td style="width: 15%">
                                         <input type="text"  class="valueInput" name="doctor[timing][]" placeholder="Timing" value="{{$item->timing}}">
                                  </td>
-                                 <td>
+                                 <td style="width: 15%">
                                  <button class="btn btn-danger delete_doctor"  type="button"><i class="fa fa-plus"></i> Delete Doctor</button> 
    
                                  </td>
@@ -129,7 +129,7 @@
                          @endforeach
                          @else
                          <tr>
-                                <td>
+                                <td >
                                      <input type="file" name="doctor[image][]" value="">   
                                 </td>
                                 <td>
