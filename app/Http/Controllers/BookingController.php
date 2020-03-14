@@ -85,7 +85,7 @@ class BookingController extends Controller
         else{
             abort(404);
         }
-        
+       
         return $view;
     }
 
