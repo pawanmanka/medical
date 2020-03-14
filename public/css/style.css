@@ -3468,9 +3468,14 @@ td.text-right {
 }
 
 .certificate-image {
-  margin-bottom: 20px;
+  margin-bottom: 4px;
 } 
-
+.certificate-title
+{
+  text-align:center;
+  font-weight: 500;
+  text-transform: capitalize;
+}
 /*------------------------------------------*/
 /*   Doctor Data
 /*------------------------------------------*/
@@ -6036,4 +6041,20 @@ table#wallet_table th:last-child ,table#wallet_table td:last-child{
 {
   margin-left:0px;
   margin-right:0px;
+}
+/* .certificate-image {
+  width: 200px;
+  height: auto;
+}
+.certificate-image img.img-responsive {
+  width:200px;
+}*/
+.gallery-image
+{
+width: 140px;
+    margin: auto;
+} 
+.help_last_panel
+{
+  font-weight:bold;
 }

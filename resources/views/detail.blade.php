@@ -268,13 +268,14 @@
 											<div class="row">
 												@foreach ($userPhotos as $certificate)
 												<!-- Certificate Image -->
-												<div class="col-xs-12 col-sm-6 col-lg-3">
-													<div class="certificate-image">
+												<div class="col-xs-12 col-sm-6 col-lg-2 gallery-div">
+													<div class="gallery-image">
 														<a class="image-link" href="{{$certificate->image_url}}" title="{{$record->name}} certificate">
 															<img class="img-fluid" src="{{$certificate->image_url}}" alt="{{$record->name}}-certificate" />
 														</a>
 													</div>
 												</div>
+												
 												@endforeach
 											</div>
 										</div>	<!-- END CERTIFI-->
@@ -310,13 +311,17 @@
 
 									<!-- Certificate Preview -->
 									<div class="row">
+								
 										@foreach ($userCertificate as $certificate)
 										<!-- Certificate Image -->
-										<div class="col-xs-12 col-sm-6 col-lg-3">
+										<div class="col-xs-12 col-sm-6 col-lg-2">
 											<div class="certificate-image">
 												<a class="image-link" href="{{$certificate->image_url}}" title="{{$certificate->title}}">
 													<img class="img-fluid" src="{{$certificate->image_url}}" alt="{{$certificate->title}}" />
 												</a>
+											</div>
+											<div class="certificate-title">
+												<p>Title  Here</p>
 											</div>
 										</div>
 										@endforeach
