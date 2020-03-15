@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
@@ -49,7 +50,7 @@ class UserController extends Controller
         if(!$user->hasRole('doctor')){
             return response()->json(['status'=>'error','message' => 'invalid_credentials'], 400);
         }
-        $user['token'] = $token; 
+        $user['token'] = Crypt::encrypt($user->id); 
         unset($user['roles']);
         $response = array(
             'status'=>'success',
