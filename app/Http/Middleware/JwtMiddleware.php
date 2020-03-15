@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use JWTAuth;
 use Exception;
+use Illuminate\Support\Facades\Crypt;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 class JwtMiddleware extends BaseMiddleware
@@ -19,7 +21,9 @@ class JwtMiddleware extends BaseMiddleware
     public function handle($request, Closure $next)
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
+            $token = Crypt::decrypt($request->token);
+            $user = User::find($token);
+            \Auth::login($user);
         } catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                 return response()->json(['status'=>'error','message' => 'Token is Invalid'],403);
