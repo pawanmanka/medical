@@ -33,7 +33,7 @@ trait OtpHandle{
 
     public function sendOtp($mobile,$userId = 0,$message)
     {
-        Otp::where('mobile', '<>', $mobile)->delete();
+        Otp::where('mobile',$mobile)->delete();
         $token = $this->generateOtp($mobile);
         $OtpObj = new Otp();
         $OtpObj->mobile = $mobile;
