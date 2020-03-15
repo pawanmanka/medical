@@ -97,7 +97,7 @@
                         <div class="doctor_text_holder">
                                 <h5 class="mb-0">{{$item->name}}</h5>
                                 <p>{{isset($item->getUserInformation->category_name)?$item->getUserInformation->category_name:''}}</p>
-                                <p>10 Year Experience</p>
+                                {{-- <p>{{ $item->getUserInformation->experience }} Experience</p> --}}
                                 {!!ratingView($item->avg_rating)!!}
                             </div>
                       
