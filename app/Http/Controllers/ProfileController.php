@@ -184,8 +184,8 @@ class ProfileController extends Controller{
             // doctors
             $oldRecords = UserPhotos::where('user_id',auth()->id())->pluck('id','id')->toArray();
             $value = $request->photo; 
-            if(isset($value['image'])){
-                foreach ($value['image'] as $index => $name) {
+            if(!empty($value)){
+                foreach ($value['id'] as $index => $name) {
                     $id = isset($value['id'][$index])?$value['id'][$index]:0;
                     $userCertificateObj = !empty($id)?UserPhotos::find($id):new UserPhotos();
                     $userCertificateObj->user_id = auth()->id();
