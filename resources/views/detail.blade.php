@@ -368,12 +368,15 @@
 									@endif	
 										
 									@if($record->role_name  == config('application.hospital_role'))	
+									
 										@if(!empty($userInformation->hospital_service))
-										<ul>
+										<div class="row bk-white mar-0">
 										@foreach ($userInformation->hospital_service as $item)
-										<li>{{$item}}</li>
+											<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+												<p><i class="fa fa-arrow-right" aria-hidden="true"></i> {{$item}}</p>
+											</div>
 										@endforeach
-									    </ul>
+										</div>
 										@endif
 									@endif	
 								</div>
@@ -430,7 +433,7 @@
 							@if($record->role_name  == config('application.hospital_role'))
 							<!-- TAB-2 CONTENT -->
 								<div class="tab-pane fade" id="tab-specification" role="tabpanel" aria-labelledby="tab2-list">
-									<div class="row d-flex align-items-center mar-0">
+									<div class="row d-flex align-items-center mar-0 mb-10">
 										 <select class="form-control"  id="specification_doctor">
 											   <option>Select</option>
 											   @foreach ($userInformation->getHospitalDoctor->pluck('specification','specification') as $item)
@@ -454,7 +457,7 @@
 													<span>{{$item->experience}}</span>	
 													<p class="blue-color">{{$item->timing}}</p>	
 													@hasanyrole(config('application.wallet_add_roles'))
-													<a href="{{url('booking/'.$record->slug.'/'.$item->getProductItem->code)}}">Book Appointment</a>
+													<a class="btn btn-info btn-spc mt-7" href="{{url('booking/'.$record->slug.'/'.$item->getProductItem->code)}}">Book Appointment</a>
 													@endhasanyrole
 
 												</div>
@@ -489,7 +492,7 @@
 													<span>{{$item->experience}}</span>	
 													<p class="blue-color">{{$item->timing}}</p>	
 													@hasanyrole(config('application.wallet_add_roles'))
-													<a href="{{url('booking/'.$record->slug.'/'.$item->getProductItem->code)}}">Book Appointment</a>
+													<a class="btn btn-info btn-spc mt-7" href="{{url('booking/'.$record->slug.'/'.$item->getProductItem->code)}}">Book Appointment</a>
 													@endhasanyrole
 
 												</div>

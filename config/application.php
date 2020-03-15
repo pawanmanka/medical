@@ -134,6 +134,8 @@ return [
             'edit'=>'edit',
             'delete'=>'delete'
         ),
-    )
+    ),
+    'symbol_content'=>'( Use this | symbol for multiple entries )',
+    'map_key'=>'AIzaSyCREIdHZBD5RWhB63e58_CYXcat_-MFraQ',
 
     ];
