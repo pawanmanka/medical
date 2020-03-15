@@ -322,7 +322,7 @@
 												</a>
 											</div>
 											<div class="certificate-title">
-												<p>Title  Here</p>
+												<p>{{$certificate->title}}</p>
 											</div>
 										</div>
 										@endforeach
