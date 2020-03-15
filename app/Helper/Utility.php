@@ -64,6 +64,8 @@ if(!function_exists('topRateDoctor')){
              ->whereHas('roles',function($query) use($role){
                 $query->whereIn('name',array($role));
               })
+              ->whereNotNull('mobile_verified_at')
+              ->where('status',0)
              ->limit(6)
              ->get(); 
        }

@@ -69,7 +69,6 @@ class PaymentGateway {
       $headers[] = 'Content-Type: application/json';
       curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
       $data = curl_exec($ch);
-      dd($data);
       if (empty($data) OR (curl_getinfo($ch, CURLINFO_HTTP_CODE != 200))) {
          return array('status'=>'error','message'=>'Please try again');
       } else {
