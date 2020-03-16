@@ -11,6 +11,12 @@ class Question extends Model
     public function getPatient(){
         return $this->hasOne(User::class,'id','patient_id');   
     }
+    public function getTotalHelpFull(){
+        return $this->hasMany(QuestionReview::class,'question_id','id')->where('status',1);   
+    }
+    public function getTotalNotHelpFull(){
+        return $this->hasMany(QuestionReview::class,'question_id','id')->where('status',2);   
+    }
 
     public function getCreateAgeAttribute(){
         $full = false;
