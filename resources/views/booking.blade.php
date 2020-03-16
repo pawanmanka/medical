@@ -24,13 +24,11 @@
                             
                             <div class="doctor_profile_sec">
                             <div class="image-holder">
-<<<<<<< HEAD
+
 
                             <img class="image-round" src="{{baseUrl('uploads/users/'.$userObj->getUserInformation->profile_image)}}" alt="doctor-foto">
 
-=======
-                            <img class="image-round" src="{{baseUrl('uploads/users/'.$userObj->getUserInformation->profile_image)}}" alt="doctor-foto">
->>>>>>> 352d8b19ad2ab41923e5eb88020b9c536ed70438
+
                             </div>
                             <div class="doc_detail">
                             <div class="doctor-details">

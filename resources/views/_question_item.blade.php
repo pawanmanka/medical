@@ -6,7 +6,7 @@
         <div class="ans_div"><b>Answer -</b> {{$item->answer}} </div>
         <div class="help_last_panel">
         <div class="helpful">Helpful &nbsp</div>
-       <span class="question_helpfull">{{$item->helpfull}}</span><a href="#" class="question_helpfull_status" data-status="1" data-id="{{$item->id}}"><i class="fas fa-thumbs-up"></i> </a>&nbsp;<a href="#" class="question_helpfull_status" data-status="0" data-id="{{$item->id}}"><i class="fas fa-thumbs-down"></i> </a>  <span class="question_nothelpfull">{{$item->nothelpfull}}</span>
+       <span class="question_helpfull">{{$item->helpfull}}</span> <a href="#" class="question_helpfull_status" data-status="1" data-id="{{$item->id}}"><i class="fas fa-thumbs-up"></i> </a>&nbsp;<a href="#" class="question_helpfull_status" data-status="0" data-id="{{$item->id}}"><i class="fas fa-thumbs-down"></i> </a>  <span class="question_nothelpfull">{{$item->nothelpfull}}</span>
         <div class="clearfix"></div>
         </div>											
     </div>
