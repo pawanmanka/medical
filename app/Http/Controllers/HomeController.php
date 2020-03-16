@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\Question;
 use App\Models\Review;
 use App\Models\Amenities;
+use App\Models\QuestionReview;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -184,18 +185,28 @@ class HomeController extends Controller
       $helpfull =$nothelpfull = 0;
       $userObj = User::where('slug',$request->seoname)->where('status',0)->first();
       if(isset($userObj->id)){
-         $records =  Question::where('user_id',$userObj->id)->where('id',$request->id)->where('status',1)->first();
+         $records =  Question::withCount(['getTotalHelpFull','getTotalNotHelpFull'])->where('user_id',$userObj->id)->where('id',$request->id)->where('status',1)->first();
          if(isset($userObj->id)){
+            $review = QuestionReview::where('question_id',$records->id)->where('user_id',\Auth::id())->first();
+
             $status = self::$SUCCESS; 
+            if(!isset($review->id)){
+               $review =new QuestionReview();
+               $review->user_id = \Auth::id();
+               $review->question_id = $records->id;
+            }
             if($request->status == 1){
-               $records->helpfull = $records->helpfull+1;
+               $review->status = 1;
             }
             else{
-               $records->nothelpfull = $records->nothelpfull+1;
+               $review->status  = 2;
             }
-            $records->save();
-            $helpfull = $records->helpfull;
-            $nothelpfull = $records->nothelpfull;
+            $review->save();
+
+            $records =  Question::withCount(['getTotalHelpFull','getTotalNotHelpFull'])->where('user_id',$userObj->id)->where('id',$request->id)->where('status',1)->first();
+            $helpfull =$records->get_total_help_full_count;
+            $nothelpfull = $records->get_total_not_help_full_count;
+            
          }
          
       }
@@ -220,7 +231,7 @@ class HomeController extends Controller
          $offset = $page * $limit ;
 
          if($request->type == 'question'){
-            $records =  Question::
+            $records =  Question::withCount(['getTotalHelpFull','getTotalNotHelpFull'])->
             where('user_id',$userObj->id)
             ->where('status',1)
             ->offset($offset)->limit($limit)->get();
