@@ -6,7 +6,8 @@
 
 @section('customScript')
      @parent
-     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCREIdHZBD5RWhB63e58_CYXcat_-MFraQ&libraries=places"></script>
+     var api_key={{config('application.map_key')}};
+     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key="+api_key+"&libraries=places"></script>
      <script>
              var input = document.getElementById('autocomplete_location');
              var autocomplete = new google.maps.places.Autocomplete(input);

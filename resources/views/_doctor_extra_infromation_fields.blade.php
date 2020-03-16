@@ -108,18 +108,21 @@
 
     <div class="form-group mt-20">
             <label class="control-label col-sm-2" for="ActualFee">Education</label>
+            <span>{{config('application.symbol_content')}}</span>
             <div class="col-sm-10 ">
                     <input  type="text" class="form-control required" name="education" value="{{ old('education',isset($record->doctor_education)?$record->doctor_education:'') }}" >
             </div>
     </div>
     <div class="form-group mt-20">
             <label class="control-label col-sm-2" for="specializations">Specializations</label>
+            <span>{{config('application.symbol_content')}}</span>
             <div class="col-sm-10 ">
                     <input  type="text" class="form-control required" name="specializations" value="{{ old('specializations',isset($record->specializations)?$record->specializations:'') }}" >
             </div>
     </div>
     <div class="form-group mt-20">
             <label class="control-label col-sm-2" for="services">Services</label>
+            <span>{{config('application.symbol_content')}}</span>
             <div class="col-sm-10 ">
                     <input  type="text" class="form-control required" name="services" value="{{ old('services',isset($record->services)?$record->services:'') }}" >
             </div>
