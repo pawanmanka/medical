@@ -77,7 +77,7 @@ class AppointmentController extends Controller
                 );
                 if(!auth()->user()->hasRole(config('application.doctor_role')))
                     {
-                        if($getUser->role_name  != config('application.doctor_role')){
+                        if(isset($getUser->role_name) && $getUser->role_name  != config('application.doctor_role')){
                           
                             $labBooking = isset($row->getProductItem->lab_product_type) && $row->getProductItem->lab_product_type >0?($row->getProductItem->lab_product_type==1?'(Service)':'(Package)'):'';
                             $bookingFor = isset($row->getProductItem->name)?$row->getProductItem->name." ".$labBooking:'';
