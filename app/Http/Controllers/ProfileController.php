@@ -881,14 +881,14 @@ class ProfileController extends Controller{
     public function bankDetail(Request $request)
     {
         $user = auth()->user();
-        return view('bank-detail');
+        return view('bank-detail',array('record'=>$user));
     }
     public function bankDetailSave(Request $request)
     {
         $rules = array(
             'ifsc_code' => ['required', 'string'],
             'beneficiary_name' => ['required', 'string'],
-            'account_type' => ['required', 'string'],
+            'account_type' => ['required'],
             'account_number' => ['required']
         );
         $validatorObj =   \Validator::make($request->all(),$rules);
@@ -899,21 +899,26 @@ class ProfileController extends Controller{
         else{
             $user = auth()->user();
             $inputs = $request->only(['ifsc_code', 'beneficiary_name','account_type','account_number']);
-
+            $bankType = config('application.bankType');
+            $inputs['account_type'] = isset($bankType[$request->account_type])?$bankType[$request->account_type]:'';
             $pay = new PaymentGateway();
             $email = "$user->id@arogyarth.com";
-            $output = $pay->createAccount($email,$user->name,$inputs);
-            if($output['status'] == 'error'){
-                flash($output['message'])->error()->important();
-                return back()->withInput(); 
-            }
-            else{
+            // $output = $pay->createAccount($email,$user->name,$inputs);
+            // if($output['status'] == 'error'){
+            //     flash($output['message'])->error()->important();
+            //     return back()->withInput(); 
+            // }
+            // else{
                 $userObj = User::find(auth()->id());
-                $userObj->razorpay_account_id = $output['data'];
+           //     $userObj->razorpay_account_id = $output['data'];
+                $userObj->ifsc_code = $request->ifsc_code;
+                $userObj->beneficiary_name = $request->beneficiary_name;
+                $userObj->account_type = $request->account_type;
+                $userObj->account_number = $request->account_number;
                 $userObj->save();
                 flash(('Bank Add Successfully'))->success()->important();
                 return redirect("/dashboard");
-            }
+           // }
         }
     }
 }
