@@ -15,6 +15,10 @@ return [
         0=>'No',
         1=>'Yes'
     ),
+    'bankType'=>array(
+        1=>'Current',
+        2=>'Saving'
+    ),
     'idProofTypes'=>array(
         1=>'Aadhaar card',
         2=>'Identity Card ',
@@ -95,6 +99,7 @@ return [
         2=>'Availability'
     ),
     'front_end_roles'=>'patient|hospital|doctor|lab',
+    'booking_info_roles'=>'patient|hospital|lab',
     'extra_info_roles'=>'hospital|doctor|lab',
     'wallet_add_roles'=>'doctor|patient',
     'rolePermissionArr'=>array(

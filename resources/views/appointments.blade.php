@@ -18,6 +18,9 @@
                                    <tr>
                                        <th>SR. NO</th>
                                        <th>Name</th>
+                                       @hasanyrole(config('application.booking_info_roles'))
+                                       <th>Booking For</th>
+                                       @endhasanyrole
                                        @hasanyrole(config('application.extra_info_roles'))
                                        <th>Gender</th>
                                        @endhasanyrole
