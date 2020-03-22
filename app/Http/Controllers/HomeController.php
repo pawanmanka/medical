@@ -236,13 +236,13 @@ class HomeController extends Controller
             $records =  Question::withCount(['getTotalHelpFull','getTotalNotHelpFull'])->
             where('user_id',$userObj->id)
             ->where('status',1)
-            ->offset($offset)->limit($limit)->get();
+            ->offset($offset)->limit($limit)->orderBy('id','desc')->get();
             foreach ($records as $key => $value) {
                $output.= \View::make('_question_item',array('item'=>$value))->render();
             }
          }
          else{
-            $records =  Review::where('user_id',$userObj->id)->where('status',1)->offset($offset)->limit($limit)->get();
+            $records =  Review::where('user_id',$userObj->id)->where('status',1)->offset($offset)->limit($limit)->orderBy('id','desc')->get();
             foreach ($records as $key => $value) {
                $output.= \View::make('_review_item',array('item'=>$value))->render();
             }

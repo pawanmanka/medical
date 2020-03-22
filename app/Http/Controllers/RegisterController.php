@@ -33,6 +33,7 @@ class RegisterController extends Controller{
     public function patientSave(Request $request)
     {
        $validatorObj =   \Validator::make($request->all(), [
+            'password' => ['required'],
             'contact_number' => ['required', 'string','max:255', 'unique:users'],
             'password' => ['required', 'string', 'confirmed']
         ]);

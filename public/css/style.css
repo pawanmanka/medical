@@ -6070,3 +6070,7 @@ width: 140px;
   margin-top:7px;
 
 }
+discount{
+  text-decoration: line-through;
+  color: red
+}

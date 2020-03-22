@@ -90,12 +90,13 @@
                     
                         <!-- Avatar -->
                         <div class="txt-widget-avatar">
+                            <a href="{{$item->detail_url}}">
                             <img src="{{isset($item->getUserInformation->profile_pic)?$item->getUserInformation->profile_pic:''}}" alt="{{$item->name}}">	
-
+                            </a>   
                         </div>
                       
                         <div class="doctor_text_holder">
-                                <h5 class="mb-0">{{$item->name}}</h5>
+                                <h5 class="mb-0"><a href="{{$item->detail_url}}">{{$item->name}}</a></h5>
                                 <p>{{isset($item->getUserInformation->category_name)?$item->getUserInformation->category_name:''}}</p>
                                 {{-- <p>{{ $item->getUserInformation->experience }} Experience</p> --}}
                                 {!!ratingView($item->avg_rating)!!}

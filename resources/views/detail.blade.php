@@ -415,14 +415,14 @@
 								<!-- TAB-2 CONTENT -->
 								
 								<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab2-list">
-								
-									<div id="review_list_div"></div>
-								
 									@hasanyrole(config('application.wallet_add_roles'))
 									<div class="text-align-end mar-0">
 										<a href="#"  class="btn btn-sm btn-blue blue-hover" id="reviewForm">Submit Review</a>
 									</div>
 									@endhasanyrole
+									<div id="review_list_div"></div>
+								
+								
 									@if(!empty($record->get_user_rating_count))	
 									<div class="bk-white mt-10" id="get_reviews">
 									   <div class="show_all"><a href=""> Show all reviews ({{config('application.question_feedback_item_limit')}}) </a></div>
@@ -511,11 +511,11 @@
 
 								<!-- TAB-3 CONTENT -->
 								<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab3-list">
-									<div id="question_list_div"></div>
+									
 									@hasanyrole(config('application.wallet_add_roles'))
 											<div class="sub_rew_btn"><a href="#" class="btn btn-sm btn-blue blue-hover" data-toggle="modal" data-target="#questionFormModal">Ask Free Question</a></div>
-											
 									@endhasanyrole
+									<div id="question_list_div"></div>
 									@if(!empty($record->get_questions_count))	
 									 <div class="bk-white mt-10" id="get_questions">
 										<div class="show_all"><a href=""> Show all patient questions ({{config('application.question_feedback_item_limit')}}) </a></div>
