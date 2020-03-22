@@ -750,3 +750,7 @@ ul{
 .facility_sec b{
    font-weight: 700; 
 } 
+discount {
+    text-decoration: line-through;
+    color: red
+}

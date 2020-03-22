@@ -69,7 +69,8 @@ class AppointmentController extends Controller
                     }
                     
                 }
-              
+               $price = $actionButton?"<discount>".$row->price."</discount> ".$row->discount_price:$row->price; 
+               
                 
                 $each = array (
 	    			$row->id,
@@ -94,7 +95,7 @@ class AppointmentController extends Controller
                 $each[] = $row->date_str;
                 $each[] = $row->time;
                 $each[] = $row->code;
-                $each[] = $row->price;
+                $each[] = $price;
                 if($actionButton){
                     if($row->status == Appointment::$STATUS_CANCEL){
                         $action ='Canceled';

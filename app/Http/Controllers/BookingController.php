@@ -159,13 +159,14 @@ class BookingController extends Controller
         $walletObj = $this->data['wallet'];
         $productDetail = $this->data['productDetail'];
         $userObj = $this->data['userObj'];
-   
+        $walletLinkUrl = url('my-wallet');
+        $walletLink = "<a href='$walletLinkUrl'>Click Here</a>";
         if($walletAmount < $productDetail->price){
-            flash('Please Add Money In Wallet')->error()->important();
+            flash('Please Add Money In Wallet '.$walletLink)->error()->important();
             return back()->withInput();
         }
         if(!isset($walletObj->amount)){
-            flash('Please Add Money In Wallet')->error()->important();
+            flash('Please Add Money In Wallet '.$walletLink)->error()->important();
             return back()->withInput();
         }
         

@@ -1,3 +1,4 @@
+
 <div class="col-md-4">
     <div class="sbox-7 icon-xs {{$class}}">
         
@@ -7,7 +8,7 @@
                 <input type="hidden" id="availability_{{$index}}" name="availability[{{$index}}]"  value="{{$availability}}">
                 <h5 class="h5-sm steelblue-color">Time: {{$time}} <i data-index="{{$index}}" class="fas fa-pencil-alt  cursor edit_slot_item text-right"></i></h5>
                 <p class="p-sm"> 
-                    Fee: <spam>{{$price}}</spam>/-
+                    Fee: <discount>{{$price}}</discount><spam> {{$discount_fee}}</spam>/-
                 </p>
             </div>
             
