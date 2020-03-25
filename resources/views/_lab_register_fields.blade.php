@@ -46,6 +46,24 @@
             </div>
     </div> 
 </div>
+@else
+<div  class="col-md-12">
+    <div class="form-group mt-10">
+                <input  type="text" class="form-control required" placeholder="Title" name="meta_title" value="{{ old('meta_title',isset($record->getUserInformation)?$record->getUserInformation->meta_title:'') }}">
+    </div>
+    <div class="form-group mt-10">
+       
+                <input  type="text" class="form-control required" placeholder="Description" name="meta_description" value="{{ old('meta_description',isset($record->getUserInformation)?$record->getUserInformation->meta_description:'') }}">
+    </div>
+    <div class="form-group mt-10">
+        
+                <input  type="text" class="form-control required" placeholder="Key word"  name="meta_keyword" value="{{ old('meta_keyword',isset($record->getUserInformation)?$record->getUserInformation->meta_keyword:'') }}">
+       
+    </div>
+    </div>
+
+@include('admin.elements.upload_certificate')
+@include('admin.elements.upload_photos')
 @endif 
 @section('customScript')
 @parent;

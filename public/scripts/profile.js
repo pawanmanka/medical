@@ -5,10 +5,12 @@ var ProfileFn = function(){
 
 ProfileFn.prototype.init = function(){
         this.handleForm('#profile_form');
+        this.bindElement();
 }
 ProfileFn.prototype.initExtraInfo = function(){
         this.handleForm('#profile_form');
         this.bindElement();
+        this.bindElementExtra();
         this.dataPickerElement();
 }
 
@@ -36,6 +38,9 @@ ProfileFn.prototype.dataPickerElement = function(){
     this.dataPickerFn('h_s_m_datetimepicker_e');
     this.dataPickerFn('h_s_datetimepicker_m');
 }
+ProfileFn.prototype.bindElementExtra = function(){
+    jQuery('.chosen-select').chosen({width: "100%"});
+}
 ProfileFn.prototype.bindElement = function(){
      jQuery('#home_visit').click(function(){
           if(jQuery(this).is(':checked')){
@@ -46,7 +51,7 @@ ProfileFn.prototype.bindElement = function(){
           }
           
         });
-        jQuery('.chosen-select').chosen({width: "100%"});
+      
 
      jQuery('#add_doctor').click(function(){
             var ele = jQuery('#doctors_list').find('tr').clone();

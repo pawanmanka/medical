@@ -50,7 +50,8 @@ class ProfileController extends Controller{
             $this->_getCategory($role_wih_category[$role->name]);
 
         }
-      
+        $this->data['certificates']= $record = UserCertificate::where('user_id',auth()->id())->get();
+
         $this->data['title'] ='Profile'; 
         return view('profile',$this->data);
     }
@@ -100,8 +101,10 @@ class ProfileController extends Controller{
         'location' => ['required','string'],
         'hospital' => ['required','string'],
         'qualification' => ['required','string'],
-        'email' => ['required', 'string','max:255']
-        
+        'email' => ['required', 'string','max:255'],
+        'meta_title' => ['required'],
+        'meta_description' => ['required'],
+        'meta_keyword' => ['required']
        ];
        if(!empty($request->profile_image)){
         $rules['profile_image'] =   ['image','mimes:'.config('application.valid_image_mimes')];
@@ -139,7 +142,11 @@ class ProfileController extends Controller{
                 $oldImage = config('application.users_image_path').'/'.$userInformationObj->profile_image;
                 $userInformationObj->profile_image =   $this->fileUpload($request,config('application.users_image_path'),$oldImage,'profile_image');
             }
-            
+            $userInformationObj->meta_title = $request->meta_title;
+            $userInformationObj->meta_keyword = $request->meta_keyword;
+            $userInformationObj->meta_description = $request->meta_description;
+           
+            $this->_uploadCertificate($request);
             $userInformationObj->save();
             flash('Update Successfully')->success()->important();
             return redirect("/profile");      
@@ -217,7 +224,10 @@ class ProfileController extends Controller{
         'category' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
         'location' => ['required','string'],
-        'email' => ['required', 'string','max:255']
+        'email' => ['required', 'string','max:255'],
+          'meta_title' => ['required'],
+        'meta_description' => ['required'],
+        'meta_keyword' => ['required']
            ];
        if(!empty($request->profile_image)){
         $rules['profile_image'] =   ['image','mimes:'.config('application.valid_image_mimes')];
@@ -252,7 +262,59 @@ class ProfileController extends Controller{
                 $oldImage = config('application.users_image_path').'/'.$userInformationObj->profile_image;
                 $userInformationObj->profile_image =   $this->fileUpload($request,config('application.users_image_path'),$oldImage,'profile_image');
             }
+             $userInformationObj->meta_title = $request->meta_title;
+            $userInformationObj->meta_keyword = $request->meta_keyword;
+            $userInformationObj->meta_description = $request->meta_description;
+                        $userInformationObj->hospital_service = !empty($request->hospital_servic)?json_encode($request->hospital_servic):'{}';
+
             $userInformationObj->save();
+
+                 // doctors
+                 $oldDoctors = HospitalDoctor::where('user_id',auth()->id())->pluck('id','id')->toArray();
+                 $value = $request->doctor; 
+                 if(!empty($value)){
+                     foreach ($value['name'] as $index => $name) {
+                         if(empty($name)) continue;
+                         $id = isset($value['id'][$index])?$value['id'][$index]:0;
+                         $doctor = !empty($id)?HospitalDoctor::find($id):new HospitalDoctor();
+                         $ProductItem = $this->_saveProduct($name,$doctor,$userInformationObj);
+                         $doctor->product_id = $ProductItem->product_id;
+                         $doctor->name = $name;
+                         $doctor->user_id = auth()->id();
+                         $doctor->experience = isset($value['experience'][$index])?$value['experience'][$index]:'';
+                         $doctor->timing = isset($value['timing'][$index])?$value['timing'][$index]:'';
+                         $doctor->specification = isset($value['specification'][$index])?$value['specification'][$index]:'';
+                         if(isset($value['image'][$index])){
+                             $oldImage =null;
+                             if(isset($doctor->image)){
+                                 $oldImage = config('application.hospital_doctor_image_path').'/'.$doctor->image;
+                             }
+                             $doctor->image =   $this->fileUploadFile($value['image'][$index],config('application.hospital_doctor_image_path'),$oldImage);
+                         }
+                         $doctor->save();
+                         if(isset($oldDoctors[$doctor->id])){
+                             unset($oldDoctors[$doctor->id]);
+                         }
+                 }
+                 }
+                 if(!empty($oldDoctors)){
+                    $records = HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->get();
+                    $productIds = array();
+                    foreach ($records as $key => $value) {
+                     $productIds[$value->product_id] = $value->product_id; 
+                    }
+                   HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
+                   if(!empty($productIds)){
+                       Product::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
+                       ProductItem::whereIn('product_id',$oldDoctors)->delete();
+                   }
+     
+                 }
+     
+                
+     
+                  $this->_uploadCertificate($request);
+                  $this->uploadPhoto($request);
 
             flash('Update Successfully')->success()->important();
             return redirect("/profile");    
@@ -270,7 +332,10 @@ class ProfileController extends Controller{
         'category.*' => ['required','numeric'],
         'practice_since' => ['required','numeric'],
         'location' => ['required','string'],
-        'email' => ['required', 'string','max:255']
+        'email' => ['required', 'string','max:255'],
+        'meta_title' => ['required'],
+        'meta_description' => ['required'],
+        'meta_keyword' => ['required']
        ];
      
        if(!empty($request->profile_image)){
@@ -309,7 +374,15 @@ class ProfileController extends Controller{
                 $oldImage = config('application.users_image_path').'/'.$userInformationObj->profile_image;
                 $userInformationObj->profile_image =   $this->fileUpload($request,config('application.users_image_path'),$oldImage,'profile_image');
             }
+            $userInformationObj->meta_title = $request->meta_title;
+            $userInformationObj->meta_keyword = $request->meta_keyword;
+            $userInformationObj->meta_description = $request->meta_description;
+           
+
             $userInformationObj->save();
+
+            $this->_uploadCertificate($request);
+            $this->uploadPhoto($request);
             flash('Update Successfully')->success()->important();
             return redirect("/profile");    
                 
@@ -378,9 +451,9 @@ class ProfileController extends Controller{
         's_evening_end' => ['required'],
         'actual_fee' => ['required'],
         'discounted_fee' => ['required'],
-        'meta_title' => ['required'],
-        'meta_description' => ['required'],
-        'meta_keyword' => ['required']
+        // 'meta_title' => ['required'],
+        // 'meta_description' => ['required'],
+        // 'meta_keyword' => ['required']
        ];
 
        if(!empty($request->home_visit)){
@@ -429,11 +502,7 @@ class ProfileController extends Controller{
             $userInformationObj->specializations = $request->specializations;
             $userInformationObj->actual_fee = $request->actual_fee;
             $userInformationObj->discounted_fee = $request->discounted_fee;
-            $userInformationObj->meta_title = $request->meta_title;
-            $userInformationObj->meta_keyword = $request->meta_keyword;
-            $userInformationObj->meta_description = $request->meta_description;
-           
-            $this->_uploadCertificate($request);
+          
 
 
             $userInformationObj->save();
@@ -453,9 +522,9 @@ class ProfileController extends Controller{
         's_evening_start' => ['required'],
         's_evening_end' => ['required'],
         'facility' => ['required'],
-        'meta_title' => ['required'],
-        'meta_description' => ['required'],
-        'meta_keyword' => ['required']
+        // 'meta_title' => ['required'],
+        // 'meta_description' => ['required'],
+        // 'meta_keyword' => ['required']
        ];
 
      
@@ -478,61 +547,15 @@ class ProfileController extends Controller{
             $userInformationObj->facility = $request->facility;
             $userInformationObj->actual_fee = $request->actual_fee;
             $userInformationObj->discounted_fee = $request->discounted_fee;
-            $userInformationObj->meta_title = $request->meta_title;
-            $userInformationObj->meta_keyword = $request->meta_keyword;
-            $userInformationObj->meta_description = $request->meta_description;
-            $userInformationObj->hospital_service = !empty($request->hospital_servic)?json_encode($request->hospital_servic):'{}';
+            // $userInformationObj->meta_title = $request->meta_title;
+            // $userInformationObj->meta_keyword = $request->meta_keyword;
+            // $userInformationObj->meta_description = $request->meta_description;
             $userInformationObj->save();
-
-            // doctors
-            $oldDoctors = HospitalDoctor::where('user_id',auth()->id())->pluck('id','id')->toArray();
-            $value = $request->doctor; 
-            if(!empty($value)){
-                foreach ($value['name'] as $index => $name) {
-                    if(empty($name)) continue;
-                    $id = isset($value['id'][$index])?$value['id'][$index]:0;
-                    $doctor = !empty($id)?HospitalDoctor::find($id):new HospitalDoctor();
-                    $ProductItem = $this->_saveProduct($name,$doctor,$userInformationObj);
-                    $doctor->product_id = $ProductItem->product_id;
-                    $doctor->name = $name;
-                    $doctor->user_id = auth()->id();
-                    $doctor->experience = isset($value['experience'][$index])?$value['experience'][$index]:'';
-                    $doctor->timing = isset($value['timing'][$index])?$value['timing'][$index]:'';
-                    $doctor->specification = isset($value['specification'][$index])?$value['specification'][$index]:'';
-                    if(isset($value['image'][$index])){
-                        $oldImage =null;
-                        if(isset($doctor->image)){
-                            $oldImage = config('application.hospital_doctor_image_path').'/'.$doctor->image;
-                        }
-                        $doctor->image =   $this->fileUploadFile($value['image'][$index],config('application.hospital_doctor_image_path'),$oldImage);
-                    }
-                    $doctor->save();
-                    if(isset($oldDoctors[$doctor->id])){
-                        unset($oldDoctors[$doctor->id]);
-                    }
-            }
-            }
-            if(!empty($oldDoctors)){
-               $records = HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->get();
-               $productIds = array();
-               foreach ($records as $key => $value) {
-                $productIds[$value->product_id] = $value->product_id; 
-               }
-              HospitalDoctor::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
-              if(!empty($productIds)){
-                  Product::where('user_id',auth()->id())->whereIn('id',$oldDoctors)->delete();
-                  ProductItem::whereIn('product_id',$oldDoctors)->delete();
-              }
-
-            }
-
-            //amenities
-             if(!empty($request->amenities)){
-                $userInformationObj->getAmenities()->sync($request->amenities);
-             }
-
-             $this->_uploadCertificate($request);
-             $this->uploadPhoto($request);
+ //amenities
+ if(!empty($request->amenities)){
+    $userInformationObj->getAmenities()->sync($request->amenities);
+ }
+       
 
 
             flash('Update Successfully')->success()->important();
@@ -577,9 +600,9 @@ class ProfileController extends Controller{
         's_evening_start' => ['required'],
         's_evening_end' => ['required'],
         'facility' => ['required'],
-        'meta_title' => ['required'],
-        'meta_description' => ['required'],
-        'meta_keyword' => ['required']
+        // 'meta_title' => ['required'],
+        // 'meta_description' => ['required'],
+        // 'meta_keyword' => ['required']
        ];
 
       
@@ -599,15 +622,15 @@ class ProfileController extends Controller{
             $userInformationObj->s_evening_start = date("H:i", strtotime($request->s_evening_start));
 
             $userInformationObj->facility = $request->facility;
-            $userInformationObj->meta_title = $request->meta_title;
-            $userInformationObj->meta_keyword = $request->meta_keyword;
-            $userInformationObj->meta_description = $request->meta_description;
+            // $userInformationObj->meta_title = $request->meta_title;
+            // $userInformationObj->meta_keyword = $request->meta_keyword;
+            // $userInformationObj->meta_description = $request->meta_description;
            
 
             $userInformationObj->save();
 
-            $this->_uploadCertificate($request);
-            $this->uploadPhoto($request);
+            // $this->_uploadCertificate($request);
+            // $this->uploadPhoto($request);
 
             flash('Update Successfully')->success()->important();
             return redirect("/extra-info");      
