@@ -49,10 +49,10 @@
             </div>
     </div>   
 
-    <div class="form-group mt-50">
+    {{-- <div class="form-group mt-50">
         <a class="btn btn-primary" href="{{ url('/my-services') }}">My Service</a>
         <a class="btn btn-primary" href="{{ url('/my-packages') }}">My Packages</a>
-    </div>
+    </div> --}}
 
     <div class="form-group mt-10">
             <label class="control-label col-sm-2" for="facility">Facility</label>
