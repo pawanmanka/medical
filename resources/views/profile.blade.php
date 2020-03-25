@@ -54,7 +54,10 @@
   var profileObj = new ProfileFn();
   var categoryArr = {!! json_encode($categoryArr) !!}
   jQuery(document).ready(function(){
-    profileObj.categorySubCategory(categoryArr);
+     if(Object.keys(categoryArr).length > 0){
+         profileObj.categorySubCategory(categoryArr);
+
+     } 
     profileObj.init();
   })
 </script>

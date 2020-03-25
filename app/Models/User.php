@@ -76,7 +76,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Category::class,'lab_categories','user_id','category_id');
 
     }
-
+    public function getHospitalDoctor()
+    {
+      return $this->hasMany(HospitalDoctor::class,'user_id','id');
+    }
     public function getAppointmentCount(){
         return $this->hasMany(Appointment::class,'user_id','id')
         ->where(\DB::Raw('DATE(date)'),\DB::Raw('NOW()'));

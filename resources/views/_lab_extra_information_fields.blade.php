@@ -49,10 +49,10 @@
             </div>
     </div>   
 
-    <div class="form-group mt-50">
+    {{-- <div class="form-group mt-50">
         <a class="btn btn-primary" href="{{ url('/my-services') }}">My Service</a>
         <a class="btn btn-primary" href="{{ url('/my-packages') }}">My Packages</a>
-    </div>
+    </div> --}}
 
     <div class="form-group mt-10">
             <label class="control-label col-sm-2" for="facility">Facility</label>
@@ -60,26 +60,6 @@
                     <input  type="text" class="form-control required" name="facility" value="{{ old('facility',isset($record->facility)?$record->facility:'') }}">
             </div>
     </div>
-    <div class="form-group mt-10">
-            <label class="control-label col-sm-2" for="title">Title</label>
-            <div class="col-sm-10 ">
-                    <input  type="text" class="form-control required" name="meta_title" value="{{ old('meta_title',isset($record->meta_title)?$record->meta_title:'') }}">
-            </div>
-    </div>
-    <div class="form-group mt-10">
-            <label class="control-label col-sm-2" for="Description">Description</label>
-            <div class="col-sm-10 ">
-                    <input  type="text" class="form-control required" name="meta_description" value="{{ old('meta_description',isset($record->meta_description)?$record->meta_description:'') }}">
-            </div>
-    </div>
-    <div class="form-group mt-10">
-            <label class="control-label col-sm-2" for="Keyword">Keyword</label>
-            <div class="col-sm-10 ">
-                    <input  type="text" class="form-control required"  name="meta_keyword" value="{{ old('meta_keyword',isset($record->meta_keyword)?$record->meta_keyword:'') }}">
-            </div>
-    </div>
 
-    @include('admin.elements.upload_certificate')
-    @include('admin.elements.upload_photos')
 </div>
     

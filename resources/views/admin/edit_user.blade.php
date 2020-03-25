@@ -19,6 +19,7 @@
                                     <li><a class="nav-link active" data-toggle="tab" href="#tab-1">Profile</a></li>
                                     @if ($record->role_name  != config('application.patient_role')) 
                                       <li><a class="nav-link" data-toggle="tab" href="#tab-extra_info">Extra Info</a></li>
+                                      <li><a class="nav-link" data-toggle="tab" href="#tab-bank_detail">Bank Detail</a></li>
                                       <li><a class="nav-link" data-toggle="tab" href="#tab-reviews">Reviews</a></li>
                                       <li><a class="nav-link" data-toggle="tab" href="#tab-questions">Questions</a></li>
                                     @endif
@@ -53,6 +54,13 @@
                                         </div>
                                     </div>
                                   
+                                    <div role="tabpanel" id="tab-bank_detail" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="contact-form only_view">
+                                                @include('_bank_detail',array('record'=>$record)) 
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div role="tabpanel" id="tab-extra_info" class="tab-pane">
                                         <div class="panel-body">
                                             <div class="contact-form only_view">
