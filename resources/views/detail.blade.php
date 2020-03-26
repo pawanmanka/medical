@@ -398,14 +398,15 @@
 											<th>Package Name /Code Description</th>
 											<th>Package  Fee</th>
 											<th>Discounted Fee(Only for member)</th>
+											@hasanyrole(config('application.wallet_add_roles'))
 											<th>Action</th>
-											
+											@endhasanyrole
 										</tr>
 										<?php $i=1; ?>
 										@foreach($packages as $item)
 										<tr>
 										<td><?php echo $i; ?></td>
-											<td>{{$item->name}}</td>
+											<td>{{$item->name}} <i class="fa fa-info btn btn-primary detailPackage" data-detail="{{$item->description}}" ></i></td>
 											<td>{{$item->actual_price}}</td>
 											<td>{{$item->discount_price}}</td>
 											@hasanyrole(config('application.wallet_add_roles'))
@@ -556,6 +557,7 @@
 			</section> <!-- END  DOCTOR-2 DETAILS -->
 
 @include('_review_modal')
+@include('_package_description_modal')
 @endsection
 
 

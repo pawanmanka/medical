@@ -85,7 +85,7 @@ class HomeController extends Controller
     }
     public function labs()
     {   
-        $this->data['title'] = 'Labs';
+        $this->data['title'] = 'Lab and Diagnostics';
         $this->_getListData(array(config('application.lab_role')));
         return view('listing',$this->data);
     }

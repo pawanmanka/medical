@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.41112,
+    'siteVersion'=>0.411212,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
@@ -61,7 +61,7 @@ return [
     'super_categories'=>array(
         1=>'Doctor',
         2=>'Hospital',
-        3=>'Test Lab'
+        3=>'Lab and Diagnostics'
     ),
     'super_categories_slug'=>array(
         1=>'doctors',

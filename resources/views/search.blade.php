@@ -36,9 +36,9 @@
                                             </div>
                                             <div class="col-md-6 col-lg-3 ">
                                                 <div class="form-group">
-                                                    <label for="">Doctor/Hospital/Test Lab</label>
-                                                    <select name="cate" class="form-control" placeholder="Select Doctor/Hospital/Test Lab">
-                                                        <option value="time">Doctor/Hospital/Test Lab</option>
+                                                    <label for="">Doctor/Hospital/ Lab and Diagnostics</label>
+                                                    <select name="cate" class="form-control" placeholder="Select Doctor/Hospital/ Lab and Diagnostics">
+                                                        <option value="time">Doctor/Hospital/ Lab and Diagnostics</option>
                                                     </select>												
                                                 </div>											
                                             </div>
