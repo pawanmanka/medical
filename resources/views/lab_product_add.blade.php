@@ -19,10 +19,11 @@
                                     <input type="text" name="name" value="{{old('name',isset($record)?$record->name:'')}}"  class="form-control required " placeholder="Name"  > 
                                 </div>
                                 @if($segment =='my-packages')
-                                <div  class="col-md-12">
-                                    <textarea name="description" class="form-control required "   placeholder="Description"   cols="30" rows="10">{{old('description',isset($record)?$record->description:'')}}</textarea>
+                                <div  class="col-md-12" style="margin-bottom: 15px;">
+                                    <textarea name="description" id="description" class="form-control required "   placeholder="Description"   cols="30" rows="10">{{old('description',isset($record)?$record->description:'')}}</textarea>
                                    
                                 </div>
+                                <br>
                                 @endif
                                 <div  class="col-md-12">
                                     <input type="text" name="actual_fee" value="{{old('actual_fee',isset($record)?$record->actual_price:'')}}" class="form-control required " placeholder="Fee"  > 
@@ -47,9 +48,20 @@
 
 @section('customStyle')
 <link rel="stylesheet" href="{{ baseUrl('admin/css/plugins/dataTables/datatables.min.css') }}">
+<link rel="stylesheet" href="{{ baseUrl('admin/css/plugins/summernote/summernote-bs4.css') }}">
 
 @endsection
 @section('customScript')
+<script src="{{ baseUrl('js/tinymce.min.js') }}"></script>
+<script>
+    tinymce.init({
+        menubar:false,
+        statusbar: false,
+  selector: 'textarea',  // change this value according to the HTML
+  toolbar: 'undo redo | styleselect | bold italic'
+});
+</script>
+
 <script src="{{ baseUrl('js/jquery.validate.min.js') }}"></script>
 
      <script src="{{ baseUrl('scripts/products.js') }}"></script>
@@ -57,6 +69,7 @@
        var productObj = new ProductFn();
        jQuery(document).ready(function(){
          productObj.initLabFrom();
+        
        })
      </script>
 @endsection

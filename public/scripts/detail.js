@@ -38,6 +38,11 @@ DetailFn.prototype.bindElement= function(){
                
              jQuery('#reviewFormModal').modal('show');  
     });
+    jQuery(document).on('click','.detailPackage',function(){
+               
+             jQuery('#packageDescription').html(jQuery(this).attr('data-detail'));  
+             jQuery('#packageDescriptionModal').modal('show');  
+    });
     jQuery(document).on('click','#get_questions',function(e){
         e.preventDefault();
         self.questionList();

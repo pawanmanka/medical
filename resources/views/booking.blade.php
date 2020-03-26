@@ -70,7 +70,7 @@
                                             @else
                                             <tr><td>Booking For :-{{ $productDetail->name }}</td></tr>    
                                             @endif    
-                                            <tr><td>Fee :-{{ $productDetail->price }}</td></tr> 
+                                            <tr><td>Fee :- <discount>{{ $productDetail->actual_price }}</discount> {{$productDetail->discount_price }}</td></tr> 
                                             
                                             @if($productDetail->lab_product_type == 2)   
                                             <tr><td>{{ $productDetail->description }}</td></tr>
