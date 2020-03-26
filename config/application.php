@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.34112,
+    'siteVersion'=>0.41112,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
@@ -142,5 +142,5 @@ return [
     ),
     'symbol_content'=>'( Use this | symbol for multiple entries )',
     'map_key'=>'AIzaSyCREIdHZBD5RWhB63e58_CYXcat_-MFraQ',
-
+    "week_days" => ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
     ];

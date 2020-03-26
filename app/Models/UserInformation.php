@@ -23,7 +23,13 @@ class UserInformation extends Model
 
     public function getHospitalServiceAttribute($data){
             if(!empty($data)){
-              return json_decode($data);
+              return  json_decode($data);
+            } 
+            return array();
+    }
+    public function getWeeklyTimingAttribute($data){
+            if(!empty($data)){
+              return (array) json_decode($data);
             } 
             return array();
     }

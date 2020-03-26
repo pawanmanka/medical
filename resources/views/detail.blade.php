@@ -192,11 +192,20 @@
 											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
 												<h5 class="h5-md ">General Timing </h5><br>
+														@if(!empty($userInformation->weekly_timing))
+														     @foreach ($userInformation->weekly_timing as $key => $item)
+															 <h6>{{ucfirst($key)}}</h6>
+															 <p>Morning : {{ ($item->morning->from)}} - {{ ($item->morning->to)}} </p>
+															 <p>Evening : {{ ($item->evening->from)}} - {{ ($item->evening->to)}} </p>
+															
+															 @endforeach
+														@else
 														<h6>Mon – Sat </h6>
 														<p>Morning : {{ $userInformation->mon_sat_morning_time  }} </p>
 														<p>Evening : {{ $userInformation->mon_sat_evening_time  }} </p>
 														<h6>Sun</h6>
 														<p>Morning : {{ $userInformation->sun_morning_time  }} </p>
+														@endif
 												</div>
 												@if($record->role_name  == config('application.doctor_role'))
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">

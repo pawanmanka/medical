@@ -30,7 +30,11 @@ ProfileFn.prototype.dataPickerFn = function(className){
     });
 }
 ProfileFn.prototype.dataPickerElement = function(){
-  
+    var self = this;
+    jQuery('.datepickerHandler').each(function(i,e){
+        self.dataPickerFn(jQuery(e).attr('data-class'));
+            
+    });
     this.dataPickerFn('m_s_datetimepicker_m');
     this.dataPickerFn('m_s_datetimepicker_e');
     this.dataPickerFn('s_datetimepicker_m');

@@ -443,12 +443,12 @@ class ProfileController extends Controller{
     {
         
        $rules =  [
-        'm_to_s_morning_start' => ['required'],
-        'm_to_s_morning_end' => ['required'],
-        'm_to_s_evening_start' => ['required'],
-        'm_to_s_evening_end' => ['required'],
-        's_evening_start' => ['required'],
-        's_evening_end' => ['required'],
+        // 'm_to_s_morning_start' => ['required'],
+        // 'm_to_s_morning_end' => ['required'],
+        // 'm_to_s_evening_start' => ['required'],
+        // 'm_to_s_evening_end' => ['required'],
+        // 's_evening_start' => ['required'],
+        // 's_evening_end' => ['required'],
         'actual_fee' => ['required'],
         'discounted_fee' => ['required'],
         // 'meta_title' => ['required'],
@@ -472,12 +472,14 @@ class ProfileController extends Controller{
         }
         else{
             $userInformationObj = UserInformation::where('user_id',auth()->id())->first();
-            $userInformationObj->m_to_s_morning_start = date("H:i", strtotime($request->m_to_s_morning_start));
-            $userInformationObj->m_to_s_morning_end = date("H:i", strtotime($request->m_to_s_morning_end));
-            $userInformationObj->m_to_s_evening_start = date("H:i", strtotime($request->m_to_s_evening_start));
-            $userInformationObj->m_to_s_evening_end = date("H:i", strtotime($request->m_to_s_evening_end));
-            $userInformationObj->s_evening_end = date("H:i", strtotime($request->s_evening_end));
-            $userInformationObj->s_evening_start = date("H:i", strtotime($request->s_evening_start));
+            $userInformationObj->weekly_timing = json_encode($request->weekly_timing);
+
+            // $userInformationObj->m_to_s_morning_start = date("H:i", strtotime($request->m_to_s_morning_start));
+            // $userInformationObj->m_to_s_morning_end = date("H:i", strtotime($request->m_to_s_morning_end));
+            // $userInformationObj->m_to_s_evening_start = date("H:i", strtotime($request->m_to_s_evening_start));
+            // $userInformationObj->m_to_s_evening_end = date("H:i", strtotime($request->m_to_s_evening_end));
+            // $userInformationObj->s_evening_end = date("H:i", strtotime($request->s_evening_end));
+            // $userInformationObj->s_evening_start = date("H:i", strtotime($request->s_evening_start));
 
             if(!empty($request->home_visit)){
                 $userInformationObj->h_m_s_morning_start = date("H:i", strtotime($request->h_m_s_morning_start));
