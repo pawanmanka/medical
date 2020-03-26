@@ -5,10 +5,12 @@ var ProfileFn = function(){
 
 ProfileFn.prototype.init = function(){
         this.handleForm('#profile_form');
+        this.bindElement();
 }
 ProfileFn.prototype.initExtraInfo = function(){
         this.handleForm('#profile_form');
         this.bindElement();
+        this.bindElementExtra();
         this.dataPickerElement();
 }
 
@@ -28,13 +30,20 @@ ProfileFn.prototype.dataPickerFn = function(className){
     });
 }
 ProfileFn.prototype.dataPickerElement = function(){
-  
+    var self = this;
+    jQuery('.datepickerHandler').each(function(i,e){
+        self.dataPickerFn(jQuery(e).attr('data-class'));
+            
+    });
     this.dataPickerFn('m_s_datetimepicker_m');
     this.dataPickerFn('m_s_datetimepicker_e');
     this.dataPickerFn('s_datetimepicker_m');
     this.dataPickerFn('h_s_m_datetimepicker_m');
     this.dataPickerFn('h_s_m_datetimepicker_e');
     this.dataPickerFn('h_s_datetimepicker_m');
+}
+ProfileFn.prototype.bindElementExtra = function(){
+    jQuery('.chosen-select').chosen({width: "100%"});
 }
 ProfileFn.prototype.bindElement = function(){
      jQuery('#home_visit').click(function(){
@@ -46,7 +55,7 @@ ProfileFn.prototype.bindElement = function(){
           }
           
         });
-        jQuery('.chosen-select').chosen({width: "100%"});
+      
 
      jQuery('#add_doctor').click(function(){
             var ele = jQuery('#doctors_list').find('tr').clone();

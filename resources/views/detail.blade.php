@@ -190,11 +190,20 @@
 											
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
 												<h5 class="h5-md ">General Timing </h5><br>
+														@if(!empty($userInformation->weekly_timing))
+														     @foreach ($userInformation->weekly_timing as $key => $item)
+															 <h6>{{ucfirst($key)}}</h6>
+															 <p>Morning : {{ ($item->morning->from)}} - {{ ($item->morning->to)}} </p>
+															 <p>Evening : {{ ($item->evening->from)}} - {{ ($item->evening->to)}} </p>
+															
+															 @endforeach
+														@else
 														<h6>Mon – Sat </h6>
 														<p>Morning : {{ $userInformation->mon_sat_morning_time  }} </p>
 														<p>Evening : {{ $userInformation->mon_sat_evening_time  }} </p>
 														<h6>Sun</h6>
 														<p>Morning : {{ $userInformation->sun_morning_time  }} </p>
+														@endif
 												</div>
 												@if($record->role_name  == config('application.doctor_role'))
 												<div class="col-xs-12 col-md-6 col-xl-6 mar-0">
@@ -389,14 +398,15 @@
 											<th>Package Name /Code Description</th>
 											<th>Package  Fee</th>
 											<th>Discounted Fee(Only for member)</th>
+											@hasanyrole(config('application.wallet_add_roles'))
 											<th>Action</th>
-											
+											@endhasanyrole
 										</tr>
 										<?php $i=1; ?>
 										@foreach($packages as $item)
 										<tr>
 										<td><?php echo $i; ?></td>
-											<td>{{$item->name}}</td>
+											<td>{{$item->name}} <i class="fa fa-info btn btn-primary detailPackage" data-detail="{{$item->description}}" ></i></td>
 											<td>{{$item->actual_price}}</td>
 											<td>{{$item->discount_price}}</td>
 											@hasanyrole(config('application.wallet_add_roles'))
@@ -415,14 +425,14 @@
 								<!-- TAB-2 CONTENT -->
 								
 								<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab2-list">
-								
-									<div id="review_list_div"></div>
-								
 									@hasanyrole(config('application.wallet_add_roles'))
 									<div class="text-align-end mar-0">
 										<a href="#"  class="btn btn-sm btn-blue blue-hover" id="reviewForm">Submit Review</a>
 									</div>
 									@endhasanyrole
+									<div id="review_list_div"></div>
+								
+								
 									@if(!empty($record->get_user_rating_count))	
 									<div class="bk-white mt-10" id="get_reviews">
 									   <div class="show_all"><a href=""> Show all reviews ({{config('application.question_feedback_item_limit')}}) </a></div>
@@ -511,11 +521,11 @@
 
 								<!-- TAB-3 CONTENT -->
 								<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab3-list">
-									<div id="question_list_div"></div>
+									
 									@hasanyrole(config('application.wallet_add_roles'))
 											<div class="sub_rew_btn"><a href="#" class="btn btn-sm btn-blue blue-hover" data-toggle="modal" data-target="#questionFormModal">Ask Free Question</a></div>
-											
 									@endhasanyrole
+									<div id="question_list_div"></div>
 									@if(!empty($record->get_questions_count))	
 									 <div class="bk-white mt-10" id="get_questions">
 										<div class="show_all"><a href=""> Show all patient questions ({{config('application.question_feedback_item_limit')}}) </a></div>
@@ -547,6 +557,7 @@
 			</section> <!-- END  DOCTOR-2 DETAILS -->
 
 @include('_review_modal')
+@include('_package_description_modal')
 @endsection
 
 

@@ -82,7 +82,8 @@ var ProductFn = function(){
                jQuery('#slot_item_'+self.slotIndex).find('#actual_fee_'+self.slotIndex).val(jQuery('#edit_slot_actual_fee').val());
                jQuery('#slot_item_'+self.slotIndex).find('#discount_fee_'+self.slotIndex).val(jQuery('#edit_slot_discount_fee').val());
                jQuery('#slot_item_'+self.slotIndex).find('#availability_'+self.slotIndex).val(jQuery('#edit_slot_availability').val());
-               jQuery('#slot_item_'+self.slotIndex).find('.p-sm spam').html(jQuery('#edit_slot_actual_fee').val());
+               jQuery('#slot_item_'+self.slotIndex).find('.p-sm spam').html(jQuery('#edit_slot_discount_fee').val());
+               jQuery('#slot_item_'+self.slotIndex).find('discount').html(jQuery('#edit_slot_actual_fee').val());
                jQuery('#edit_slot_modal').modal('hide');
            }
        });

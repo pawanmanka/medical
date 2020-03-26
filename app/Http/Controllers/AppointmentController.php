@@ -60,21 +60,34 @@ class AppointmentController extends Controller
                     $getUser = $row->getUser;
                     if(isset($getUser->id)){
                         $userName = isset($getUser->name)?$getUser->name:'';
-                        if($getUser->role_name  == config('application.hospital_role')){
-                            $userName .= isset($row->getProductItem->name)?" (".$row->getProductItem->name.")":'';
-                        }
+                        // if($getUser->role_name  == config('application.hospital_role')){
+                        //     $userName .= isset($row->getProductItem->name)?" (".$row->getProductItem->name.")":'';
+                        // }
                         
                         $userName = "<a target='_blank' href='$getUser->detail_url'>$userName</a>";
 
                     }
                     
                 }
-              
+               $price = $actionButton?"<discount>".$row->price."</discount> ".$row->discount_price:$row->price; 
+               
                 
                 $each = array (
 	    			$row->id,
 	    			$userName
                 );
+                if(!auth()->user()->hasRole(config('application.doctor_role')))
+                    {
+                        if(isset($getUser->role_name) && $getUser->role_name  != config('application.doctor_role')){
+                          
+                            $labBooking = isset($row->getProductItem->lab_product_type) && $row->getProductItem->lab_product_type >0?($row->getProductItem->lab_product_type==1?'(Service)':'(Package)'):'';
+                            $bookingFor = isset($row->getProductItem->name)?$row->getProductItem->name." ".$labBooking:'';
+                            $each[] = $bookingFor;
+                        }  
+                        else{
+                            $each[] = '-';
+                        }
+                    }
                 if($row->user_id == auth()->id())
                 {
                  $each[] = $row->patient_gender;
@@ -82,7 +95,7 @@ class AppointmentController extends Controller
                 $each[] = $row->date_str;
                 $each[] = $row->time;
                 $each[] = $row->code;
-                $each[] = $row->price;
+                $each[] = $price;
                 if($actionButton){
                     if($row->status == Appointment::$STATUS_CANCEL){
                         $action ='Canceled';

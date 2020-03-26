@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.3441,
+    'siteVersion'=>0.411212,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
@@ -14,6 +14,10 @@ return [
     'yesNoArr'=>array(
         0=>'No',
         1=>'Yes'
+    ),
+    'bankType'=>array(
+        1=>'Current',
+        2=>'Saving'
     ),
     'idProofTypes'=>array(
         1=>'Aadhaar card',
@@ -57,7 +61,7 @@ return [
     'super_categories'=>array(
         1=>'Doctor',
         2=>'Hospital',
-        3=>'Test Lab'
+        3=>'Lab and Diagnostics'
     ),
     'super_categories_slug'=>array(
         1=>'doctors',
@@ -95,6 +99,7 @@ return [
         2=>'Availability'
     ),
     'front_end_roles'=>'patient|hospital|doctor|lab',
+    'booking_info_roles'=>'patient|hospital|lab',
     'extra_info_roles'=>'hospital|doctor|lab',
     'wallet_add_roles'=>'doctor|patient',
     'rolePermissionArr'=>array(
@@ -137,5 +142,5 @@ return [
     ),
     'symbol_content'=>'( Use this | symbol for multiple entries )',
     'map_key'=>'AIzaSyCREIdHZBD5RWhB63e58_CYXcat_-MFraQ',
-
+    "week_days" => ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
     ];
