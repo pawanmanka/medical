@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title','Lab Register')
+@section('title','Lab and Diagnostics Register')
 @section('content')
 <section id="contacts-1" class="wide-60 contacts-section division">				
     <div class="container">
         <div class="row">	
             <div class="col-lg-10 offset-lg-1 section-title">
-                <h3 class="h3-md steelblue-color">Lab Register</h3>
+                <h3 class="h3-md steelblue-color">Lab and Diagnostics Register</h3>
             </div>
         </div>
 

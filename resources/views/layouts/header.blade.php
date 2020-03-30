@@ -106,7 +106,7 @@
 							  </li> 
 							<li aria-haspopup="true"><a href="{{ url('doctors') }}">Doctor </a></li>
 							<li aria-haspopup="true"><a href="{{ url('hospitals') }}">Hospital  </a></li>
-							<li aria-haspopup="true"><a href="{{ url('labs') }}">Laboratory</a></li>
+							<li aria-haspopup="true"><a href="{{ url('labs') }}">Lab and Diagnostics</a></li>
 								
                              
 

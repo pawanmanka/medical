@@ -91,7 +91,7 @@
             @endcanany
             @canany(['delete lab','edit lab'])
             <li class="{{ isset($menu) && ($menu == 'lab')?'active':'' }}">
-                <a href="{{ url('administrator/lab/list') }}"><i class="fa fa-list"></i> <span class="nav-label">Lab management</span></a>
+                <a href="{{ url('administrator/lab/list') }}"><i class="fa fa-list"></i> <span class="nav-label">Lab and Diagnostics management</span></a>
             </li>
             @endcanany
             

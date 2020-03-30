@@ -13,7 +13,7 @@ class LabController extends UserCommonController
     public function __construct()
     {
         parent::__construct();
-        $this->data['title'] = 'Lab';
+        $this->data['title'] = 'Lab and Diagnostics';
         $this->data['pageView'] = 'admin.lab';
     } 
 
