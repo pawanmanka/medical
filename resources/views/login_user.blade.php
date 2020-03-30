@@ -33,7 +33,7 @@
 				 		<div class="col-md-6 col-lg-6 offset-lg-3 col-md-offset-5">
 							<a href="{{ url('/lab/login') }}">
 								<div class="card">
-									<div class="card-body">Testing Lab</div>
+									<div class="card-body">Lab and Diagnostics</div>
 								</div>
 							</a>
 				 		</div>
