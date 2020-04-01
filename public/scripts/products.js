@@ -117,7 +117,8 @@ var ProductFn = function(){
            App.showMessage(data.message,data.status);
          }
        }
-       App.sendRequest('/get-slots', params);
+       var edit = jQuery('.slot_create_form').attr('data-id').length > 0 ?'yes':'no'; 
+       App.sendRequest('/get-slots?edit='+edit, params);
    }
    
    ProductFn.prototype.dataPickerFn = function(){

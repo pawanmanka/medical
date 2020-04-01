@@ -5,7 +5,7 @@
  $timeRangeArr = array_combine(range(1,24),range(1,24));
 return [
     "siteEmail"=>"admin@admin.com",
-    'siteVersion'=>0.4113212,
+    'siteVersion'=>0.41131212,
     'genderArr'=>array(
         1=>'Male',
         2=>'Female',
