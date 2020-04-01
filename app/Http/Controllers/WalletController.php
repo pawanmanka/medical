@@ -80,6 +80,7 @@ class WalletController extends Controller
             'totalAmount'=>'required',
             'productId'=>'required'
         );
+        $total = 0;
         $status = self::$ERROR;
         $validation = \Validator::make($request->all(),$rules);
         if($validation->fails()){
@@ -104,13 +105,15 @@ class WalletController extends Controller
  
            $walletObj->amount = $walletTransObj->after_total;
            $walletObj->save();
+           $total = $walletObj->amount;
 
            $message = 'Money Add Successfully';
         }
 
         $result = array(
             'status'=>$status,
-            'message'=>$message
+            'message'=>$message,
+            'total'=>$total,
         );
 
         return response()->json($result);

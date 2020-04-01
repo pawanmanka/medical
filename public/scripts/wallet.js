@@ -76,7 +76,8 @@ var WalletFn = function(){
                     success: function (data) {
                         App.showMessage(data.message,data.status);
                         if(data.status == 'success')
-                        {
+                        {   //wallet_grand_total_amount
+                        jQuery('#wallet_grand_total_amount').html(data.total);
                             walletObj.table.fnDraw();
                             jQuery('#addWalletMoneyShowModal').modal('hide');
                         }

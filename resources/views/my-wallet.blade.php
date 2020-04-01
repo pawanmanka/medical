@@ -14,7 +14,7 @@
                             <div class="mt-20">
                                 <div class="row mlr-0">
                                     <div class="col-lg-6">
-                                        <h4>My wallet Balance ( {{$amount}} )</h4>
+                                        <h4>My wallet Balance ( <span id="wallet_grand_total_amount">{{$amount}}</span> )</h4>
                                     </div>
                                     <div class="col-lg-6 text-right">
                                         @hasanyrole(config('application.extra_info_roles'))
