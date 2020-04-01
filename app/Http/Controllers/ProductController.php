@@ -277,7 +277,14 @@ class ProductController extends Controller
             $message =   makeErrorMessage($validation->errors()->messages());
         }
         else{
-           $time_start = strtotime($request->time_start);
+            $date = date('Y-m-d',strtotime($request->date));
+            $productObj = Product::where('date',$date)->whereUserId(auth()->id())->first();
+            
+            if($request->edit == 'no' && isset($productObj->id)){
+                $message = "Please edit this date already resent in your list";
+            }
+            else{
+                $time_start = strtotime($request->time_start);
            $time_end = strtotime($request->time_end);
            if($time_start < $time_end){
               $oldItems = array();  
@@ -287,8 +294,7 @@ class ProductController extends Controller
               $date_time_start = "$request->date $request->time_start";
               $date_time_start_value = date('Y-m-d',strtotime($date_time_start));
               $time_start_value = strtotime($date_time_start);
-              $date = date('Y-m-d',strtotime($request->date));
-              $productObj = Product::where('date',$date)->whereUserId(auth()->id())->first();
+              
               $editMode = false;
               if(isset($productObj->id)){
                 $editMode = true;
@@ -329,7 +335,10 @@ class ProductController extends Controller
            }
            else{
             $message =  "End Time Grater than Start time";
-           }
+           }  
+            }
+
+         
         }
         $result = array(
             'status'=>$status,

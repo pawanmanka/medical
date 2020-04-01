@@ -45,6 +45,10 @@ class Appointment extends Model
     {
         return $this->hasOne(User::class,'id','user_id');
     }
+    public function getAppointmentCancelUser()
+    {
+        return $this->hasOne(User::class,'id','cancel_by_user');
+    }
 
     public function generateUniqueCode()
     {
