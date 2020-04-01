@@ -45,7 +45,7 @@ class AppointmentController extends Controller
             $fieldName = 'patient_id';
       
         }
-        $this->query = Appointment::with('getUser')
+        $this->query = Appointment::with(['getUser','getAppointmentCancelUser'])
         ->where($fieldName,auth()->id());        
     	$output = $this->getGridData();
         if(!empty($output['recordsTotal']) && $output['recordsTotal']>0 && !empty($output['data'])){
@@ -79,7 +79,6 @@ class AppointmentController extends Controller
                 if(!auth()->user()->hasRole(config('application.doctor_role')))
                     {
                         if(isset($getUser->role_name) && $getUser->role_name  != config('application.doctor_role')){
-                          
                             $labBooking = isset($row->getProductItem->lab_product_type) && $row->getProductItem->lab_product_type >0?($row->getProductItem->lab_product_type==1?'(Service)':'(Package)'):'';
                             $bookingFor = isset($row->getProductItem->name)?$row->getProductItem->name." ".$labBooking:'';
                             $each[] = $bookingFor;
@@ -96,15 +95,16 @@ class AppointmentController extends Controller
                 $each[] = $row->time;
                 $each[] = $row->code;
                 $each[] = $price;
-                if($actionButton){
+               // if($actionButton){
                     if($row->status == Appointment::$STATUS_CANCEL){
-                        $action ='Canceled';
+                        $canceledUser = auth()->id()== $row->cancel_by_user?'You':$row->getAppointmentCancelUser->name;
+                        $action ="Canceled by ($canceledUser)";
                     }
                     else{
                         $action ="<a href='#' class='cancelAppointment' data-href='".url('appointment/cancel/'.$row->code)."'> Cancel <a>";
                     }
                     $each[] = $action;
-                }
+               // }
                 $output ['data'] [] = $each;
 	    	}
         }
@@ -116,8 +116,15 @@ class AppointmentController extends Controller
 
    public function cancel(Request $request)
    {
-              
-    $query = Appointment::where('user_id',auth()->id())->where('code',$request->code)->first();
+    $fieldName = 'user_id';
+    if(auth()->user()->hasRole(config('application.patient_role')))
+    {
+        $fieldName = 'patient_id';
+    }
+    
+    $query = Appointment::where($fieldName,auth()->id())->where('code',$request->code)
+    ->whereRaw('date <= now()')
+    ->first();
     if(!isset($query->id)) abort(404);
     if($query->status == Appointment::$STATUS_CANCEL) 
     {
@@ -126,8 +133,13 @@ class AppointmentController extends Controller
     } 
   
     $query->status = Appointment::$STATUS_CANCEL;
+    $query->cancel_by_user = auth()->id();
+    
     $query->save();
-    $this->sendSms($query->patient_contact_number,config('application.cancel_booking_patient_sms_content'));
+    if(auth()->user()->hasRole(config('application.patient_role')))
+    {
+      $this->sendSms($query->patient_contact_number,config('application.cancel_booking_patient_sms_content'));
+    }
     $productDetail = ProductItem::where('code',$query->code)->first();
     if(isset($productDetail->id))
     {

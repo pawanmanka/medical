@@ -143,7 +143,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
     Route::get('/my-wallet/grid','WalletController@grid');
     Route::get('/my-appointment','AppointmentController@index');
     Route::get('/appointment/grid','AppointmentController@grid');
-    
+    Route::get('/appointment/cancel/{code}','AppointmentController@cancel');  
     //extra_info_roles
     Route::group(['middleware'=>['role:'.config('application.extra_info_roles')]],function(){
         Route::get('/extra-info','ProfileController@extraInfo');
@@ -161,7 +161,7 @@ Route::group(['middleware'=>['role:patient|hospital|doctor|lab','userAuth']],fun
         Route::post('/saveAnswer','ProfileController@saveAnswer');
 
 
-        Route::get('/appointment/cancel/{code}','AppointmentController@cancel');  
+      
     });
 
 });

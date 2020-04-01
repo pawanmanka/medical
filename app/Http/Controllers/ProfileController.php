@@ -51,6 +51,7 @@ class ProfileController extends Controller{
 
         }
         $this->data['certificates']= $record = UserCertificate::where('user_id',auth()->id())->get();
+        $this->data['photos'] = UserPhotos::where('user_id',auth()->id())->get();
 
         $this->data['title'] ='Profile'; 
         return view('profile',$this->data);
