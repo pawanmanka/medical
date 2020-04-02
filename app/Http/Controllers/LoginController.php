@@ -23,6 +23,7 @@ use OtpHandle;
     
     public function loginUser(Request $request)
     {
+        
         return view('login_user');
     }
     public function login(Request $request)
@@ -80,6 +81,7 @@ use OtpHandle;
     }
     public function showLoginForm(Request $request)
     {
+        $this->data['menu'] = $this->data['menu'] == 'lab'?'Lab and Diagnostics':$this->data['menu'];
         return view('login',$this->data);
     }
     protected function sendFailedLoginResponse(Request $request)
