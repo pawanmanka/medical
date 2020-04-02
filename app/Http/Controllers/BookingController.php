@@ -214,6 +214,7 @@ class BookingController extends Controller
            $appointmentObj->patient_gender = $currentUser->gender_title; 
            $appointmentObj->patient_contact_number = $currentUser->contact_number; 
            $appointmentObj->date =$date; 
+           $appointmentObj->discount_price =$productDetail->actual_price; 
            $appointmentObj->code = $appointmentObj->generateUniqueCode(); 
            $appointmentObj->save();
            
