@@ -248,7 +248,7 @@ class ProductController extends Controller
                     }
                     $productItemObj->actual_price=$value;
                     $productItemObj->discount_price=isset($request->discount_fee[$timestamp])?$request->discount_fee[$timestamp]:0;
-                    $productItemObj->status=isset($request->availability[$timestamp])?$request->availability[$timestamp]:0;
+                    $productItemObj->status=isset($request->availability[$timestamp])?$request->availability[$timestamp]:2;
                     $productItemObj->save();
                 }    
 
@@ -309,7 +309,7 @@ class ProductController extends Controller
                   'time'=> date("h:i A", $time_start_value),
                   'price'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->actual_price:$user->actual_fee,
                   'discount_fee'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->discount_price:$user->discounted_fee,
-                  'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'1',
+                  'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'2',
                   'index'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->name:$time_start_value
                 );
               $dataArr['class'] = $editMode?(isset($slotArr[$dataArr['availability']])?$slotArr[$dataArr['availability']]:''):'';
@@ -321,7 +321,7 @@ class ProductController extends Controller
                     'time'=> date("h:i A", $time_start_value),
                     'price'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->actual_price:$user->actual_fee,
                     'discount_fee'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->discount_price:$user->discounted_fee,
-                    'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'1',
+                    'availability'=>isset($oldItems[$time_start_value])?$oldItems[$time_start_value]->status:'2',
                     'index'=>$time_start_value
                   );
                   $dataArr['class'] = $editMode?(isset($slotArr[$dataArr['availability']])?$slotArr[$dataArr['availability']]:''):'';
