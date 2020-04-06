@@ -25,17 +25,16 @@
 						           			<div class="hero-txt">
 
 						           				<!-- Title -->
-						       					<h5 class="blue-color">Welcome to MedService</h5>
-						       					<h2 class="steelblue-color">We will help you <span>to become healthy</span></h2>
+						       					<h5 class="blue-color">Welcome to Arogyarth</h5>
+						       					<h2 class="steelblue-color">We will help you to become healthy</h2>
 									          	
 									          	<!-- Text -->
-												<p class="p-md">Feugiat primis ligula risus auctor egestas augue mauri viverra tortor 
-												   in iaculis placerat eugiat mauris ipsum in viverra tortor and gravida purus pretium 
-												   lorem primis in integer mollis and pretium purus pretium
+												<p class="p-md">Arogyarth is aspiring to help you to become healthy by providing services of the
+best doctors and team on a single platform.
 												</p>
 
 												<!-- Button -->
-												<a href="about-us.html" class="btn btn-blue blue-hover">More About Clinic</a>
+												<a href="{{url('about-us')}}" class="btn btn-blue blue-hover">About Us</a>
 
 								            </div> 
 								        </div>
@@ -57,18 +56,17 @@
 						           			<div class="hero-txt">
 
 						           				<!-- Title -->
-					        					<h5 class="blue-color">Our clinic Provide</h5>
+					        					<h5 class="blue-color">Best quality medical treatment for you</h5>
 								         	 	<h2 class="steelblue-color"><span>Best Quality</span> Medical Treatment for You</h2>
 									          	
 									          	<!-- Text -->
-												<p class="p-md">Feugiat primis ligula risus auctor egestas augue mauri viverra tortor 
-												   in iaculis placerat eugiat mauris ipsum in viverra tortor and gravida purus pretium 
-												   lorem primis in integer mollis and pretium purus pretium
+												<p class="p-md">With Arogyarth you can access to best quality medical team and treatment of
+your preference on a single click.
 												</p>
 
 												<!-- Button -->
-												<a href="who-we-are.html" class="btn btn-black tra-black-hover mr-10">Get More Info</a>
-												<a href="all-services.html" class="btn btn-blue blue-hover">Our Core Services</a>
+												<!-- <a href="who-we-are.html" class="btn btn-black tra-black-hover mr-10">Get More Info</a>
+												<a href="all-services.html" class="btn btn-blue blue-hover">Our Core Services</a> -->
 
 								            </div> 
 								        </div>
@@ -91,30 +89,11 @@
 
 						           				<!-- Title -->
 						       			 		<h5 class="blue-color">Why Choose Our clinic</h5>
-									        	<h2 class="steelblue-color">We <span>will Care</span> About Your Health</h2>
-
-				                                <!-- Option Box #1 -->
-												<div class="box-list">							
-													<div class="box-list-icon blue-color"><i class="fas fa-angle-double-right"></i></div>
-													<p class="p-md">Fringilla risus nec, luctus mauris orci auctor purus euismod 
-													   pretium purus pretium ligula rutrum tempor sapien at pretium luctus
-													</p>						
-												</div>
-
-												<!-- Option Box #2 -->
-												<div class="box-list">	
-													<div class="box-list-icon blue-color"><i class="fas fa-angle-double-right"></i></div>
-													<p class="p-md">Feugiat primis ultrice in ligula risus auctor tempus feugiat</p>		
-												</div>
-
-												<!-- Option Box #3 -->
-												<div class="box-list">	
-													<div class="box-list-icon blue-color"><i class="fas fa-angle-double-right"></i></div>
-													<p class="p-md">Porta semper lacus cursus, feugiat primis ultrice in ligula risus 
-													   auctor tempus feugiat dolor impedit magna purus pretium donec
-													</p>		
-												</div>
-
+									        	<h2 class="steelblue-color">We will care about your health</h2>
+												<p class="p-md">Arogyarth provides you to choose the best medical specialist of your choice
+because we care for your health.
+													</p>
+				                               
 								            </div> 
 								        </div>								    
 
@@ -153,7 +132,7 @@
 			============================================= -->
 			<section id="services-3" class="bg-lightgrey wide-60 services-section division">
 					<div class="container">
-	
+							
 	
 						<!-- SECTION TITLE -->	
 						<div class="row">	
@@ -220,8 +199,7 @@
 							<h3 class="h3-md steelblue-color">Our Medical Specialists</h3>	
 
 							<!-- Text -->
-							<p>Aliquam a augue suscipit, luctus neque purus ipsum neque dolor primis libero at tempus, 
-							   blandit posuere ligula varius congue cursus porta feugiat
+							<p>We have the best doctors of Jodhpur associated with us.
 							</p>
 										
 						</div> 

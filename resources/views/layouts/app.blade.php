@@ -98,8 +98,9 @@
 								<img src="{{ baseUrl('images/Arogyarth-logo.png') }}" width="auto" height="70" alt="footer-logo">
 
 								<!-- Text -->	
-								<p class="p-sm mt-20">Aliquam orci nullam tempor sapien gravida donec an enim ipsum porta
-								   justo at velna auctor congue
+								<p class="p-sm mt-20">“Arogyarth” an organization completely dedicated to providing health services 
+A single platform that brings together both the health seekers and health services
+providers. (Patients and the doctors)
 								</p>  
 
 							
