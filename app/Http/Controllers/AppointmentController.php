@@ -60,10 +60,6 @@ class AppointmentController extends Controller
                     $getUser = $row->getUser;
                     if(isset($getUser->id)){
                         $userName = isset($getUser->name)?$getUser->name:'';
-                        // if($getUser->role_name  == config('application.hospital_role')){
-                        //     $userName .= isset($row->getProductItem->name)?" (".$row->getProductItem->name.")":'';
-                        // }
-                        
                         $userName = "<a target='_blank' href='$getUser->detail_url'>$userName</a>";
 
                     }
@@ -78,6 +74,7 @@ class AppointmentController extends Controller
                 );
                 if(!auth()->user()->hasRole(config('application.doctor_role')))
                     {
+                        $getUser = $row->getUser;
                         if(isset($getUser->role_name) && $getUser->role_name  != config('application.doctor_role')){
                             $labBooking = isset($row->getProductItem->lab_product_type) && $row->getProductItem->lab_product_type >0?($row->getProductItem->lab_product_type==1?'(Service)':'(Package)'):'';
                             $bookingFor = isset($row->getProductItem->name)?$row->getProductItem->name." ".$labBooking:'';
