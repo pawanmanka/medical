@@ -6070,7 +6070,13 @@ width: 140px;
   margin-top:7px;
 
 }
+<<<<<<< HEAD
+#banner-5
+{
+  padding-bottom: 20px;
+=======
 discount{
   text-decoration: line-through;
   color: red
+>>>>>>> 7bc7e50409331dbb43c067b12e7b2ea00617401d
 }
