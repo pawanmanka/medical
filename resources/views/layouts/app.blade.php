@@ -5,9 +5,9 @@
 
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-		<meta name="author" content="@if (trim($__env->yieldContent('title')))@yield('title') @else config('app.name')  @endif "/>
-		<meta name="description" content="@if (trim($__env->yieldContent('description')))@yield('description')  @else config('app.name')@endif"/>
-		<meta name="keywords" content="@if (trim($__env->yieldContent('keywords'))) @yield('keywords')  @else config('app.name')@endif" />	
+		<meta name="author" content="@if (trim($__env->yieldContent('title')))@yield('title') @else {{config('app.name')}}  @endif "/>
+		<meta name="description" content="@if (trim($__env->yieldContent('description')))@yield('description')  @else {{config('app.name')}}@endif"/>
+		<meta name="keywords" content="@if (trim($__env->yieldContent('keywords'))) @yield('keywords')  @else {{config('app.name')}}@endif" />	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="csrf_token" content="{{ csrf_token() }}">
 
