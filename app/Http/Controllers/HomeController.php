@@ -54,6 +54,7 @@ class HomeController extends Controller
       if(!isset($PageObj->id)) abort('404');
       $this->data['title'] = $PageObj->name;
       $this->data['content'] = $PageObj->content;
+      $this->data['record'] = $PageObj;
       return view('page',$this->data);
     }
 

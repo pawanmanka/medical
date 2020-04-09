@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title',$title)
+@section('meta_title',$record->meta_title)
+@section('description',$record->meta_description)
+@section('keywords',$record->meta_keyword)
 @section('breadcrumb')
 		@include('layouts.breadcrumb')
 @endsection

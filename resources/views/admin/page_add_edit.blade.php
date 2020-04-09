@@ -37,7 +37,18 @@
                                 </div>
                             </div>
                           
-                           
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group  row"><label class="col-sm-2 col-form-label">Meta Keyword</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="meta_keyword" value="{{ old('meta_keyword',(isset($page->meta_keyword)?$page->meta_keyword:'')) }}" class="form-control required">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group  row"><label class="col-sm-2 col-form-label">Meta Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="meta_description" value="{{ old('meta_description',(isset($page->meta_description)?$page->meta_description:'')) }}" class="form-control required">
+                                </div>
+                            </div>
                             <div class="hr-line-dashed"></div>
                         
                             <div class="form-group row">
