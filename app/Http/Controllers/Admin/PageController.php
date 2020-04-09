@@ -50,6 +50,8 @@ class PageController extends Controller
             $PageObj = !empty($id)?Page::find($id):new Page();
             $PageObj->name = $request->name;
             $PageObj->content = $request->content;
+            $PageObj->meta_keyword = $request->meta_keyword;
+            $PageObj->meta_description = $request->meta_description;
             $PageObj->display_order = is_numeric($request->display_order)?$request->display_order:0;
             $PageObj->navigation_type = is_numeric($request->navigation_type)?$request->navigation_type:0;
             $PageObj->slug = $PageObj->createSlug($request->name,$id);
