@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        '\App\Console\Commands\MerchantWalletTransfer'
+        '\App\Console\Commands\MerchantWalletTransfer',
+        '\App\Console\Commands\PatientWalletTransfer'
     ];
 
     /**
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('commend:merchant_wallet_transfer')->hourly();
+        $schedule->command('commend:patient_wallet_transfer')->hourly();
     }
 
     /**
