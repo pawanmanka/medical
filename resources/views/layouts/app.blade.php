@@ -166,8 +166,7 @@ providers. (Patients and the doctors)
 								<h5 class="h5-xl blue-color">8561903387</h5>
 
 								<!-- Text -->	
-								<p class="p-sm mt-15">Aliquam orci nullam undo tempor sapien gravida donec enim ipsum porta
-								   justo velna aucto magna
+								<p class="p-sm mt-15">
 								</p> 																												
 
 							</div>

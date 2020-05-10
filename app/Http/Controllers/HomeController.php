@@ -12,6 +12,7 @@ use App\Models\QuestionReview;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -29,9 +30,7 @@ class HomeController extends Controller
     
        public function testing(Request $request)
     {
-      Log::info('webhook');
-      Log::info($request->all());
-
+        Artisan::call('commend:merchant_wallet_transfer');
     }
 
     /**

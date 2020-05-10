@@ -40,6 +40,7 @@ class PatientWalletTransfer extends Command
      */
     public function handle()
     {
+
         $appointments = Appointment::where('payment_transfer_status',Appointment::$PAYMENT_TRANSFER_STATUS_PENDING)
         ->where('status',Appointment::$STATUS_CANCEL)
         ->where('patient_id','=','cancel_by_user')
