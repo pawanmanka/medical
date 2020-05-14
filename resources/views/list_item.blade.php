@@ -38,9 +38,9 @@
                         <ul class="pl-0 mb-0">
                            <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
                            <li>Multi-Specialty hospital</li>
-                           <li><b>Timing - </b><br>Mon - Sun ( 
-                              <br>Morning : {{ $item->getUserInformation->mon_sat_morning_time  }} And
-                              <br>Evening : {{ $item->getUserInformation->mon_sat_evening_time  }} ) <i class="fa fa-map-marker"></i></li>
+                           <li><b>Timing : </b>Mon - Sun 
+                              <br><b>Morning :</b> {{ $item->getUserInformation->mon_sat_morning_time  }}
+                              <br><b>Evening :</b> {{ $item->getUserInformation->mon_sat_evening_time  }}</li>
                         </ul>
                      </div>
                   </div>
