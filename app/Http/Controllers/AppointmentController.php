@@ -120,7 +120,7 @@ class AppointmentController extends Controller
     }
     
     $query = Appointment::where($fieldName,auth()->id())->where('code',$request->code)
-    ->whereRaw('date <= now()')
+    ->whereRaw('date >= now()')
     ->first();
     if(!isset($query->id)) abort(404);
     if($query->status == Appointment::$STATUS_CANCEL) 

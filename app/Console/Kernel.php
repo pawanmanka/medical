@@ -25,8 +25,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+<<<<<<< HEAD
         $schedule->command('commend:merchant_wallet_transfer')->everyMinute();
         $schedule->command('commend:patient_wallet_transfer')->everyMinute();
+=======
+        $schedule->command('commend:merchant_wallet_transfer')->hourly();
+        $schedule->command('commend:patient_wallet_transfer')->hourly();
+>>>>>>> e332ce50d17116d82142a2ced09664c7714cb9ca
     }
 
     /**
