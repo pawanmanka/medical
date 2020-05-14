@@ -1,10 +1,10 @@
 @if(isset($roles[config('application.doctor_role')]))
     <div class="col-12">
                <div class="box-one">
-               <div class="txt-widget-avatar">
+               <div class="txt-widget-avatar col-17-per">
                  <img src="{{$item->getUserInformation->profile_pic}}" class="image-round" alt="{{ $item->name }}">
               </div>
-                  <div class="text-holder">
+                  <div class="text-holder col-83-per">
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">
                            <li><a href="{{ $item->detail_url }}" class="text-color">{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</a></li>
