@@ -43,7 +43,7 @@ class PatientWalletTransfer extends Command
 
         $appointments = Appointment::where('payment_transfer_status',Appointment::$PAYMENT_TRANSFER_STATUS_PENDING)
         ->where('status',Appointment::$STATUS_CANCEL)
-        ->where('patient_id','=','cancel_by_user')
+        ->whereRaw('patient_id = cancel_by_user')
         ->get();
 
         foreach ($appointments as $key => $appointment) {
