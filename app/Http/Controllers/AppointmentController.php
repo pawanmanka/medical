@@ -122,7 +122,10 @@ class AppointmentController extends Controller
     $query = Appointment::where($fieldName,auth()->id())->where('code',$request->code)
     ->whereRaw('date >= now()')
     ->first();
-    if(!isset($query->id)) abort(404);
+    if(!isset($query->id)){
+        flash('Appointment not canceled due to time end')->error()->important();
+        return back();
+    }
     if($query->status == Appointment::$STATUS_CANCEL) 
     {
         flash('Appointment Already Canceled')->error()->important();
