@@ -97,6 +97,9 @@ class AppointmentController extends Controller
                         $canceledUser = auth()->id()== $row->cancel_by_user?'You':$row->getAppointmentCancelUser->name;
                         $action ="Canceled by ($canceledUser)";
                     }
+                    else if($row->payment_transfer_status == Appointment::$PAYMENT_TRANSFER_STATUS_DONE){
+                        $action ="Done";
+                    }
                     else{
                         $action ="<a href='#' class='cancelAppointment' data-href='".url('appointment/cancel/'.$row->code)."'> Cancel <a>";
                     }

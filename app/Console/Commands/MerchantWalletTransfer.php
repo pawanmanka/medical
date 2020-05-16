@@ -42,7 +42,7 @@ class MerchantWalletTransfer extends Command
     {
         $appointments = Appointment::where('payment_transfer_status',Appointment::$PAYMENT_TRANSFER_STATUS_PENDING)
         ->where('status',Appointment::$STATUS_ACTIVE)
-        ->whereRaw('date >= now() - interval ? minute', [5])
+        ->whereRaw('date <= now() - interval ? minute', [5])
         ->get();
 
         foreach ($appointments as $key => $appointment) {
