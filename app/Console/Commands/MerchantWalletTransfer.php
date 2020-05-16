@@ -42,7 +42,6 @@ class MerchantWalletTransfer extends Command
     {
         $appointments = Appointment::where('payment_transfer_status',Appointment::$PAYMENT_TRANSFER_STATUS_PENDING)
         ->where('status',Appointment::$STATUS_ACTIVE)
-        ->whereRaw('patient_id = cancel_by_user')
         ->whereRaw('date >= now() - interval ? minute', [5])
         ->get();
 
