@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \URL::forceScheme('https');
+      //  \URL::forceScheme('https');
 
         // \DB::listen(function ($query) {
         //     dd($query->sql,$query->bindings);

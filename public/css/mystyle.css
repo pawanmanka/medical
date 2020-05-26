@@ -755,9 +755,23 @@ discount {
     color: red
 }
 
-.col-17-per{
+/* .col-17-per{
     width: 17%;
 }
 .col-83-per{
     width: 83%;
+} */
+
+@media only screen and (max-width: 768px) {
+    .text-holder{
+        float: none;
+    }
+    .search-panel .form-group{
+        margin-bottom: 10px;
+    }
+    ul.filter-ul-li li{
+         padding-right: 0px; 
+    width: 100%;
+    margin-bottom: 10px;
+    }
 }

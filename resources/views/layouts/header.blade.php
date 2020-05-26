@@ -18,7 +18,7 @@
 				<!-- MOBILE HEADER -->
 			    <div class="wsmobileheader clearfix">
 			    	<a id="wsnavtoggle" class="wsanimated-arrow"><span></span></a>
-			    	<span class="smllogo"><img src="images/arogyarth-logo.png" width="120" height="auto" alt="mobile-logo"/></span>
+			    	<span class="smllogo"><img src="{{ baseUrl('images/Arogyarth-logo.png') }}" width="120" height="auto" alt="mobile-logo"/></span>
 					@if(auth()->id() == null)
                     <div class="headertopright">
                         <a title="Login" href="{{ url('/login') }}"> <span >Login</span>&nbsp;</a>
