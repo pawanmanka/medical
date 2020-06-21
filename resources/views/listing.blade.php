@@ -8,7 +8,7 @@
 
 			<!-- SERVICE DETAILS
 			============================================= -->
-			<div id="service-page" class="wide-60 service-page-section division">
+			<div id="service-page" class="wide-60 service-page-section division" style="padding-top:0px;padding-bottom: 20px;">
 
                    @include('_search_form')
                     <div class="container">
@@ -50,7 +50,7 @@
                 <div class="s2-page pr-30 mb-20">          
                     <h2 >{{ $title }} Near You</h2>
                 </div>
-                <div class="row">
+                <div class="">
                 @if($paging->total() > 0)
                     @foreach ($result as $item)
                         @include('list_item')

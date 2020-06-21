@@ -3397,7 +3397,7 @@ td.text-right {
 }
 
 #doctor-1-details {
-  padding-bottom: 70px;
+  padding-bottom: 20px;
 }
 
 #doctor-1-details .doctor-bio {
@@ -5146,7 +5146,7 @@ ul.blog-category-list li:hover {
 
 .txt-widget-avatar img {
   width: 100px;
-  height: 100px;
+  /*height: 100px;*/
   display: inline-block;
   margin: 0 15px 0 0; 
 }

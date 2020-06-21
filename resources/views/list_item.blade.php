@@ -1,11 +1,14 @@
 @if(isset($roles[config('application.doctor_role')]))
-    <div class="col-12">
-               <div class="box-one">
-               <div class="txt-widget-avatar col-17-per">
-                 <img src="{{$item->getUserInformation->profile_pic}}" class="image-round" alt="{{ $item->name }}">
-              </div>
-                  <div class="text-holder col-83-per">
-                     <div class="doctor-details">
+  
+            
+            <div class="row box-one" style="margin:0px;margin-bottom:30px;">
+                <div class="col-xs-12 col-sm-2">
+                    <div class="image-holder col-17-per">
+                        <img src="{{$item->getUserInformation->profile_pic}}" class="image-round" alt="{{ $item->name }}">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    <div class="doctor-details">
                         <ul class="pl-0 mb-0">
                            <li><a href="{{ $item->detail_url }}" class="text-color">{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</a></li>
                           <li>{{$item->getUserInformation->doctor_education}}</li>
@@ -21,19 +24,18 @@
                            <li><a href="{{ url('/booking/'.$item->slug) }}">Book an appointment</a></li>
                         </ul>
                      </div>
-                  </div>
-                  <div class="clearfix"></div>
-               </div>
-               
+                </div>
             </div>
 @endif
 @if(isset($roles[config('application.hospital_role')]))
 
-<div class="col-12">
-               <div class="box-one">
-                  <div class="image-holder">
+<div class="row box-one" style="margin:0px;margin-bottom:20px;">
+<div class="col-xs-12 col-sm-2">
+      <div class="image-holder">
                      <img src="{{$item->getUserInformation->profile_pic }}" alt="{{ $item->name }}"></div>
-                  <div class="text-holder">
+</div>
+<div class="col-xs-12 col-sm-10">
+      <div class="text-holder">
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">
                            <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
@@ -50,17 +52,18 @@
                         <li><a href="{{ $item->detail_url }}">Profile</a></li>
                      </ul>
                      </div>
-                  <div class="clearfix"></div>
-               </div>
-              
-               
-            </div>
+</div>
+</div>
 @endif
 @if(isset($roles[config('application.lab_role')]))
-<div class="col-12">
-               <div class="box-one">
-                  <div class="image-holder"><img src="{{$item->getUserInformation->profile_pic }}" alt=""></div>
-                  <div class="text-holder">
+
+<div class="row box-one" style="margin:0px;margin-bottom:20px;">
+<div class="col-xs-12 col-sm-2">
+      <div class="image-holder">
+                   <img src="{{$item->getUserInformation->profile_pic }}" alt=""></div>
+</div>
+<div class="col-xs-12 col-sm-10">
+      <div class="text-holder">
                      <div class="doctor-details">
                         <ul class="pl-0 mb-0">
                            <li>{{ $item->name }} {{ !empty($item->gender_title)?"($item->gender_title)":"" }}</li>
@@ -74,14 +77,12 @@
                   </div>
                   <div class="testing_lab_btns">
                      <ul class="mb-0">
-                        <li><a href="tel:{{$item->username}}">Call Now</a></li>
+                      <li><a href="tel:{{$item->username}}">Call Now</a></li>
                         <li><a href="{{ $item->detail_url }}">View Detail</a></li>
                      </ul>
                      </div>
-                  <div class="clearfix"></div>
-               </div>
-               
-            </div>
+</div>
+</div>
 @endif
 
            

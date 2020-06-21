@@ -23,7 +23,7 @@
     <input type="email" name="email" value="{{old('email',isset($record)?$record->email:'')}}"  class="form-control required " placeholder="Email*"  > 
 </div>
 <div  class="col-md-12">
-    <input type="text" name="practice_since" value="{{old('practice_since',isset($record)?$record->getUserInformation->practice_since:'')}}" class="form-control required " placeholder="Practice Since*"  > 
+    <input type="text" name="practice_since" minlength="4" value="{{old('practice_since',isset($record)?$record->getUserInformation->practice_since:'')}}" class="form-control required " placeholder="Practice Since*"  > 
 </div>
 <div  class="col-md-12">
     <input type="text" name="registration_number" value="{{old('registration_number',isset($record)?$record->getUserInformation->registration_number:'')}}"  class="form-control required " placeholder="Registertion Number*"  > 

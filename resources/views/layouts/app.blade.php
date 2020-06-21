@@ -75,8 +75,6 @@
         	<!-- BREADCRUMB
 			============================================= -->
 		 @yield('breadcrumb')
-			
-			
 	
 	     @yield('content')
 			<!-- FOOTER-1

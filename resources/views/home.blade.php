@@ -130,12 +130,12 @@ because we care for your health.
 
 			<!-- SERVICES-3
 			============================================= -->
-			<section id="services-3" class="bg-lightgrey wide-60 services-section division">
+			<section id="services-3" class="bg-lightgrey wide-60 services-section division" style="padding-top:20px">
 					<div class="container">
 							
 	
 						<!-- SECTION TITLE -->	
-						<div class="row">	
+						<div class="row" style="padding-top:20px">	
 							<div class="col-lg-10 offset-lg-1 section-title">		
 	
 								<!-- Title 	-->	
@@ -187,7 +187,7 @@ because we care for your health.
 
 			<!-- DOCTORS-1
 			============================================= -->
-			<section id="doctors-1" class="wide-40 doctors-section division">
+			<section id="doctors-1" class="wide-40 doctors-section division" style="padding-top: 40px;">
 				<div class="container">
 
 
@@ -249,7 +249,7 @@ because we care for your health.
 					<!-- ALL DOCTORS BUTTON -->		
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<div class="all-doctors mb-40">
+							<div class="all-doctors mb-40" style="margin-bottom:20px;">
 								<a href="{{url('/doctors')}}" class="btn btn-blue blue-hover">Meet All Doctors</a>
 							</div>
 						</div>

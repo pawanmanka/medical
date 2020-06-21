@@ -39,7 +39,7 @@
                                                     </a>
                                             </div>
                                                 <div class="row mar-0" style="text-align:center">
-                                                <i class="fas fa-info-circle fa-3x"></i>
+                                                <i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                         
@@ -145,7 +145,7 @@
                                                 </a>
                                         </div>
                                             <div class="row mar-0" style="text-align:center">
-                                            <i class="fas fa-bank fa-3x"></i>
+                                            <span class="flaticon-076-microscope"></span>
                                             </div>
                                         </div>
                                    
@@ -161,7 +161,7 @@
                                                 </a>
                                         </div>
                                             <div class="row mar-0" style="text-align:center">
-                                            <i class="fas fa-bank fa-3x"></i>
+                                           <i class="fa fa-shopping-bag fa-3x" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                    

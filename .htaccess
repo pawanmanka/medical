@@ -32,8 +32,11 @@
 
 
 <IfModule mod_rewrite.c>
-   RewriteEngine On 
-   RewriteRule ^(.*)$ public/$1 [L]
+    RewriteEngine On 
+    RewriteRule ^(.*)$ public/$1 [L]
+    RewriteCond %{HTTP_HOST} ^arogyarth\.com [NC]
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://arogyarth.com/$1 [R,L]
 </IfModule>
 
 # END cPanel-generated php ini directives, do not edit
@@ -43,4 +46,5 @@
 <IfModule mime_module>
   AddHandler application/x-httpd-ea-php71 .php .php7 .phtml
 </IfModule>
+
 # php -- END cPanel-generated handler, do not edit

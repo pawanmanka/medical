@@ -955,7 +955,7 @@
 
   .wsmobileheader { height: 70px; background-color: #fff; box-shadow: 0 0 2px rgba(50, 50, 50, 0.4); }
 
-  .wsmobileheader .smllogo { margin-top: 15px; }
+  .wsmobileheader .smllogo { margin-top: 15px; margin: 7px 1px 9px 37px;}
   .wsanimated-arrow { padding: 14px 28px 14px 0px; margin: 19px 0 0 20px; }
   .wsanimated-arrow span:before { top: -8px; width: 26px; }
   .wsanimated-arrow span:after { bottom: -8px; width: 20px; }
